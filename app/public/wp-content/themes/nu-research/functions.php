@@ -122,8 +122,16 @@ add_action( 'wp_footer', 'nu_research_dequeue_embed' );
 
 /**
  * Meta description: page excerpt when set, site tagline otherwise.
+ *
+ * Yields to an SEO plugin (Yoast) when one is active — it owns the meta
+ * description, Open Graph, canonical, and sitemap output, so emitting our own
+ * would duplicate the tag.
  */
 function nu_research_meta_description() {
+	if ( defined( 'WPSEO_VERSION' ) ) {
+		return;
+	}
+
 	$description = get_bloginfo( 'description' );
 
 	if ( is_singular() ) {
@@ -196,5 +204,53 @@ function nu_research_cta( $label, $url ) {
 		<span class="btn-label"><?php echo esc_html( $label ); ?></span>
 		<span class="btn-arrow" aria-hidden="true">&rarr;</span>
 	</a>
+	<?php
+}
+
+/**
+ * Tighten default excerpts for the card grid and use a subtle ellipsis.
+ */
+function nu_research_excerpt_length() {
+	return 28;
+}
+add_filter( 'excerpt_length', 'nu_research_excerpt_length' );
+
+function nu_research_excerpt_more() {
+	return '&hellip;';
+}
+add_filter( 'excerpt_more', 'nu_research_excerpt_more' );
+
+/**
+ * Category filter bar for the blog listing and archives: an "All" pill plus one
+ * pill per non-empty category, linking to each category archive. The pill for
+ * the category currently being viewed is marked active.
+ */
+function nu_research_category_filter_bar() {
+	$categories = get_categories( array( 'hide_empty' => true ) );
+	if ( empty( $categories ) ) {
+		return;
+	}
+
+	$blog_id  = (int) get_option( 'page_for_posts' );
+	$blog_url = $blog_id ? get_permalink( $blog_id ) : home_url( '/' );
+	$all_active = ! is_category();
+	?>
+	<nav class="filter-bar" aria-label="<?php esc_attr_e( 'Filter posts by category', 'nu-research' ); ?>">
+		<a
+			class="filter-pill<?php echo $all_active ? ' is-active' : ''; ?>"
+			href="<?php echo esc_url( $blog_url ); ?>"
+			<?php echo $all_active ? 'aria-current="page"' : ''; ?>
+		><?php esc_html_e( 'All', 'nu-research' ); ?></a>
+		<?php
+		foreach ( $categories as $category ) :
+			$active = is_category( $category->term_id );
+			?>
+			<a
+				class="filter-pill<?php echo $active ? ' is-active' : ''; ?>"
+				href="<?php echo esc_url( get_category_link( $category->term_id ) ); ?>"
+				<?php echo $active ? 'aria-current="page"' : ''; ?>
+			><?php echo esc_html( $category->name ); ?></a>
+		<?php endforeach; ?>
+	</nav>
 	<?php
 }
