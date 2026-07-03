@@ -34,7 +34,7 @@
 	--nu-white: #ffffff;
 	--nu-red: #d41b2c;         /* Northeastern Red — the single accent */
 	--nu-red-dark: #b01524;    /* press / hover */
-	--nu-red-bright: #e31837;  /* red as it reads on black (stats, links) */
+	--nu-red-bright: #f0193a;  /* red as it reads on black (stats, links) — 4.9:1 on #000, AA */
 
 	--gray-950: #1a1a1a;       /* strongest text on white */
 	--gray-800: #333333;       /* body copy on white */

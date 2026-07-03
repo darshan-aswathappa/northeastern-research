@@ -339,7 +339,7 @@ function nu_research_render_hero_billboard( $a ) {
 				<?php nu_research_cta( $a['ctaLabel'], nu_research_page_url( $a['ctaSlug'] ) ); ?>
 			</div>
 			<div class="hero-billboard-media">
-				<img src="<?php echo esc_url( nu_research_img( $a['image'] ) ); ?>" alt="<?php echo esc_attr( $a['imageAlt'] ); ?>" width="1200" height="800" fetchpriority="high">
+				<img src="<?php echo esc_url( nu_research_img( $a['image'] ) ); ?>" alt="<?php echo esc_attr( $a['imageAlt'] ); ?>" width="1600" height="900" fetchpriority="high">
 			</div>
 		</div>
 	</section>
