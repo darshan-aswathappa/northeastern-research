@@ -11,6 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'NU_RESEARCH_VERSION', '1.0.0' );
 
+// Home-page content blocks (hero, overview, media cards, CTA).
+require_once get_theme_file_path( 'inc/blocks.php' );
+
 /**
  * Theme supports and nav menus.
  */
@@ -22,6 +25,10 @@ function nu_research_setup() {
 		'html5',
 		array( 'search-form', 'gallery', 'caption', 'style', 'script', 'navigation-widgets' )
 	);
+
+	// Style the block-editor previews with the same CSS the front end uses, so
+	// the home-page blocks look right inside the editor iframe.
+	add_editor_style( 'assets/css/main.css' );
 
 	register_nav_menus(
 		array(
