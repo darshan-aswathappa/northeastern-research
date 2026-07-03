@@ -3,7 +3,7 @@
  * Plugin Name: Fellows Deadline Countdown
  * Description: Deadline settings, [fellows_countdown] shortcode, a "closing soon" site-wide banner, and an admin dashboard snapshot widget for the SWE Fellows Program.
  * Version:     1.0.0
- * Author:      Summer Research Program Web Team
+ * Author:      Darshan Aswathappa
  * License:     GPL v2 or later
  * Requires at least: 6.3
  * Requires PHP: 8.0

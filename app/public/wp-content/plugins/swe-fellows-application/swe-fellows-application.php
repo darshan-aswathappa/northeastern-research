@@ -3,7 +3,7 @@
  * Plugin Name: SWE Fellows Multi-Step Application
  * Description: Multi-step application form for the WordPress Research Fellows Program. Renders via [swe_fellows_application], stores submissions in a dedicated database table (wp_swe_applications), and provides an Applications admin screen. Works without JavaScript via a standard form post; JavaScript progressively enhances it into an accessible 3-step flow submitting over the REST API.
  * Version: 2.0.0
- * Author: Summer Research Program Web Team
+ * Author: Darshan Aswathappa
  * License: GPL v2 or later
  * Requires at least: 6.3
  * Requires PHP: 8.0
