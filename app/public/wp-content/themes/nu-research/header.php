@@ -22,8 +22,9 @@
 
 <header class="site-header">
 	<div class="utility-bar">
-		<div class="wrap">
+		<div class="wrap utility-bar__row">
 			<span class="utility-label"><?php esc_html_e( 'Explore Northeastern', 'nu-research' ); ?></span>
+			<?php do_action( 'nu_research_utility_bar' ); ?>
 		</div>
 	</div>
 
