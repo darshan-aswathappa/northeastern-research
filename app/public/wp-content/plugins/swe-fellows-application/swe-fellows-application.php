@@ -21,6 +21,7 @@ define( 'SWE_APP_URL', plugin_dir_url( __FILE__ ) );
 
 require_once SWE_APP_PATH . 'includes/db.php';
 require_once SWE_APP_PATH . 'includes/validation.php';
+require_once SWE_APP_PATH . 'includes/emails.php';
 require_once SWE_APP_PATH . 'includes/form.php';
 require_once SWE_APP_PATH . 'includes/rest.php';
 

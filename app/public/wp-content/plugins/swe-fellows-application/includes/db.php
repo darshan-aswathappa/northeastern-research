@@ -100,6 +100,9 @@ function swe_app_insert( array $data ) {
 		)
 	);
 
+	// Confirmation email to the applicant.
+	swe_app_send_received_email( $data );
+
 	return $id;
 }
 
@@ -142,13 +145,27 @@ function swe_app_set_status( $id, $status ) {
 		return false;
 	}
 
-	return (bool) $wpdb->update( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+	$id       = (int) $id;
+	$existing = swe_app_get( $id );
+	if ( ! $existing ) {
+		return false;
+	}
+
+	$updated = (bool) $wpdb->update( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 		swe_app_table_name(),
 		array( 'status' => $status ),
-		array( 'id' => (int) $id ),
+		array( 'id' => $id ),
 		array( '%s' ),
 		array( '%d' )
 	);
+
+	// Email the applicant only on the transition *into* rejected, so
+	// re-saving an already-rejected application doesn't send a duplicate.
+	if ( $updated && 'rejected' === $status && 'rejected' !== $existing->status ) {
+		swe_app_send_rejection_email( $existing );
+	}
+
+	return $updated;
 }
 
 /**
