@@ -39,27 +39,58 @@ $tracks = array(
 );
 
 /**
- * The ten-week arc — headings with supporting copy, no links.
+ * Program stats — eyebrow + large red serif figure, a short label, and a
+ * supporting description, rendered as hairline-ruled rows.
+ */
+$stats = array(
+	array(
+		'eyebrow' => __( 'Program', 'nu-research' ),
+		'value'   => __( '10', 'nu-research' ),
+		'label'   => __( 'Weeks, Paid', 'nu-research' ),
+		'body'    => __( 'A full summer arc — from paid onboarding in week one to the department showcase in week ten. Fellows are paid for every week of the program, including onboarding.', 'nu-research' ),
+	),
+	array(
+		'eyebrow' => __( 'Research', 'nu-research' ),
+		'value'   => __( '4', 'nu-research' ),
+		'label'   => __( 'Research Tracks', 'nu-research' ),
+		'body'    => __( 'Plugin architecture, editor and block UX, performance and security, and accessibility — each track ships real code into the department’s own WordPress infrastructure.', 'nu-research' ),
+	),
+	array(
+		'eyebrow' => __( 'Mentorship', 'nu-research' ),
+		'value'   => __( '3–4', 'nu-research' ),
+		'label'   => __( 'Fellows per Team', 'nu-research' ),
+		'body'    => __( 'Small teams led by a faculty mentor and a graduate TA, with weekly one-on-ones, code review, and a Friday all-hands demo keeping every fellow accountable.', 'nu-research' ),
+	),
+);
+
+/**
+ * The ten-week arc — rendered as a timeline: horizontal on wide screens,
+ * a vertical rail on small ones.
  */
 $structure = array(
 	array(
-		'title' => __( 'Week 1 — Paid onboarding', 'nu-research' ),
+		'week'  => __( 'Week 1', 'nu-research' ),
+		'title' => __( 'Paid onboarding', 'nu-research' ),
 		'body'  => __( 'Local environment setup, a tour of WordPress internals, and team formation across the four tracks.', 'nu-research' ),
 	),
 	array(
-		'title' => __( 'Weeks 2–4 — Scoping', 'nu-research' ),
+		'week'  => __( 'Weeks 2–4', 'nu-research' ),
+		'title' => __( 'Scoping', 'nu-research' ),
 		'body'  => __( 'Problem scoping with your faculty mentor, ending in a first working prototype you can demo.', 'nu-research' ),
 	),
 	array(
-		'title' => __( 'Weeks 5–8 — Core build', 'nu-research' ),
+		'week'  => __( 'Weeks 5–8', 'nu-research' ),
+		'title' => __( 'Core build', 'nu-research' ),
 		'body'  => __( 'The main build sprint, with weekly code review and a Friday all-hands demo to keep momentum honest.', 'nu-research' ),
 	),
 	array(
-		'title' => __( 'Week 9 — Polish', 'nu-research' ),
+		'week'  => __( 'Week 9', 'nu-research' ),
+		'title' => __( 'Polish', 'nu-research' ),
 		'body'  => __( 'Testing, documentation, and the final round of review before the work goes in front of the department.', 'nu-research' ),
 	),
 	array(
-		'title' => __( 'Week 10 — Showcase', 'nu-research' ),
+		'week'  => __( 'Week 10', 'nu-research' ),
+		'title' => __( 'Showcase', 'nu-research' ),
 		'body'  => __( 'The end-of-summer showcase, presenting shipped work to faculty and department staff.', 'nu-research' ),
 	),
 );
@@ -79,6 +110,22 @@ $structure = array(
 	</header>
 
 	<section class="prog-section">
+		<h2><?php esc_html_e( 'By the numbers', 'nu-research' ); ?></h2>
+		<div class="stat-rows">
+			<?php foreach ( $stats as $stat ) : ?>
+				<article class="stat-row">
+					<div class="stat-figure">
+						<p class="stat-eyebrow"><?php echo esc_html( $stat['eyebrow'] ); ?></p>
+						<p class="stat-value"><?php echo esc_html( $stat['value'] ); ?></p>
+					</div>
+					<h3 class="stat-label"><?php echo esc_html( $stat['label'] ); ?></h3>
+					<p class="stat-desc"><?php echo esc_html( $stat['body'] ); ?></p>
+				</article>
+			<?php endforeach; ?>
+		</div>
+	</section>
+
+	<section class="prog-section">
 		<h2><?php esc_html_e( 'Research tracks', 'nu-research' ); ?></h2>
 		<div class="prog-list">
 			<?php foreach ( $tracks as $track ) : ?>
@@ -95,14 +142,15 @@ $structure = array(
 
 	<section class="prog-section">
 		<h2><?php esc_html_e( 'How the summer runs', 'nu-research' ); ?></h2>
-		<div class="prog-list">
+		<ol class="timeline" role="list">
 			<?php foreach ( $structure as $phase ) : ?>
-				<article class="prog-item">
-					<h3><?php echo esc_html( $phase['title'] ); ?></h3>
-					<p><?php echo esc_html( $phase['body'] ); ?></p>
-				</article>
+				<li class="timeline-item">
+					<p class="timeline-week"><?php echo esc_html( $phase['week'] ); ?></p>
+					<h3 class="timeline-title"><?php echo esc_html( $phase['title'] ); ?></h3>
+					<p class="timeline-body"><?php echo esc_html( $phase['body'] ); ?></p>
+				</li>
 			<?php endforeach; ?>
-		</div>
+		</ol>
 	</section>
 
 	<section class="prog-section">
