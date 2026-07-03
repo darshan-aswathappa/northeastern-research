@@ -1,0 +1,17 @@
+/*
+Theme Name: NU Research
+Theme URI: https://northeastern-research.local
+Author: Darshan Aswathappa
+Author URI: https://northeastern-research.local
+Description: Custom classic theme for the WordPress Research Fellows Program microsite, built from the Northeastern Research design system. Accessible, responsive, token-driven.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 7.0
+Requires PHP: 8.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: nu-research
+*/
+
+/* All styles are enqueued from assets/css/main.css — this file carries the
+   theme header only. */
