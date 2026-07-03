@@ -107,10 +107,10 @@ get_header();
 
 <section class="section section-muted" aria-labelledby="application-heading">
 	<div class="wrap form-wrap">
-		<div class="acf-note">
+		<!-- <div class="acf-note">
 			<span class="badge badge-red"><?php esc_html_e( 'Custom Plugin', 'nu-research' ); ?></span>
 			<span class="acf-note-detail"><?php esc_html_e( 'swe-fellows-application (multi-step form)', 'nu-research' ); ?></span>
-		</div>
+		</div> -->
 		<h2 id="application-heading"><?php esc_html_e( 'Start your application', 'nu-research' ); ?></h2>
 		<?php
 		// Page content carries the [swe_fellows_application] shortcode so

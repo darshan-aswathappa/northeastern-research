@@ -5,6 +5,39 @@
    (the hero photo scrim is the one sanctioned overlay).
    ========================================================================== */
 
+/* --- Self-hosted fonts (latin subset) -----------------------------------
+   Served from the theme instead of Google Fonts: removes a render-blocking
+   third-party request + its font-fetch chain, and lets these cache for a
+   year on our own origin. font-display:swap keeps text visible immediately. */
+@font-face {
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('../fonts/lato-400.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('../fonts/lato-700.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 900;
+	font-display: swap;
+	src: url('../fonts/lato-900.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Libre Baskerville';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('../fonts/librebaskerville-400.woff2') format('woff2');
+}
+
 /* --- Design tokens ------------------------------------------------------ */
 :root {
 	--nu-black: #000000;

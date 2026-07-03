@@ -18,7 +18,7 @@ get_header();
 		nu_research_section_header(
 			__( 'Highlights & Team', 'nu-research' ),
 			__( 'Meet the 2026 fellows', 'nu-research' ),
-			__( 'Content on this page is managed by non-technical staff each summer via two ACF (Advanced Custom Fields) repeater fields on a single WordPress page — no template edits needed to add a new fellow or project.', 'nu-research' ),
+			__( 'List of Team members and members Research Highlights listed down in the page', 'nu-research' ),
 			'h1'
 		);
 		?>
@@ -26,8 +26,8 @@ get_header();
 
 	<section class="section-block" aria-labelledby="team-heading">
 		<div class="acf-note">
-			<span class="badge badge-red"><?php esc_html_e( 'ACF Repeater: team_members', 'nu-research' ); ?></span>
-			<span class="acf-note-detail"><?php esc_html_e( '5 sub-fields per row · photo, name, major, mentor, focus', 'nu-research' ); ?></span>
+			<span class="badge badge-red"><?php esc_html_e( 'Team Members', 'nu-research' ); ?></span>
+			<span class="acf-note-detail"><?php esc_html_e( '', 'nu-research' ); ?></span>
 		</div>
 		<h2 id="team-heading" class="screen-reader-text"><?php esc_html_e( 'Fellows', 'nu-research' ); ?></h2>
 
@@ -36,23 +36,30 @@ get_header();
 				<?php
 				while ( have_rows( 'team_members' ) ) :
 					the_row();
-					$nu_photo  = get_sub_field( 'photo' );
-					// Image fields may return an array or ID if reconfigured; normalize to URL.
-					if ( is_array( $nu_photo ) ) {
-						$nu_photo = $nu_photo['url'] ?? '';
-					} elseif ( is_numeric( $nu_photo ) ) {
-						$nu_photo = wp_get_attachment_image_url( (int) $nu_photo, 'medium_large' );
-					}
-					$nu_name   = get_sub_field( 'name' );
-					$nu_major  = get_sub_field( 'major' );
-					$nu_mentor = get_sub_field( 'mentor' );
-					$nu_focus  = get_sub_field( 'focus' );
+					// Raw attachment ID (ACF stores the ID regardless of return format),
+					// so wp_get_attachment_image can emit srcset for right-sized delivery.
+					$nu_photo_id = (int) get_sub_field( 'photo', false );
+					$nu_name     = get_sub_field( 'name' );
+					$nu_major    = get_sub_field( 'major' );
+					$nu_mentor   = get_sub_field( 'mentor' );
+					$nu_focus    = get_sub_field( 'focus' );
 					?>
 					<li class="card">
 						<div class="card-media ratio-4-3">
-							<?php if ( $nu_photo ) : ?>
-								<img src="<?php echo esc_url( $nu_photo ); ?>" alt="<?php echo esc_attr( $nu_name ); ?>" loading="lazy">
-							<?php endif; ?>
+							<?php
+							if ( $nu_photo_id ) {
+								echo wp_get_attachment_image(
+									$nu_photo_id,
+									'medium_large',
+									false,
+									array(
+										'alt'     => $nu_name,
+										'loading' => 'lazy',
+										'sizes'   => '(max-width: 599px) 100vw, (max-width: 900px) 50vw, 300px',
+									)
+								);
+							}
+							?>
 						</div>
 						<div class="card-body">
 							<h3 class="card-title"><?php echo esc_html( $nu_name ); ?></h3>
@@ -75,8 +82,8 @@ get_header();
 
 	<section class="section-block" aria-labelledby="highlights-heading">
 		<div class="acf-note">
-			<span class="badge badge-red"><?php esc_html_e( 'ACF Repeater: research_highlights', 'nu-research' ); ?></span>
-			<span class="acf-note-detail"><?php esc_html_e( '5 sub-fields per row · image, title, track, summary, students', 'nu-research' ); ?></span>
+			<span class="badge badge-red"><?php esc_html_e( 'Research Highlights', 'nu-research' ); ?></span>
+			<span class="acf-note-detail"><?php esc_html_e( '', 'nu-research' ); ?></span>
 		</div>
 		<h2 id="highlights-heading" class="screen-reader-text"><?php esc_html_e( 'Research highlights', 'nu-research' ); ?></h2>
 
@@ -85,12 +92,7 @@ get_header();
 				<?php
 				while ( have_rows( 'research_highlights' ) ) :
 					the_row();
-					$nu_image    = get_sub_field( 'image' );
-					if ( is_array( $nu_image ) ) {
-						$nu_image = $nu_image['url'] ?? '';
-					} elseif ( is_numeric( $nu_image ) ) {
-						$nu_image = wp_get_attachment_image_url( (int) $nu_image, 'medium_large' );
-					}
+					$nu_image_id = (int) get_sub_field( 'image', false );
 					$nu_title    = get_sub_field( 'title' );
 					$nu_track    = get_sub_field( 'track' );
 					$nu_summary  = get_sub_field( 'summary' );
@@ -98,9 +100,20 @@ get_header();
 					?>
 					<li class="card">
 						<div class="card-media ratio-16-10">
-							<?php if ( $nu_image ) : ?>
-								<img src="<?php echo esc_url( $nu_image ); ?>" alt="<?php echo esc_attr( $nu_title ); ?>" loading="lazy">
-							<?php endif; ?>
+							<?php
+							if ( $nu_image_id ) {
+								echo wp_get_attachment_image(
+									$nu_image_id,
+									'medium_large',
+									false,
+									array(
+										'alt'     => $nu_title,
+										'loading' => 'lazy',
+										'sizes'   => '(max-width: 599px) 100vw, (max-width: 900px) 50vw, 380px',
+									)
+								);
+							}
+							?>
 						</div>
 						<div class="card-body">
 							<?php if ( $nu_track ) : ?>

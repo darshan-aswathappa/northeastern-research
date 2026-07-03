@@ -35,17 +35,11 @@ add_action( 'after_setup_theme', 'nu_research_setup' );
  * Styles and scripts.
  */
 function nu_research_enqueue() {
-	wp_enqueue_style(
-		'nu-research-fonts',
-		'https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700&display=swap',
-		array(),
-		null
-	);
-
+	// Fonts are self-hosted via @font-face in main.css — no external request.
 	wp_enqueue_style(
 		'nu-research-main',
 		get_theme_file_uri( 'assets/css/main.css' ),
-		array( 'nu-research-fonts' ),
+		array(),
 		(string) filemtime( get_theme_file_path( 'assets/css/main.css' ) )
 	);
 
@@ -63,23 +57,68 @@ function nu_research_enqueue() {
 add_action( 'wp_enqueue_scripts', 'nu_research_enqueue' );
 
 /**
- * Preconnect to the font host so text renders fast on first visit.
- *
- * @param array  $urls          Resource hint URLs.
- * @param string $relation_type Hint type being filtered.
- * @return array
+ * Head preloads: the two most-used self-hosted fonts (so text swaps in early),
+ * plus the hero background image on the front page (the LCP element — a CSS
+ * background can't be discovered by the preload scanner without this).
  */
-function nu_research_resource_hints( $urls, $relation_type ) {
-	if ( 'preconnect' === $relation_type ) {
-		$urls[] = array(
-			'href'        => 'https://fonts.gstatic.com',
-			'crossorigin' => 'anonymous',
+function nu_research_preloads() {
+	$fonts = array( 'assets/fonts/lato-400.woff2', 'assets/fonts/lato-700.woff2' );
+	foreach ( $fonts as $font ) {
+		printf(
+			'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
+			esc_url( get_theme_file_uri( $font ) )
 		);
-		$urls[] = array( 'href' => 'https://fonts.googleapis.com' );
 	}
-	return $urls;
+
+	if ( is_front_page() ) {
+		printf(
+			'<link rel="preload" href="%s" as="image" fetchpriority="high">' . "\n",
+			esc_url( nu_research_img( 'hero.jpg' ) )
+		);
+	}
 }
-add_filter( 'wp_resource_hints', 'nu_research_resource_hints', 10, 2 );
+add_action( 'wp_head', 'nu_research_preloads', 1 );
+
+/**
+ * Trim front-end weight for this classic, block-free theme: drop the block
+ * editor's default CSS, the classic-theme shim, global styles, and the emoji
+ * detection script — none of which this theme's markup uses. Keeps them in
+ * the admin so the editor is unaffected.
+ */
+function nu_research_dequeue_unused() {
+	wp_dequeue_style( 'wp-block-library' );
+	wp_dequeue_style( 'wp-block-library-theme' );
+	wp_dequeue_style( 'classic-theme-styles' );
+	wp_dequeue_style( 'global-styles' );
+}
+add_action( 'wp_enqueue_scripts', 'nu_research_dequeue_unused', 100 );
+
+/**
+ * Remove the emoji detection script/styles and the wp-embed script on the
+ * front end (a main-thread task and two requests real visitors don't need).
+ */
+function nu_research_disable_extras() {
+	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+	remove_action( 'wp_print_styles', 'print_emoji_styles' );
+	remove_action( 'wp_head', 'wp_oembed_add_host_js' );
+	add_filter( 'emoji_svg_url', '__return_false' );
+
+	// Core global styles emit an inline block of preset variables this theme
+	// never uses. Removing the generating actions is more reliable than a
+	// late wp_dequeue_style, which can miss the wp_footer-printed copy.
+	remove_action( 'wp_enqueue_scripts', 'wp_enqueue_global_styles' );
+	remove_action( 'wp_footer', 'wp_enqueue_global_styles', 1 );
+	remove_action( 'wp_body_open', 'wp_global_styles_render_svg_filters' );
+}
+add_action( 'init', 'nu_research_disable_extras' );
+
+/**
+ * Drop the wp-embed script (used only for embedding this site elsewhere).
+ */
+function nu_research_dequeue_embed() {
+	wp_deregister_script( 'wp-embed' );
+}
+add_action( 'wp_footer', 'nu_research_dequeue_embed' );
 
 /**
  * Meta description: page excerpt when set, site tagline otherwise.
