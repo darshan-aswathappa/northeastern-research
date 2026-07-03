@@ -96,6 +96,53 @@ function nu_research_register_blocks() {
 			),
 		)
 	);
+
+	register_block_type(
+		'nu/hero-billboard',
+		array(
+			'render_callback' => 'nu_research_render_hero_billboard',
+			'attributes'      => array(
+				'eyebrow'  => array( 'type' => 'string', 'default' => 'WordPress Research Fellows' ),
+				'heading'  => array( 'type' => 'string', 'default' => 'Build. Test. Ship.' ),
+				'lead'     => array( 'type' => 'string', 'default' => 'A 10-week paid summer fellowship where undergraduate Software Engineering students build, test, and ship real WordPress tooling alongside faculty mentors.' ),
+				'ctaLabel' => array( 'type' => 'string', 'default' => 'Apply Now' ),
+				'ctaSlug'  => array( 'type' => 'string', 'default' => 'apply-eligibility' ),
+				'image'    => array( 'type' => 'string', 'default' => 'hero.jpg' ),
+				'imageAlt' => array( 'type' => 'string', 'default' => 'Fellows working together in a research lab' ),
+			),
+		)
+	);
+
+	register_block_type(
+		'nu/pillars',
+		array(
+			'render_callback' => 'nu_research_render_pillars',
+			'attributes'      => array(
+				'heading' => array( 'type' => 'string', 'default' => 'A deep commitment to your research success' ),
+				'intro'   => array( 'type' => 'string', 'default' => '' ),
+				'items'   => array(
+					'type'    => 'array',
+					'items'   => array( 'type' => 'string' ),
+					'default' => array(),
+				),
+			),
+		)
+	);
+
+	register_block_type(
+		'nu/journey-cards',
+		array(
+			'render_callback' => 'nu_research_render_journey_cards',
+			'attributes'      => array(
+				'label' => array( 'type' => 'string', 'default' => 'Your research journey' ),
+				'cards' => array(
+					'type'    => 'array',
+					'items'   => array( 'type' => 'string' ),
+					'default' => array(),
+				),
+			),
+		)
+	);
 }
 add_action( 'init', 'nu_research_register_blocks' );
 
@@ -242,6 +289,141 @@ function nu_research_render_cta_band( $a ) {
 			<h2><?php echo esc_html( $a['heading'] ); ?></h2>
 			<p class="cta-lead"><?php echo esc_html( $a['lead'] ); ?></p>
 			<?php nu_research_cta( $a['ctaLabel'], nu_research_page_url( $a['ctaSlug'] ) ); ?>
+		</div>
+	</section>
+	<?php
+	return ob_get_clean();
+}
+
+/**
+ * Thin line icon for the pillars block (Lucide-style, 2px stroke, drawn with
+ * currentColor so the accent is set in CSS).
+ *
+ * @param string $name Icon key: network | medal | pyramid.
+ */
+function nu_research_pillar_icon( $name ) {
+	$paths = array(
+		'network' => '<circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><path d="M10.5 7.5 6.5 16.2M13.5 7.5l4 8.7M8 19h8"/>',
+		'medal'   => '<circle cx="12" cy="14" r="6"/><path d="M8.7 9 6 3h4l2 4.5L14 3h4l-2.7 6"/><path d="M12 11.5v3l1.8 1"/>',
+		'pyramid' => '<path d="M12 3 2.5 20h19L12 3Z"/><path d="M12 3v17"/>',
+	);
+
+	if ( ! isset( $paths[ $name ] ) ) {
+		return;
+	}
+
+	printf(
+		'<svg class="pillar-icon" viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">%s</svg>',
+		$paths[ $name ] // Static markup defined above; contains no user input.
+	);
+}
+
+/**
+ * Full-black billboard hero: eyebrow, large serif heading, lead, CTA, and the
+ * photo on a side panel.
+ *
+ * @param array $a Block attributes.
+ * @return string
+ */
+function nu_research_render_hero_billboard( $a ) {
+	ob_start();
+	?>
+	<section class="hero-billboard">
+		<div class="hero-billboard-inner wrap">
+			<div class="hero-billboard-content">
+				<p class="eyebrow eyebrow-on-dark"><?php echo esc_html( $a['eyebrow'] ); ?></p>
+				<h1 class="hero-billboard-heading"><?php echo esc_html( $a['heading'] ); ?></h1>
+				<?php if ( $a['lead'] ) : ?>
+					<p class="hero-billboard-lead"><?php echo esc_html( $a['lead'] ); ?></p>
+				<?php endif; ?>
+				<?php nu_research_cta( $a['ctaLabel'], nu_research_page_url( $a['ctaSlug'] ) ); ?>
+			</div>
+			<div class="hero-billboard-media">
+				<img src="<?php echo esc_url( nu_research_img( $a['image'] ) ); ?>" alt="<?php echo esc_attr( $a['imageAlt'] ); ?>" width="1200" height="800" fetchpriority="high">
+			</div>
+		</div>
+	</section>
+	<?php
+	return ob_get_clean();
+}
+
+/**
+ * Commitment pillars: section heading + intro over a three-up grid of
+ * icon / title / body items. Items are pipe-delimited "icon|title|body".
+ *
+ * @param array $a Block attributes.
+ * @return string
+ */
+function nu_research_render_pillars( $a ) {
+	$items = is_array( $a['items'] ) ? $a['items'] : array();
+	ob_start();
+	?>
+	<section class="section pillars-section">
+		<div class="wrap">
+			<div class="section-header">
+				<h2 class="pillars-heading"><?php echo esc_html( $a['heading'] ); ?></h2>
+				<?php if ( $a['intro'] ) : ?>
+					<p class="section-intro"><?php echo esc_html( $a['intro'] ); ?></p>
+				<?php endif; ?>
+			</div>
+			<?php if ( $items ) : ?>
+				<ul class="pillars-grid">
+					<?php
+					foreach ( $items as $item ) :
+						$parts = array_pad( explode( '|', $item, 3 ), 3, '' );
+						?>
+						<li class="pillar">
+							<?php nu_research_pillar_icon( sanitize_key( $parts[0] ) ); ?>
+							<h3 class="pillar-title"><?php echo esc_html( $parts[1] ); ?></h3>
+							<p class="pillar-body"><?php echo esc_html( $parts[2] ); ?></p>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+			<?php endif; ?>
+		</div>
+	</section>
+	<?php
+	return ob_get_clean();
+}
+
+/**
+ * Research-journey cards: a labelled three-up grid of photo cards, each with a
+ * red arrow text link. Cards are pipe-delimited
+ * "image|alt|title|body|ctaLabel|slug".
+ *
+ * @param array $a Block attributes.
+ * @return string
+ */
+function nu_research_render_journey_cards( $a ) {
+	$cards = is_array( $a['cards'] ) ? $a['cards'] : array();
+	ob_start();
+	?>
+	<section class="section journey-section">
+		<div class="wrap">
+			<div class="section-header">
+				<h2 class="journey-heading"><?php echo esc_html( $a['label'] ); ?></h2>
+			</div>
+			<?php if ( $cards ) : ?>
+				<ul class="journey-grid">
+					<?php
+					foreach ( $cards as $card ) :
+						$parts = array_pad( explode( '|', $card, 6 ), 6, '' );
+						?>
+						<li class="journey-card">
+							<div class="journey-card-media ratio-4-3">
+								<img src="<?php echo esc_url( nu_research_img( $parts[0] ) ); ?>" alt="<?php echo esc_attr( $parts[1] ); ?>" width="1000" height="750" loading="lazy">
+							</div>
+							<h3 class="journey-card-title"><?php echo esc_html( $parts[2] ); ?></h3>
+							<p class="journey-card-body"><?php echo esc_html( $parts[3] ); ?></p>
+							<?php if ( $parts[4] ) : ?>
+								<a class="arrow-link" href="<?php echo esc_url( nu_research_page_url( $parts[5] ) ); ?>">
+									<?php echo esc_html( $parts[4] ); ?><span class="arrow-link-glyph" aria-hidden="true">&rarr;</span>
+								</a>
+							<?php endif; ?>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+			<?php endif; ?>
 		</div>
 	</section>
 	<?php

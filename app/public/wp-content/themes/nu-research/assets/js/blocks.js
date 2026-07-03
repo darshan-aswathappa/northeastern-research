@@ -91,6 +91,42 @@
 				{ key: 'ctaLabel', label: __( 'Button label', 'nu-research' ), type: 'text' },
 				{ key: 'ctaSlug', label: __( 'Button links to page slug', 'nu-research' ), type: 'text' }
 			]
+		},
+		{
+			name: 'nu/hero-billboard',
+			title: __( 'Fellows: Hero Billboard', 'nu-research' ),
+			description: __( 'Full-black billboard hero: eyebrow, serif heading, lead, CTA, and side photo.', 'nu-research' ),
+			icon: 'cover-image',
+			fields: [
+				{ key: 'eyebrow', label: __( 'Eyebrow', 'nu-research' ), type: 'text' },
+				{ key: 'heading', label: __( 'Heading', 'nu-research' ), type: 'text' },
+				{ key: 'lead', label: __( 'Lead paragraph', 'nu-research' ), type: 'textarea' },
+				{ key: 'ctaLabel', label: __( 'Button label', 'nu-research' ), type: 'text' },
+				{ key: 'ctaSlug', label: __( 'Button links to page slug', 'nu-research' ), type: 'text' },
+				{ key: 'image', label: __( 'Image filename (assets/img/)', 'nu-research' ), type: 'text' },
+				{ key: 'imageAlt', label: __( 'Image alt text', 'nu-research' ), type: 'text' }
+			]
+		},
+		{
+			name: 'nu/pillars',
+			title: __( 'Fellows: Commitment Pillars', 'nu-research' ),
+			description: __( 'Section heading and intro over a three-up icon / title / body grid.', 'nu-research' ),
+			icon: 'columns',
+			fields: [
+				{ key: 'heading', label: __( 'Heading', 'nu-research' ), type: 'text' },
+				{ key: 'intro', label: __( 'Intro paragraph', 'nu-research' ), type: 'textarea' },
+				{ key: 'items', label: __( 'Items (one per line: icon|title|body)', 'nu-research' ), type: 'lines' }
+			]
+		},
+		{
+			name: 'nu/journey-cards',
+			title: __( 'Fellows: Journey Cards', 'nu-research' ),
+			description: __( 'Labelled three-up grid of photo cards with arrow links.', 'nu-research' ),
+			icon: 'grid-view',
+			fields: [
+				{ key: 'label', label: __( 'Section heading', 'nu-research' ), type: 'text' },
+				{ key: 'cards', label: __( 'Cards (one per line: image|alt|title|body|ctaLabel|slug)', 'nu-research' ), type: 'lines' }
+			]
 		}
 	];
 

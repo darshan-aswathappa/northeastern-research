@@ -69,7 +69,7 @@ add_action( 'wp_enqueue_scripts', 'nu_research_enqueue' );
  * background can't be discovered by the preload scanner without this).
  */
 function nu_research_preloads() {
-	$fonts = array( 'assets/fonts/lato-400.woff2', 'assets/fonts/lato-700.woff2' );
+	$fonts = array( 'assets/fonts/hankengrotesk-var.woff2', 'assets/fonts/sourceserif4-var.woff2' );
 	foreach ( $fonts as $font ) {
 		printf(
 			'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
