@@ -83,6 +83,14 @@ function nu_research_preloads() {
 			esc_url( nu_research_img( 'hero.jpg' ) )
 		);
 	}
+
+	// The About page opens with a full-bleed photo — its LCP element.
+	if ( is_page_template( 'page-about.php' ) ) {
+		printf(
+			'<link rel="preload" href="%s" as="image" fetchpriority="high">' . "\n",
+			esc_url( nu_research_img( 'collab.jpg' ) )
+		);
+	}
 }
 add_action( 'wp_head', 'nu_research_preloads', 1 );
 
@@ -196,6 +204,46 @@ function nu_research_section_header( $eyebrow, $heading, $intro = '', $tag = 'h2
 			<p class="section-intro"><?php echo esc_html( $intro ); ?></p>
 		<?php endif; ?>
 	</div>
+	<?php
+}
+
+/**
+ * Reusable breadcrumb: Home › [ancestors…] › current page. Rendered on every
+ * view except the front page, where it would be redundant.
+ *
+ * @param string $label     Current (non-linked) label. Defaults to the page title.
+ * @param array  $ancestors Optional intermediate links between Home and the
+ *                          current label, each array( 'label' => …, 'url' => … ).
+ */
+function nu_research_breadcrumb( $label = '', $ancestors = array() ) {
+	if ( is_front_page() ) {
+		return;
+	}
+
+	if ( '' === $label ) {
+		$label = get_the_title();
+	}
+
+	$sep = '<span class="breadcrumb-sep" aria-hidden="true">&rsaquo;</span>';
+	?>
+	<nav class="breadcrumb" aria-label="<?php esc_attr_e( 'Breadcrumb', 'nu-research' ); ?>">
+		<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'nu-research' ); ?></a>
+		<?php
+		foreach ( $ancestors as $crumb ) {
+			if ( empty( $crumb['label'] ) ) {
+				continue;
+			}
+			echo wp_kses_post( $sep );
+			printf(
+				'<a href="%s">%s</a>',
+				esc_url( $crumb['url'] ),
+				esc_html( $crumb['label'] )
+			);
+		}
+		echo wp_kses_post( $sep );
+		?>
+		<span aria-current="page"><?php echo esc_html( $label ); ?></span>
+	</nav>
 	<?php
 }
 

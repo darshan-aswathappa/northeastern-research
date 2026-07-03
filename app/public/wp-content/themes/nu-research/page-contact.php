@@ -11,6 +11,8 @@ get_header();
 
 <div class="wrap page-pad">
 
+	<?php nu_research_breadcrumb(); ?>
+
 	<section class="section-block">
 		<?php
 		nu_research_section_header(

@@ -9,6 +9,7 @@ get_header();
 ?>
 
 <div class="wrap page-pad">
+	<?php nu_research_breadcrumb(); ?>
 	<?php
 	while ( have_posts() ) :
 		the_post();

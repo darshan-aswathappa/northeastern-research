@@ -7,14 +7,24 @@
 
 get_header();
 
-$nu_blog_id  = (int) get_option( 'page_for_posts' );
-$nu_blog_url = $nu_blog_id ? get_permalink( $nu_blog_id ) : home_url( '/' );
+$nu_blog_id    = (int) get_option( 'page_for_posts' );
+$nu_blog_url   = $nu_blog_id ? get_permalink( $nu_blog_id ) : home_url( '/' );
+$nu_blog_title = $nu_blog_id ? get_the_title( $nu_blog_id ) : __( 'Blog', 'nu-research' );
 ?>
 
 <div class="wrap page-pad">
 	<?php
 	while ( have_posts() ) :
 		the_post();
+		nu_research_breadcrumb(
+			get_the_title(),
+			array(
+				array(
+					'label' => $nu_blog_title,
+					'url'   => $nu_blog_url,
+				),
+			)
+		);
 		?>
 		<article <?php post_class( 'post-single' ); ?>>
 			<header class="post-header">

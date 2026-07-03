@@ -23,6 +23,7 @@ $nu_intro = wp_strip_all_tags( get_the_archive_description() );
 ?>
 
 <div class="wrap page-pad">
+	<?php nu_research_breadcrumb( $nu_title ); ?>
 	<?php
 	nu_research_section_header( $nu_eyebrow, $nu_title, $nu_intro, 'h1' );
 

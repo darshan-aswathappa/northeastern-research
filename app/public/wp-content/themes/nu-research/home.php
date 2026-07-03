@@ -12,6 +12,7 @@ $nu_blog_title = $nu_blog_id ? get_the_title( $nu_blog_id ) : __( 'Blog', 'nu-re
 ?>
 
 <div class="wrap page-pad">
+	<?php nu_research_breadcrumb( $nu_blog_title ); ?>
 	<?php
 	nu_research_section_header(
 		__( 'News & Updates', 'nu-research' ),
