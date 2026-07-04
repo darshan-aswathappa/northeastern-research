@@ -23,6 +23,7 @@ jobs:
 
       - name: Install PHP_CodeSniffer + WordPress Coding Standards
         run: |
+          composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
           composer global require --dev squizlabs/php_codesniffer dealerdirect/phpcodesniffer-composer-installer wp-coding-standards/wpcs
           echo "$HOME/.composer/vendor/bin" >> $GITHUB_PATH
 
