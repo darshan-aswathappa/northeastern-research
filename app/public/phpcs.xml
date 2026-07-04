@@ -2,38 +2,46 @@
 <ruleset name="NU Research WordPress Standards">
     <description>PHPCS config for the NU Research WordPress theme and custom plugins.</description>
 
-    <!-- Files and directories to scan -->
+    <!-- Files and directories to scan (PHP only) -->
     <file>wp-content/themes/nu-research</file>
     <file>wp-content/plugins/fellows-deadline</file>
     <file>wp-content/plugins/swe-fellows-application</file>
     <file>wp-content/plugins/swe-mail-list</file>
 
+    <!-- Only scan PHP files — CSS/JS use their own tools -->
+    <arg name="extensions" value="php"/>
+
     <!-- Exclude generated/vendor files -->
     <exclude-pattern>*/node_modules/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
-    <exclude-pattern>*/assets/js/*.min.js</exclude-pattern>
-    <exclude-pattern>*/assets/css/*.min.css</exclude-pattern>
 
     <!-- WordPress Coding Standards -->
     <rule ref="WordPress">
         <!-- Allow short array syntax [] instead of array() -->
         <exclude name="Universal.Arrays.DisallowShortArraySyntax"/>
+        <!-- Pre/post increment style is a preference, not a bug -->
+        <exclude name="Universal.Operators.DisallowStandalonePostIncrementDecrement"/>
+        <!-- Alignment of = in multi-assignments is noisy and not critical -->
+        <exclude name="Generic.Formatting.MultipleStatementAlignment"/>
     </rule>
 
-    <!-- Require proper text domain for the theme -->
+    <!-- Require proper text domain — new element syntax (PHPCS 3.3+) -->
     <rule ref="WordPress.WP.I18n">
         <properties>
-            <property name="text_domain" type="array" value="nu-research,fellows-deadline,swe-fellows-application,swe-mail-list"/>
+            <property name="text_domain" type="array">
+                <element value="nu-research"/>
+                <element value="fellows-deadline"/>
+                <element value="swe-fellows-application"/>
+                <element value="swe-mail-list"/>
+            </property>
         </properties>
     </rule>
 
     <!-- PHP version compatibility -->
     <config name="testVersion" value="8.0-"/>
 
-    <!-- Show progress and use colors in local runs -->
+    <!-- Show progress and sniff codes -->
     <arg name="colors"/>
     <arg value="sp"/>
-
-    <!-- Show sniff codes in all reports -->
     <arg value="s"/>
 </ruleset>
