@@ -1,0 +1,326 @@
+/* ============================================================
+   SWE Fellows application form
+   Styled to the Northeastern Graduate Design System:
+   square corners, hairline borders, a single red accent, serif
+   headings on a black/white editorial base. Tokens come from the
+   active theme (main.css); hard-coded fallbacks keep the form
+   presentable under any theme.
+   ============================================================ */
+
+.swe-app {
+  max-width: 640px;
+  font-family: var(--font-sans, 'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif);
+  color: var(--color-text, #1a1a1a);
+}
+
+/* Honeypot: visually removed but still in the DOM for bots. */
+.swe-app-hp {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.swe-app-live,
+.swe-app .screen-reader-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* The hidden attribute must always win over our display rules. */
+.swe-app [hidden] {
+  display: none !important;
+}
+
+/* --- Progress (JS only) --- editorial eyebrow steps, red = reached --- */
+.swe-app-progress {
+  list-style: none;
+  display: flex;
+  gap: var(--space-3, 12px);
+  margin: 0 0 var(--space-6, 32px);
+  padding: 0;
+  counter-reset: swe-steps;
+}
+
+.swe-app-progress li {
+  flex: 1;
+  counter-increment: swe-steps;
+  font-size: 0.8125rem; /* 13px eyebrow */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-text-muted, #6b6b6b);
+  padding-top: var(--space-3, 12px);
+  border-top: 2px solid var(--gray-300, #d1d1d1);
+  transition: color 200ms cubic-bezier(0.2, 0, 0.1, 1),
+    border-color 200ms cubic-bezier(0.2, 0, 0.1, 1);
+}
+
+.swe-app-progress li::before {
+  content: counter(swe-steps) ". ";
+}
+
+.swe-app-progress li.is-active,
+.swe-app-progress li.is-complete {
+  border-top-color: var(--nu-red, #d41b2c);
+  color: var(--color-text, #1a1a1a);
+}
+
+/* --- Errors --- square, red hairline --- */
+.swe-app-errors {
+  border: 1px solid var(--nu-red, #d41b2c);
+  border-radius: 0;
+  background: #fdf2f4;
+  padding: var(--space-3, 12px) var(--space-4, 16px);
+  margin-bottom: var(--space-5, 24px);
+}
+
+.swe-app-errors p {
+  margin: 0;
+  font-weight: 600;
+  color: var(--nu-red-dark, #b01524);
+}
+
+/* --- Steps --- flat surface, hairline border, square corners --- */
+.swe-app-step {
+  border: 1px solid var(--color-border, #e6e6e6);
+  border-radius: 0;
+  background: var(--nu-white, #fff);
+  padding: var(--space-6, 32px);
+  margin: 0 0 var(--space-5, 24px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5, 24px);
+}
+
+.swe-app-step legend {
+  font-family: var(--font-serif, 'Source Serif 4', Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(1.375rem, 2vw, 1.75rem); /* 22–28px display heading */
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--color-text, #1a1a1a);
+  padding: 0;
+  margin-bottom: var(--space-1, 4px);
+}
+
+.swe-app-step legend:focus-visible {
+  outline: 2px solid var(--nu-red, #d41b2c);
+  outline-offset: 4px;
+}
+
+.swe-app-step-count {
+  display: block;
+  font-family: var(--font-sans, 'Hanken Grotesk', sans-serif);
+  font-size: 0.8125rem; /* 13px eyebrow */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--nu-red, #d41b2c);
+  margin-bottom: var(--space-2, 8px);
+}
+
+/* --- Fields --- */
+.swe-app-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 8px);
+  margin: 0;
+}
+
+.swe-app-field label {
+  font-size: 0.9375rem; /* 15px */
+  font-weight: 600;
+  color: var(--color-text-secondary, #333333);
+}
+
+.swe-app-req {
+  color: var(--nu-red, #d41b2c);
+}
+
+.swe-app-field input,
+.swe-app-field select,
+.swe-app-field textarea {
+  font-family: inherit;
+  font-size: 1.0625rem; /* 17px body */
+  line-height: 1.5;
+  color: var(--color-text, #1a1a1a);
+  background: transparent;
+  padding: 18px 20px;
+  border: 1px solid var(--gray-300, #d1d1d1);
+  border-radius: 0;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 200ms cubic-bezier(0.2, 0, 0.1, 1),
+    box-shadow 200ms cubic-bezier(0.2, 0, 0.1, 1);
+}
+
+.swe-app-field textarea {
+  resize: vertical;
+  min-height: 160px;
+}
+
+.swe-app-field input:focus,
+.swe-app-field select:focus,
+.swe-app-field textarea:focus {
+  border-color: var(--nu-red, #d41b2c);
+  box-shadow: 0 0 0 3px rgba(212, 27, 44, 0.18);
+}
+
+/* Native select with a red chevron on the right. */
+.swe-app-field select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 52px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='%23d41b2c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+}
+
+.swe-app-hint {
+  font-size: 0.9375rem; /* 15px */
+  color: var(--color-text-muted, #6b6b6b);
+}
+
+/* --- Buttons --- square-cornered; primary is the solid red CTA --- */
+.swe-app-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3, 12px);
+  margin: var(--space-1, 4px) 0 0;
+}
+
+.swe-app-nav .swe-app-next:only-child,
+.swe-app-nav .swe-app-submit:only-child {
+  margin-left: auto;
+}
+
+.swe-app-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 16px 28px;
+  border-radius: 0;
+  font-family: inherit;
+  font-size: 1.0625rem; /* 17px */
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: none;
+  background: var(--nu-red, #d41b2c);
+  color: var(--nu-white, #fff);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 200ms cubic-bezier(0.2, 0, 0.1, 1),
+    color 200ms cubic-bezier(0.2, 0, 0.1, 1),
+    border-color 200ms cubic-bezier(0.2, 0, 0.1, 1);
+}
+
+.swe-app-btn:hover {
+  background: var(--nu-red-dark, #b01524);
+}
+
+.swe-app-btn:focus-visible {
+  outline: 2px solid var(--nu-red, #d41b2c);
+  outline-offset: 3px;
+}
+
+.swe-app-btn:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+/* Continue / submit carry the design system's forward arrow. */
+.swe-app-next::after,
+.swe-app-submit::after {
+  content: "\2192"; /* → */
+  font-size: 1.125em;
+  line-height: 1;
+}
+
+.swe-app-btn-secondary {
+  background: transparent;
+  color: var(--color-text, #1a1a1a);
+  border: 1px solid var(--color-text, #1a1a1a);
+}
+
+.swe-app-btn-secondary:hover {
+  background: var(--color-text, #1a1a1a);
+  color: var(--nu-white, #fff);
+}
+
+.swe-app-btn-secondary::after {
+  content: none;
+}
+
+/* --- Success --- flat, serif heading --- */
+.swe-app-success {
+  border: 1px solid var(--color-border, #e6e6e6);
+  border-radius: 0;
+  background: var(--nu-white, #fff);
+  padding: var(--space-7, 48px);
+  text-align: center;
+}
+
+.swe-app-success:focus-visible {
+  outline: 2px solid var(--nu-red, #d41b2c);
+  outline-offset: 4px;
+}
+
+.swe-app-success h3 {
+  font-family: var(--font-serif, 'Source Serif 4', Georgia, serif);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--color-text, #1a1a1a);
+  margin: 0 0 var(--space-3, 12px);
+}
+
+.swe-app-success p {
+  margin: 0;
+  color: var(--color-text-secondary, #333333);
+}
+
+/* ============================================================
+   Admin list: status pills (wp-admin — square, brand-tinted)
+   ============================================================ */
+.swe-app-status-pill {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #e6e6e6;
+}
+
+.swe-app-status-new {
+  background: #fce8ec;
+  color: #b01524;
+}
+
+.swe-app-status-reviewed {
+  background: #fff3cd;
+  color: #664d03;
+}
+
+.swe-app-status-accepted {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+
+.swe-app-status-rejected {
+  background: #e6e6e6;
+  color: #41464b;
+}

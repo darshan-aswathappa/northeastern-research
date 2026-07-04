@@ -1,4 +1,5 @@
 <?php
+define('WP_CACHE', true); // WP-Optimize Cache
 /**
  * The base configuration for WordPress
  *
@@ -18,26 +19,19 @@
  *
  * @package WordPress
  */
-
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 define( 'DB_NAME', 'local' );
-
 /** Database username */
 define( 'DB_USER', 'root' );
-
 /** Database password */
 define( 'DB_PASSWORD', 'root' );
-
 /** Database hostname */
 define( 'DB_HOST', 'localhost' );
-
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
-
 /** The database collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
-
 /**#@+
  * Authentication unique keys and salts.
  *
@@ -58,10 +52,7 @@ define( 'SECURE_AUTH_SALT',  '&4Gy;Mf^[])pC;U*Sr/yhWCc/^s@g2cJ61dadlo?oY{or-%Om^
 define( 'LOGGED_IN_SALT',    'gcW&=GY$VO@a8ZOSXYU_LcX[sF&$c:^i=7a4%(z7a>p*jMH*K+;WWK_awUjwPY;K' );
 define( 'NONCE_SALT',        '*[/|w^UNbN]vOf*{>I(xqHCXxWEsUDm(YNloNF |Q7Pqk$oUE!,dnZg%lx|S*/Te' );
 define( 'WP_CACHE_KEY_SALT', 'y_Z{^4Ha}l`j_O ,yh>:NaXu=eWqw.i6D3MUJ<q`F}/[w}r:mz{{xw{<@p<m8B_W' );
-
-
 /**#@-*/
-
 /**
  * WordPress database table prefix.
  *
@@ -69,12 +60,12 @@ define( 'WP_CACHE_KEY_SALT', 'y_Z{^4Ha}l`j_O ,yh>:NaXu=eWqw.i6D3MUJ<q`F}/[w}r:mz
  * a unique prefix. Only numbers, letters, and underscores please!
  */
 $table_prefix = 'wp_';
-
-
 /* Add any custom values between this line and the "stop editing" line. */
 
-
-
+// Security hardening
+define('DISALLOW_FILE_EDIT', true);  // disable theme/plugin editor in admin
+define('DISALLOW_FILE_MODS', true);  // disable plugin/theme installation
+define('FORCE_SSL_ADMIN', true);     // admin always over HTTPS
 /**
  * For developers: WordPress debugging mode.
  *
@@ -90,14 +81,11 @@ $table_prefix = 'wp_';
 if ( ! defined( 'WP_DEBUG' ) ) {
 	define( 'WP_DEBUG', false );
 }
-
 define( 'WP_ENVIRONMENT_TYPE', 'local' );
 /* That's all, stop editing! Happy publishing. */
-
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
 	define( 'ABSPATH', __DIR__ . '/' );
 }
-
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';

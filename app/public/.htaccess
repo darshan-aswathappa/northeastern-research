@@ -1,3 +1,17 @@
+# Block wp-config.php
+<files wp-config.php>
+order allow,deny
+deny from all
+</files>
+
+# Block xmlrpc.php
+<files xmlrpc.php>
+order allow,deny
+deny from all
+</files>
+
+# Disable directory browsing
+Options -Indexes
 
 # BEGIN WordPress
 # The directives (lines) between "BEGIN WordPress" and "END WordPress" are

@@ -1,2 +1,63 @@
 [03-Jul-2026 08:27:52] NOTICE: fpm is running, pid 48225
 [03-Jul-2026 08:27:52] NOTICE: ready to handle connections
+[03-Jul-2026 16:07:20] NOTICE: Terminating ...
+[03-Jul-2026 16:07:20] NOTICE: Terminating ...
+[03-Jul-2026 16:07:20] NOTICE: exiting, bye-bye!
+[03-Jul-2026 16:07:27] NOTICE: fpm is running, pid 10270
+[03-Jul-2026 16:07:27] NOTICE: ready to handle connections
+[03-Jul-2026 16:09:11] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 16:09:11] ERROR: FPM initialization failed
+[03-Jul-2026 16:09:11] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 16:09:11] ERROR: FPM initialization failed
+[03-Jul-2026 16:09:12] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 16:09:12] ERROR: FPM initialization failed
+[03-Jul-2026 16:09:13] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 16:09:13] ERROR: FPM initialization failed
+[03-Jul-2026 16:11:06] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 16:11:06] ERROR: FPM initialization failed
+[03-Jul-2026 16:11:07] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 16:11:07] ERROR: FPM initialization failed
+[03-Jul-2026 16:11:07] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 16:11:07] ERROR: FPM initialization failed
+[03-Jul-2026 16:11:08] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 16:11:08] ERROR: FPM initialization failed
+[03-Jul-2026 16:14:04] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 16:14:04] ERROR: FPM initialization failed
+[03-Jul-2026 16:14:05] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 16:14:05] ERROR: FPM initialization failed
+[03-Jul-2026 16:14:05] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 16:14:05] ERROR: FPM initialization failed
+[03-Jul-2026 16:14:06] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 16:14:06] ERROR: FPM initialization failed
+[03-Jul-2026 16:14:17] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 16:14:17] ERROR: FPM initialization failed
+[03-Jul-2026 16:14:17] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 16:14:17] ERROR: FPM initialization failed
+[03-Jul-2026 16:14:18] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 16:14:18] ERROR: FPM initialization failed
+[03-Jul-2026 16:14:19] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 16:14:19] ERROR: FPM initialization failed
+[03-Jul-2026 17:13:59] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 17:13:59] ERROR: FPM initialization failed
+[03-Jul-2026 17:13:59] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 17:13:59] ERROR: FPM initialization failed
+[03-Jul-2026 17:14:00] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 17:14:00] ERROR: FPM initialization failed
+[03-Jul-2026 17:14:01] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 17:14:01] ERROR: FPM initialization failed
+[03-Jul-2026 17:15:08] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 17:15:08] ERROR: FPM initialization failed
+[03-Jul-2026 17:15:09] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 17:15:09] ERROR: FPM initialization failed
+[03-Jul-2026 17:15:09] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 17:15:09] ERROR: FPM initialization failed
+[03-Jul-2026 17:15:10] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 17:15:10] ERROR: FPM initialization failed
+[03-Jul-2026 17:15:30] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 17:15:30] ERROR: FPM initialization failed
+[03-Jul-2026 17:15:30] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 17:15:30] ERROR: FPM initialization failed
+[03-Jul-2026 17:15:31] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 17:15:31] ERROR: FPM initialization failed
+[03-Jul-2026 17:15:31] ERROR: Another FPM instance seems to already listen on /Users/darshanaswathappa/Library/Application Support/Local/run/lXEkfeBsU/php/php-fpm.socket
+[03-Jul-2026 17:15:31] ERROR: FPM initialization failed

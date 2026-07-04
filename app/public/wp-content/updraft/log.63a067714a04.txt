@@ -1,0 +1,524 @@
+0000.000 (0) Opened log file at time: Sat, 04 Jul 2026 05:06:32 +0000 on https://northeastern-research.local
+0000.002 (0) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.26.5 WP: 7.0 PHP: 8.2.29 (fpm-fcgi, Darwin Mac.local 25.5.0 Darwin Kernel Version 25.5.0: Mon Apr 27 20:41:26 PDT 2026; root:xnu-12377.121.6~2/RELEASE_ARM64_T8132 arm64) MySQL: 8.4.0 (max packet size=1073741824) WPLANG: en_US Server: nginx/1.26.1 safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 6M | 8M) multisite: N openssl: OpenSSL 3.5.1 1 Jul 2025 mcrypt: N LANG:  WP Proxy: disabled ZipArchive::addFile: Y
+0000.002 (0) Free space on disk containing Updraft's temporary directory: 46488.9 MB
+0000.008 (0) Tasks: Backup files: 1 (schedule: unset) Backup DB: 1 (schedule: unset)
+0000.009 (0) Requesting semaphore lock (fd) (apparently not via scheduler)
+0000.011 (0) Set semaphore last lock (fd) time to 2026-07-04 05:06:32
+0000.011 (0) Semaphore lock (fd) complete
+0000.013 (0) Backup run: resumption=0, nonce=63a067714a04, file_nonce=63a067714a04 begun at=1783141592 (0s ago), job type=backup
+0000.014 (0) Scheduling a resumption (1) after 300 seconds (1783141892) in case this run gets aborted
+0000.015 (0) Checking if we have a zip executable available
+0000.016 (0) Testing: /usr/bin/zip
+0000.026 (0) Output: zip warning: binziptest/test.zip not found or empty
+0000.027 (0) Output: adding: binziptest/subdir1/	(in=0) (out=0) (stored 0%)
+0000.027 (0) Output: adding: binziptest/subdir1/subdir2/	(in=0) (out=0) (stored 0%)
+0000.028 (0) Output: adding: binziptest/subdir1/subdir2/test.html	(in=131) (out=107) (deflated 18%)
+0000.028 (0) Output: total bytes=131, compressed=107 -> 18% savings
+0000.039 (0) Output: adding: binziptest/subdir1/subdir2/test2.html	(in=138) (out=113) (deflated 18%)
+0000.041 (0) Output: total bytes=269, compressed=220 -> 18% savings
+0000.042 (0) Working binary zip found: /usr/bin/zip
+0000.043 (0) Zip engine: found/will use a binary zip: /usr/bin/zip
+0000.044 (0) Creation of backups of directories: beginning
+0000.045 (0) Beginning creation of dump of plugins (split every: 400 MB)
+0000.148 (0) Total entities for the zip file: 1406 directories, 7840 files (0 skipped as non-modified), 127.2 MB
+0000.150 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 100 files added (on-disk size: 0 KB)
+0000.151 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 200 files added (on-disk size: 0 KB)
+0000.153 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 300 files added (on-disk size: 0 KB)
+0000.154 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 400 files added (on-disk size: 0 KB)
+0000.155 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 500 files added (on-disk size: 0 KB)
+0000.157 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 600 files added (on-disk size: 0 KB)
+0000.158 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 700 files added (on-disk size: 0 KB)
+0000.159 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 800 files added (on-disk size: 0 KB)
+0000.161 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 900 files added (on-disk size: 0 KB)
+0000.161 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 25 MB added on this batch (25.1 MB, 7840 files batched, 936 (936) added so far); re-opening (prior size: 0 KB)
+0000.695 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: size is now: 8.30 MB
+0000.695 (0) A useful amount of data was added after this amount of zip processing: 1 s (normalised: 1 s, rate: 26282 KB/s)
+0000.696 (0) Performance is good - will increase the amount of data we attempt to batch (time=0.97923803329468, normalised_time=0.97405042260547, max_time=0.69561100006104, data points known=1, old_max_bytes=26214400, new_max_bytes=161476650)
+0000.697 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 1000 files added (on-disk size: 8512.7 KB)
+0000.703 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 1100 files added (on-disk size: 8512.7 KB)
+0000.705 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 1200 files added (on-disk size: 8512.7 KB)
+0000.706 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 1300 files added (on-disk size: 8512.7 KB)
+0000.707 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 1400 files added (on-disk size: 8512.7 KB)
+0000.708 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 1500 files added (on-disk size: 8512.7 KB)
+0000.709 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 1600 files added (on-disk size: 8512.7 KB)
+0000.710 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 1700 files added (on-disk size: 8512.7 KB)
+0000.711 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 1800 files added (on-disk size: 8512.7 KB)
+0000.713 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 1900 files added (on-disk size: 8512.7 KB)
+0000.713 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (14.7 MB, 7840 files batched, 1001 (1937) added so far); re-opening (prior size: 8512.7 KB)
+0001.092 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: size is now: 13.30 MB
+0001.095 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 2000 files added (on-disk size: 13669.8 KB)
+0001.096 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 2100 files added (on-disk size: 13669.8 KB)
+0001.097 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 2200 files added (on-disk size: 13669.8 KB)
+0001.098 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 2300 files added (on-disk size: 13669.8 KB)
+0001.100 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 2400 files added (on-disk size: 13669.8 KB)
+0001.101 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 2500 files added (on-disk size: 13669.8 KB)
+0001.102 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 2600 files added (on-disk size: 13669.8 KB)
+0001.106 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 2700 files added (on-disk size: 13669.8 KB)
+0001.107 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 2800 files added (on-disk size: 13669.8 KB)
+0001.108 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 2900 files added (on-disk size: 13669.8 KB)
+0001.109 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (17.1 MB, 7840 files batched, 1001 (2938) added so far); re-opening (prior size: 13669.8 KB)
+0001.779 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: size is now: 19.50 MB
+0001.782 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 3000 files added (on-disk size: 19988.2 KB)
+0001.783 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 3100 files added (on-disk size: 19988.2 KB)
+0001.784 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 3200 files added (on-disk size: 19988.2 KB)
+0001.785 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 3300 files added (on-disk size: 19988.2 KB)
+0001.787 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 3400 files added (on-disk size: 19988.2 KB)
+0001.788 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 3500 files added (on-disk size: 19988.2 KB)
+0001.790 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 3600 files added (on-disk size: 19988.2 KB)
+0001.791 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 3700 files added (on-disk size: 19988.2 KB)
+0001.796 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 3800 files added (on-disk size: 19988.2 KB)
+0001.799 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 3900 files added (on-disk size: 19988.2 KB)
+0001.800 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (22.1 MB, 7840 files batched, 1001 (3939) added so far); re-opening (prior size: 19988.2 KB)
+0002.357 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: size is now: 25.70 MB
+0002.359 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 4000 files added (on-disk size: 26270.5 KB)
+0002.361 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 4100 files added (on-disk size: 26270.5 KB)
+0002.362 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 4200 files added (on-disk size: 26270.5 KB)
+0002.363 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 4300 files added (on-disk size: 26270.5 KB)
+0002.364 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 4400 files added (on-disk size: 26270.5 KB)
+0002.366 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 4500 files added (on-disk size: 26270.5 KB)
+0002.367 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 4600 files added (on-disk size: 26270.5 KB)
+0002.368 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 4700 files added (on-disk size: 26270.5 KB)
+0002.370 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 4800 files added (on-disk size: 26270.5 KB)
+0002.371 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 4900 files added (on-disk size: 26270.5 KB)
+0002.375 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (10.4 MB, 7840 files batched, 1001 (4940) added so far); re-opening (prior size: 26270.5 KB)
+0002.715 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 5000 files added (on-disk size: 30811.4 KB)
+0002.716 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 5100 files added (on-disk size: 30811.4 KB)
+0002.718 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 5200 files added (on-disk size: 30811.4 KB)
+0002.719 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 5300 files added (on-disk size: 30811.4 KB)
+0002.720 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 5400 files added (on-disk size: 30811.4 KB)
+0002.722 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 5500 files added (on-disk size: 30811.4 KB)
+0002.723 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 5600 files added (on-disk size: 30811.4 KB)
+0002.725 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 5700 files added (on-disk size: 30811.4 KB)
+0002.726 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 5800 files added (on-disk size: 30811.4 KB)
+0002.727 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 5900 files added (on-disk size: 30811.4 KB)
+0002.728 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (22.1 MB, 7840 files batched, 1001 (5941) added so far); re-opening (prior size: 30811.4 KB)
+0003.248 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 6000 files added (on-disk size: 36598.2 KB)
+0003.249 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 6100 files added (on-disk size: 36598.2 KB)
+0003.250 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 6200 files added (on-disk size: 36598.2 KB)
+0003.251 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 6300 files added (on-disk size: 36598.2 KB)
+0003.252 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 6400 files added (on-disk size: 36598.2 KB)
+0003.253 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 6500 files added (on-disk size: 36598.2 KB)
+0003.254 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 6600 files added (on-disk size: 36598.2 KB)
+0003.255 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 6700 files added (on-disk size: 36598.2 KB)
+0003.256 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 6800 files added (on-disk size: 36598.2 KB)
+0003.257 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 6900 files added (on-disk size: 36598.2 KB)
+0003.258 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (13.3 MB, 7840 files batched, 1001 (6942) added so far); re-opening (prior size: 36598.2 KB)
+0003.716 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 7000 files added (on-disk size: 40627.6 KB)
+0003.717 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 7100 files added (on-disk size: 40627.6 KB)
+0003.719 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 7200 files added (on-disk size: 40627.6 KB)
+0003.720 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 7300 files added (on-disk size: 40627.6 KB)
+0003.723 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 7400 files added (on-disk size: 40627.6 KB)
+0003.724 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 7500 files added (on-disk size: 40627.6 KB)
+0003.729 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 7600 files added (on-disk size: 40627.6 KB)
+0003.731 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 7700 files added (on-disk size: 40627.6 KB)
+0003.732 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.tmp: 7800 files added (on-disk size: 40627.6 KB)
+0004.001 (0) Creating zip file manifest (backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.list-temp.tmp)
+0004.012 (0) Successfully created zip file manifest (size: 695691)
+0004.221 (0) Created plugins zip (0) - 41653.4 KB in 4.2 s (9979.8 KB/s) (sha1: 5567090d4bb48168b10ac888de9b534bb1ff0353, sha256: 0b1eb46b550daf2a68170f255094e0a39f77d20fb317f7eae8ced999e9f624c2)
+0004.224 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0004.225 (0) No remote despatch: user chose no remote backup service
+0004.225 (0) Recording as successfully uploaded: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip
+0004.226 (0) Deleting zip manifest (backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip.list.tmp)
+0004.228 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0004.228 (0) Number of backup sets in history: 1; groups (db): 1
+0004.229 (0) Examining (for databases) backup set with group_id=0, nonce=08c54eef777b, datestamp=1783124771 (Jul 04 2026 00:26:11)
+0004.229 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0004.230 (0) Number of backup sets in history: 1; groups (files): 1
+0004.230 (0) Examining (for files) backup set with nonce=08c54eef777b, datestamp=1783124771 (Jul 04 2026 00:26:11)
+0004.230 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0004.231 (0) Retain: saving new backup history (sets now: 1) and finishing retain operation
+0004.233 (0) Beginning creation of dump of themes (split every: 400 MB)
+0004.238 (0) Total entities for the zip file: 56 directories, 429 files (0 skipped as non-modified), 15.4 MB
+0004.240 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-themes.zip.tmp: 100 files added (on-disk size: 0 KB)
+0004.241 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-themes.zip.tmp: 200 files added (on-disk size: 0 KB)
+0004.242 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-themes.zip.tmp: 300 files added (on-disk size: 0 KB)
+0004.243 (0) Zip: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-themes.zip.tmp: 400 files added (on-disk size: 0 KB)
+0004.540 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-themes.zip.tmp: size is now: 14.30 MB
+0004.543 (0) Creating zip file manifest (backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-themes.zip.list-temp.tmp)
+0004.544 (0) Successfully created zip file manifest (size: 29844)
+0004.624 (0) Created themes zip (0) - 14678.2 KB in 0.4 s (37694.8 KB/s) (sha1: 400864e526ebd04648e14a6b2f9e3a44e491dd7a, sha256: 28bc09ce3e5b9c0d4aaeb26f540975391c6d76a08e7d96137198d44a7b560163)
+0004.626 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0004.627 (0) No remote despatch: user chose no remote backup service
+0004.628 (0) Recording as successfully uploaded: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-themes.zip
+0004.628 (0) Deleting zip manifest (backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-themes.zip.list.tmp)
+0004.629 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0004.630 (0) Number of backup sets in history: 1; groups (db): 1
+0004.630 (0) Examining (for databases) backup set with group_id=0, nonce=08c54eef777b, datestamp=1783124771 (Jul 04 2026 00:26:11)
+0004.630 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0004.630 (0) Number of backup sets in history: 1; groups (files): 1
+0004.631 (0) Examining (for files) backup set with nonce=08c54eef777b, datestamp=1783124771 (Jul 04 2026 00:26:11)
+0004.631 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0004.631 (0) Retain: saving new backup history (sets now: 1) and finishing retain operation
+0004.633 (0) Exclusion option setting (uploads): backup*,*backups,backwpup*,wp-clone,snapshots,wp-staging
+0004.633 (0) Looking for candidates to backup in: /Users/darshanaswathappa/Local Sites/northeastern-research/app/public/wp-content/uploads
+0004.633 (0) finding files: aios: adding to list (1)
+0004.634 (0) finding files: burst: adding to list (2)
+0004.634 (0) finding files: 2026: adding to list (3)
+0004.634 (0) finding files: wpo: adding to list (4)
+0004.635 (0) finding files: .htaccess: adding to list (5)
+0004.635 (0) Beginning creation of dump of uploads (split every: 400 MB)
+0004.637 (0) Total entities for the zip file: 10 directories, 74 files (0 skipped as non-modified), 14.2 MB
+0005.116 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-uploads.zip.tmp: size is now: 8.80 MB
+0005.118 (0) Creating zip file manifest (backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-uploads.zip.list-temp.tmp)
+0005.119 (0) Successfully created zip file manifest (size: 3508)
+0005.170 (0) Created uploads zip (0) - 9028 KB in 0.5 s (16917 KB/s) (sha1: c6ea47ad3d5838576794caa3682c7686f600a1ee, sha256: 8ccc0147c6656c1b91dfd393ae7567f927fa4cf67c04101d539f2c2662b62086)
+0005.172 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0005.173 (0) No remote despatch: user chose no remote backup service
+0005.174 (0) Recording as successfully uploaded: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-uploads.zip
+0005.174 (0) Deleting zip manifest (backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-uploads.zip.list.tmp)
+0005.176 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0005.176 (0) Number of backup sets in history: 1; groups (db): 1
+0005.177 (0) Examining (for databases) backup set with group_id=0, nonce=08c54eef777b, datestamp=1783124771 (Jul 04 2026 00:26:11)
+0005.177 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0005.177 (0) Number of backup sets in history: 1; groups (files): 1
+0005.177 (0) Examining (for files) backup set with nonce=08c54eef777b, datestamp=1783124771 (Jul 04 2026 00:26:11)
+0005.177 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0005.178 (0) Retain: saving new backup history (sets now: 1) and finishing retain operation
+0005.181 (0) Beginning creation of dump of mu-plugins (split every: 400 MB)
+0005.182 (0) Total entities for the zip file: 1 directories, 2 files (0 skipped as non-modified), 0 MB
+0005.189 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-mu-plugins.zip.tmp: size is now: 0.00 MB
+0005.191 (0) Creating zip file manifest (backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-mu-plugins.zip.list-temp.tmp)
+0005.192 (0) Successfully created zip file manifest (size: 136)
+0005.195 (0) Created mu-plugins zip (0) - 5.1 KB in 0 s (406.6 KB/s) (sha1: ab83a8fefdffc6c9133885e0b4ac0b7464f41b05, sha256: 734dd4a56950029164846ba379d173163684ff69031cd55b23dd15c3b70a4f9a)
+0005.196 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0005.197 (0) No remote despatch: user chose no remote backup service
+0005.197 (0) Recording as successfully uploaded: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-mu-plugins.zip
+0005.198 (0) Deleting zip manifest (backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-mu-plugins.zip.list.tmp)
+0005.198 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0005.200 (0) Number of backup sets in history: 1; groups (db): 1
+0005.201 (0) Examining (for databases) backup set with group_id=0, nonce=08c54eef777b, datestamp=1783124771 (Jul 04 2026 00:26:11)
+0005.201 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0005.201 (0) Number of backup sets in history: 1; groups (files): 1
+0005.201 (0) Examining (for files) backup set with nonce=08c54eef777b, datestamp=1783124771 (Jul 04 2026 00:26:11)
+0005.201 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0005.201 (0) Retain: saving new backup history (sets now: 1) and finishing retain operation
+0005.204 (0) Beginning backup of other directories found in the content directory (index: 0)
+0005.204 (0) Exclusion option setting (others): upgrade,cache,updraft,backup*,*backups,mysql.sql,debug.log
+0005.205 (0) Looking for candidates to backup in: /Users/darshanaswathappa/Local Sites/northeastern-research/app/public/wp-content
+0005.205 (0) finding files: upgrade: skipping: excluded by options
+0005.205 (0) finding files: index.php: adding to list (1)
+0005.206 (0) finding files: cache: skipping: excluded by options
+0005.206 (0) finding files: plugins: skipping: this is the plugins directory
+0005.206 (0) finding files: uploads: skipping: this is the uploads directory
+0005.207 (0) finding files: updraft: skipping: this is the updraft directory
+0005.207 (0) finding files: advanced-cache.php: adding to list (2)
+0005.207 (0) finding files: aiowps_backups: skipping: excluded by options (glob)
+0005.207 (0) finding files: wpo-cache: adding to list (3)
+0005.208 (0) finding files: themes: skipping: this is the themes directory
+0005.208 (0) finding files: mu-plugins: skipping: this is the mu-plugins directory
+0005.209 (0) Total entities for the zip file: 2 directories, 4 files (0 skipped as non-modified), 0 MB
+0005.218 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-others.zip.tmp: size is now: 0.00 MB
+0005.219 (0) Creating zip file manifest (backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-others.zip.list-temp.tmp)
+0005.219 (0) Successfully created zip file manifest (size: 204)
+0005.221 (0) Created others zip (0) - 3.2 KB in 0 s (261.9 KB/s) (sha1: 1c0c1ccd51af94c4c2c9e581c10e55b219d348c9, sha256: d73e4ede9dbfbde6af4fedbea85d498f3729b11df6c0661717e8547cbbaa61c5)
+0005.222 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0005.222 (0) No remote despatch: user chose no remote backup service
+0005.222 (0) Recording as successfully uploaded: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-others.zip
+0005.223 (0) Deleting zip manifest (backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-others.zip.list.tmp)
+0005.223 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0005.224 (0) Number of backup sets in history: 1; groups (db): 1
+0005.224 (0) Examining (for databases) backup set with group_id=0, nonce=08c54eef777b, datestamp=1783124771 (Jul 04 2026 00:26:11)
+0005.224 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0005.224 (0) Number of backup sets in history: 1; groups (files): 1
+0005.224 (0) Examining (for files) backup set with nonce=08c54eef777b, datestamp=1783124771 (Jul 04 2026 00:26:11)
+0005.224 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0005.224 (0) Retain: saving new backup history (sets now: 1) and finishing retain operation
+0005.226 (0) Saving backup status to database (elements: 10)
+0005.226 (0) Beginning creation of database dump (WordPress DB)
+0005.227 (0) SQL compatibility mode is: NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+0005.231 (0) Table wp_options: Total expected rows (via COUNT): 326
+0005.231 (0) Table is relatively small; fetch_rows will thus be: 500 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0005.251 (0) Table wp_options: Rows added in this batch (next record: 781): 322 (uncompressed bytes in this segment=1237864) in 0.02 seconds
+0005.252 (0) Table wp_options: finishing file(s) (2, 262.2 KB)
+0005.255 (0) Table wp_users: Total expected rows (via COUNT): 1
+0005.255 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0005.256 (0) Table wp_users: Rows added in this batch (next record: 1): 1 (uncompressed bytes in this segment=1441) in 0.00 seconds
+0005.257 (0) Table wp_users: finishing file(s) (2, 0.6 KB)
+0005.258 (0) Table wp_usermeta: Total expected rows (via COUNT): 34
+0005.258 (0) Table is relatively small; fetch_rows will thus be: 50 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0005.259 (0) Table wp_usermeta: Rows added in this batch (next record: 51): 34 (uncompressed bytes in this segment=4814) in 0.00 seconds
+0005.260 (0) Table wp_usermeta: finishing file(s) (2, 2.1 KB)
+0005.264 (0) Table wp_commentmeta: Total expected rows (via COUNT): 0
+0005.264 (0) Table wp_commentmeta: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=677) in 0.00 seconds
+0005.266 (0) Table wp_commentmeta: finishing file(s) (2, 0.4 KB)
+0005.267 (0) Table wp_comments: Total expected rows (via COUNT): 0
+0005.267 (0) Table wp_comments: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1702) in 0.00 seconds
+0005.268 (0) Table wp_comments: finishing file(s) (2, 0.5 KB)
+0005.270 (0) Table wp_links: Total expected rows (via COUNT): 0
+0005.270 (0) Table wp_links: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1298) in 0.00 seconds
+0005.271 (0) Table wp_links: finishing file(s) (2, 0.5 KB)
+0005.272 (0) Table wp_postmeta: Total expected rows (via COUNT): 263
+0005.272 (0) Table is relatively small; fetch_rows will thus be: 500 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0005.273 (0) Table wp_postmeta: Rows added in this batch (next record: 375): 263 (uncompressed bytes in this segment=32476) in 0.00 seconds
+0005.276 (0) Table wp_postmeta: finishing file(s) (2, 5.4 KB)
+0005.277 (0) Table wp_posts: Total expected rows (via COUNT): 58
+0005.277 (0) Table is relatively small; fetch_rows will thus be: 100 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0005.278 (0) Table wp_posts: Rows added in this batch (next record: 98): 58 (uncompressed bytes in this segment=52493) in 0.00 seconds
+0005.280 (0) Table wp_posts: finishing file(s) (2, 13.3 KB)
+0005.281 (0) Table wp_term_relationships: Total expected rows (approximate): 1
+0005.281 (0) Table wp_term_relationships: Rows added in this batch (next record: 100000): 29 (uncompressed bytes in this segment=1070) in 0.00 seconds
+0005.282 (0) Table wp_term_relationships: finishing file(s) (2, 0.5 KB)
+0005.283 (0) Table wp_term_taxonomy: Total expected rows (via COUNT): 21
+0005.284 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0005.284 (0) Table wp_term_taxonomy: Rows added in this batch (next record: 28): 21 (uncompressed bytes in this segment=1600) in 0.00 seconds
+0005.286 (0) Table wp_term_taxonomy: finishing file(s) (2, 0.6 KB)
+0005.289 (0) Table wp_termmeta: Total expected rows (via COUNT): 0
+0005.289 (0) Table wp_termmeta: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=650) in 0.00 seconds
+0005.290 (0) Table wp_termmeta: finishing file(s) (2, 0.4 KB)
+0005.291 (0) Table wp_terms: Total expected rows (via COUNT): 21
+0005.291 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0005.292 (0) Table wp_terms: Rows added in this batch (next record: 28): 21 (uncompressed bytes in this segment=1545) in 0.00 seconds
+0005.293 (0) Table wp_terms: finishing file(s) (2, 0.7 KB)
+0005.295 (0) Table wp_aiowps_audit_log: Total expected rows (via COUNT): 12
+0005.295 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0005.295 (0) Table wp_aiowps_audit_log: Rows added in this batch (next record: 12): 12 (uncompressed bytes in this segment=50895) in 0.00 seconds
+0005.296 (0) Table wp_aiowps_audit_log: finishing file(s) (2, 2.8 KB)
+0005.299 (0) Table wp_aiowps_debug_log: Total expected rows (via COUNT): 0
+0005.299 (0) Table wp_aiowps_debug_log: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=827) in 0.00 seconds
+0005.300 (0) Table wp_aiowps_debug_log: finishing file(s) (2, 0.4 KB)
+0005.302 (0) Table wp_aiowps_events: Total expected rows (via COUNT): 0
+0005.302 (0) Table wp_aiowps_events: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1050) in 0.00 seconds
+0005.304 (0) Table wp_aiowps_events: finishing file(s) (2, 0.4 KB)
+0005.306 (0) Table wp_aiowps_global_meta: Total expected rows (via COUNT): 0
+0005.306 (0) Table wp_aiowps_global_meta: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1227) in 0.00 seconds
+0005.307 (0) Table wp_aiowps_global_meta: finishing file(s) (2, 0.4 KB)
+0005.308 (0) Table wp_aiowps_logged_in_users: Total expected rows (via COUNT): 1
+0005.308 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0005.309 (0) Table wp_aiowps_logged_in_users: Rows added in this batch (next record: 1): 1 (uncompressed bytes in this segment=1063) in 0.00 seconds
+0005.309 (0) Table wp_aiowps_logged_in_users: finishing file(s) (2, 0.5 KB)
+0005.311 (0) Table wp_aiowps_login_lockdown: Total expected rows (via COUNT): 0
+0005.312 (0) Table wp_aiowps_login_lockdown: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1345) in 0.00 seconds
+0005.313 (0) Table wp_aiowps_login_lockdown: finishing file(s) (2, 0.5 KB)
+0005.315 (0) Table wp_aiowps_message_store: Total expected rows (via COUNT): 0
+0005.315 (0) Table wp_aiowps_message_store: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=626) in 0.00 seconds
+0005.316 (0) Table wp_aiowps_message_store: finishing file(s) (2, 0.3 KB)
+0005.317 (0) Table wp_aiowps_permanent_block: Total expected rows (via COUNT): 0
+0005.318 (0) Table wp_aiowps_permanent_block: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=903) in 0.00 seconds
+0005.318 (0) Table wp_aiowps_permanent_block: finishing file(s) (2, 0.4 KB)
+0005.321 (0) Table wp_burst_archived_months: Total expected rows (via COUNT): 0
+0005.321 (0) Table wp_burst_archived_months: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=679) in 0.00 seconds
+0005.322 (0) Table wp_burst_archived_months: finishing file(s) (2, 0.4 KB)
+0005.323 (0) Table wp_burst_browser_versions: Total expected rows (via COUNT): 1
+0005.323 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0005.323 (0) Table wp_burst_browser_versions: Rows added in this batch (next record: 1): 1 (uncompressed bytes in this segment=616) in 0.00 seconds
+0005.324 (0) Table wp_burst_browser_versions: finishing file(s) (2, 0.4 KB)
+0005.325 (0) Table wp_burst_browsers: Total expected rows (via COUNT): 1
+0005.325 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0005.325 (0) Table wp_burst_browsers: Rows added in this batch (next record: 1): 1 (uncompressed bytes in this segment=557) in 0.00 seconds
+0005.326 (0) Table wp_burst_browsers: finishing file(s) (2, 0.4 KB)
+0005.327 (0) Table wp_burst_devices: Total expected rows (via COUNT): 2
+0005.328 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0005.328 (0) Table wp_burst_devices: Rows added in this batch (next record: 2): 2 (uncompressed bytes in this segment=567) in 0.00 seconds
+0005.329 (0) Table wp_burst_devices: finishing file(s) (2, 0.4 KB)
+0005.330 (0) Table wp_burst_goal_statistics: Total expected rows (via COUNT): 0
+0005.331 (0) Table wp_burst_goal_statistics: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=666) in 0.00 seconds
+0005.332 (0) Table wp_burst_goal_statistics: finishing file(s) (2, 0.4 KB)
+0005.333 (0) Table wp_burst_goals: Total expected rows (via COUNT): 1
+0005.333 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0005.333 (0) Table wp_burst_goals: Rows added in this batch (next record: 1): 1 (uncompressed bytes in this segment=1164) in 0.00 seconds
+0005.334 (0) Table wp_burst_goals: finishing file(s) (2, 0.5 KB)
+0005.335 (0) Table wp_burst_known_uids: Total expected rows (approximate): 0
+0005.336 (0) Table wp_burst_known_uids: Rows added in this batch (next record: 1000): 2 (uncompressed bytes in this segment=792) in 0.00 seconds
+0005.336 (0) Table wp_burst_known_uids: finishing file(s) (2, 0.5 KB)
+0005.339 (0) Table wp_burst_locations: Total expected rows (via COUNT): 254
+0005.339 (0) Table is relatively small; fetch_rows will thus be: 500 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0005.340 (0) Table wp_burst_locations: Rows added in this batch (next record: 2755251): 254 (uncompressed bytes in this segment=8735) in 0.00 seconds
+0005.340 (0) Table wp_burst_locations: finishing file(s) (2, 1.7 KB)
+0005.341 (0) Table wp_burst_platforms: Total expected rows (via COUNT): 2
+0005.342 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0005.342 (0) Table wp_burst_platforms: Rows added in this batch (next record: 2): 2 (uncompressed bytes in this segment=584) in 0.00 seconds
+0005.344 (0) Table wp_burst_platforms: finishing file(s) (2, 0.4 KB)
+0005.345 (0) Table wp_burst_query_stats: Total expected rows (via COUNT): 7
+0005.345 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0005.345 (0) Table wp_burst_query_stats: Rows added in this batch (next record: 7): 7 (uncompressed bytes in this segment=3903) in 0.00 seconds
+0005.346 (0) Table wp_burst_query_stats: finishing file(s) (2, 1 KB)
+0005.348 (0) Table wp_burst_referrers: Total expected rows (via COUNT): 0
+0005.348 (0) Table wp_burst_referrers: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=521) in 0.00 seconds
+0005.350 (0) Table wp_burst_referrers: finishing file(s) (2, 0.3 KB)
+0005.352 (0) Table wp_burst_report_logs: Total expected rows (via COUNT): 0
+0005.352 (0) Table wp_burst_report_logs: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=962) in 0.00 seconds
+0005.353 (0) Table wp_burst_report_logs: finishing file(s) (2, 0.4 KB)
+0005.355 (0) Table wp_burst_reports: Total expected rows (via COUNT): 0
+0005.355 (0) Table wp_burst_reports: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1272) in 0.00 seconds
+0005.356 (0) Table wp_burst_reports: finishing file(s) (2, 0.5 KB)
+0005.357 (0) Table wp_burst_searches: Total expected rows (via COUNT): 0
+0005.358 (0) Table wp_burst_searches: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=528) in 0.00 seconds
+0005.359 (0) Table wp_burst_searches: finishing file(s) (2, 0.3 KB)
+0005.360 (0) Table wp_burst_sessions: Total expected rows (via COUNT): 8
+0005.360 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0005.361 (0) Table wp_burst_sessions: Rows added in this batch (next record: 8): 8 (uncompressed bytes in this segment=1968) in 0.00 seconds
+0005.361 (0) Table wp_burst_sessions: finishing file(s) (2, 0.6 KB)
+0005.362 (0) Table wp_burst_statistics: Total expected rows (via COUNT): 345
+0005.362 (0) Table is relatively small; fetch_rows will thus be: 500 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0005.365 (0) Table wp_burst_statistics: Rows added in this batch (next record: 345): 345 (uncompressed bytes in this segment=35881) in 0.00 seconds
+0005.366 (0) Table wp_burst_statistics: finishing file(s) (2, 4.7 KB)
+0005.368 (0) Table wp_burst_statistics_searches: Total expected rows (via COUNT): 0
+0005.369 (0) Table wp_burst_statistics_searches: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=820) in 0.00 seconds
+0005.369 (0) Table wp_burst_statistics_searches: finishing file(s) (2, 0.4 KB)
+0005.370 (0) Table wp_swe_applications: Total expected rows (via COUNT): 1
+0005.370 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0005.371 (0) Table wp_swe_applications: Rows added in this batch (next record: 14): 1 (uncompressed bytes in this segment=1264) in 0.00 seconds
+0005.373 (0) Table wp_swe_applications: finishing file(s) (2, 0.6 KB)
+0005.374 (0) Table wp_swe_waitlist: Total expected rows (via COUNT): 0
+0005.374 (0) Table wp_swe_waitlist: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=569) in 0.00 seconds
+0005.376 (0) Table wp_swe_waitlist: finishing file(s) (2, 0.4 KB)
+0005.378 (0) Table wp_tm_taskmeta: Total expected rows (via COUNT): 0
+0005.378 (0) Table wp_tm_taskmeta: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=668) in 0.00 seconds
+0005.380 (0) Table wp_tm_taskmeta: finishing file(s) (2, 0.4 KB)
+0005.383 (0) Table wp_tm_tasks: Total expected rows (via COUNT): 0
+0005.383 (0) Table wp_tm_tasks: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=878) in 0.00 seconds
+0005.384 (0) Table wp_tm_tasks: finishing file(s) (2, 0.4 KB)
+0005.385 (0) Table wp_wpo_404_detector: Total expected rows (via COUNT): 0
+0005.386 (0) Table wp_wpo_404_detector: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=857) in 0.00 seconds
+0005.387 (0) Table wp_wpo_404_detector: finishing file(s) (2, 0.4 KB)
+0005.388 (0) Table wp_yoast_expiring_store: Total expected rows (approximate): 0
+0005.389 (0) Table wp_yoast_expiring_store: Rows added in this batch (next record: 0): 0 (uncompressed bytes in this segment=512) in 0.00 seconds
+0005.390 (0) Table wp_yoast_expiring_store: finishing file(s) (2, 0.3 KB)
+0005.391 (0) Table wp_yoast_indexable: Total expected rows (via COUNT): 0
+0005.391 (0) Table wp_yoast_indexable: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=3807) in 0.00 seconds
+0005.392 (0) Table wp_yoast_indexable: finishing file(s) (2, 1 KB)
+0005.394 (0) Table wp_yoast_indexable_hierarchy: Total expected rows (approximate): 0
+0005.394 (0) Table wp_yoast_indexable_hierarchy: Rows added in this batch (next record: 0): 0 (uncompressed bytes in this segment=734) in 0.00 seconds
+0005.395 (0) Table wp_yoast_indexable_hierarchy: finishing file(s) (2, 0.4 KB)
+0005.397 (0) Table wp_yoast_migrations: Total expected rows (via COUNT): 26
+0005.397 (0) Table is relatively small; fetch_rows will thus be: 50 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0005.397 (0) Table wp_yoast_migrations: Rows added in this batch (next record: 26): 26 (uncompressed bytes in this segment=1270) in 0.00 seconds
+0005.399 (0) Table wp_yoast_migrations: finishing file(s) (2, 0.6 KB)
+0005.400 (0) Table wp_yoast_primary_term: Total expected rows (via COUNT): 0
+0005.401 (0) Table wp_yoast_primary_term: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=842) in 0.00 seconds
+0005.401 (0) Table wp_yoast_primary_term: finishing file(s) (2, 0.4 KB)
+0005.404 (0) Table wp_yoast_seo_links: Total expected rows (via COUNT): 0
+0005.404 (0) Table wp_yoast_seo_links: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1038) in 0.00 seconds
+0005.405 (0) Table wp_yoast_seo_links: finishing file(s) (2, 0.4 KB)
+0005.405 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_options.table.tmpr782.gz (1/48/fopen): adding to final database dump
+0005.407 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_options.table.gz (2/48/fopen): adding to final database dump
+0005.407 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_users.table.tmpr2.gz (3/48/fopen): adding to final database dump
+0005.407 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_users.table.gz (4/48/fopen): adding to final database dump
+0005.407 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_usermeta.table.tmpr52.gz (5/48/fopen): adding to final database dump
+0005.407 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_usermeta.table.gz (6/48/fopen): adding to final database dump
+0005.408 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_commentmeta.table.tmpr0.gz (7/48/fopen): adding to final database dump
+0005.408 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_commentmeta.table.gz (8/48/fopen): adding to final database dump
+0005.408 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_comments.table.tmpr0.gz (9/48/fopen): adding to final database dump
+0005.408 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_comments.table.gz (10/48/fopen): adding to final database dump
+0005.408 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_links.table.tmpr0.gz (11/48/fopen): adding to final database dump
+0005.408 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_links.table.gz (12/48/fopen): adding to final database dump
+0005.409 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_postmeta.table.tmpr376.gz (13/48/fopen): adding to final database dump
+0005.409 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_postmeta.table.gz (14/48/fopen): adding to final database dump
+0005.409 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_posts.table.tmpr99.gz (15/48/fopen): adding to final database dump
+0005.409 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_posts.table.gz (16/48/fopen): adding to final database dump
+0005.409 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_term_relationships.table.tmpr100001.gz (17/48/fopen): adding to final database dump
+0005.409 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_term_relationships.table.gz (18/48/fopen): adding to final database dump
+0005.410 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_term_taxonomy.table.tmpr29.gz (19/48/fopen): adding to final database dump
+0005.410 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_term_taxonomy.table.gz (20/48/fopen): adding to final database dump
+0005.410 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_termmeta.table.tmpr0.gz (21/48/fopen): adding to final database dump
+0005.410 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_termmeta.table.gz (22/48/fopen): adding to final database dump
+0005.410 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_terms.table.tmpr29.gz (23/48/fopen): adding to final database dump
+0005.410 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_terms.table.gz (24/48/fopen): adding to final database dump
+0005.410 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_aiowps_audit_log.table.tmpr13.gz (25/48/fopen): adding to final database dump
+0005.411 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_aiowps_audit_log.table.gz (26/48/fopen): adding to final database dump
+0005.411 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_aiowps_debug_log.table.tmpr0.gz (27/48/fopen): adding to final database dump
+0005.411 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_aiowps_debug_log.table.gz (28/48/fopen): adding to final database dump
+0005.411 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_aiowps_events.table.tmpr0.gz (29/48/fopen): adding to final database dump
+0005.411 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_aiowps_events.table.gz (30/48/fopen): adding to final database dump
+0005.411 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_aiowps_global_meta.table.tmpr0.gz (31/48/fopen): adding to final database dump
+0005.412 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_aiowps_global_meta.table.gz (32/48/fopen): adding to final database dump
+0005.412 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_aiowps_logged_in_users.table.tmpr2.gz (33/48/fopen): adding to final database dump
+0005.412 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_aiowps_logged_in_users.table.gz (34/48/fopen): adding to final database dump
+0005.412 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_aiowps_login_lockdown.table.tmpr0.gz (35/48/fopen): adding to final database dump
+0005.412 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_aiowps_login_lockdown.table.gz (36/48/fopen): adding to final database dump
+0005.412 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_aiowps_message_store.table.tmpr0.gz (37/48/fopen): adding to final database dump
+0005.412 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_aiowps_message_store.table.gz (38/48/fopen): adding to final database dump
+0005.413 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_aiowps_permanent_block.table.tmpr0.gz (39/48/fopen): adding to final database dump
+0005.413 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_aiowps_permanent_block.table.gz (40/48/fopen): adding to final database dump
+0005.413 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_archived_months.table.tmpr0.gz (41/48/fopen): adding to final database dump
+0005.413 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_archived_months.table.gz (42/48/fopen): adding to final database dump
+0005.413 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_browser_versions.table.tmpr2.gz (43/48/fopen): adding to final database dump
+0005.413 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_browser_versions.table.gz (44/48/fopen): adding to final database dump
+0005.413 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_browsers.table.tmpr2.gz (45/48/fopen): adding to final database dump
+0005.414 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_browsers.table.gz (46/48/fopen): adding to final database dump
+0005.414 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_devices.table.tmpr3.gz (47/48/fopen): adding to final database dump
+0005.414 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_devices.table.gz (48/48/fopen): adding to final database dump
+0005.414 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_goal_statistics.table.tmpr0.gz (49/48/fopen): adding to final database dump
+0005.414 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_goal_statistics.table.gz (50/48/fopen): adding to final database dump
+0005.414 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_goals.table.tmpr2.gz (51/48/fopen): adding to final database dump
+0005.414 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_goals.table.gz (52/48/fopen): adding to final database dump
+0005.415 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_known_uids.table.tmpr1001.gz (53/48/fopen): adding to final database dump
+0005.415 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_known_uids.table.gz (54/48/fopen): adding to final database dump
+0005.415 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_locations.table.tmpr2755252.gz (55/48/fopen): adding to final database dump
+0005.415 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_locations.table.gz (56/48/fopen): adding to final database dump
+0005.415 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_platforms.table.tmpr3.gz (57/48/fopen): adding to final database dump
+0005.415 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_platforms.table.gz (58/48/fopen): adding to final database dump
+0005.415 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_query_stats.table.tmpr8.gz (59/48/fopen): adding to final database dump
+0005.416 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_query_stats.table.gz (60/48/fopen): adding to final database dump
+0005.416 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_referrers.table.tmpr0.gz (61/48/fopen): adding to final database dump
+0005.416 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_referrers.table.gz (62/48/fopen): adding to final database dump
+0005.416 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_report_logs.table.tmpr0.gz (63/48/fopen): adding to final database dump
+0005.416 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_report_logs.table.gz (64/48/fopen): adding to final database dump
+0005.416 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_reports.table.tmpr0.gz (65/48/fopen): adding to final database dump
+0005.416 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_reports.table.gz (66/48/fopen): adding to final database dump
+0005.417 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_searches.table.tmpr0.gz (67/48/fopen): adding to final database dump
+0005.417 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_searches.table.gz (68/48/fopen): adding to final database dump
+0005.417 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_sessions.table.tmpr9.gz (69/48/fopen): adding to final database dump
+0005.417 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_sessions.table.gz (70/48/fopen): adding to final database dump
+0005.417 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_statistics.table.tmpr346.gz (71/48/fopen): adding to final database dump
+0005.417 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_statistics.table.gz (72/48/fopen): adding to final database dump
+0005.417 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_statistics_searches.table.tmpr0.gz (73/48/fopen): adding to final database dump
+0005.418 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_burst_statistics_searches.table.gz (74/48/fopen): adding to final database dump
+0005.418 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_swe_applications.table.tmpr15.gz (75/48/fopen): adding to final database dump
+0005.418 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_swe_applications.table.gz (76/48/fopen): adding to final database dump
+0005.418 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_swe_waitlist.table.tmpr0.gz (77/48/fopen): adding to final database dump
+0005.418 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_swe_waitlist.table.gz (78/48/fopen): adding to final database dump
+0005.418 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_tm_taskmeta.table.tmpr0.gz (79/48/fopen): adding to final database dump
+0005.418 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_tm_taskmeta.table.gz (80/48/fopen): adding to final database dump
+0005.418 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_tm_tasks.table.tmpr0.gz (81/48/fopen): adding to final database dump
+0005.419 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_tm_tasks.table.gz (82/48/fopen): adding to final database dump
+0005.419 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_wpo_404_detector.table.tmpr0.gz (83/48/fopen): adding to final database dump
+0005.419 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_wpo_404_detector.table.gz (84/48/fopen): adding to final database dump
+0005.419 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_yoast_expiring_store.table.tmpr1.gz (85/48/fopen): adding to final database dump
+0005.419 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_yoast_expiring_store.table.gz (86/48/fopen): adding to final database dump
+0005.419 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_yoast_indexable.table.tmpr0.gz (87/48/fopen): adding to final database dump
+0005.420 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_yoast_indexable.table.gz (88/48/fopen): adding to final database dump
+0005.420 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_yoast_indexable_hierarchy.table.tmpr1.gz (89/48/fopen): adding to final database dump
+0005.420 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_yoast_indexable_hierarchy.table.gz (90/48/fopen): adding to final database dump
+0005.420 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_yoast_migrations.table.tmpr27.gz (91/48/fopen): adding to final database dump
+0005.420 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_yoast_migrations.table.gz (92/48/fopen): adding to final database dump
+0005.420 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_yoast_primary_term.table.tmpr0.gz (93/48/fopen): adding to final database dump
+0005.420 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_yoast_primary_term.table.gz (94/48/fopen): adding to final database dump
+0005.421 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_yoast_seo_links.table.tmpr0.gz (95/48/fopen): adding to final database dump
+0005.421 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db-table-wp_yoast_seo_links.table.gz (96/48/fopen): adding to final database dump
+0005.422 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db.gz: finished writing out complete database file (311.2 KB)
+0005.428 (0) Total database tables backed up: 48 (backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db.gz, size: 318783, sha1: 9b8fd43d888b2907ecea63601019094f8cda4140, sha256: 2c52d9661d6d70ce142672c9c6064417d0f3e4ac2f554234554748ebd253c737)
+0005.431 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-plugins.zip: plugins: This file has already been successfully processed
+0005.431 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-themes.zip: themes: This file has already been successfully processed
+0005.432 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-uploads.zip: uploads: This file has already been successfully processed
+0005.432 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-mu-plugins.zip: mu-plugins: This file has already been successfully processed
+0005.432 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-others.zip: others: This file has already been successfully processed
+0005.432 (0) backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db.gz: db: This file has not yet been successfully uploaded: will queue
+0005.432 (0) Saving backup history. Total backup size: 64.1 MB
+0005.432 (0) Requesting upload of the files that have not yet been successfully uploaded (1)
+0005.433 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0005.433 (0) No remote despatch: user chose no remote backup service
+0005.433 (0) Recording as successfully uploaded: backup_2026-07-04-0506_WordPress_Research_Fellows_Progr_63a067714a04-db.gz
+0005.435 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0005.435 (0) Number of backup sets in history: 2; groups (db): 1
+0005.435 (0) Examining (for databases) backup set with group_id=0, nonce=63a067714a04, datestamp=1783141592 (Jul 04 2026 05:06:32)
+0005.435 (0) This backup set is the backup set just made, so will not be deleted.
+0005.435 (0) Examining (for databases) backup set with group_id=0, nonce=08c54eef777b, datestamp=1783124771 (Jul 04 2026 00:26:11)
+0005.435 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0005.435 (0) Number of backup sets in history: 2; groups (files): 1
+0005.436 (0) Examining (for files) backup set with nonce=63a067714a04, datestamp=1783141592 (Jul 04 2026 05:06:32)
+0005.436 (0) This backup set is the backup set just made, so will not be deleted.
+0005.436 (0) This backup set is the backup set just made, so will not be deleted.
+0005.436 (0) This backup set is the backup set just made, so will not be deleted.
+0005.436 (0) This backup set is the backup set just made, so will not be deleted.
+0005.436 (0) This backup set is the backup set just made, so will not be deleted.
+0005.436 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0005.436 (0) Examining (for files) backup set with nonce=08c54eef777b, datestamp=1783124771 (Jul 04 2026 00:26:11)
+0005.436 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0005.436 (0) Retain: saving new backup history (sets now: 2) and finishing retain operation
+0005.436 (0) Resume backup (63a067714a04, 0): finish run
+0005.437 (0) Decremented the semaphore (fd) by 1
+0005.437 (0) Semaphore (fd) unlocked
+0005.437 (0) There were no errors in the uploads, so the 'resume' event (1) is being unscheduled
+0005.439 (0) No email will/can be sent - the user has not configured an email address.
+0005.439 (0) The backup succeeded and is now complete
