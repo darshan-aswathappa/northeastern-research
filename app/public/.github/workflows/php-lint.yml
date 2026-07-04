@@ -1,0 +1,47 @@
+name: PHP Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  phpcs:
+    name: PHP CodeSniffer
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer, cs2pr
+
+      - name: Install PHP_CodeSniffer + WordPress Coding Standards
+        run: |
+          composer global require --dev squizlabs/php_codesniffer dealerdirect/phpcodesniffer-composer-installer wp-coding-standards/wpcs
+          echo "$HOME/.composer/vendor/bin" >> $GITHUB_PATH
+
+      - name: Verify standards are registered
+        run: phpcs -i
+
+      - name: Run PHPCS
+        id: phpcs
+        run: |
+          phpcs \
+            --standard=phpcs.xml \
+            --report=full \
+            --report-summary \
+            --colors \
+            || true
+
+      - name: Run PHPCS (machine-readable for annotations)
+        run: |
+          phpcs \
+            --standard=phpcs.xml \
+            --report=checkstyle \
+            | cs2pr --graceful-warnings
