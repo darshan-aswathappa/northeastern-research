@@ -61,6 +61,11 @@ define( 'WP_CACHE_KEY_SALT', 'y_Z{^4Ha}l`j_O ,yh>:NaXu=eWqw.i6D3MUJ<q`F}/[w}r:mz
  */
 $table_prefix = 'wp_';
 /* Add any custom values between this line and the "stop editing" line. */
+
+// Security hardening
+define('DISALLOW_FILE_EDIT', true);  // disable theme/plugin editor in admin
+define('DISALLOW_FILE_MODS', true);  // disable plugin/theme installation
+define('FORCE_SSL_ADMIN', true);     // admin always over HTTPS
 /**
  * For developers: WordPress debugging mode.
  *
