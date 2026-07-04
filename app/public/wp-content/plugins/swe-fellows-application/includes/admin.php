@@ -61,8 +61,9 @@ function swe_app_admin_actions() {
 	if ( isset( $_POST['swe_app_status_update'], $_POST['id'], $_POST['status'] ) ) {
 		$id = (int) $_POST['id'];
 		check_admin_referer( 'swe_app_status_' . $id );
-		swe_app_set_status( $id, sanitize_key( wp_unslash( $_POST['status'] ) ) );
-		wp_safe_redirect( add_query_arg( array( 'view' => $id, 'swe_app_notice' => 'updated' ), $base ) );
+		$updated = swe_app_set_status( $id, sanitize_key( wp_unslash( $_POST['status'] ) ) );
+		$notice  = $updated ? 'updated' : 'update_failed';
+		wp_safe_redirect( add_query_arg( array( 'view' => $id, 'swe_app_notice' => $notice ), $base ) );
 		exit;
 	}
 }
@@ -81,6 +82,8 @@ function swe_app_render_admin_page() {
 		echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Application deleted.', 'swe-fellows-application' ) . '</p></div>';
 	} elseif ( 'updated' === $notice ) {
 		echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Status updated.', 'swe-fellows-application' ) . '</p></div>';
+	} elseif ( 'update_failed' === $notice ) {
+		echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'Status update failed — the application may no longer exist.', 'swe-fellows-application' ) . '</p></div>';
 	}
 
 	$view_id = isset( $_GET['view'] ) ? (int) $_GET['view'] : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended

@@ -69,7 +69,7 @@ function swe_app_shortcode() {
 
 	if ( 'received' === $status ) {
 		?>
-		<div class="swe-app swe-app-success" role="status">
+		<div class="swe-app swe-app-success" id="swe-app" role="status">
 			<h3><?php esc_html_e( 'Application received', 'swe-fellows-application' ); ?></h3>
 			<p><?php esc_html_e( 'Thanks for applying — you’ll hear back by the notification date listed in the key deadlines above.', 'swe-fellows-application' ); ?></p>
 		</div>
@@ -77,7 +77,7 @@ function swe_app_shortcode() {
 		return ob_get_clean();
 	}
 	?>
-	<div class="swe-app" data-swe-app>
+	<div class="swe-app" id="swe-app" data-swe-app>
 
 		<?php if ( 'error' === $status ) : ?>
 			<div class="swe-app-errors" role="alert" tabindex="-1">
@@ -195,7 +195,7 @@ function swe_app_handle_post() {
 					'swe_app_code'   => $code,
 				),
 				$redirect
-			)
+			) . '#swe-app'
 		);
 		exit;
 	};
@@ -221,7 +221,7 @@ function swe_app_handle_post() {
 		$fail( $result->get_error_code() );
 	}
 
-	wp_safe_redirect( add_query_arg( 'swe_app_status', 'received', $redirect ) );
+	wp_safe_redirect( add_query_arg( 'swe_app_status', 'received', $redirect ) . '#swe-app' );
 	exit;
 }
 add_action( 'admin_post_nopriv_swe_app_submit', 'swe_app_handle_post' );

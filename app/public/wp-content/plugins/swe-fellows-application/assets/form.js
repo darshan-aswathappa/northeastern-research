@@ -128,6 +128,9 @@
 			}
 
 			var submitBtn = form.querySelector( '.swe-app-submit' );
+			if ( ! submitBtn ) {
+				return;
+			}
 			submitBtn.disabled = true;
 			submitBtn.textContent = window.sweAppConfig.i18n.submitting;
 
