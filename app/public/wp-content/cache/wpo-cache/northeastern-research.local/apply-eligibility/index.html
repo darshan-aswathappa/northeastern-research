@@ -41,7 +41,11 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <link rel="https://api.w.org/" href="https://northeastern-research.local/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://northeastern-research.local/wp-json/wp/v2/pages/15" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://northeastern-research.local/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 7.0" />
 <link rel='shortlink' href='https://northeastern-research.local/?p=15' />
-<link rel='stylesheet' id='wpo_min-footer-0-css' href='https://northeastern-research.local/wp-content/cache/wpo-minify/1783130642/assets/wpo-minify-footer-swe-ml-style1783133072.min.css' media='all' />
+<style id="wp-block-paragraph-inline-css">
+.is-small-text{font-size:.875em}.is-regular-text{font-size:1em}.is-large-text{font-size:2.25em}.is-larger-text{font-size:3em}.has-drop-cap:not(:focus):first-letter{float:left;font-size:8.4em;font-style:normal;font-weight:100;line-height:.68;margin:.05em .1em 0 0;text-transform:uppercase}body.rtl .has-drop-cap:not(:focus):first-letter{float:none;margin-left:.1em}p.has-drop-cap.has-background{overflow:hidden}:root :where(p.has-background){padding:1.25em 2.375em}:where(p.has-text-color:not(.has-link-color)) a{color:inherit}p.has-text-align-left[style*="writing-mode:vertical-lr"],p.has-text-align-right[style*="writing-mode:vertical-rl"]{rotate:180deg}
+/*# sourceURL=https://northeastern-research.local/wp-includes/blocks/paragraph/style.min.css */
+</style>
+<link rel='stylesheet' id='wpo_min-footer-0-css' href='https://northeastern-research.local/wp-content/cache/wpo-minify/1783130642/assets/wpo-minify-footer-swe-app-style1783117018.min.css' media='all' />
 
 </head>
 <body class="wp-singular page-template page-template-page-apply page-template-page-apply-php page page-id-15 wp-embed-responsive wp-theme-nu-research" data-burst_id="15" data-burst_type="page">
@@ -52,9 +56,12 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 	<div class="utility-bar">
 		<div class="wrap utility-bar__row">
 			<span class="utility-label">Explore Northeastern</span>
-					<span class="fellows-util-status fellows-util-status--closed" role="status">
-			Applications closed		</span>
-				</div>
+				<a class="fellows-util-status fellows-util-status--open"
+	   href="https://northeastern-research.local/apply-eligibility/"
+	   aria-label="Applications open · 28 days left — go to apply page">
+					<span class="fellows-util-status__dot" aria-hidden="true"></span>
+				Applications open · 28 days left	</a>
+			</div>
 	</div>
 
 	<div class="brand-bar">
@@ -95,7 +102,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 	<section class="section-block" data-aos="fade-up">
 			<div class="section-header">
 					<p class="eyebrow">Apply &amp; Eligibility</p>
-				<h1 class="section-heading">How to apply</h1>					<p class="section-intro">Applications are currently closed. Review the criteria and deadlines below, then join the waitlist at the bottom of this page to be notified the moment the new intake opens.</p>
+				<h1 class="section-heading">How to apply</h1>					<p class="section-intro">Applications for Summer 2027 open December 1, 2026. Review the criteria and deadlines below, then use the application form at the bottom of this page.</p>
 			</div>
 		</section>
 
@@ -192,25 +199,112 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 			<span class="badge badge-red">Custom Plugin</span>
 			<span class="acf-note-detail">swe-fellows-application (multi-step form)</span>
 		</div> -->
-					<h2 id="application-heading">Applications are currently closed</h2>
-			<p>The application form will open soon for the new intake. Leave your email below and we’ll notify you the moment it does.</p>
-				<div class="swe-ml" id="swe-waitlist">
+					<h2 id="application-heading">Start your application</h2>
+				<div class="fellows-countdown fellows-countdown--open">
+		<span class="fellows-countdown__indicator" aria-hidden="true"></span>
+		<span class="fellows-countdown__label">
+			Applications open &middot; Closes in 28 days		</span>
+	</div>
+	
 
+
+
+<p class="wp-block-paragraph"></p>
+
+
+	<div class="swe-app" data-swe-app>
+
+					<div class="swe-app-errors" role="alert" tabindex="-1" hidden></div>
 		
-		<form class="swe-ml-form" method="post" action="https://northeastern-research.local/wp-admin/admin-post.php">
-			<input type="hidden" name="action" value="swe_ml_subscribe">
-			<input type="hidden" id="swe_ml_nonce" name="swe_ml_nonce" value="23db7123f7" /><input type="hidden" name="_wp_http_referer" value="/apply-eligibility/" />
-			<p class="swe-ml-hp" aria-hidden="true">
-				<input type="text" name="swe_ml_website" tabindex="-1" autocomplete="off" aria-hidden="true">
+		<p class="swe-app-live screen-reader-text" aria-live="polite"></p>
+
+		<ol class="swe-app-progress" hidden data-progress>
+			<li data-progress-step="1">Personal info</li>
+			<li data-progress-step="2">Program details</li>
+			<li data-progress-step="3">Statement of interest</li>
+		</ol>
+
+		<form class="swe-app-form" method="post" action="https://northeastern-research.local/wp-admin/admin-post.php">
+			<input type="hidden" name="action" value="swe_app_submit">
+			<input type="hidden" id="swe_app_nonce" name="swe_app_nonce" value="be3232bdab" /><input type="hidden" name="_wp_http_referer" value="/apply-eligibility/" />
+			<p class="swe-app-hp" aria-hidden="true">
+				<input type="text" name="swe_website" tabindex="-1" autocomplete="off" aria-hidden="true">
 			</p>
 
-			<div class="swe-ml-row">
-				<label class="screen-reader-text" for="swe-ml-email">Email address</label>
-				<input type="email" id="swe-ml-email" name="email" required autocomplete="email" maxlength="190" placeholder="you@university.edu">
-				<button type="submit" class="swe-ml-btn">Join the waitlist</button>
-			</div>
-			<p class="swe-ml-hint">One email when applications open — nothing else.</p>
+			<fieldset class="swe-app-step" data-step="1">
+				<legend tabindex="-1"><span class="swe-app-step-count">Step 1 of 3</span> Personal info</legend>
+
+				<p class="swe-app-field">
+					<label for="swe-name">Full name <span class="swe-app-req" aria-hidden="true">*</span></label>
+					<input type="text" id="swe-name" name="name" required autocomplete="name" maxlength="190">
+				</p>
+
+				<p class="swe-app-field">
+					<label for="swe-email">Email address <span class="swe-app-req" aria-hidden="true">*</span></label>
+					<input type="email" id="swe-email" name="email" required autocomplete="email" maxlength="190">
+				</p>
+
+				<p class="swe-app-field">
+					<label for="swe-year">Class year <span class="swe-app-req" aria-hidden="true">*</span></label>
+					<select id="swe-year" name="class_year" required>
+						<option value="">Select one</option>
+													<option value="First-year">First-year</option>
+													<option value="Sophomore">Sophomore</option>
+													<option value="Junior">Junior</option>
+													<option value="Senior">Senior</option>
+											</select>
+				</p>
+
+				<p class="swe-app-nav" hidden data-nav>
+					<button type="button" class="swe-app-btn swe-app-next">Continue</button>
+				</p>
+			</fieldset>
+
+			<fieldset class="swe-app-step" data-step="2">
+				<legend tabindex="-1"><span class="swe-app-step-count">Step 2 of 3</span> Program details</legend>
+
+				<p class="swe-app-field">
+					<label for="swe-track">Preferred track <span class="swe-app-req" aria-hidden="true">*</span></label>
+					<select id="swe-track" name="track" required>
+						<option value="">Select one</option>
+													<option value="Plugin Architecture">Plugin Architecture</option>
+													<option value="Editor &amp; Block UX">Editor &amp; Block UX</option>
+													<option value="Performance &amp; Security">Performance &amp; Security</option>
+													<option value="Accessibility">Accessibility</option>
+											</select>
+				</p>
+
+				<p class="swe-app-field">
+					<label for="swe-coursework">Relevant coursework</label>
+					<input type="text" id="swe-coursework" name="coursework" autocomplete="off" maxlength="255" placeholder="e.g. Databases, Web Development">
+				</p>
+
+				<p class="swe-app-nav" hidden data-nav>
+					<button type="button" class="swe-app-btn swe-app-btn-secondary swe-app-back">Back</button>
+					<button type="button" class="swe-app-btn swe-app-next">Continue</button>
+				</p>
+			</fieldset>
+
+			<fieldset class="swe-app-step" data-step="3">
+				<legend tabindex="-1"><span class="swe-app-step-count">Step 3 of 3</span> Statement of interest</legend>
+
+				<p class="swe-app-field">
+					<label for="swe-statement">Statement of interest <span class="swe-app-req" aria-hidden="true">*</span></label>
+					<textarea id="swe-statement" name="statement" rows="7" required aria-describedby="swe-statement-hint"></textarea>
+					<span class="swe-app-hint" id="swe-statement-hint">500 words max — why do you want to spend a summer building WordPress tooling?</span>
+				</p>
+
+				<p class="swe-app-nav swe-app-nav-final">
+					<button type="button" class="swe-app-btn swe-app-btn-secondary swe-app-back" hidden data-nav-back>Back</button>
+					<button type="submit" class="swe-app-btn swe-app-submit">Submit application</button>
+				</p>
+			</fieldset>
 		</form>
+
+		<div class="swe-app-success" hidden tabindex="-1" data-success>
+			<h3>Application received</h3>
+			<p>Thanks for applying — you’ll hear back by the notification date listed in the key deadlines above.</p>
+		</div>
 	</div>
 				</div>
 </section>
@@ -264,7 +358,12 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <script id="burst-js" defer src="https://northeastern-research.local/wp-content/uploads/burst/js/burst.min.js?ver=1783118874"></script>
 <script data-wp-strategy="defer" defer id="aos-js" src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js?ver=2.3.4"></script>
 <script data-wp-strategy="defer" defer id="wpo_min-footer-2-js" src="https://northeastern-research.local/wp-content/cache/wpo-minify/1783130642/assets/wpo-minify-footer-nu-research-nav1783130372.min.js"></script>
+<script id="wpo_min-footer-3-js-extra">
+var sweAppConfig = {"restUrl":"https://northeastern-research.local/wp-json/swe-app/v1/submit","nonce":"7335ffaa84","i18n":{"stepAnnouncement":"Step %1$s of %2$s: %3$s","submitting":"Submitting\u2026","submitLabel":"Submit application","networkError":"Something went wrong submitting your application \u2014 please try again."}};
+//# sourceURL=wpo_min-footer-3-js-extra
+</script>
+<script data-wp-strategy="defer" defer id="wpo_min-footer-3-js" src="https://northeastern-research.local/wp-content/cache/wpo-minify/1783130642/assets/wpo-minify-footer-swe-app-script1783100027.min.js"></script>
 </body>
 </html>
 
-<!-- Cached by WP-Optimize (gzip) - https://teamupdraft.com/wp-optimize/ - Last modified: July 4, 2026 2:53 am (UTC:0) -->
+<!-- Cached by WP-Optimize (gzip) - https://teamupdraft.com/wp-optimize/ - Last modified: July 4, 2026 3:30 am (UTC:0) -->

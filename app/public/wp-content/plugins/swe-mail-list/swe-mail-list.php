@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Fellows Mail List
- * Description: Waitlist email capture for the WordPress Research Fellows Program. Renders via [swe_waitlist], stores subscribers in a dedicated database table (wp_swe_waitlist), and provides a Mail List admin screen with an intake open/closed toggle and bulk announcement emails.
+ * Description: Waitlist email capture for the WordPress Research Fellows Program. Renders via [swe_waitlist], stores subscribers in a dedicated database table (wp_swe_waitlist), and provides a Mail List admin screen with bulk announcement emails. Intake open/closed state derives from the Fellows Deadline application-window dates.
  * Version: 1.0.0
  * Author: Darshan Aswathappa
  * License: GPL v2 or later
@@ -43,13 +43,37 @@ add_action( 'plugins_loaded', 'swe_ml_maybe_upgrade' );
 /**
  * Whether the application intake is currently open.
  *
+ * Derived from the Fellows Deadline plugin's application-window dates
+ * (fellows_dl_open / fellows_dl_close) so the Apply page form, the waitlist,
+ * the utility-bar status pill, and the closing-soon banner all agree. The
+ * comparisons intentionally mirror fellows_deadline_render_shortcode().
+ *
  * The theme's Apply template checks this to decide between rendering the
  * application form and the closed-intake waitlist.
  *
  * @return bool
  */
 function swe_ml_intake_is_open() {
-	return '1' === get_option( 'swe_ml_intake_open', '0' );
+	$open_str  = get_option( 'fellows_dl_open', '' );
+	$close_str = get_option( 'fellows_dl_close', '' );
+	$open_ts   = $open_str ? strtotime( $open_str ) : false;
+	$close_ts  = $close_str ? strtotime( $close_str ) : false;
+
+	// No window configured → no active intake; collect waitlist signups.
+	if ( ! $open_ts && ! $close_ts ) {
+		return false;
+	}
+
+	$now = current_time( 'timestamp' );
+
+	if ( $open_ts && $now < $open_ts ) {
+		return false; // Opening soon.
+	}
+	if ( $close_ts && $now > $close_ts ) {
+		return false; // Deadline passed.
+	}
+
+	return true;
 }
 
 /**

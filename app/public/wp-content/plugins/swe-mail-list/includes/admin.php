@@ -1,8 +1,8 @@
 <?php
 /**
- * "Mail List" admin screen: intake open/closed toggle, announcement
- * composer (bulk send to every subscriber), and a WP_List_Table of
- * subscribers with row + bulk delete.
+ * "Mail List" admin screen: intake status (derived from the Fellows
+ * Deadline window dates), announcement composer (bulk send to every
+ * subscriber), and a WP_List_Table of subscribers with row + bulk delete.
  *
  * @package swe-mail-list
  */
@@ -61,14 +61,6 @@ function swe_ml_admin_actions() {
 		exit;
 	}
 
-	// Intake open/closed toggle.
-	if ( isset( $_POST['swe_ml_save_intake'] ) ) {
-		check_admin_referer( 'swe_ml_intake' );
-		update_option( 'swe_ml_intake_open', empty( $_POST['intake_open'] ) ? '0' : '1' );
-		wp_safe_redirect( add_query_arg( 'swe_ml_notice', 'intake_saved', $base ) );
-		exit;
-	}
-
 	// Send announcement to all subscribers.
 	if ( isset( $_POST['swe_ml_send'] ) ) {
 		check_admin_referer( 'swe_ml_send' );
@@ -109,8 +101,6 @@ function swe_ml_admin_notices() {
 
 	if ( 'deleted' === $notice ) {
 		echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Subscriber removed.', 'swe-mail-list' ) . '</p></div>';
-	} elseif ( 'intake_saved' === $notice ) {
-		echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Intake status saved.', 'swe-mail-list' ) . '</p></div>';
 	} elseif ( 'send_missing' === $notice ) {
 		echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'A subject and message are both required to send.', 'swe-mail-list' ) . '</p></div>';
 	} elseif ( 'sent' === $notice ) {
@@ -152,14 +142,34 @@ function swe_ml_render_admin_page() {
 					: esc_html__( 'Intake is CLOSED — the Apply page shows the waitlist signup instead of the form.', 'swe-mail-list' );
 				?>
 			</p>
-			<form method="post">
-				<?php wp_nonce_field( 'swe_ml_intake' ); ?>
-				<label>
-					<input type="checkbox" name="intake_open" value="1" <?php checked( $intake_open ); ?>>
-					<?php esc_html_e( 'Application intake is open', 'swe-mail-list' ); ?>
-				</label>
-				<p><button type="submit" name="swe_ml_save_intake" value="1" class="button button-primary"><?php esc_html_e( 'Save', 'swe-mail-list' ); ?></button></p>
-			</form>
+			<?php
+			$window_open  = get_option( 'fellows_dl_open', '' );
+			$window_close = get_option( 'fellows_dl_close', '' );
+			$date_format  = get_option( 'date_format' );
+			?>
+			<p>
+				<?php if ( $window_open || $window_close ) : ?>
+					<?php
+					printf(
+						/* translators: 1: window open date, 2: window close date */
+						esc_html__( 'Application window: %1$s — %2$s.', 'swe-mail-list' ),
+						'<strong>' . esc_html( $window_open ? date_i18n( $date_format, strtotime( $window_open ) ) : __( 'not set', 'swe-mail-list' ) ) . '</strong>',
+						'<strong>' . esc_html( $window_close ? date_i18n( $date_format, strtotime( $window_close ) ) : __( 'not set', 'swe-mail-list' ) ) . '</strong>'
+					);
+					?>
+				<?php else : ?>
+					<?php esc_html_e( 'No application window is configured, so intake is treated as closed.', 'swe-mail-list' ); ?>
+				<?php endif; ?>
+			</p>
+			<p>
+				<?php
+				printf(
+					/* translators: %s: link to the Fellows Deadline settings screen */
+					esc_html__( 'Intake follows the application-window dates — change them under %s.', 'swe-mail-list' ),
+					'<a href="' . esc_url( admin_url( 'options-general.php?page=fellows-deadline' ) ) . '">' . esc_html__( 'Settings → Fellows Deadline', 'swe-mail-list' ) . '</a>'
+				);
+				?>
+			</p>
 		</div>
 
 		<div class="card" style="max-width:760px;">
