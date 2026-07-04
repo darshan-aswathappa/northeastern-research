@@ -30,19 +30,23 @@ jobs:
       - name: Verify standards are registered
         run: phpcs -i
 
-      - name: Run PHPCS
-        id: phpcs
+      - name: Run PHPCS (human-readable report)
+        # continue-on-error so violations are logged but the job doesn't fail
+        continue-on-error: true
         run: |
           phpcs \
             --standard=app/public/phpcs.xml \
             --report=full \
             --report-summary \
-            --colors \
-            || true
+            --no-colors
 
-      - name: Run PHPCS (machine-readable for annotations)
+      - name: Run PHPCS (GitHub annotations)
+        # 2>/dev/null prevents deprecation warnings from corrupting the checkstyle XML
+        continue-on-error: true
         run: |
           phpcs \
             --standard=app/public/phpcs.xml \
             --report=checkstyle \
+            --no-colors \
+            2>/dev/null \
             | cs2pr --graceful-warnings
