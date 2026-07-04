@@ -473,6 +473,7 @@ a:hover {
 .hero-billboard {
 	background: var(--nu-black);
 	color: var(--nu-white);
+	overflow: hidden;
 }
 
 .hero-billboard-inner {
@@ -499,10 +500,17 @@ a:hover {
 	margin: 0 0 var(--space-6);
 }
 
+.hero-billboard-media {
+	min-height: 260px;
+	margin-inline: calc(-1 * var(--content-pad));
+	margin-bottom: calc(-1 * clamp(40px, 6vw, 96px));
+}
+
 .hero-billboard-media img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	display: block;
 }
 
 .hero-billboard :focus-visible {
@@ -517,6 +525,10 @@ a:hover {
 	.hero-billboard-media {
 		align-self: stretch;
 		min-height: 420px;
+		margin-inline: 0;
+		margin-top: calc(-1 * clamp(40px, 6vw, 96px));
+		margin-bottom: calc(-1 * clamp(40px, 6vw, 96px));
+		margin-right: calc(-1 * (var(--content-pad) + max(0px, (100vw - var(--content-max-width)) / 2)));
 	}
 }
 
