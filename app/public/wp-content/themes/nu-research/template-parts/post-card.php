@@ -12,7 +12,15 @@ $nu_primary    = ! empty( $nu_categories ) ? $nu_categories[0] : null;
 <li <?php post_class( 'card' ); ?> data-aos="fade-up" data-aos-delay="<?php echo esc_attr( $nu_delay ); ?>">
 	<?php if ( has_post_thumbnail() ) : ?>
 		<a class="card-media ratio-4-3" href="<?php the_permalink(); ?>" tabindex="-1" aria-hidden="true">
-			<?php the_post_thumbnail( 'medium_large', array( 'loading' => 'lazy', 'alt' => '' ) ); ?>
+			<?php
+			the_post_thumbnail(
+				'medium_large',
+				array(
+					'loading' => 'lazy',
+					'alt'     => '',
+				)
+			);
+			?>
 		</a>
 	<?php endif; ?>
 

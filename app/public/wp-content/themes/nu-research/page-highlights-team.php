@@ -70,7 +70,15 @@ get_header();
 							<h3 class="card-title"><?php echo esc_html( $nu_name ); ?></h3>
 							<?php if ( $nu_major || $nu_mentor ) : ?>
 								<p class="card-meta">
-									<?php echo esc_html( $nu_major ); ?><?php if ( $nu_major && $nu_mentor ) : ?> &middot; <?php endif; ?><?php if ( $nu_mentor ) : ?><?php echo esc_html( sprintf( /* translators: %s: mentor name */ __( 'Mentor: %s', 'nu-research' ), $nu_mentor ) ); ?><?php endif; ?>
+									<?php echo esc_html( $nu_major ); ?>
+									<?php
+									if ( $nu_major && $nu_mentor ) :
+										?>
+										&middot; <?php endif; ?>
+										<?php
+										if ( $nu_mentor ) :
+											?>
+																				<?php echo esc_html( sprintf( /* translators: %s: mentor name */ __( 'Mentor: %s', 'nu-research' ), $nu_mentor ) ); ?><?php endif; ?>
 								</p>
 							<?php endif; ?>
 							<?php if ( $nu_focus ) : ?>

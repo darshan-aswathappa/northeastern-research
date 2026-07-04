@@ -57,23 +57,58 @@ function swe_app_validate( array $raw ) {
 	$statement  = isset( $raw['statement'] ) ? sanitize_textarea_field( wp_unslash( $raw['statement'] ) ) : '';
 
 	if ( '' === $name || mb_strlen( $name ) > 190 ) {
-		return new WP_Error( 'swe_app_invalid_name', __( 'Please enter your full name.', 'swe-fellows-application' ), array( 'status' => 400, 'field' => 'name' ) );
+		return new WP_Error(
+			'swe_app_invalid_name',
+			__( 'Please enter your full name.', 'swe-fellows-application' ),
+			array(
+				'status' => 400,
+				'field'  => 'name',
+			)
+		);
 	}
 
 	if ( ! is_email( $email ) ) {
-		return new WP_Error( 'swe_app_invalid_email', __( 'Please enter a valid email address.', 'swe-fellows-application' ), array( 'status' => 400, 'field' => 'email' ) );
+		return new WP_Error(
+			'swe_app_invalid_email',
+			__( 'Please enter a valid email address.', 'swe-fellows-application' ),
+			array(
+				'status' => 400,
+				'field'  => 'email',
+			)
+		);
 	}
 
 	if ( ! in_array( $class_year, swe_app_class_years(), true ) ) {
-		return new WP_Error( 'swe_app_invalid_year', __( 'Please select your class year.', 'swe-fellows-application' ), array( 'status' => 400, 'field' => 'class_year' ) );
+		return new WP_Error(
+			'swe_app_invalid_year',
+			__( 'Please select your class year.', 'swe-fellows-application' ),
+			array(
+				'status' => 400,
+				'field'  => 'class_year',
+			)
+		);
 	}
 
 	if ( ! in_array( $track, swe_app_tracks(), true ) ) {
-		return new WP_Error( 'swe_app_invalid_track', __( 'Please select a preferred track.', 'swe-fellows-application' ), array( 'status' => 400, 'field' => 'track' ) );
+		return new WP_Error(
+			'swe_app_invalid_track',
+			__( 'Please select a preferred track.', 'swe-fellows-application' ),
+			array(
+				'status' => 400,
+				'field'  => 'track',
+			)
+		);
 	}
 
 	if ( '' === trim( $statement ) ) {
-		return new WP_Error( 'swe_app_invalid_statement', __( 'Please include a statement of interest.', 'swe-fellows-application' ), array( 'status' => 400, 'field' => 'statement' ) );
+		return new WP_Error(
+			'swe_app_invalid_statement',
+			__( 'Please include a statement of interest.', 'swe-fellows-application' ),
+			array(
+				'status' => 400,
+				'field'  => 'statement',
+			)
+		);
 	}
 
 	$word_count = str_word_count( wp_strip_all_tags( $statement ) );
@@ -81,7 +116,10 @@ function swe_app_validate( array $raw ) {
 		return new WP_Error(
 			'swe_app_statement_too_long',
 			sprintf( /* translators: %d: word limit */ __( 'The statement of interest must be %d words or fewer.', 'swe-fellows-application' ), swe_app_statement_word_limit() ),
-			array( 'status' => 400, 'field' => 'statement' )
+			array(
+				'status' => 400,
+				'field'  => 'statement',
+			)
 		);
 	}
 

@@ -19,7 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'FELLOWS_DL_VERSION', '1.0.0' );
 define( 'FELLOWS_DL_URL', plugin_dir_url( __FILE__ ) );
 
-/* -------------------------------------------------------------------------- *
+/*
+-------------------------------------------------------------------------- *
  * Settings: Settings → Fellows Deadline
  * -------------------------------------------------------------------------- */
 
@@ -126,7 +127,8 @@ function fellows_deadline_settings_page() {
 	<?php
 }
 
-/* -------------------------------------------------------------------------- *
+/*
+-------------------------------------------------------------------------- *
  * Shortcode: [fellows_countdown]
  * -------------------------------------------------------------------------- */
 
@@ -206,7 +208,8 @@ function fellows_deadline_render_shortcode() {
 	return ob_get_clean();
 }
 
-/* -------------------------------------------------------------------------- *
+/*
+-------------------------------------------------------------------------- *
  * "Closing soon" banner (fixed bottom, shown ≤ 7 days before deadline)
  * -------------------------------------------------------------------------- */
 
@@ -272,7 +275,8 @@ function fellows_deadline_banner() {
 	<?php
 }
 
-/* -------------------------------------------------------------------------- *
+/*
+-------------------------------------------------------------------------- *
  * Admin dashboard widget: Application Snapshot
  * -------------------------------------------------------------------------- */
 
@@ -363,7 +367,12 @@ function fellows_deadline_query_counts() {
 		ARRAY_A
 	);
 
-	$counts = array( 'new' => 0, 'reviewed' => 0, 'accepted' => 0, 'rejected' => 0 );
+	$counts = array(
+		'new'      => 0,
+		'reviewed' => 0,
+		'accepted' => 0,
+		'rejected' => 0,
+	);
 	foreach ( (array) $rows as $row ) {
 		$status = $row['status'];
 		if ( array_key_exists( $status, $counts ) ) {
@@ -375,7 +384,8 @@ function fellows_deadline_query_counts() {
 	return $counts;
 }
 
-/* -------------------------------------------------------------------------- *
+/*
+-------------------------------------------------------------------------- *
  * Style registration (enqueue happens inside shortcode or banner)
  * -------------------------------------------------------------------------- */
 
@@ -401,7 +411,8 @@ function fellows_deadline_register_style() {
 	}
 }
 
-/* -------------------------------------------------------------------------- *
+/*
+-------------------------------------------------------------------------- *
  * Utility-bar status pill — hooked into nu_research_utility_bar action
  * -------------------------------------------------------------------------- */
 
@@ -460,8 +471,8 @@ function fellows_deadline_utility_status() {
 		: home_url( '/apply-eligibility/' );
 	?>
 	<a class="fellows-util-status fellows-util-status--<?php echo esc_attr( $state ); ?>"
-	   href="<?php echo esc_url( $apply_url ); ?>"
-	   aria-label="<?php echo esc_attr( $message . ' — ' . __( 'go to apply page', 'fellows-deadline' ) ); ?>">
+		href="<?php echo esc_url( $apply_url ); ?>"
+		aria-label="<?php echo esc_attr( $message . ' — ' . __( 'go to apply page', 'fellows-deadline' ) ); ?>">
 		<?php if ( 'open' === $state ) : ?>
 			<span class="fellows-util-status__dot" aria-hidden="true"></span>
 		<?php endif; ?>
@@ -470,14 +481,15 @@ function fellows_deadline_utility_status() {
 	<?php
 }
 
-/* -------------------------------------------------------------------------- *
+/*
+-------------------------------------------------------------------------- *
  * Hook registrations
  * -------------------------------------------------------------------------- */
 
-add_action( 'admin_menu',            'fellows_deadline_admin_menu' );
-add_action( 'admin_init',            'fellows_deadline_settings_init' );
-add_action( 'wp_dashboard_setup',    'fellows_deadline_dashboard_setup' );
-add_action( 'wp_enqueue_scripts',    'fellows_deadline_register_style' );
+add_action( 'admin_menu', 'fellows_deadline_admin_menu' );
+add_action( 'admin_init', 'fellows_deadline_settings_init' );
+add_action( 'wp_dashboard_setup', 'fellows_deadline_dashboard_setup' );
+add_action( 'wp_enqueue_scripts', 'fellows_deadline_register_style' );
 add_action( 'nu_research_utility_bar', 'fellows_deadline_utility_status' );
-add_action( 'wp_footer',             'fellows_deadline_banner' );
-add_shortcode( 'fellows_countdown',  'fellows_deadline_render_shortcode' );
+add_action( 'wp_footer', 'fellows_deadline_banner' );
+add_shortcode( 'fellows_countdown', 'fellows_deadline_render_shortcode' );

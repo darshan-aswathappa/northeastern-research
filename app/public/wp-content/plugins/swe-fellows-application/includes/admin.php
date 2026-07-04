@@ -63,7 +63,15 @@ function swe_app_admin_actions() {
 		check_admin_referer( 'swe_app_status_' . $id );
 		$updated = swe_app_set_status( $id, sanitize_key( wp_unslash( $_POST['status'] ) ) );
 		$notice  = $updated ? 'updated' : 'update_failed';
-		wp_safe_redirect( add_query_arg( array( 'view' => $id, 'swe_app_notice' => $notice ), $base ) );
+		wp_safe_redirect(
+			add_query_arg(
+				array(
+					'view'           => $id,
+					'swe_app_notice' => $notice,
+				),
+				$base
+			)
+		);
 		exit;
 	}
 }

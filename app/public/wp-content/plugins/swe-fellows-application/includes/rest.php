@@ -25,12 +25,31 @@ function swe_app_register_route() {
 			'callback'            => 'swe_app_handle_rest_submit',
 			'permission_callback' => 'swe_app_rest_permission',
 			'args'                => array(
-				'name'       => array( 'type' => 'string', 'required' => true ),
-				'email'      => array( 'type' => 'string', 'required' => true ),
-				'class_year' => array( 'type' => 'string', 'required' => true ),
-				'track'      => array( 'type' => 'string', 'required' => true ),
-				'coursework' => array( 'type' => 'string', 'required' => false, 'default' => '' ),
-				'statement'  => array( 'type' => 'string', 'required' => true ),
+				'name'       => array(
+					'type'     => 'string',
+					'required' => true,
+				),
+				'email'      => array(
+					'type'     => 'string',
+					'required' => true,
+				),
+				'class_year' => array(
+					'type'     => 'string',
+					'required' => true,
+				),
+				'track'      => array(
+					'type'     => 'string',
+					'required' => true,
+				),
+				'coursework' => array(
+					'type'     => 'string',
+					'required' => false,
+					'default'  => '',
+				),
+				'statement'  => array(
+					'type'     => 'string',
+					'required' => true,
+				),
 			),
 		)
 	);

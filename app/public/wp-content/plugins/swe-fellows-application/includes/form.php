@@ -25,14 +25,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function swe_app_error_message( $code ) {
 	$messages = array(
-		'swe_app_invalid_name'        => __( 'Please enter your full name.', 'swe-fellows-application' ),
-		'swe_app_invalid_email'       => __( 'Please enter a valid email address.', 'swe-fellows-application' ),
-		'swe_app_invalid_year'        => __( 'Please select your class year.', 'swe-fellows-application' ),
-		'swe_app_invalid_track'       => __( 'Please select a preferred track.', 'swe-fellows-application' ),
-		'swe_app_invalid_statement'   => __( 'Please include a statement of interest.', 'swe-fellows-application' ),
-		'swe_app_statement_too_long'  => sprintf( /* translators: %d: word limit */ __( 'The statement of interest must be %d words or fewer.', 'swe-fellows-application' ), swe_app_statement_word_limit() ),
-		'swe_app_rate_limited'        => __( 'Too many submissions from this connection — please wait a few minutes and try again.', 'swe-fellows-application' ),
-		'swe_app_bad_nonce'           => __( 'Your session expired — please reload the page and try again.', 'swe-fellows-application' ),
+		'swe_app_invalid_name'       => __( 'Please enter your full name.', 'swe-fellows-application' ),
+		'swe_app_invalid_email'      => __( 'Please enter a valid email address.', 'swe-fellows-application' ),
+		'swe_app_invalid_year'       => __( 'Please select your class year.', 'swe-fellows-application' ),
+		'swe_app_invalid_track'      => __( 'Please select a preferred track.', 'swe-fellows-application' ),
+		'swe_app_invalid_statement'  => __( 'Please include a statement of interest.', 'swe-fellows-application' ),
+		'swe_app_statement_too_long' => sprintf( /* translators: %d: word limit */ __( 'The statement of interest must be %d words or fewer.', 'swe-fellows-application' ), swe_app_statement_word_limit() ),
+		'swe_app_rate_limited'       => __( 'Too many submissions from this connection — please wait a few minutes and try again.', 'swe-fellows-application' ),
+		'swe_app_bad_nonce'          => __( 'Your session expired — please reload the page and try again.', 'swe-fellows-application' ),
 	);
 	return isset( $messages[ $code ] ) ? $messages[ $code ] : __( 'Something went wrong — please check your answers and try again.', 'swe-fellows-application' );
 }
@@ -44,7 +44,16 @@ function swe_app_error_message( $code ) {
  */
 function swe_app_shortcode() {
 	wp_enqueue_style( 'swe-app-style', SWE_APP_URL . 'assets/style.css', array(), SWE_APP_VERSION );
-	wp_enqueue_script( 'swe-app-script', SWE_APP_URL . 'assets/form.js', array(), SWE_APP_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
+	wp_enqueue_script(
+		'swe-app-script',
+		SWE_APP_URL . 'assets/form.js',
+		array(),
+		SWE_APP_VERSION,
+		array(
+			'in_footer' => true,
+			'strategy'  => 'defer',
+		)
+	);
 	wp_localize_script(
 		'swe-app-script',
 		'sweAppConfig',

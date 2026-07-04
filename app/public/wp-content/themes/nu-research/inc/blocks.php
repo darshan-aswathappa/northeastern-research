@@ -25,12 +25,30 @@ function nu_research_register_blocks() {
 		array(
 			'render_callback' => 'nu_research_render_hero',
 			'attributes'      => array(
-				'eyebrow'  => array( 'type' => 'string', 'default' => 'Summer Research Program' ),
-				'heading'  => array( 'type' => 'string', 'default' => 'WordPress Research Fellows' ),
-				'lead'     => array( 'type' => 'string', 'default' => 'A 10-week paid summer fellowship where undergraduate Software Engineering students build, test, and ship real WordPress tooling alongside faculty mentors.' ),
-				'ctaLabel' => array( 'type' => 'string', 'default' => 'Apply Now' ),
-				'ctaSlug'  => array( 'type' => 'string', 'default' => 'apply-eligibility' ),
-				'image'    => array( 'type' => 'string', 'default' => 'hero.jpg' ),
+				'eyebrow'  => array(
+					'type'    => 'string',
+					'default' => 'Summer Research Program',
+				),
+				'heading'  => array(
+					'type'    => 'string',
+					'default' => 'WordPress Research Fellows',
+				),
+				'lead'     => array(
+					'type'    => 'string',
+					'default' => 'A 10-week paid summer fellowship where undergraduate Software Engineering students build, test, and ship real WordPress tooling alongside faculty mentors.',
+				),
+				'ctaLabel' => array(
+					'type'    => 'string',
+					'default' => 'Apply Now',
+				),
+				'ctaSlug'  => array(
+					'type'    => 'string',
+					'default' => 'apply-eligibility',
+				),
+				'image'    => array(
+					'type'    => 'string',
+					'default' => 'hero.jpg',
+				),
 			),
 		)
 	);
@@ -40,9 +58,18 @@ function nu_research_register_blocks() {
 		array(
 			'render_callback' => 'nu_research_render_section_header',
 			'attributes'      => array(
-				'eyebrow' => array( 'type' => 'string', 'default' => 'Program Overview' ),
-				'heading' => array( 'type' => 'string', 'default' => 'Build the tools you use every day' ),
-				'intro'   => array( 'type' => 'string', 'default' => 'The WordPress Research Fellows Program pairs Software Engineering undergraduates with faculty mentors to solve real problems in plugin architecture, editor UX, performance, security, and accessibility — the same systems that power the department’s own web infrastructure.' ),
+				'eyebrow' => array(
+					'type'    => 'string',
+					'default' => 'Program Overview',
+				),
+				'heading' => array(
+					'type'    => 'string',
+					'default' => 'Build the tools you use every day',
+				),
+				'intro'   => array(
+					'type'    => 'string',
+					'default' => 'The WordPress Research Fellows Program pairs Software Engineering undergraduates with faculty mentors to solve real problems in plugin architecture, editor UX, performance, security, and accessibility — the same systems that power the department’s own web infrastructure.',
+				),
 			),
 		)
 	);
@@ -52,12 +79,30 @@ function nu_research_register_blocks() {
 		array(
 			'render_callback' => 'nu_research_render_media_card',
 			'attributes'      => array(
-				'image'    => array( 'type' => 'string', 'default' => 'mentor.jpg' ),
-				'imageAlt' => array( 'type' => 'string', 'default' => 'Fellow working at a laptop with a mentor' ),
-				'heading'  => array( 'type' => 'string', 'default' => 'Hands-on, mentored research' ),
-				'body'     => array( 'type' => 'string', 'default' => 'Each fellow is paired with a faculty mentor and joins a small track team focused on one problem area — plugin architecture, editor UX, performance, or accessibility. No prior WordPress experience required, just solid PHP or JS fundamentals.' ),
-				'reverse'  => array( 'type' => 'boolean', 'default' => false ),
-				'section'  => array( 'type' => 'string', 'default' => 'section section-tight' ),
+				'image'    => array(
+					'type'    => 'string',
+					'default' => 'mentor.jpg',
+				),
+				'imageAlt' => array(
+					'type'    => 'string',
+					'default' => 'Fellow working at a laptop with a mentor',
+				),
+				'heading'  => array(
+					'type'    => 'string',
+					'default' => 'Hands-on, mentored research',
+				),
+				'body'     => array(
+					'type'    => 'string',
+					'default' => 'Each fellow is paired with a faculty mentor and joins a small track team focused on one problem area — plugin architecture, editor UX, performance, or accessibility. No prior WordPress experience required, just solid PHP or JS fundamentals.',
+				),
+				'reverse'  => array(
+					'type'    => 'boolean',
+					'default' => false,
+				),
+				'section'  => array(
+					'type'    => 'string',
+					'default' => 'section section-tight',
+				),
 			),
 		)
 	);
@@ -67,7 +112,10 @@ function nu_research_register_blocks() {
 		array(
 			'render_callback' => 'nu_research_render_track_badges',
 			'attributes'      => array(
-				'label'  => array( 'type' => 'string', 'default' => 'Research tracks' ),
+				'label'  => array(
+					'type'    => 'string',
+					'default' => 'Research tracks',
+				),
 				'tracks' => array(
 					'type'    => 'array',
 					'items'   => array( 'type' => 'string' ),
@@ -89,10 +137,22 @@ function nu_research_register_blocks() {
 		array(
 			'render_callback' => 'nu_research_render_cta_band',
 			'attributes'      => array(
-				'heading'  => array( 'type' => 'string', 'default' => 'Ready to spend your summer building?' ),
-				'lead'     => array( 'type' => 'string', 'default' => 'Applications for Summer 2027 open December 1, 2026.' ),
-				'ctaLabel' => array( 'type' => 'string', 'default' => 'See Eligibility & Deadlines' ),
-				'ctaSlug'  => array( 'type' => 'string', 'default' => 'apply-eligibility' ),
+				'heading'  => array(
+					'type'    => 'string',
+					'default' => 'Ready to spend your summer building?',
+				),
+				'lead'     => array(
+					'type'    => 'string',
+					'default' => 'Applications for Summer 2027 open December 1, 2026.',
+				),
+				'ctaLabel' => array(
+					'type'    => 'string',
+					'default' => 'See Eligibility & Deadlines',
+				),
+				'ctaSlug'  => array(
+					'type'    => 'string',
+					'default' => 'apply-eligibility',
+				),
 			),
 		)
 	);
@@ -102,13 +162,34 @@ function nu_research_register_blocks() {
 		array(
 			'render_callback' => 'nu_research_render_hero_billboard',
 			'attributes'      => array(
-				'eyebrow'  => array( 'type' => 'string', 'default' => 'WordPress Research Fellows' ),
-				'heading'  => array( 'type' => 'string', 'default' => 'Build. Test. Ship.' ),
-				'lead'     => array( 'type' => 'string', 'default' => 'A 10-week paid summer fellowship where undergraduate Software Engineering students build, test, and ship real WordPress tooling alongside faculty mentors.' ),
-				'ctaLabel' => array( 'type' => 'string', 'default' => 'Apply Now' ),
-				'ctaSlug'  => array( 'type' => 'string', 'default' => 'apply-eligibility' ),
-				'image'    => array( 'type' => 'string', 'default' => 'hero.jpg' ),
-				'imageAlt' => array( 'type' => 'string', 'default' => 'Fellows working together in a research lab' ),
+				'eyebrow'  => array(
+					'type'    => 'string',
+					'default' => 'WordPress Research Fellows',
+				),
+				'heading'  => array(
+					'type'    => 'string',
+					'default' => 'Build. Test. Ship.',
+				),
+				'lead'     => array(
+					'type'    => 'string',
+					'default' => 'A 10-week paid summer fellowship where undergraduate Software Engineering students build, test, and ship real WordPress tooling alongside faculty mentors.',
+				),
+				'ctaLabel' => array(
+					'type'    => 'string',
+					'default' => 'Apply Now',
+				),
+				'ctaSlug'  => array(
+					'type'    => 'string',
+					'default' => 'apply-eligibility',
+				),
+				'image'    => array(
+					'type'    => 'string',
+					'default' => 'hero.jpg',
+				),
+				'imageAlt' => array(
+					'type'    => 'string',
+					'default' => 'Fellows working together in a research lab',
+				),
 			),
 		)
 	);
@@ -118,8 +199,14 @@ function nu_research_register_blocks() {
 		array(
 			'render_callback' => 'nu_research_render_pillars',
 			'attributes'      => array(
-				'heading' => array( 'type' => 'string', 'default' => 'A deep commitment to your research success' ),
-				'intro'   => array( 'type' => 'string', 'default' => '' ),
+				'heading' => array(
+					'type'    => 'string',
+					'default' => 'A deep commitment to your research success',
+				),
+				'intro'   => array(
+					'type'    => 'string',
+					'default' => '',
+				),
 				'items'   => array(
 					'type'    => 'array',
 					'items'   => array( 'type' => 'string' ),
@@ -134,7 +221,10 @@ function nu_research_register_blocks() {
 		array(
 			'render_callback' => 'nu_research_render_journey_cards',
 			'attributes'      => array(
-				'label' => array( 'type' => 'string', 'default' => 'Your research journey' ),
+				'label' => array(
+					'type'    => 'string',
+					'default' => 'Your research journey',
+				),
 				'cards' => array(
 					'type'    => 'array',
 					'items'   => array( 'type' => 'string' ),
@@ -178,7 +268,8 @@ function nu_research_block_editor_assets() {
 }
 add_action( 'enqueue_block_editor_assets', 'nu_research_block_editor_assets' );
 
-/* -------------------------------------------------------------------------- *
+/*
+-------------------------------------------------------------------------- *
  * Render callbacks. Each mirrors the original front-page.php markup exactly.
  * -------------------------------------------------------------------------- */
 
