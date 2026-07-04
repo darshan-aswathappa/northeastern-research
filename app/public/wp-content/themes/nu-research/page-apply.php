@@ -10,6 +10,10 @@
  */
 
 get_header();
+
+// The Fellows Mail List plugin owns the intake open/closed state; without
+// it, fall back to the original always-open behavior.
+$nu_intake_open = function_exists( 'swe_ml_intake_is_open' ) ? swe_ml_intake_is_open() : true;
 ?>
 
 <div class="wrap page-pad">
@@ -21,7 +25,9 @@ get_header();
 		nu_research_section_header(
 			__( 'Apply & Eligibility', 'nu-research' ),
 			__( 'How to apply', 'nu-research' ),
-			__( 'Applications for Summer 2027 open December 1, 2026. Review the criteria and deadlines below, then use the application form at the bottom of this page.', 'nu-research' ),
+			$nu_intake_open
+				? __( 'Applications for Summer 2027 open December 1, 2026. Review the criteria and deadlines below, then use the application form at the bottom of this page.', 'nu-research' )
+				: __( 'Applications are currently closed. Review the criteria and deadlines below, then join the waitlist at the bottom of this page to be notified the moment the new intake opens.', 'nu-research' ),
 			'h1'
 		);
 		?>
@@ -113,15 +119,21 @@ get_header();
 			<span class="badge badge-red"><?php esc_html_e( 'Custom Plugin', 'nu-research' ); ?></span>
 			<span class="acf-note-detail"><?php esc_html_e( 'swe-fellows-application (multi-step form)', 'nu-research' ); ?></span>
 		</div> -->
-		<h2 id="application-heading"><?php esc_html_e( 'Start your application', 'nu-research' ); ?></h2>
-		<?php
-		// Page content carries the [swe_fellows_application] shortcode so
-		// editors can move or replace the form without a template edit.
-		while ( have_posts() ) :
-			the_post();
-			the_content();
-		endwhile;
-		?>
+		<?php if ( $nu_intake_open ) : ?>
+			<h2 id="application-heading"><?php esc_html_e( 'Start your application', 'nu-research' ); ?></h2>
+			<?php
+			// Page content carries the [swe_fellows_application] shortcode so
+			// editors can move or replace the form without a template edit.
+			while ( have_posts() ) :
+				the_post();
+				the_content();
+			endwhile;
+			?>
+		<?php else : ?>
+			<h2 id="application-heading"><?php esc_html_e( 'Applications are currently closed', 'nu-research' ); ?></h2>
+			<p><?php esc_html_e( 'The application form will open soon for the new intake. Leave your email below and we’ll notify you the moment it does.', 'nu-research' ); ?></p>
+			<?php echo do_shortcode( '[swe_waitlist]' ); ?>
+		<?php endif; ?>
 	</div>
 </section>
 
