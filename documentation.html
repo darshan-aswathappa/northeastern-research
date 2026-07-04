@@ -857,6 +857,19 @@
               <span class="nav-icon">🏠</span> Lighthouse Score
             </a>
           </div>
+
+          <div class="sidebar-group">
+            <div class="sidebar-group-label">Deployment</div>
+            <a
+              href="#campus-press"
+              onclick="
+                showPage('campus-press', this);
+                return false;
+              "
+            >
+              <span class="nav-icon">🏫</span> CampusPress
+            </a>
+          </div>
         </nav>
       </aside>
 
@@ -4519,15 +4532,20 @@ Indexes:
         <!-- ══════════════════════════════════════════════════
              PAGE: UI & UX
              ══════════════════════════════════════════════════ -->
-        <section class="doc-page" id="page-ui-ux" aria-labelledby="ui-ux-heading">
+        <section
+          class="doc-page"
+          id="page-ui-ux"
+          aria-labelledby="ui-ux-heading"
+        >
           <header class="page-header">
             <p class="page-eyebrow">Frontend</p>
             <h1 class="page-title" id="ui-ux-heading">UI &amp; UX</h1>
             <p class="page-lead">
-              The visual and interaction design of the NU Research Fellows site is derived
-              directly from the Northeastern Graduate Programs design system — an editorial,
-              high-contrast, flat aesthetic built around a single accent colour, two typefaces,
-              and a rigid set of surface rules.
+              The visual and interaction design of the NU Research Fellows site
+              is derived directly from the Northeastern Graduate Programs design
+              system — an editorial, high-contrast, flat aesthetic built around
+              a single accent colour, two typefaces, and a rigid set of surface
+              rules.
             </p>
           </header>
 
@@ -4537,22 +4555,54 @@ Indexes:
             <div class="callout">
               <span class="callout-icon">🎯</span>
               <div class="callout-body">
-                <p class="callout-title">Editorial Black / White + One Accent</p>
-                <p>The entire UI operates on a strict two-surface system: white pages with dark text, and black panels (hero, footer, feature banners) with white text. Northeastern Red (<code>#d41b2c</code>) is the only accent colour — used for links, active states, CTA buttons, stat figures, eyebrow labels, and the timeline markers. No secondary colours. No gradients (the hero photo scrim is the one documented exception). No box shadows. No rounded corners beyond the pill filter-bar, which is the system's single sanctioned rounded element.</p>
+                <p class="callout-title">
+                  Editorial Black / White + One Accent
+                </p>
+                <p>
+                  The entire UI operates on a strict two-surface system: white
+                  pages with dark text, and black panels (hero, footer, feature
+                  banners) with white text. Northeastern Red
+                  (<code>#d41b2c</code>) is the only accent colour — used for
+                  links, active states, CTA buttons, stat figures, eyebrow
+                  labels, and the timeline markers. No secondary colours. No
+                  gradients (the hero photo scrim is the one documented
+                  exception). No box shadows. No rounded corners beyond the pill
+                  filter-bar, which is the system's single sanctioned rounded
+                  element.
+                </p>
               </div>
             </div>
             <div class="tool-grid tool-grid-3">
               <div class="tool-card">
                 <h3 class="tool-name">Flat surfaces</h3>
-                <p class="tool-desc">No card shadows, no elevation levels, no depth cues. Sections are separated by hairline 1 px borders (<code>var(--color-border): #e6e6e6</code>) and background-fill contrast (<code>#f4f4f4</code> muted vs. <code>#ffffff</code> white). The UI reads as editorial print, not a web app.</p>
+                <p class="tool-desc">
+                  No card shadows, no elevation levels, no depth cues. Sections
+                  are separated by hairline 1 px borders (<code
+                    >var(--color-border): #e6e6e6</code
+                  >) and background-fill contrast (<code>#f4f4f4</code> muted
+                  vs. <code>#ffffff</code> white). The UI reads as editorial
+                  print, not a web app.
+                </p>
               </div>
               <div class="tool-card">
                 <h3 class="tool-name">Square corners everywhere</h3>
-                <p class="tool-desc"><code>border-radius: 0</code> on all buttons, inputs, cards, and image containers. The only exception is the category filter-pill bar, defined by <code>--radius-pill: 999px</code> and restricted to that single component.</p>
+                <p class="tool-desc">
+                  <code>border-radius: 0</code> on all buttons, inputs, cards,
+                  and image containers. The only exception is the category
+                  filter-pill bar, defined by
+                  <code>--radius-pill: 999px</code> and restricted to that
+                  single component.
+                </p>
               </div>
               <div class="tool-card">
                 <h3 class="tool-name">Density as a virtue</h3>
-                <p class="tool-desc">The audience is graduate-program applicants and faculty — technically literate, goal-oriented. Layouts prefer information density over whitespace breathing room. Section padding scales from 48 px on mobile to 96 px on large screens, but within sections content is compact.</p>
+                <p class="tool-desc">
+                  The audience is graduate-program applicants and faculty —
+                  technically literate, goal-oriented. Layouts prefer
+                  information density over whitespace breathing room. Section
+                  padding scales from 48 px on mobile to 96 px on large screens,
+                  but within sections content is compact.
+                </p>
               </div>
             </div>
           </div>
@@ -4561,19 +4611,86 @@ Indexes:
           <div class="doc-section">
             <h2 class="doc-section-heading">Colour System</h2>
             <table class="doc-table" aria-label="Colour token reference">
-              <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Token</th>
+                  <th>Value</th>
+                  <th>Usage</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><td><code>--nu-red</code></td><td><code>#d41b2c</code></td><td>Primary accent — links, buttons, active nav, eyebrows, stat values, timeline markers, FAQ toggle, blockquote border</td></tr>
-                <tr><td><code>--nu-red-dark</code></td><td><code>#b01524</code></td><td>Hover / pressed state of red buttons and links</td></tr>
-                <tr><td><code>--nu-red-bright</code></td><td><code>#f0193a</code></td><td>Red as it reads on black surfaces (footer arrows, eyebrow on dark hero) — tuned for contrast against <code>#000</code></td></tr>
-                <tr><td><code>--nu-black</code></td><td><code>#000000</code></td><td>Hero, footer, feature banners, utility bar, nav toggle border</td></tr>
-                <tr><td><code>--nu-white</code></td><td><code>#ffffff</code></td><td>Page background, primary nav background, card background</td></tr>
-                <tr><td><code>--gray-950</code></td><td><code>#1a1a1a</code></td><td>Heading text colour</td></tr>
-                <tr><td><code>--gray-800</code></td><td><code>#333333</code></td><td>Body copy colour</td></tr>
-                <tr><td><code>--gray-600</code></td><td><code>#6b6b6b</code></td><td>Secondary / muted text — card meta, breadcrumb, footer titles</td></tr>
-                <tr><td><code>--gray-300</code></td><td><code>#d1d1d1</code></td><td>Input borders, dashed empty-state borders</td></tr>
-                <tr><td><code>--gray-200</code></td><td><code>#e6e6e6</code></td><td>Hairline dividers on white surfaces</td></tr>
-                <tr><td><code>--gray-100</code></td><td><code>#f4f4f4</code></td><td>Muted section fills, table header backgrounds, code inline background</td></tr>
+                <tr>
+                  <td><code>--nu-red</code></td>
+                  <td><code>#d41b2c</code></td>
+                  <td>
+                    Primary accent — links, buttons, active nav, eyebrows, stat
+                    values, timeline markers, FAQ toggle, blockquote border
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>--nu-red-dark</code></td>
+                  <td><code>#b01524</code></td>
+                  <td>Hover / pressed state of red buttons and links</td>
+                </tr>
+                <tr>
+                  <td><code>--nu-red-bright</code></td>
+                  <td><code>#f0193a</code></td>
+                  <td>
+                    Red as it reads on black surfaces (footer arrows, eyebrow on
+                    dark hero) — tuned for contrast against <code>#000</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>--nu-black</code></td>
+                  <td><code>#000000</code></td>
+                  <td>
+                    Hero, footer, feature banners, utility bar, nav toggle
+                    border
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>--nu-white</code></td>
+                  <td><code>#ffffff</code></td>
+                  <td>
+                    Page background, primary nav background, card background
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>--gray-950</code></td>
+                  <td><code>#1a1a1a</code></td>
+                  <td>Heading text colour</td>
+                </tr>
+                <tr>
+                  <td><code>--gray-800</code></td>
+                  <td><code>#333333</code></td>
+                  <td>Body copy colour</td>
+                </tr>
+                <tr>
+                  <td><code>--gray-600</code></td>
+                  <td><code>#6b6b6b</code></td>
+                  <td>
+                    Secondary / muted text — card meta, breadcrumb, footer
+                    titles
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>--gray-300</code></td>
+                  <td><code>#d1d1d1</code></td>
+                  <td>Input borders, dashed empty-state borders</td>
+                </tr>
+                <tr>
+                  <td><code>--gray-200</code></td>
+                  <td><code>#e6e6e6</code></td>
+                  <td>Hairline dividers on white surfaces</td>
+                </tr>
+                <tr>
+                  <td><code>--gray-100</code></td>
+                  <td><code>#f4f4f4</code></td>
+                  <td>
+                    Muted section fills, table header backgrounds, code inline
+                    background
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -4581,20 +4698,95 @@ Indexes:
           <!-- Typography -->
           <div class="doc-section">
             <h2 class="doc-section-heading">Typography</h2>
-            <p>The editorial pairing uses a transitional display serif for all headings and a neutral grotesque for all body copy, UI labels, and navigation. Both are variable-weight WOFF2 fonts self-hosted from the theme.</p>
+            <p>
+              The editorial pairing uses a transitional display serif for all
+              headings and a neutral grotesque for all body copy, UI labels, and
+              navigation. Both are variable-weight WOFF2 fonts self-hosted from
+              the theme.
+            </p>
             <table class="doc-table" aria-label="Type scale">
-              <thead><tr><th>Role</th><th>Family</th><th>Size</th><th>Weight</th><th>Tracking</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Family</th>
+                  <th>Size</th>
+                  <th>Weight</th>
+                  <th>Tracking</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><td>Hero display</td><td>Source Serif 4</td><td><code>clamp(3.25rem, 7vw, 6.5rem)</code> (52–104 px)</td><td>400</td><td><code>-0.02em</code></td></tr>
-                <tr><td>Page title (h1)</td><td>Source Serif 4</td><td><code>clamp(2.5rem, 4.6vw, 4.25rem)</code> (40–68 px)</td><td>400</td><td><code>-0.02em</code></td></tr>
-                <tr><td>Section heading (h2)</td><td>Source Serif 4</td><td><code>clamp(1.875rem, 3vw, 2.75rem)</code> (30–44 px)</td><td>400</td><td><code>-0.02em</code></td></tr>
-                <tr><td>Sub-heading (h3)</td><td>Source Serif 4</td><td><code>clamp(1.375rem, 2vw, 1.875rem)</code> (22–30 px)</td><td>400</td><td><code>-0.02em</code></td></tr>
-                <tr><td>Lead paragraph</td><td>Hanken Grotesk</td><td><code>1.375rem</code> (22 px)</td><td>400</td><td>—</td></tr>
-                <tr><td>Body copy</td><td>Hanken Grotesk</td><td><code>1.0625rem</code> (17 px)</td><td>400</td><td>—</td></tr>
-                <tr><td>Eyebrow / label</td><td>Hanken Grotesk</td><td><code>0.8125rem</code> (13 px)</td><td>600</td><td><code>0.14em</code> uppercase</td></tr>
-                <tr><td>Stat figure</td><td>Source Serif 4</td><td><code>clamp(3.5rem, 6.5vw, 5.5rem)</code></td><td>400</td><td><code>-0.02em</code></td></tr>
-                <tr><td>Navigation</td><td>Hanken Grotesk</td><td><code>1.0625rem</code></td><td>500</td><td>—</td></tr>
-                <tr><td>Button</td><td>Hanken Grotesk</td><td><code>1.0625rem</code></td><td>600</td><td>—</td></tr>
+                <tr>
+                  <td>Hero display</td>
+                  <td>Source Serif 4</td>
+                  <td><code>clamp(3.25rem, 7vw, 6.5rem)</code> (52–104 px)</td>
+                  <td>400</td>
+                  <td><code>-0.02em</code></td>
+                </tr>
+                <tr>
+                  <td>Page title (h1)</td>
+                  <td>Source Serif 4</td>
+                  <td><code>clamp(2.5rem, 4.6vw, 4.25rem)</code> (40–68 px)</td>
+                  <td>400</td>
+                  <td><code>-0.02em</code></td>
+                </tr>
+                <tr>
+                  <td>Section heading (h2)</td>
+                  <td>Source Serif 4</td>
+                  <td><code>clamp(1.875rem, 3vw, 2.75rem)</code> (30–44 px)</td>
+                  <td>400</td>
+                  <td><code>-0.02em</code></td>
+                </tr>
+                <tr>
+                  <td>Sub-heading (h3)</td>
+                  <td>Source Serif 4</td>
+                  <td>
+                    <code>clamp(1.375rem, 2vw, 1.875rem)</code> (22–30 px)
+                  </td>
+                  <td>400</td>
+                  <td><code>-0.02em</code></td>
+                </tr>
+                <tr>
+                  <td>Lead paragraph</td>
+                  <td>Hanken Grotesk</td>
+                  <td><code>1.375rem</code> (22 px)</td>
+                  <td>400</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>Body copy</td>
+                  <td>Hanken Grotesk</td>
+                  <td><code>1.0625rem</code> (17 px)</td>
+                  <td>400</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>Eyebrow / label</td>
+                  <td>Hanken Grotesk</td>
+                  <td><code>0.8125rem</code> (13 px)</td>
+                  <td>600</td>
+                  <td><code>0.14em</code> uppercase</td>
+                </tr>
+                <tr>
+                  <td>Stat figure</td>
+                  <td>Source Serif 4</td>
+                  <td><code>clamp(3.5rem, 6.5vw, 5.5rem)</code></td>
+                  <td>400</td>
+                  <td><code>-0.02em</code></td>
+                </tr>
+                <tr>
+                  <td>Navigation</td>
+                  <td>Hanken Grotesk</td>
+                  <td><code>1.0625rem</code></td>
+                  <td>500</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>Button</td>
+                  <td>Hanken Grotesk</td>
+                  <td><code>1.0625rem</code></td>
+                  <td>600</td>
+                  <td>—</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -4603,83 +4795,297 @@ Indexes:
           <div class="doc-section">
             <h2 class="doc-section-heading">UI Component Inventory</h2>
 
-            <h3 style="margin: var(--space-5) 0 var(--space-3);">Hero Billboard (Home)</h3>
-            <p>Full-black field (<code>background: var(--nu-black)</code>) with the copy in the left column and the photo bleeding off the right edge at ≥ 900 px. On mobile the photo sits below the copy as a full-width image. The eyebrow is red-bright, the heading is the largest white serif on the site, and the CTA button is square red. No scrim — the photo reads as a flat rectangle, not a background.</p>
+            <h3 style="margin: var(--space-5) 0 var(--space-3)">
+              Hero Billboard (Home)
+            </h3>
+            <p>
+              Full-black field (<code>background: var(--nu-black)</code>) with
+              the copy in the left column and the photo bleeding off the right
+              edge at ≥ 900 px. On mobile the photo sits below the copy as a
+              full-width image. The eyebrow is red-bright, the heading is the
+              largest white serif on the site, and the CTA button is square red.
+              No scrim — the photo reads as a flat rectangle, not a background.
+            </p>
 
-            <h3 style="margin: var(--space-5) 0 var(--space-3);">Hero (Interior pages)</h3>
-            <p>A full-width <code>background-image</code> with a sanctioned linear-gradient scrim: <code>rgba(0,0,0,0.94) → rgba(0,0,0,0.3)</code> left to right. This is the only gradient in the system. The photo reads through on the right, keeping the heading on a consistently dark field for legibility.</p>
+            <h3 style="margin: var(--space-5) 0 var(--space-3)">
+              Hero (Interior pages)
+            </h3>
+            <p>
+              A full-width <code>background-image</code> with a sanctioned
+              linear-gradient scrim:
+              <code>rgba(0,0,0,0.94) → rgba(0,0,0,0.3)</code> left to right.
+              This is the only gradient in the system. The photo reads through
+              on the right, keeping the heading on a consistently dark field for
+              legibility.
+            </p>
 
-            <h3 style="margin: var(--space-5) 0 var(--space-3);">Eyebrow / Section Header</h3>
-            <p>Every section opens with the same three-layer pattern: a small-caps red label (<code>.eyebrow</code>), a large serif heading, and an optional lead paragraph. Implemented as the reusable <code>nu_research_section_header()</code> PHP helper — every template and block render callback calls this function rather than writing the markup by hand.</p>
+            <h3 style="margin: var(--space-5) 0 var(--space-3)">
+              Eyebrow / Section Header
+            </h3>
+            <p>
+              Every section opens with the same three-layer pattern: a
+              small-caps red label (<code>.eyebrow</code>), a large serif
+              heading, and an optional lead paragraph. Implemented as the
+              reusable <code>nu_research_section_header()</code> PHP helper —
+              every template and block render callback calls this function
+              rather than writing the markup by hand.
+            </p>
 
-            <h3 style="margin: var(--space-5) 0 var(--space-3);">CTA Button</h3>
-            <p>Square red (<code>border-radius: 0</code>), 48 px minimum height for touch target compliance, bold label, trailing <code>&rarr;</code> glyph. Background transitions to <code>--nu-red-dark</code> on hover at 120 ms. Used as the primary conversion action on every major section — applied consistently through the <code>nu_research_cta()</code> helper.</p>
+            <h3 style="margin: var(--space-5) 0 var(--space-3)">CTA Button</h3>
+            <p>
+              Square red (<code>border-radius: 0</code>), 48 px minimum height
+              for touch target compliance, bold label, trailing
+              <code>&rarr;</code> glyph. Background transitions to
+              <code>--nu-red-dark</code> on hover at 120 ms. Used as the primary
+              conversion action on every major section — applied consistently
+              through the <code>nu_research_cta()</code> helper.
+            </p>
 
-            <h3 style="margin: var(--space-5) 0 var(--space-3);">Arrow Link</h3>
-            <p>A secondary text CTA (<code>.arrow-link</code>): bold dark text with a red <code>&rarr;</code> glyph suffix. Used on Journey Cards and programme items where a softer action is appropriate. Styled with <code>text-decoration: underline</code> on hover.</p>
+            <h3 style="margin: var(--space-5) 0 var(--space-3)">Arrow Link</h3>
+            <p>
+              A secondary text CTA (<code>.arrow-link</code>): bold dark text
+              with a red <code>&rarr;</code> glyph suffix. Used on Journey Cards
+              and programme items where a softer action is appropriate. Styled
+              with <code>text-decoration: underline</code> on hover.
+            </p>
 
-            <h3 style="margin: var(--space-5) 0 var(--space-3);">Cards</h3>
+            <h3 style="margin: var(--space-5) 0 var(--space-3)">Cards</h3>
             <div class="tool-grid">
               <div class="tool-card">
                 <h3 class="tool-name">Team cards</h3>
-                <p class="tool-desc"><code>.card-grid-team</code> · 4:3 portrait photo, name (serif h3), major · mentor meta line, focus text. Grid uses <code>auto-fill minmax(260px, 1fr)</code> — fills as many columns as fit the viewport.</p>
+                <p class="tool-desc">
+                  <code>.card-grid-team</code> · 4:3 portrait photo, name (serif
+                  h3), major · mentor meta line, focus text. Grid uses
+                  <code>auto-fill minmax(260px, 1fr)</code> — fills as many
+                  columns as fit the viewport.
+                </p>
               </div>
               <div class="tool-card">
                 <h3 class="tool-name">Highlight cards</h3>
-                <p class="tool-desc"><code>.card-grid-highlights</code> · 16:10 landscape photo, red overline track label, title (serif), summary, "Built by" meta. Same auto-fill grid at <code>minmax(300px, 1fr)</code>.</p>
+                <p class="tool-desc">
+                  <code>.card-grid-highlights</code> · 16:10 landscape photo,
+                  red overline track label, title (serif), summary, "Built by"
+                  meta. Same auto-fill grid at <code>minmax(300px, 1fr)</code>.
+                </p>
               </div>
               <div class="tool-card">
                 <h3 class="tool-name">Journey cards</h3>
-                <p class="tool-desc"><code>.journey-grid</code> · Three-up fixed at <code>repeat(3, 1fr)</code> from 768 px. Photo + title + body + arrow link. Used on the home page to navigate the three main user journeys.</p>
+                <p class="tool-desc">
+                  <code>.journey-grid</code> · Three-up fixed at
+                  <code>repeat(3, 1fr)</code> from 768 px. Photo + title + body
+                  + arrow link. Used on the home page to navigate the three main
+                  user journeys.
+                </p>
               </div>
               <div class="tool-card">
                 <h3 class="tool-name">Post cards (blog)</h3>
-                <p class="tool-desc"><code>.card-grid-highlights</code> pattern reused. Category overline, h2 title link, date + author meta, excerpt. Featured image hidden on cards that have none; card body always rendered.</p>
+                <p class="tool-desc">
+                  <code>.card-grid-highlights</code> pattern reused. Category
+                  overline, h2 title link, date + author meta, excerpt. Featured
+                  image hidden on cards that have none; card body always
+                  rendered.
+                </p>
               </div>
             </div>
 
-            <h3 style="margin: var(--space-5) 0 var(--space-3);">Stat Rows</h3>
-            <p>Used on the About page: a <code>border-top</code> hairline with one stat per row. Each row is a three-column grid (figure | label | description) at ≥ 760 px. The figure is a large red serif number prefaced by a small eyebrow label with a red bar: <code>.stat-eyebrow::before { content: ''; width: 16px; height: 2px; background: var(--nu-red); }</code>.</p>
+            <h3 style="margin: var(--space-5) 0 var(--space-3)">Stat Rows</h3>
+            <p>
+              Used on the About page: a <code>border-top</code> hairline with
+              one stat per row. Each row is a three-column grid (figure | label
+              | description) at ≥ 760 px. The figure is a large red serif number
+              prefaced by a small eyebrow label with a red bar:
+              <code
+                >.stat-eyebrow::before { content: ''; width: 16px; height: 2px;
+                background: var(--nu-red); }</code
+              >.
+            </p>
 
-            <h3 style="margin: var(--space-5) 0 var(--space-3);">Timeline</h3>
-            <p>The ten-week program arc renders as a vertical left-rail list on mobile (<code>border-left: 1px solid</code>), transforming to a horizontal top-rule row at ≥ 900 px (<code>border-top: 1px solid; flex-direction: row</code>). Red 11 × 11 px square markers sit on the rail at each phase. The week label is red uppercase, the title is a serif heading, the body is muted grey copy.</p>
+            <h3 style="margin: var(--space-5) 0 var(--space-3)">Timeline</h3>
+            <p>
+              The ten-week program arc renders as a vertical left-rail list on
+              mobile (<code>border-left: 1px solid</code>), transforming to a
+              horizontal top-rule row at ≥ 900 px (<code
+                >border-top: 1px solid; flex-direction: row</code
+              >). Red 11 × 11 px square markers sit on the rail at each phase.
+              The week label is red uppercase, the title is a serif heading, the
+              body is muted grey copy.
+            </p>
 
-            <h3 style="margin: var(--space-5) 0 var(--space-3);">FAQ Accordion</h3>
-            <p>Uses native HTML <code>&lt;details&gt;</code> / <code>&lt;summary&gt;</code> — no JavaScript. The <code>+</code> glyph (generated via <code>summary::after { content: '+' }</code>) rotates 45° to an <code>×</code> when open using <code>details[open] summary::after { transform: rotate(45deg); }</code>. The first item is <code>open</code> by default. Screen readers get the native disclosed/collapsed semantics for free.</p>
+            <h3 style="margin: var(--space-5) 0 var(--space-3)">
+              FAQ Accordion
+            </h3>
+            <p>
+              Uses native HTML <code>&lt;details&gt;</code> /
+              <code>&lt;summary&gt;</code> — no JavaScript. The
+              <code>+</code> glyph (generated via
+              <code>summary::after { content: '+' }</code>) rotates 45° to an
+              <code>×</code> when open using
+              <code
+                >details[open] summary::after { transform: rotate(45deg);
+                }</code
+              >. The first item is <code>open</code> by default. Screen readers
+              get the native disclosed/collapsed semantics for free.
+            </p>
 
-            <h3 style="margin: var(--space-5) 0 var(--space-3);">Commitment Pillars</h3>
-            <p>Three-up grid of icon + serif title + body text. Icons are inline SVG (Lucide-style, 2 px stroke, <code>currentColor</code>) rendered by <code>nu_research_pillar_icon()</code> — they inherit the red accent automatically from CSS without needing per-icon colour rules.</p>
+            <h3 style="margin: var(--space-5) 0 var(--space-3)">
+              Commitment Pillars
+            </h3>
+            <p>
+              Three-up grid of icon + serif title + body text. Icons are inline
+              SVG (Lucide-style, 2 px stroke, <code>currentColor</code>)
+              rendered by <code>nu_research_pillar_icon()</code> — they inherit
+              the red accent automatically from CSS without needing per-icon
+              colour rules.
+            </p>
 
-            <h3 style="margin: var(--space-5) 0 var(--space-3);">Feature Banner (dark)</h3>
-            <p>A full-black <code>.feature-banner</code> panel used on the Contact page: white bold links each with a red-bright <code>&rarr;</code> suffix added via <code>a::after { content: '\2192'; color: var(--nu-red-bright); }</code>. Separated by <code>--divider-dark</code> (28% white) hairlines. Focus outlines use <code>outline-color: var(--nu-white)</code> on the dark surface.</p>
+            <h3 style="margin: var(--space-5) 0 var(--space-3)">
+              Feature Banner (dark)
+            </h3>
+            <p>
+              A full-black <code>.feature-banner</code> panel used on the
+              Contact page: white bold links each with a red-bright
+              <code>&rarr;</code> suffix added via
+              <code
+                >a::after { content: '\2192'; color: var(--nu-red-bright);
+                }</code
+              >. Separated by <code>--divider-dark</code> (28% white) hairlines.
+              Focus outlines use <code>outline-color: var(--nu-white)</code> on
+              the dark surface.
+            </p>
 
-            <h3 style="margin: var(--space-5) 0 var(--space-3);">Filter Pill Bar (Blog)</h3>
-            <p>The only rounded element in the system. Pills have <code>border-radius: var(--radius-pill)</code> (999 px). Inactive pills are outlined (<code>border: 1px solid var(--gray-950)</code>); the active pill fills red. The "All" pill and one pill per non-empty category, each linking to its archive. Active pill gets <code>aria-current="page"</code>.</p>
+            <h3 style="margin: var(--space-5) 0 var(--space-3)">
+              Filter Pill Bar (Blog)
+            </h3>
+            <p>
+              The only rounded element in the system. Pills have
+              <code>border-radius: var(--radius-pill)</code> (999 px). Inactive
+              pills are outlined (<code>border: 1px solid var(--gray-950)</code
+              >); the active pill fills red. The "All" pill and one pill per
+              non-empty category, each linking to its archive. Active pill gets
+              <code>aria-current="page"</code>.
+            </p>
 
-            <h3 style="margin: var(--space-5) 0 var(--space-3);">Badges &amp; Overlines</h3>
-            <p>Two badge variants: <code>.badge-outline</code> (1 px black border, used on research track chips), <code>.badge-red</code> (solid red background, used on ACF notes and status labels). Badges are used sparingly — they signal categorical membership, not decoration.</p>
+            <h3 style="margin: var(--space-5) 0 var(--space-3)">
+              Badges &amp; Overlines
+            </h3>
+            <p>
+              Two badge variants: <code>.badge-outline</code> (1 px black
+              border, used on research track chips),
+              <code>.badge-red</code> (solid red background, used on ACF notes
+              and status labels). Badges are used sparingly — they signal
+              categorical membership, not decoration.
+            </p>
 
-            <h3 style="margin: var(--space-5) 0 var(--space-3);">Deadlines Table</h3>
-            <p>A <code>&lt;table&gt;</code> with <code>border-collapse: collapse</code> and 1 px hairline borders. Row headings use <code>&lt;th scope="row"&gt;</code> in bold; values use <code>&lt;td&gt;</code>. The last row has no bottom border. A visually hidden <code>&lt;caption&gt;</code> describes the table's purpose for screen readers.</p>
+            <h3 style="margin: var(--space-5) 0 var(--space-3)">
+              Deadlines Table
+            </h3>
+            <p>
+              A <code>&lt;table&gt;</code> with
+              <code>border-collapse: collapse</code> and 1 px hairline borders.
+              Row headings use <code>&lt;th scope="row"&gt;</code> in bold;
+              values use <code>&lt;td&gt;</code>. The last row has no bottom
+              border. A visually hidden <code>&lt;caption&gt;</code> describes
+              the table's purpose for screen readers.
+            </p>
 
-            <h3 style="margin: var(--space-5) 0 var(--space-3);">Numbered &amp; Check Lists</h3>
-            <p><code>.numbered-list</code> uses CSS <code>counter-reset / counter-increment</code> to generate large red serif numerals as list markers (via <code>li::before { content: counter(nu-steps) }</code>). <code>.check-list</code> uses <code>li::before { content: '\2713' }</code> with a red tick. Both avoid <code>&lt;ol&gt;</code> / <code>&lt;ul&gt;</code> default markers entirely.</p>
+            <h3 style="margin: var(--space-5) 0 var(--space-3)">
+              Numbered &amp; Check Lists
+            </h3>
+            <p>
+              <code>.numbered-list</code> uses CSS
+              <code>counter-reset / counter-increment</code> to generate large
+              red serif numerals as list markers (via
+              <code>li::before { content: counter(nu-steps) }</code>).
+              <code>.check-list</code> uses
+              <code>li::before { content: '\2713' }</code> with a red tick. Both
+              avoid <code>&lt;ol&gt;</code> / <code>&lt;ul&gt;</code> default
+              markers entirely.
+            </p>
           </div>
 
           <!-- UX decisions -->
           <div class="doc-section">
             <h2 class="doc-section-heading">Key UX Decisions</h2>
             <table class="doc-table" aria-label="UX decision log">
-              <thead><tr><th>Decision</th><th>Rationale</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Decision</th>
+                  <th>Rationale</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><td>Intake state drives the Apply page dynamically</td><td>Applicants landing outside the window see the waitlist form immediately — no dead "Applications closed" dead-end. The open/closed state is a single option read, not a manual content edit.</td></tr>
-                <tr><td>First FAQ item open by default</td><td>The most common question ("Do I need WordPress experience?") is answered above the fold without a click. Reduces friction for the majority of visitors.</td></tr>
-                <tr><td>Footer links all trail a red <code>→</code></td><td>Generated via CSS <code>a::after</code> — consistent with zero per-link markup. Reinforces the site's navigational convention that an arrow means "go somewhere".</td></tr>
-                <tr><td>AOS animations limited to <code>once: true</code></td><td>Repeated reveal animations on scroll-up are distracting and purposeless. Elements animate in once, then stay visible permanently.</td></tr>
-                <tr><td>Category filter uses real <code>&lt;a&gt;</code> links, not JS</td><td>Each filter pill links to the genuine category archive URL. Browser history, back button, and screen readers all work correctly without JavaScript.</td></tr>
-                <tr><td>No pagination JS — native <code>the_posts_pagination()</code></td><td>Standard WordPress pagination links. Every page is a real URL, indexable by search engines and shareable.</td></tr>
-                <tr><td>Post card image link is <code>aria-hidden="true"</code></td><td>The image is a decorative duplicate of the title link. Hidden from assistive technology to prevent "link to image" announcements that add no information.</td></tr>
-                <tr><td>Breadcrumb skipped on front page</td><td>"Home › Home" is redundant and adds noise. The <code>nu_research_breadcrumb()</code> helper returns early on <code>is_front_page()</code>.</td></tr>
+                <tr>
+                  <td>Intake state drives the Apply page dynamically</td>
+                  <td>
+                    Applicants landing outside the window see the waitlist form
+                    immediately — no dead "Applications closed" dead-end. The
+                    open/closed state is a single option read, not a manual
+                    content edit.
+                  </td>
+                </tr>
+                <tr>
+                  <td>First FAQ item open by default</td>
+                  <td>
+                    The most common question ("Do I need WordPress experience?")
+                    is answered above the fold without a click. Reduces friction
+                    for the majority of visitors.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Footer links all trail a red <code>→</code></td>
+                  <td>
+                    Generated via CSS <code>a::after</code> — consistent with
+                    zero per-link markup. Reinforces the site's navigational
+                    convention that an arrow means "go somewhere".
+                  </td>
+                </tr>
+                <tr>
+                  <td>AOS animations limited to <code>once: true</code></td>
+                  <td>
+                    Repeated reveal animations on scroll-up are distracting and
+                    purposeless. Elements animate in once, then stay visible
+                    permanently.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Category filter uses real <code>&lt;a&gt;</code> links, not
+                    JS
+                  </td>
+                  <td>
+                    Each filter pill links to the genuine category archive URL.
+                    Browser history, back button, and screen readers all work
+                    correctly without JavaScript.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    No pagination JS — native
+                    <code>the_posts_pagination()</code>
+                  </td>
+                  <td>
+                    Standard WordPress pagination links. Every page is a real
+                    URL, indexable by search engines and shareable.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Post card image link is <code>aria-hidden="true"</code>
+                  </td>
+                  <td>
+                    The image is a decorative duplicate of the title link.
+                    Hidden from assistive technology to prevent "link to image"
+                    announcements that add no information.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Breadcrumb skipped on front page</td>
+                  <td>
+                    "Home › Home" is redundant and adds noise. The
+                    <code>nu_research_breadcrumb()</code> helper returns early
+                    on <code>is_front_page()</code>.
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -4688,14 +5094,21 @@ Indexes:
         <!-- ══════════════════════════════════════════════════
              PAGE: RESPONSIVENESS
              ══════════════════════════════════════════════════ -->
-        <section class="doc-page" id="page-responsiveness" aria-labelledby="responsiveness-heading">
+        <section
+          class="doc-page"
+          id="page-responsiveness"
+          aria-labelledby="responsiveness-heading"
+        >
           <header class="page-header">
             <p class="page-eyebrow">Frontend</p>
-            <h1 class="page-title" id="responsiveness-heading">Responsiveness</h1>
+            <h1 class="page-title" id="responsiveness-heading">
+              Responsiveness
+            </h1>
             <p class="page-lead">
-              The site is mobile-first: all layout, typography, and spacing start from the smallest
-              screen and expand upward via a small set of deliberate breakpoints. No CSS framework
-              — every rule is written by hand using CSS Grid, Flexbox, and <code>clamp()</code>.
+              The site is mobile-first: all layout, typography, and spacing
+              start from the smallest screen and expand upward via a small set
+              of deliberate breakpoints. No CSS framework — every rule is
+              written by hand using CSS Grid, Flexbox, and <code>clamp()</code>.
             </p>
           </header>
 
@@ -4706,7 +5119,15 @@ Indexes:
               <span class="callout-icon">📱</span>
               <div class="callout-body">
                 <p class="callout-title">Mobile-first, no framework</p>
-                <p>All base styles target the smallest viewport. <code>@media (min-width: N)</code> media queries progressively enhance the layout as the viewport grows. There are no <code>max-width</code> breakpoints — nothing is explicitly reset at smaller sizes, only added at larger ones. The result is a stylesheet that reads linearly: base styles first, enhancements after.</p>
+                <p>
+                  All base styles target the smallest viewport.
+                  <code>@media (min-width: N)</code> media queries progressively
+                  enhance the layout as the viewport grows. There are no
+                  <code>max-width</code> breakpoints — nothing is explicitly
+                  reset at smaller sizes, only added at larger ones. The result
+                  is a stylesheet that reads linearly: base styles first,
+                  enhancements after.
+                </p>
               </div>
             </div>
           </div>
@@ -4715,27 +5136,51 @@ Indexes:
           <div class="doc-section">
             <h2 class="doc-section-heading">Breakpoints</h2>
             <table class="doc-table" aria-label="Breakpoints used in main.css">
-              <thead><tr><th>Breakpoint</th><th>Value</th><th>What changes</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Breakpoint</th>
+                  <th>Value</th>
+                  <th>What changes</th>
+                </tr>
+              </thead>
               <tbody>
                 <tr>
                   <td>Tablet / nav</td>
                   <td><code>min-width: 768px</code></td>
-                  <td>Mobile hamburger hidden; primary nav becomes horizontal tab row; two-column grid activated; journey cards go 3-up; pillar grid goes 3-up; footer grid goes 4-column; hero minimum height increases to 560 px; resource list goes horizontal</td>
+                  <td>
+                    Mobile hamburger hidden; primary nav becomes horizontal tab
+                    row; two-column grid activated; journey cards go 3-up;
+                    pillar grid goes 3-up; footer grid goes 4-column; hero
+                    minimum height increases to 560 px; resource list goes
+                    horizontal
+                  </td>
                 </tr>
                 <tr>
                   <td>Stats</td>
                   <td><code>min-width: 760px</code></td>
-                  <td>Stat rows switch from stacked to 3-column grid (<code>minmax(160px,0.9fr) minmax(180px,1fr) 2fr</code>); stat label and description get a top margin to optically align with the figure baseline</td>
+                  <td>
+                    Stat rows switch from stacked to 3-column grid (<code
+                      >minmax(160px,0.9fr) minmax(180px,1fr) 2fr</code
+                    >); stat label and description get a top margin to optically
+                    align with the figure baseline
+                  </td>
                 </tr>
                 <tr>
                   <td>Cards</td>
                   <td><code>min-width: 600px</code></td>
-                  <td>Team and highlight card grids switch from 1-column to <code>auto-fill minmax(260px/300px, 1fr)</code></td>
+                  <td>
+                    Team and highlight card grids switch from 1-column to
+                    <code>auto-fill minmax(260px/300px, 1fr)</code>
+                  </td>
                 </tr>
                 <tr>
                   <td>Hero billboard</td>
                   <td><code>min-width: 900px</code></td>
-                  <td>Billboard hero switches to 2-column grid (1.1fr : 1fr); media panel bleeds to the right content edge; timeline switches from vertical rail to horizontal top-rule row</td>
+                  <td>
+                    Billboard hero switches to 2-column grid (1.1fr : 1fr);
+                    media panel bleeds to the right content edge; timeline
+                    switches from vertical rail to horizontal top-rule row
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -4743,21 +5188,81 @@ Indexes:
 
           <!-- Fluid typography -->
           <div class="doc-section">
-            <h2 class="doc-section-heading">Fluid Typography with <code>clamp()</code></h2>
-            <p><code>clamp(min, preferred, max)</code> is used for all heading sizes and several spacing values. The preferred value is always a <code>vw</code> expression so the size scales linearly with the viewport width between the min and max. This removes the need for per-breakpoint type-size overrides.</p>
-            <table class="doc-table" aria-label="clamp() values used in main.css">
-              <thead><tr><th>Property</th><th>clamp() value</th><th>Range</th></tr></thead>
+            <h2 class="doc-section-heading">
+              Fluid Typography with <code>clamp()</code>
+            </h2>
+            <p>
+              <code>clamp(min, preferred, max)</code> is used for all heading
+              sizes and several spacing values. The preferred value is always a
+              <code>vw</code> expression so the size scales linearly with the
+              viewport width between the min and max. This removes the need for
+              per-breakpoint type-size overrides.
+            </p>
+            <table
+              class="doc-table"
+              aria-label="clamp() values used in main.css"
+            >
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>clamp() value</th>
+                  <th>Range</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><td>Hero heading (<code>.hero-heading</code>, <code>.hero-billboard-heading</code>)</td><td><code>clamp(3.25rem, 7vw, 6.5rem)</code></td><td>52 px → 104 px</td></tr>
-                <tr><td>Page title (h1)</td><td><code>clamp(2.5rem, 4.6vw, 4.25rem)</code></td><td>40 px → 68 px</td></tr>
-                <tr><td>Section heading (h2)</td><td><code>clamp(1.875rem, 3vw, 2.75rem)</code></td><td>30 px → 44 px</td></tr>
-                <tr><td>Sub-heading (h3)</td><td><code>clamp(1.375rem, 2vw, 1.875rem)</code></td><td>22 px → 30 px</td></tr>
-                <tr><td>Stat figure</td><td><code>clamp(3.5rem, 6.5vw, 5.5rem)</code></td><td>56 px → 88 px</td></tr>
-                <tr><td>Section padding</td><td><code>clamp(48px, 6vw, 96px)</code></td><td>48 px → 96 px</td></tr>
-                <tr><td>Content padding inline</td><td><code>clamp(20px, 4vw, 48px)</code></td><td>20 px → 48 px</td></tr>
-                <tr><td>Hero lead paragraph</td><td><code>clamp(1.125rem, 2.5vw, 1.375rem)</code></td><td>18 px → 22 px</td></tr>
-                <tr><td>Hero billboard gap</td><td><code>clamp(24px, 4vw, 64px)</code></td><td>24 px → 64 px</td></tr>
-                <tr><td>Card grid gap (journey)</td><td><code>clamp(24px, 3vw, 48px)</code></td><td>24 px → 48 px</td></tr>
+                <tr>
+                  <td>
+                    Hero heading (<code>.hero-heading</code>,
+                    <code>.hero-billboard-heading</code>)
+                  </td>
+                  <td><code>clamp(3.25rem, 7vw, 6.5rem)</code></td>
+                  <td>52 px → 104 px</td>
+                </tr>
+                <tr>
+                  <td>Page title (h1)</td>
+                  <td><code>clamp(2.5rem, 4.6vw, 4.25rem)</code></td>
+                  <td>40 px → 68 px</td>
+                </tr>
+                <tr>
+                  <td>Section heading (h2)</td>
+                  <td><code>clamp(1.875rem, 3vw, 2.75rem)</code></td>
+                  <td>30 px → 44 px</td>
+                </tr>
+                <tr>
+                  <td>Sub-heading (h3)</td>
+                  <td><code>clamp(1.375rem, 2vw, 1.875rem)</code></td>
+                  <td>22 px → 30 px</td>
+                </tr>
+                <tr>
+                  <td>Stat figure</td>
+                  <td><code>clamp(3.5rem, 6.5vw, 5.5rem)</code></td>
+                  <td>56 px → 88 px</td>
+                </tr>
+                <tr>
+                  <td>Section padding</td>
+                  <td><code>clamp(48px, 6vw, 96px)</code></td>
+                  <td>48 px → 96 px</td>
+                </tr>
+                <tr>
+                  <td>Content padding inline</td>
+                  <td><code>clamp(20px, 4vw, 48px)</code></td>
+                  <td>20 px → 48 px</td>
+                </tr>
+                <tr>
+                  <td>Hero lead paragraph</td>
+                  <td><code>clamp(1.125rem, 2.5vw, 1.375rem)</code></td>
+                  <td>18 px → 22 px</td>
+                </tr>
+                <tr>
+                  <td>Hero billboard gap</td>
+                  <td><code>clamp(24px, 4vw, 64px)</code></td>
+                  <td>24 px → 64 px</td>
+                </tr>
+                <tr>
+                  <td>Card grid gap (journey)</td>
+                  <td><code>clamp(24px, 3vw, 48px)</code></td>
+                  <td>24 px → 48 px</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -4768,19 +5273,45 @@ Indexes:
             <div class="tool-grid">
               <div class="tool-card">
                 <h3 class="tool-name"><code>.wrap</code></h3>
-                <p class="tool-desc">The single centering utility: <code>max-width: 1360px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 48px)</code>. Every section's content is wrapped in it. The hero billboard's media panel bleed is achieved by <em>negating</em> the wrap padding with a negative margin on the media element.</p>
+                <p class="tool-desc">
+                  The single centering utility:
+                  <code
+                    >max-width: 1360px; margin-inline: auto; padding-inline:
+                    clamp(20px, 4vw, 48px)</code
+                  >. Every section's content is wrapped in it. The hero
+                  billboard's media panel bleed is achieved by
+                  <em>negating</em> the wrap padding with a negative margin on
+                  the media element.
+                </p>
               </div>
               <div class="tool-card">
                 <h3 class="tool-name"><code>.two-col</code></h3>
-                <p class="tool-desc">Simple <code>1fr / 1fr</code> CSS Grid that starts as a single column and becomes two at 768 px. Used on the About page (eligibility + steps) and Contact (details + feature banner).</p>
+                <p class="tool-desc">
+                  Simple <code>1fr / 1fr</code> CSS Grid that starts as a single
+                  column and becomes two at 768 px. Used on the About page
+                  (eligibility + steps) and Contact (details + feature banner).
+                </p>
               </div>
               <div class="tool-card">
                 <h3 class="tool-name"><code>.media-card</code></h3>
-                <p class="tool-desc">Image + text side-by-side at ≥ 768 px. Has a <code>.media-card-reverse</code> variant that swaps order via <code>order</code> properties. Used on the home page overview section.</p>
+                <p class="tool-desc">
+                  Image + text side-by-side at ≥ 768 px. Has a
+                  <code>.media-card-reverse</code> variant that swaps order via
+                  <code>order</code> properties. Used on the home page overview
+                  section.
+                </p>
               </div>
               <div class="tool-card">
                 <h3 class="tool-name">Auto-fill card grids</h3>
-                <p class="tool-desc"><code>grid-template-columns: repeat(auto-fill, minmax(Npx, 1fr))</code> — fills as many columns as fit, never breaking to an orphaned single card on intermediate viewports. No JavaScript resize handlers needed.</p>
+                <p class="tool-desc">
+                  <code
+                    >grid-template-columns: repeat(auto-fill, minmax(Npx,
+                    1fr))</code
+                  >
+                  — fills as many columns as fit, never breaking to an orphaned
+                  single card on intermediate viewports. No JavaScript resize
+                  handlers needed.
+                </p>
               </div>
             </div>
           </div>
@@ -4788,7 +5319,12 @@ Indexes:
           <!-- Hero billboard media bleed -->
           <div class="doc-section">
             <h2 class="doc-section-heading">Hero Billboard — Media Bleed</h2>
-            <p>The home-page billboard hero achieves a photo panel that bleeds to the browser edge on large screens while the copy stays within the <code>.wrap</code> content boundary. This is done with negative margins:</p>
+            <p>
+              The home-page billboard hero achieves a photo panel that bleeds to
+              the browser edge on large screens while the copy stays within the
+              <code>.wrap</code> content boundary. This is done with negative
+              margins:
+            </p>
             <pre><code>/* Mobile: photo bleeds to both sides (full-width) */
 .hero-billboard-media {
   margin-inline: calc(-1 * var(--content-pad));
@@ -4805,13 +5341,25 @@ Indexes:
     margin-right: calc(-1 * (var(--content-pad) + max(0px, (100vw - var(--content-max-width)) / 2)));
   }
 }</code></pre>
-            <p>The <code>max(0px, ...)</code> guard ensures the right margin never goes positive (which would push the photo <em>inward</em>) on viewports narrower than <code>--content-max-width</code>.</p>
+            <p>
+              The <code>max(0px, ...)</code> guard ensures the right margin
+              never goes positive (which would push the photo <em>inward</em>)
+              on viewports narrower than <code>--content-max-width</code>.
+            </p>
           </div>
 
           <!-- Nav toggle -->
           <div class="doc-section">
             <h2 class="doc-section-heading">Mobile Navigation</h2>
-            <p>The primary navigation is collapsed by default on small screens. The hamburger toggle is visible below 768 px and hidden at and above it. The toggle button and nav relationship are managed by JavaScript in <code>nav.js</code>, but the CSS collapsed state only activates once JS has added <code>.nav-ready</code> to the <code>&lt;html&gt;</code> element — so without JavaScript the nav is always visible.</p>
+            <p>
+              The primary navigation is collapsed by default on small screens.
+              The hamburger toggle is visible below 768 px and hidden at and
+              above it. The toggle button and nav relationship are managed by
+              JavaScript in <code>nav.js</code>, but the CSS collapsed state
+              only activates once JS has added <code>.nav-ready</code> to the
+              <code>&lt;html&gt;</code> element — so without JavaScript the nav
+              is always visible.
+            </p>
             <pre><code>/* Nav hidden only when JS is present AND data-collapsed is true */
 .nav-ready .primary-nav[data-collapsed='true'] { display: none; }
 
@@ -4827,14 +5375,55 @@ Indexes:
           <div class="doc-section">
             <h2 class="doc-section-heading">Tested Viewport Sizes</h2>
             <table class="doc-table" aria-label="Tested viewport sizes">
-              <thead><tr><th>Device class</th><th>Viewport width</th><th>Key checks</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Device class</th>
+                  <th>Viewport width</th>
+                  <th>Key checks</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><td>Small mobile</td><td>375 px</td><td>Single-column layout, hamburger nav, hero stacked, no horizontal scroll</td></tr>
-                <tr><td>Large mobile</td><td>430 px</td><td>Same as 375 px — no layout change until 600 px</td></tr>
-                <tr><td>Small tablet</td><td>600 px</td><td>Card grids gain columns, still single-column for hero and two-col sections</td></tr>
-                <tr><td>Tablet</td><td>768 px</td><td>Nav horizontal, two-col layouts active, hero aspect changes</td></tr>
-                <tr><td>Desktop</td><td>1024 px</td><td>All layouts at full fidelity, billboard hero 2-column</td></tr>
-                <tr><td>Wide desktop</td><td>1440 px</td><td>Wrap hits <code>max-width: 1360px</code>, padding fills the sides, hero media bleed at maximum</td></tr>
+                <tr>
+                  <td>Small mobile</td>
+                  <td>375 px</td>
+                  <td>
+                    Single-column layout, hamburger nav, hero stacked, no
+                    horizontal scroll
+                  </td>
+                </tr>
+                <tr>
+                  <td>Large mobile</td>
+                  <td>430 px</td>
+                  <td>Same as 375 px — no layout change until 600 px</td>
+                </tr>
+                <tr>
+                  <td>Small tablet</td>
+                  <td>600 px</td>
+                  <td>
+                    Card grids gain columns, still single-column for hero and
+                    two-col sections
+                  </td>
+                </tr>
+                <tr>
+                  <td>Tablet</td>
+                  <td>768 px</td>
+                  <td>
+                    Nav horizontal, two-col layouts active, hero aspect changes
+                  </td>
+                </tr>
+                <tr>
+                  <td>Desktop</td>
+                  <td>1024 px</td>
+                  <td>All layouts at full fidelity, billboard hero 2-column</td>
+                </tr>
+                <tr>
+                  <td>Wide desktop</td>
+                  <td>1440 px</td>
+                  <td>
+                    Wrap hits <code>max-width: 1360px</code>, padding fills the
+                    sides, hero media bleed at maximum
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -4843,46 +5432,128 @@ Indexes:
         <!-- ══════════════════════════════════════════════════
              PAGE: ACCESSIBILITY
              ══════════════════════════════════════════════════ -->
-        <section class="doc-page" id="page-accessibility" aria-labelledby="accessibility-heading">
+        <section
+          class="doc-page"
+          id="page-accessibility"
+          aria-labelledby="accessibility-heading"
+        >
           <header class="page-header">
             <p class="page-eyebrow">Frontend</p>
             <h1 class="page-title" id="accessibility-heading">Accessibility</h1>
             <p class="page-lead">
-              The site targets WCAG 2.1 Level AA conformance. Accessibility is built into the
-              markup and CSS rather than retrofitted — semantic HTML, native browser behaviour,
-              and ARIA are used in that priority order.
+              The site targets WCAG 2.1 Level AA conformance. Accessibility is
+              built into the markup and CSS rather than retrofitted — semantic
+              HTML, native browser behaviour, and ARIA are used in that priority
+              order.
             </p>
           </header>
 
-          <div class="stat-band" aria-label="Accessibility measures at a glance">
-            <div class="stat-cell"><p class="stat-num">AA</p><p class="stat-label">WCAG 2.1 target</p></div>
-            <div class="stat-cell"><p class="stat-num">4.9:1</p><p class="stat-label">Red on black contrast</p></div>
-            <div class="stat-cell"><p class="stat-num">44 px</p><p class="stat-label">Min touch target</p></div>
-            <div class="stat-cell"><p class="stat-num">0</p><p class="stat-label">JS-only interactions</p></div>
+          <div
+            class="stat-band"
+            aria-label="Accessibility measures at a glance"
+          >
+            <div class="stat-cell">
+              <p class="stat-num">AA</p>
+              <p class="stat-label">WCAG 2.1 target</p>
+            </div>
+            <div class="stat-cell">
+              <p class="stat-num">4.9:1</p>
+              <p class="stat-label">Red on black contrast</p>
+            </div>
+            <div class="stat-cell">
+              <p class="stat-num">44 px</p>
+              <p class="stat-label">Min touch target</p>
+            </div>
+            <div class="stat-cell">
+              <p class="stat-num">0</p>
+              <p class="stat-label">JS-only interactions</p>
+            </div>
           </div>
 
           <!-- Skip link -->
           <div class="doc-section">
             <h2 class="doc-section-heading">Skip-to-Content Link</h2>
-            <p>The very first DOM element in <code>header.php</code> is a skip link targeting <code>#main</code>:</p>
+            <p>
+              The very first DOM element in <code>header.php</code> is a skip
+              link targeting <code>#main</code>:
+            </p>
             <pre><code>&lt;a class="skip-link" href="#main"&gt;Skip to main content&lt;/a&gt;</code></pre>
-            <p>It is positioned off-screen (<code>left: -9999px</code>) until focused, at which point it snaps to the top-left corner of the viewport. This gives keyboard and screen reader users a one-keystroke path past the repeated header and navigation on every page. The <code>#main</code> target is the <code>&lt;main&gt;</code> element opened at the end of <code>header.php</code>.</p>
+            <p>
+              It is positioned off-screen (<code>left: -9999px</code>) until
+              focused, at which point it snaps to the top-left corner of the
+              viewport. This gives keyboard and screen reader users a
+              one-keystroke path past the repeated header and navigation on
+              every page. The <code>#main</code> target is the
+              <code>&lt;main&gt;</code> element opened at the end of
+              <code>header.php</code>.
+            </p>
           </div>
 
           <!-- Landmark roles -->
           <div class="doc-section">
-            <h2 class="doc-section-heading">Landmark Roles &amp; Semantic Structure</h2>
-            <table class="doc-table" aria-label="Landmark roles used in the theme">
-              <thead><tr><th>Element</th><th>Role</th><th>Where</th></tr></thead>
+            <h2 class="doc-section-heading">
+              Landmark Roles &amp; Semantic Structure
+            </h2>
+            <table
+              class="doc-table"
+              aria-label="Landmark roles used in the theme"
+            >
+              <thead>
+                <tr>
+                  <th>Element</th>
+                  <th>Role</th>
+                  <th>Where</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><td><code>&lt;header role="banner"&gt;</code></td><td>banner</td><td>Site header — skip link, utility bar, brand, primary nav</td></tr>
-                <tr><td><code>&lt;nav aria-label="Program pages"&gt;</code></td><td>navigation</td><td>Primary navigation in the header</td></tr>
-                <tr><td><code>&lt;nav aria-label="Breadcrumb"&gt;</code></td><td>navigation</td><td>Breadcrumb on all interior pages</td></tr>
-                <tr><td><code>&lt;nav aria-label="Filter posts by category"&gt;</code></td><td>navigation</td><td>Category pill bar on the blog listing</td></tr>
-                <tr><td><code>&lt;main id="main"&gt;</code></td><td>main</td><td>Primary page content — the skip link target</td></tr>
-                <tr><td><code>&lt;footer&gt;</code></td><td>contentinfo</td><td>Site footer with nav columns</td></tr>
-                <tr><td><code>&lt;nav aria-label="Program links"&gt;</code> etc.</td><td>navigation</td><td>Each footer column is a labelled nav</td></tr>
-                <tr><td><code>&lt;article class="stat-row"&gt;</code></td><td>article</td><td>Each stat row on the About page</td></tr>
+                <tr>
+                  <td><code>&lt;header role="banner"&gt;</code></td>
+                  <td>banner</td>
+                  <td>
+                    Site header — skip link, utility bar, brand, primary nav
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>&lt;nav aria-label="Program pages"&gt;</code></td>
+                  <td>navigation</td>
+                  <td>Primary navigation in the header</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;nav aria-label="Breadcrumb"&gt;</code></td>
+                  <td>navigation</td>
+                  <td>Breadcrumb on all interior pages</td>
+                </tr>
+                <tr>
+                  <td>
+                    <code
+                      >&lt;nav aria-label="Filter posts by category"&gt;</code
+                    >
+                  </td>
+                  <td>navigation</td>
+                  <td>Category pill bar on the blog listing</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;main id="main"&gt;</code></td>
+                  <td>main</td>
+                  <td>Primary page content — the skip link target</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;footer&gt;</code></td>
+                  <td>contentinfo</td>
+                  <td>Site footer with nav columns</td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>&lt;nav aria-label="Program links"&gt;</code> etc.
+                  </td>
+                  <td>navigation</td>
+                  <td>Each footer column is a labelled nav</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;article class="stat-row"&gt;</code></td>
+                  <td>article</td>
+                  <td>Each stat row on the About page</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -4890,52 +5561,210 @@ Indexes:
           <!-- Focus management -->
           <div class="doc-section">
             <h2 class="doc-section-heading">Focus Management</h2>
-            <p>A global <code>:focus-visible</code> rule provides a consistent 2 px red outline (<code>outline: 2px solid var(--nu-red); outline-offset: 2px</code>) on all interactive elements when navigated by keyboard. <code>:focus-visible</code> — not <code>:focus</code> — is used so mouse clicks do not show the outline (matching browser native behaviour for styled elements).</p>
-            <p>On dark surfaces (hero billboard, feature banner, footer) the focus colour is overridden to white:</p>
+            <p>
+              A global <code>:focus-visible</code> rule provides a consistent 2
+              px red outline (<code
+                >outline: 2px solid var(--nu-red); outline-offset: 2px</code
+              >) on all interactive elements when navigated by keyboard.
+              <code>:focus-visible</code> — not <code>:focus</code> — is used so
+              mouse clicks do not show the outline (matching browser native
+              behaviour for styled elements).
+            </p>
+            <p>
+              On dark surfaces (hero billboard, feature banner, footer) the
+              focus colour is overridden to white:
+            </p>
             <pre><code>.hero-billboard :focus-visible,
 .feature-banner :focus-visible,
 .site-footer :focus-visible {
   outline-color: var(--nu-white);
 }</code></pre>
-            <p>This ensures the focus indicator is always visible against the surface it sits on — a contrast requirement, not just an aesthetic one.</p>
+            <p>
+              This ensures the focus indicator is always visible against the
+              surface it sits on — a contrast requirement, not just an aesthetic
+              one.
+            </p>
 
-            <h3 style="margin: var(--space-5) 0 var(--space-3);">Mobile Nav — Keyboard &amp; Escape</h3>
-            <p><code>nav.js</code> adds an <code>Escape</code> key listener to the nav element: pressing Escape closes the menu and returns focus to the toggle button (<code>toggle.focus()</code>). Without this, keyboard users who opened the menu would need to Tab all the way through it to get back to the toggle.</p>
+            <h3 style="margin: var(--space-5) 0 var(--space-3)">
+              Mobile Nav — Keyboard &amp; Escape
+            </h3>
+            <p>
+              <code>nav.js</code> adds an <code>Escape</code> key listener to
+              the nav element: pressing Escape closes the menu and returns focus
+              to the toggle button (<code>toggle.focus()</code>). Without this,
+              keyboard users who opened the menu would need to Tab all the way
+              through it to get back to the toggle.
+            </p>
           </div>
 
           <!-- Colour contrast -->
           <div class="doc-section">
             <h2 class="doc-section-heading">Colour Contrast</h2>
             <table class="doc-table" aria-label="Colour contrast ratios">
-              <thead><tr><th>Foreground</th><th>Background</th><th>Ratio</th><th>WCAG AA</th><th>Usage</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Foreground</th>
+                  <th>Background</th>
+                  <th>Ratio</th>
+                  <th>WCAG AA</th>
+                  <th>Usage</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><td><code>#1a1a1a</code> (gray-950)</td><td><code>#ffffff</code></td><td>~18.1:1</td><td>✓ Pass</td><td>Body headings on white</td></tr>
-                <tr><td><code>#333333</code> (gray-800)</td><td><code>#ffffff</code></td><td>~12.6:1</td><td>✓ Pass</td><td>Body copy on white</td></tr>
-                <tr><td><code>#6b6b6b</code> (gray-600)</td><td><code>#ffffff</code></td><td>~5.0:1</td><td>✓ Pass</td><td>Muted / secondary text (AA requires 4.5:1 for normal text)</td></tr>
-                <tr><td><code>#d41b2c</code> (nu-red)</td><td><code>#ffffff</code></td><td>~5.1:1</td><td>✓ Pass</td><td>Links and eyebrows on white</td></tr>
-                <tr><td><code>#f0193a</code> (nu-red-bright)</td><td><code>#000000</code></td><td>~4.9:1</td><td>✓ Pass</td><td>Red accent on black surfaces (footer, hero)</td></tr>
-                <tr><td><code>#ffffff</code></td><td><code>#000000</code></td><td>21:1</td><td>✓ Pass</td><td>Text on hero / footer / feature banner</td></tr>
-                <tr><td>rgba(255,255,255,0.72)</td><td><code>#000000</code></td><td>~11.1:1</td><td>✓ Pass</td><td>Muted text on dark surfaces (hero lead, footer labels)</td></tr>
-                <tr><td><code>#ffffff</code></td><td><code>#d41b2c</code></td><td>~5.1:1</td><td>✓ Pass</td><td>Button text on red background</td></tr>
+                <tr>
+                  <td><code>#1a1a1a</code> (gray-950)</td>
+                  <td><code>#ffffff</code></td>
+                  <td>~18.1:1</td>
+                  <td>✓ Pass</td>
+                  <td>Body headings on white</td>
+                </tr>
+                <tr>
+                  <td><code>#333333</code> (gray-800)</td>
+                  <td><code>#ffffff</code></td>
+                  <td>~12.6:1</td>
+                  <td>✓ Pass</td>
+                  <td>Body copy on white</td>
+                </tr>
+                <tr>
+                  <td><code>#6b6b6b</code> (gray-600)</td>
+                  <td><code>#ffffff</code></td>
+                  <td>~5.0:1</td>
+                  <td>✓ Pass</td>
+                  <td>
+                    Muted / secondary text (AA requires 4.5:1 for normal text)
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>#d41b2c</code> (nu-red)</td>
+                  <td><code>#ffffff</code></td>
+                  <td>~5.1:1</td>
+                  <td>✓ Pass</td>
+                  <td>Links and eyebrows on white</td>
+                </tr>
+                <tr>
+                  <td><code>#f0193a</code> (nu-red-bright)</td>
+                  <td><code>#000000</code></td>
+                  <td>~4.9:1</td>
+                  <td>✓ Pass</td>
+                  <td>Red accent on black surfaces (footer, hero)</td>
+                </tr>
+                <tr>
+                  <td><code>#ffffff</code></td>
+                  <td><code>#000000</code></td>
+                  <td>21:1</td>
+                  <td>✓ Pass</td>
+                  <td>Text on hero / footer / feature banner</td>
+                </tr>
+                <tr>
+                  <td>rgba(255,255,255,0.72)</td>
+                  <td><code>#000000</code></td>
+                  <td>~11.1:1</td>
+                  <td>✓ Pass</td>
+                  <td>
+                    Muted text on dark surfaces (hero lead, footer labels)
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>#ffffff</code></td>
+                  <td><code>#d41b2c</code></td>
+                  <td>~5.1:1</td>
+                  <td>✓ Pass</td>
+                  <td>Button text on red background</td>
+                </tr>
               </tbody>
             </table>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted);">WCAG 2.1 AA requires a minimum contrast ratio of 4.5:1 for normal text and 3:1 for large text (≥ 18 pt regular or ≥ 14 pt bold). All colour pairings in the theme meet or exceed the AA threshold.</p>
+            <p style="font-size: 0.875rem; color: var(--color-text-muted)">
+              WCAG 2.1 AA requires a minimum contrast ratio of 4.5:1 for normal
+              text and 3:1 for large text (≥ 18 pt regular or ≥ 14 pt bold). All
+              colour pairings in the theme meet or exceed the AA threshold.
+            </p>
           </div>
 
           <!-- ARIA attributes -->
           <div class="doc-section">
             <h2 class="doc-section-heading">ARIA Attributes</h2>
             <table class="doc-table" aria-label="ARIA attribute usage">
-              <thead><tr><th>Attribute</th><th>Element</th><th>Purpose</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Attribute</th>
+                  <th>Element</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><td><code>aria-expanded="true/false"</code></td><td>Mobile nav toggle button</td><td>Announces the open/closed state of the navigation to screen readers. Updated by <code>nav.js</code> on every toggle.</td></tr>
-                <tr><td><code>aria-controls="primary-nav"</code></td><td>Mobile nav toggle button</td><td>Associates the toggle with the element it controls.</td></tr>
-                <tr><td><code>aria-current="page"</code></td><td>Active nav link, active filter pill, breadcrumb current item</td><td>Tells screen readers which link represents the current page. Set in PHP for nav and filter bar; hardcoded <code>aria-current="page"</code> on breadcrumb's <code>&lt;span&gt;</code>.</td></tr>
-                <tr><td><code>aria-label="..."</code></td><td>All <code>&lt;nav&gt;</code> elements, stat bands, card grids</td><td>Distinguishes multiple navigation landmarks; each has a unique human-readable label.</td></tr>
-                <tr><td><code>aria-hidden="true"</code></td><td>Decorative icons, arrow glyphs, hamburger lines, post card image link</td><td>Hides purely decorative or redundant elements from the accessibility tree. Used on: hamburger icon bars, nav/footer arrow glyphs, pillar/stat SVG icons, and the image link on post cards (the title link is the real accessible action).</td></tr>
-                <tr><td><code>aria-labelledby</code></td><td>Form sections, stat groups</td><td>Associates regions with their visible heading for programmatic label derivation.</td></tr>
-                <tr><td><code>role="status"</code></td><td>Waitlist success/error messages</td><td>Live region for the waitlist form feedback — announces result after redirect without requiring focus management.</td></tr>
-                <tr><td><code>tabindex="-1"</code></td><td>Post card image link</td><td>Removes the decorative image link from the tab order; the title link is the keyboard-navigable action.</td></tr>
+                <tr>
+                  <td><code>aria-expanded="true/false"</code></td>
+                  <td>Mobile nav toggle button</td>
+                  <td>
+                    Announces the open/closed state of the navigation to screen
+                    readers. Updated by <code>nav.js</code> on every toggle.
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>aria-controls="primary-nav"</code></td>
+                  <td>Mobile nav toggle button</td>
+                  <td>Associates the toggle with the element it controls.</td>
+                </tr>
+                <tr>
+                  <td><code>aria-current="page"</code></td>
+                  <td>
+                    Active nav link, active filter pill, breadcrumb current item
+                  </td>
+                  <td>
+                    Tells screen readers which link represents the current page.
+                    Set in PHP for nav and filter bar; hardcoded
+                    <code>aria-current="page"</code> on breadcrumb's
+                    <code>&lt;span&gt;</code>.
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>aria-label="..."</code></td>
+                  <td>
+                    All <code>&lt;nav&gt;</code> elements, stat bands, card
+                    grids
+                  </td>
+                  <td>
+                    Distinguishes multiple navigation landmarks; each has a
+                    unique human-readable label.
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>aria-hidden="true"</code></td>
+                  <td>
+                    Decorative icons, arrow glyphs, hamburger lines, post card
+                    image link
+                  </td>
+                  <td>
+                    Hides purely decorative or redundant elements from the
+                    accessibility tree. Used on: hamburger icon bars, nav/footer
+                    arrow glyphs, pillar/stat SVG icons, and the image link on
+                    post cards (the title link is the real accessible action).
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>aria-labelledby</code></td>
+                  <td>Form sections, stat groups</td>
+                  <td>
+                    Associates regions with their visible heading for
+                    programmatic label derivation.
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>role="status"</code></td>
+                  <td>Waitlist success/error messages</td>
+                  <td>
+                    Live region for the waitlist form feedback — announces
+                    result after redirect without requiring focus management.
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>tabindex="-1"</code></td>
+                  <td>Post card image link</td>
+                  <td>
+                    Removes the decorative image link from the tab order; the
+                    title link is the keyboard-navigable action.
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -4946,19 +5775,92 @@ Indexes:
             <div class="callout">
               <span class="callout-icon">✅</span>
               <div class="callout-body">
-                <p class="callout-title">Prefer native elements over ARIA roles</p>
-                <p>Where a native HTML element provides the required semantics, it is used directly rather than adding ARIA roles to a generic element. Native elements carry keyboard behaviour, focus management, and accessibility semantics for free — with no JavaScript required.</p>
+                <p class="callout-title">
+                  Prefer native elements over ARIA roles
+                </p>
+                <p>
+                  Where a native HTML element provides the required semantics,
+                  it is used directly rather than adding ARIA roles to a generic
+                  element. Native elements carry keyboard behaviour, focus
+                  management, and accessibility semantics for free — with no
+                  JavaScript required.
+                </p>
               </div>
             </div>
             <table class="doc-table" aria-label="Native HTML element choices">
-              <thead><tr><th>Pattern</th><th>Element used</th><th>Why native over ARIA</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Pattern</th>
+                  <th>Element used</th>
+                  <th>Why native over ARIA</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><td>FAQ accordion</td><td><code>&lt;details&gt;</code> / <code>&lt;summary&gt;</code></td><td>Browser provides open/close toggle, keyboard activation (Enter/Space), and <code>aria-expanded</code>-equivalent semantics automatically. Zero JavaScript.</td></tr>
-                <tr><td>Deadline data</td><td><code>&lt;table&gt;</code> with <code>&lt;th scope="row"&gt;</code></td><td>Screen readers announce row headers automatically. A CSS grid with <code>role="table"</code> would require manual ARIA wiring.</td></tr>
-                <tr><td>Date/time display</td><td><code>&lt;time datetime="ISO8601"&gt;</code></td><td>Machine-readable date for assistive tech and search engine parsing, alongside human-readable format.</td></tr>
-                <tr><td>Blog category filter</td><td><code>&lt;a href&gt;</code> links in a <code>&lt;nav&gt;</code></td><td>Real links with real URLs — keyboard navigable, right-clickable, history-friendly. No toggle button + JS state.</td></tr>
-                <tr><td>Form inputs (application, waitlist)</td><td><code>&lt;input&gt;</code>, <code>&lt;select&gt;</code>, <code>&lt;textarea&gt;</code> with <code>&lt;label for&gt;</code></td><td>Native label association and input semantics without <code>aria-labelledby</code> workarounds.</td></tr>
-                <tr><td>Post navigation</td><td><code>&lt;nav&gt;</code> with <code>&lt;a&gt;</code> links</td><td>Prev/next links are real anchors inside a navigation landmark — no custom widget needed.</td></tr>
+                <tr>
+                  <td>FAQ accordion</td>
+                  <td>
+                    <code>&lt;details&gt;</code> / <code>&lt;summary&gt;</code>
+                  </td>
+                  <td>
+                    Browser provides open/close toggle, keyboard activation
+                    (Enter/Space), and <code>aria-expanded</code>-equivalent
+                    semantics automatically. Zero JavaScript.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Deadline data</td>
+                  <td>
+                    <code>&lt;table&gt;</code> with
+                    <code>&lt;th scope="row"&gt;</code>
+                  </td>
+                  <td>
+                    Screen readers announce row headers automatically. A CSS
+                    grid with <code>role="table"</code> would require manual
+                    ARIA wiring.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Date/time display</td>
+                  <td><code>&lt;time datetime="ISO8601"&gt;</code></td>
+                  <td>
+                    Machine-readable date for assistive tech and search engine
+                    parsing, alongside human-readable format.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Blog category filter</td>
+                  <td>
+                    <code>&lt;a href&gt;</code> links in a
+                    <code>&lt;nav&gt;</code>
+                  </td>
+                  <td>
+                    Real links with real URLs — keyboard navigable,
+                    right-clickable, history-friendly. No toggle button + JS
+                    state.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Form inputs (application, waitlist)</td>
+                  <td>
+                    <code>&lt;input&gt;</code>, <code>&lt;select&gt;</code>,
+                    <code>&lt;textarea&gt;</code> with
+                    <code>&lt;label for&gt;</code>
+                  </td>
+                  <td>
+                    Native label association and input semantics without
+                    <code>aria-labelledby</code> workarounds.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Post navigation</td>
+                  <td>
+                    <code>&lt;nav&gt;</code> with <code>&lt;a&gt;</code> links
+                  </td>
+                  <td>
+                    Prev/next links are real anchors inside a navigation
+                    landmark — no custom widget needed.
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -4966,7 +5868,12 @@ Indexes:
           <!-- Reduced motion -->
           <div class="doc-section">
             <h2 class="doc-section-heading">Reduced Motion</h2>
-            <p>The theme respects the OS-level "Reduce Motion" preference via the <code>prefers-reduced-motion: reduce</code> media query. The global reset in <code>main.css</code> sets all animation and transition durations to 0.01 ms when the preference is active:</p>
+            <p>
+              The theme respects the OS-level "Reduce Motion" preference via the
+              <code>prefers-reduced-motion: reduce</code> media query. The
+              global reset in <code>main.css</code> sets all animation and
+              transition durations to 0.01 ms when the preference is active:
+            </p>
             <pre><code>@media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -4976,13 +5883,26 @@ Indexes:
     scroll-behavior: auto !important;
   }
 }</code></pre>
-            <p>This single rule cancels all AOS scroll-triggered reveals, all CSS button/link hover transitions, and all CSS FAQ accordion transitions — without needing to find and override each animation individually. The <code>!important</code> is intentional and correct here: it must override any inline or specificity-winning animation declarations.</p>
+            <p>
+              This single rule cancels all AOS scroll-triggered reveals, all CSS
+              button/link hover transitions, and all CSS FAQ accordion
+              transitions — without needing to find and override each animation
+              individually. The <code>!important</code> is intentional and
+              correct here: it must override any inline or specificity-winning
+              animation declarations.
+            </p>
           </div>
 
           <!-- Screen reader text -->
           <div class="doc-section">
             <h2 class="doc-section-heading">Screen Reader Utilities</h2>
-            <p>The <code>.screen-reader-text</code> class visually hides content while keeping it accessible to screen readers. It uses a clip-path technique that avoids the <code>display: none</code> / <code>visibility: hidden</code> pattern (which would hide from assistive technology too):</p>
+            <p>
+              The <code>.screen-reader-text</code> class visually hides content
+              while keeping it accessible to screen readers. It uses a clip-path
+              technique that avoids the <code>display: none</code> /
+              <code>visibility: hidden</code> pattern (which would hide from
+              assistive technology too):
+            </p>
             <pre><code>.screen-reader-text {
   position: absolute;
   width: 1px; height: 1px;
@@ -4992,7 +5912,12 @@ Indexes:
   white-space: nowrap;
   border: 0;
 }</code></pre>
-            <p>Used on: the deadlines table <code>&lt;caption&gt;</code>, visually hidden section headings on the Highlights page (the ACF badge serves as the visible label), the category filter "All" label on the blog listing, and the blog post navigation.</p>
+            <p>
+              Used on: the deadlines table <code>&lt;caption&gt;</code>,
+              visually hidden section headings on the Highlights page (the ACF
+              badge serves as the visible label), the category filter "All"
+              label on the blog listing, and the blog post navigation.
+            </p>
           </div>
         </section>
 
@@ -5004,67 +5929,147 @@ Indexes:
             <p class="page-eyebrow">Platform</p>
             <h1 class="page-title" id="seo-heading">SEO</h1>
             <p class="page-lead">
-              Search engine optimisation is split between two layers: Yoast SEO owns all
-              dynamic meta output, and the theme provides a performance-first foundation
-              (preloads, self-hosted fonts, clean markup) that the crawler sees before
-              any plugin output.
+              Search engine optimisation is split between two layers: Yoast SEO
+              owns all dynamic meta output, and the theme provides a
+              performance-first foundation (preloads, self-hosted fonts, clean
+              markup) that the crawler sees before any plugin output.
             </p>
           </header>
 
           <div class="stat-band" aria-label="SEO coverage at a glance">
-            <div class="stat-cell"><p class="stat-num">100</p><p class="stat-label">Lighthouse SEO score</p></div>
-            <div class="stat-cell"><p class="stat-num">Auto</p><p class="stat-label">XML sitemap generated</p></div>
-            <div class="stat-cell"><p class="stat-num">JSON-LD</p><p class="stat-label">Schema format</p></div>
-            <div class="stat-cell"><p class="stat-num">0</p><p class="stat-label">Duplicate meta tags</p></div>
+            <div class="stat-cell">
+              <p class="stat-num">100</p>
+              <p class="stat-label">Lighthouse SEO score</p>
+            </div>
+            <div class="stat-cell">
+              <p class="stat-num">Auto</p>
+              <p class="stat-label">XML sitemap generated</p>
+            </div>
+            <div class="stat-cell">
+              <p class="stat-num">JSON-LD</p>
+              <p class="stat-label">Schema format</p>
+            </div>
+            <div class="stat-cell">
+              <p class="stat-num">0</p>
+              <p class="stat-label">Duplicate meta tags</p>
+            </div>
           </div>
 
           <!-- Layer 1: Yoast -->
           <div class="doc-section">
             <h2 class="doc-section-heading">Layer 1 — Yoast SEO Plugin</h2>
-            <p>Yoast SEO (<code>wordpress-seo</code>) owns all structured meta output. It is configured site-wide and per-page/post via the Yoast sidebar panel in the block editor.</p>
+            <p>
+              Yoast SEO (<code>wordpress-seo</code>) owns all structured meta
+              output. It is configured site-wide and per-page/post via the Yoast
+              sidebar panel in the block editor.
+            </p>
 
             <div class="tool-grid tool-grid-3">
               <div class="tool-card">
                 <h3 class="tool-name">Meta description</h3>
                 <p class="tool-role">Per-page in Yoast sidebar</p>
-                <p class="tool-desc">Set explicitly for every page via the Yoast "SEO" tab. Falls back to the page excerpt, then to the site tagline if left blank. The theme's own <code>nu_research_meta_description()</code> hook checks for <code>WPSEO_VERSION</code> and returns early — zero duplicate <code>&lt;meta name="description"&gt;</code> tags.</p>
+                <p class="tool-desc">
+                  Set explicitly for every page via the Yoast "SEO" tab. Falls
+                  back to the page excerpt, then to the site tagline if left
+                  blank. The theme's own
+                  <code>nu_research_meta_description()</code> hook checks for
+                  <code>WPSEO_VERSION</code> and returns early — zero duplicate
+                  <code>&lt;meta name="description"&gt;</code> tags.
+                </p>
               </div>
               <div class="tool-card">
                 <h3 class="tool-name">Canonical URLs</h3>
                 <p class="tool-role">Automatic</p>
-                <p class="tool-desc">Yoast emits <code>&lt;link rel="canonical"&gt;</code> on every page and post, pointing to the preferred URL. Prevents duplicate-content penalties when the same content is accessible via multiple URLs (e.g., <code>?p=123</code> vs slug).</p>
+                <p class="tool-desc">
+                  Yoast emits <code>&lt;link rel="canonical"&gt;</code> on every
+                  page and post, pointing to the preferred URL. Prevents
+                  duplicate-content penalties when the same content is
+                  accessible via multiple URLs (e.g., <code>?p=123</code> vs
+                  slug).
+                </p>
               </div>
               <div class="tool-card">
                 <h3 class="tool-name">Open Graph tags</h3>
                 <p class="tool-role">Social sharing</p>
-                <p class="tool-desc"><code>og:title</code>, <code>og:description</code>, <code>og:image</code>, <code>og:type</code>, <code>og:url</code> emitted on every page and post. The OG image defaults to the page's featured image; a site-wide fallback image can be set in Yoast → Social.</p>
+                <p class="tool-desc">
+                  <code>og:title</code>, <code>og:description</code>,
+                  <code>og:image</code>, <code>og:type</code>,
+                  <code>og:url</code> emitted on every page and post. The OG
+                  image defaults to the page's featured image; a site-wide
+                  fallback image can be set in Yoast → Social.
+                </p>
               </div>
               <div class="tool-card">
                 <h3 class="tool-name">Twitter / X Cards</h3>
                 <p class="tool-role">Social sharing</p>
-                <p class="tool-desc"><code>twitter:card</code> (summary_large_image), <code>twitter:title</code>, <code>twitter:description</code>, <code>twitter:image</code> emitted alongside Open Graph tags. Configured in Yoast → Social → Twitter.</p>
+                <p class="tool-desc">
+                  <code>twitter:card</code> (summary_large_image),
+                  <code>twitter:title</code>, <code>twitter:description</code>,
+                  <code>twitter:image</code> emitted alongside Open Graph tags.
+                  Configured in Yoast → Social → Twitter.
+                </p>
               </div>
               <div class="tool-card">
                 <h3 class="tool-name">XML Sitemap</h3>
                 <p class="tool-role">Crawler discovery</p>
-                <p class="tool-desc">Automatically generated at <code>/sitemap_index.xml</code>. Separate sitemaps for pages and posts. Referenced in <code>robots.txt</code>. Updates on every publish. Excludes non-indexed pages (e.g., privacy policy if set to noindex).</p>
+                <p class="tool-desc">
+                  Automatically generated at <code>/sitemap_index.xml</code>.
+                  Separate sitemaps for pages and posts. Referenced in
+                  <code>robots.txt</code>. Updates on every publish. Excludes
+                  non-indexed pages (e.g., privacy policy if set to noindex).
+                </p>
               </div>
               <div class="tool-card">
                 <h3 class="tool-name">JSON-LD Schema</h3>
                 <p class="tool-role">Rich results</p>
-                <p class="tool-desc">Yoast injects a <code>&lt;script type="application/ld+json"&gt;</code> block on every page with <code>WebSite</code>, <code>WebPage</code>, <code>BreadcrumbList</code>, and <code>Organization</code> schema. Posts additionally get <code>Article</code> schema with author and date properties.</p>
+                <p class="tool-desc">
+                  Yoast injects a
+                  <code>&lt;script type="application/ld+json"&gt;</code> block
+                  on every page with <code>WebSite</code>, <code>WebPage</code>,
+                  <code>BreadcrumbList</code>, and
+                  <code>Organization</code> schema. Posts additionally get
+                  <code>Article</code> schema with author and date properties.
+                </p>
               </div>
             </div>
 
-            <h3 style="margin: var(--space-6) 0 var(--space-3);">Robots &amp; Indexing Control</h3>
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">
+              Robots &amp; Indexing Control
+            </h3>
             <table class="doc-table" aria-label="Robots and indexing settings">
-              <thead><tr><th>URL / condition</th><th>Index status</th><th>Set by</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>URL / condition</th>
+                  <th>Index status</th>
+                  <th>Set by</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><td>All published pages and posts</td><td><code>index, follow</code></td><td>Yoast default</td></tr>
-                <tr><td>Admin area (<code>/wp-admin/</code>)</td><td><code>noindex</code> via server / WordPress</td><td>WordPress core</td></tr>
-                <tr><td><code>wp-login.php</code> (now at custom URL)</td><td>Effectively hidden — returns 404 at old path</td><td>WPS Hide Login</td></tr>
-                <tr><td>Search result pages</td><td><code>noindex</code></td><td>Yoast default (thin content)</td></tr>
-                <tr><td>Author archive (single admin account)</td><td>Configured in Yoast → Search Appearance</td><td>Yoast</td></tr>
+                <tr>
+                  <td>All published pages and posts</td>
+                  <td><code>index, follow</code></td>
+                  <td>Yoast default</td>
+                </tr>
+                <tr>
+                  <td>Admin area (<code>/wp-admin/</code>)</td>
+                  <td><code>noindex</code> via server / WordPress</td>
+                  <td>WordPress core</td>
+                </tr>
+                <tr>
+                  <td><code>wp-login.php</code> (now at custom URL)</td>
+                  <td>Effectively hidden — returns 404 at old path</td>
+                  <td>WPS Hide Login</td>
+                </tr>
+                <tr>
+                  <td>Search result pages</td>
+                  <td><code>noindex</code></td>
+                  <td>Yoast default (thin content)</td>
+                </tr>
+                <tr>
+                  <td>Author archive (single admin account)</td>
+                  <td>Configured in Yoast → Search Appearance</td>
+                  <td>Yoast</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -5072,50 +6077,118 @@ Indexes:
           <!-- Layer 2: Theme -->
           <div class="doc-section">
             <h2 class="doc-section-heading">Layer 2 — Theme SEO Foundation</h2>
-            <p>The theme contributes several technical SEO improvements that operate at the HTML/HTTP level, before Yoast's meta output is evaluated.</p>
+            <p>
+              The theme contributes several technical SEO improvements that
+              operate at the HTML/HTTP level, before Yoast's meta output is
+              evaluated.
+            </p>
 
             <table class="doc-table" aria-label="Theme-level SEO contributions">
-              <thead><tr><th>Technique</th><th>Implementation</th><th>SEO benefit</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Technique</th>
+                  <th>Implementation</th>
+                  <th>SEO benefit</th>
+                </tr>
+              </thead>
               <tbody>
                 <tr>
                   <td>Hero image preload</td>
-                  <td><code>&lt;link rel="preload" as="image" fetchpriority="high"&gt;</code> in <code>wp_head</code> priority 1</td>
-                  <td>Improves LCP (Largest Contentful Paint) by surfacing the hero image to the browser before the CSS parser discovers it. LCP is a Core Web Vital that directly influences search ranking.</td>
+                  <td>
+                    <code
+                      >&lt;link rel="preload" as="image"
+                      fetchpriority="high"&gt;</code
+                    >
+                    in <code>wp_head</code> priority 1
+                  </td>
+                  <td>
+                    Improves LCP (Largest Contentful Paint) by surfacing the
+                    hero image to the browser before the CSS parser discovers
+                    it. LCP is a Core Web Vital that directly influences search
+                    ranking.
+                  </td>
                 </tr>
                 <tr>
                   <td>Self-hosted fonts</td>
-                  <td>WOFF2 variable fonts served from theme origin with <code>font-display: swap</code></td>
-                  <td>Eliminates render-blocking third-party DNS + font fetch chain. Reduces FCP (First Contentful Paint). Fonts also preloaded via <code>rel="preload"</code>.</td>
+                  <td>
+                    WOFF2 variable fonts served from theme origin with
+                    <code>font-display: swap</code>
+                  </td>
+                  <td>
+                    Eliminates render-blocking third-party DNS + font fetch
+                    chain. Reduces FCP (First Contentful Paint). Fonts also
+                    preloaded via <code>rel="preload"</code>.
+                  </td>
                 </tr>
                 <tr>
                   <td>Deferred JavaScript</td>
-                  <td>All scripts enqueued with <code>strategy: defer</code></td>
-                  <td>No render-blocking scripts. Parser-blocking JS is a direct performance penalty that Lighthouse and Google PageSpeed measure explicitly.</td>
+                  <td>
+                    All scripts enqueued with <code>strategy: defer</code>
+                  </td>
+                  <td>
+                    No render-blocking scripts. Parser-blocking JS is a direct
+                    performance penalty that Lighthouse and Google PageSpeed
+                    measure explicitly.
+                  </td>
                 </tr>
                 <tr>
                   <td>Semantic HTML</td>
-                  <td><code>&lt;article&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;time datetime&gt;</code> throughout</td>
-                  <td>Search crawlers use structural signals to understand content hierarchy. <code>&lt;time datetime="ISO8601"&gt;</code> on post dates gives Googlebot machine-readable publish dates.</td>
+                  <td>
+                    <code>&lt;article&gt;</code>, <code>&lt;nav&gt;</code>,
+                    <code>&lt;main&gt;</code>, <code>&lt;header&gt;</code>,
+                    <code>&lt;time datetime&gt;</code> throughout
+                  </td>
+                  <td>
+                    Search crawlers use structural signals to understand content
+                    hierarchy. <code>&lt;time datetime="ISO8601"&gt;</code> on
+                    post dates gives Googlebot machine-readable publish dates.
+                  </td>
                 </tr>
                 <tr>
                   <td>Responsive images</td>
-                  <td><code>wp_get_attachment_image()</code> with explicit <code>sizes</code> attributes</td>
-                  <td>Browser downloads the right image size for the viewport. Reduces wasted bytes (a CLS and LCP factor).</td>
+                  <td>
+                    <code>wp_get_attachment_image()</code> with explicit
+                    <code>sizes</code> attributes
+                  </td>
+                  <td>
+                    Browser downloads the right image size for the viewport.
+                    Reduces wasted bytes (a CLS and LCP factor).
+                  </td>
                 </tr>
                 <tr>
                   <td>Removed third-party origins</td>
-                  <td>Google Fonts, Gravatar, emoji CDN, oEmbed host all removed in <code>functions.php</code></td>
-                  <td>Fewer origins = fewer connection round-trips = better TTFB and LCP. PageSpeed penalises unused third-party JavaScript specifically.</td>
+                  <td>
+                    Google Fonts, Gravatar, emoji CDN, oEmbed host all removed
+                    in <code>functions.php</code>
+                  </td>
+                  <td>
+                    Fewer origins = fewer connection round-trips = better TTFB
+                    and LCP. PageSpeed penalises unused third-party JavaScript
+                    specifically.
+                  </td>
                 </tr>
                 <tr>
                   <td>Title tag</td>
-                  <td><code>add_theme_support('title-tag')</code> + Yoast control</td>
-                  <td>Theme hands title-tag management to Yoast entirely. No duplicated or competing title output.</td>
+                  <td>
+                    <code>add_theme_support('title-tag')</code> + Yoast control
+                  </td>
+                  <td>
+                    Theme hands title-tag management to Yoast entirely. No
+                    duplicated or competing title output.
+                  </td>
                 </tr>
                 <tr>
                   <td>Fallback meta description</td>
-                  <td><code>nu_research_meta_description()</code> fires at <code>wp_head</code> priority 1; yields to Yoast</td>
-                  <td>Ensures every page has a meta description even if Yoast is deactivated. Guarded by <code>defined('WPSEO_VERSION')</code> check — never duplicates.</td>
+                  <td>
+                    <code>nu_research_meta_description()</code> fires at
+                    <code>wp_head</code> priority 1; yields to Yoast
+                  </td>
+                  <td>
+                    Ensures every page has a meta description even if Yoast is
+                    deactivated. Guarded by
+                    <code>defined('WPSEO_VERSION')</code> check — never
+                    duplicates.
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -5124,22 +6197,67 @@ Indexes:
           <!-- Breadcrumbs -->
           <div class="doc-section">
             <h2 class="doc-section-heading">Breadcrumbs</h2>
-            <p>Every interior page renders a breadcrumb trail via <code>nu_research_breadcrumb()</code> — a <code>&lt;nav aria-label="Breadcrumb"&gt;</code> with Home → [optional ancestors] → current page. The current item has <code>aria-current="page"</code> and is a plain <code>&lt;span&gt;</code> (not a link). Yoast's JSON-LD schema picks up the page hierarchy and emits a corresponding <code>BreadcrumbList</code> structured data block, giving Google the breadcrumb trail for rich results independently of the visual HTML.</p>
+            <p>
+              Every interior page renders a breadcrumb trail via
+              <code>nu_research_breadcrumb()</code> — a
+              <code>&lt;nav aria-label="Breadcrumb"&gt;</code> with Home →
+              [optional ancestors] → current page. The current item has
+              <code>aria-current="page"</code> and is a plain
+              <code>&lt;span&gt;</code> (not a link). Yoast's JSON-LD schema
+              picks up the page hierarchy and emits a corresponding
+              <code>BreadcrumbList</code> structured data block, giving Google
+              the breadcrumb trail for rich results independently of the visual
+              HTML.
+            </p>
           </div>
 
           <!-- Page titles -->
           <div class="doc-section">
             <h2 class="doc-section-heading">Page Title Strategy</h2>
             <table class="doc-table" aria-label="Page title patterns">
-              <thead><tr><th>Page</th><th>Title pattern (Yoast)</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Page</th>
+                  <th>Title pattern (Yoast)</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><td>Home</td><td>WordPress Research Fellows Program · Northeastern University</td></tr>
-                <tr><td>About</td><td>About the Program · WordPress Research Fellows Program</td></tr>
-                <tr><td>Apply</td><td>Apply &amp; Eligibility · WordPress Research Fellows Program</td></tr>
-                <tr><td>Highlights &amp; Team</td><td>Highlights &amp; Team · WordPress Research Fellows Program</td></tr>
-                <tr><td>Contact</td><td>Contact · WordPress Research Fellows Program</td></tr>
-                <tr><td>Blog listing</td><td>Blog · WordPress Research Fellows Program</td></tr>
-                <tr><td>Single post</td><td>[Post title] · WordPress Research Fellows Program</td></tr>
+                <tr>
+                  <td>Home</td>
+                  <td>
+                    WordPress Research Fellows Program · Northeastern University
+                  </td>
+                </tr>
+                <tr>
+                  <td>About</td>
+                  <td>
+                    About the Program · WordPress Research Fellows Program
+                  </td>
+                </tr>
+                <tr>
+                  <td>Apply</td>
+                  <td>
+                    Apply &amp; Eligibility · WordPress Research Fellows Program
+                  </td>
+                </tr>
+                <tr>
+                  <td>Highlights &amp; Team</td>
+                  <td>
+                    Highlights &amp; Team · WordPress Research Fellows Program
+                  </td>
+                </tr>
+                <tr>
+                  <td>Contact</td>
+                  <td>Contact · WordPress Research Fellows Program</td>
+                </tr>
+                <tr>
+                  <td>Blog listing</td>
+                  <td>Blog · WordPress Research Fellows Program</td>
+                </tr>
+                <tr>
+                  <td>Single post</td>
+                  <td>[Post title] · WordPress Research Fellows Program</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -5148,49 +6266,140 @@ Indexes:
         <!-- ══════════════════════════════════════════════════
              PAGE: SECURITY
              ══════════════════════════════════════════════════ -->
-        <section class="doc-page" id="page-security" aria-labelledby="security-heading">
+        <section
+          class="doc-page"
+          id="page-security"
+          aria-labelledby="security-heading"
+        >
           <header class="page-header">
             <p class="page-eyebrow">Platform</p>
             <h1 class="page-title" id="security-heading">Security</h1>
             <p class="page-lead">
-              Security is implemented in layers — from the application code (input validation,
-              prepared statements, nonce verification) through the plugin stack (hardening,
-              WAF, login protection) to operational practices (backups, dependency management).
+              Security is implemented in layers — from the application code
+              (input validation, prepared statements, nonce verification)
+              through the plugin stack (hardening, WAF, login protection) to
+              operational practices (backups, dependency management).
             </p>
           </header>
 
           <div class="stat-band" aria-label="Security measures at a glance">
-            <div class="stat-cell"><p class="stat-num">0</p><p class="stat-label">Raw SQL queries with user input</p></div>
-            <div class="stat-cell"><p class="stat-num">2</p><p class="stat-label">Rate-limited endpoints</p></div>
-            <div class="stat-cell"><p class="stat-num">2</p><p class="stat-label">Honeypot fields</p></div>
-            <div class="stat-cell"><p class="stat-num">Custom</p><p class="stat-label">Login URL</p></div>
-            <div class="stat-cell"><p class="stat-num">WAF</p><p class="stat-label">Firewall active</p></div>
+            <div class="stat-cell">
+              <p class="stat-num">0</p>
+              <p class="stat-label">Raw SQL queries with user input</p>
+            </div>
+            <div class="stat-cell">
+              <p class="stat-num">2</p>
+              <p class="stat-label">Rate-limited endpoints</p>
+            </div>
+            <div class="stat-cell">
+              <p class="stat-num">2</p>
+              <p class="stat-label">Honeypot fields</p>
+            </div>
+            <div class="stat-cell">
+              <p class="stat-num">Custom</p>
+              <p class="stat-label">Login URL</p>
+            </div>
+            <div class="stat-cell">
+              <p class="stat-num">WAF</p>
+              <p class="stat-label">Firewall active</p>
+            </div>
           </div>
 
           <!-- Input validation -->
           <div class="doc-section">
-            <h2 class="doc-section-heading">Input Validation &amp; Sanitisation</h2>
-            <p>All user-supplied data is validated and sanitised at the system boundary — before it touches the database or is echoed to the page. The WordPress sanitisation API is used throughout; no hand-rolled regex validation.</p>
+            <h2 class="doc-section-heading">
+              Input Validation &amp; Sanitisation
+            </h2>
+            <p>
+              All user-supplied data is validated and sanitised at the system
+              boundary — before it touches the database or is echoed to the
+              page. The WordPress sanitisation API is used throughout; no
+              hand-rolled regex validation.
+            </p>
 
             <table class="doc-table" aria-label="Sanitisation functions used">
-              <thead><tr><th>Function</th><th>Applied to</th><th>What it does</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Function</th>
+                  <th>Applied to</th>
+                  <th>What it does</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><td><code>sanitize_text_field(wp_unslash())</code></td><td>Name, class year, track, coursework</td><td>Strips tags, removes extra whitespace, removes slashes added by magic quotes</td></tr>
-                <tr><td><code>sanitize_email()</code></td><td>All email inputs</td><td>Strips invalid characters for an email address</td></tr>
-                <tr><td><code>sanitize_textarea_field(wp_unslash())</code></td><td>Statement of interest</td><td>Like <code>sanitize_text_field</code> but preserves newlines</td></tr>
-                <tr><td><code>sanitize_key()</code></td><td>Query-string parameters (<code>swe_ml_status</code>, AOS delay values)</td><td>Lowercase alphanumeric + hyphens/underscores only — safe for use in CSS classes and attributes</td></tr>
-                <tr><td><code>sanitize_file_name()</code></td><td>Theme image helper <code>nu_research_img()</code></td><td>Prevents directory traversal in image filename arguments</td></tr>
-                <tr><td><code>esc_html()</code></td><td>All string output to HTML context</td><td>Converts <code>&lt;</code>, <code>&gt;</code>, <code>&amp;</code>, <code>"</code> to HTML entities</td></tr>
-                <tr><td><code>esc_attr()</code></td><td>All string output to HTML attribute context</td><td>Escapes for safe embedding inside HTML attributes</td></tr>
-                <tr><td><code>esc_url()</code></td><td>All URL output</td><td>Validates and escapes URLs, removing unsafe protocols</td></tr>
+                <tr>
+                  <td><code>sanitize_text_field(wp_unslash())</code></td>
+                  <td>Name, class year, track, coursework</td>
+                  <td>
+                    Strips tags, removes extra whitespace, removes slashes added
+                    by magic quotes
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>sanitize_email()</code></td>
+                  <td>All email inputs</td>
+                  <td>Strips invalid characters for an email address</td>
+                </tr>
+                <tr>
+                  <td><code>sanitize_textarea_field(wp_unslash())</code></td>
+                  <td>Statement of interest</td>
+                  <td>
+                    Like <code>sanitize_text_field</code> but preserves newlines
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>sanitize_key()</code></td>
+                  <td>
+                    Query-string parameters (<code>swe_ml_status</code>, AOS
+                    delay values)
+                  </td>
+                  <td>
+                    Lowercase alphanumeric + hyphens/underscores only — safe for
+                    use in CSS classes and attributes
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>sanitize_file_name()</code></td>
+                  <td>Theme image helper <code>nu_research_img()</code></td>
+                  <td>
+                    Prevents directory traversal in image filename arguments
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>esc_html()</code></td>
+                  <td>All string output to HTML context</td>
+                  <td>
+                    Converts <code>&lt;</code>, <code>&gt;</code>,
+                    <code>&amp;</code>, <code>"</code> to HTML entities
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>esc_attr()</code></td>
+                  <td>All string output to HTML attribute context</td>
+                  <td>Escapes for safe embedding inside HTML attributes</td>
+                </tr>
+                <tr>
+                  <td><code>esc_url()</code></td>
+                  <td>All URL output</td>
+                  <td>Validates and escapes URLs, removing unsafe protocols</td>
+                </tr>
               </tbody>
             </table>
 
             <div class="callout">
               <span class="callout-icon">🔑</span>
               <div class="callout-body">
-                <p class="callout-title">Validate on the way in — escape on the way out</p>
-                <p>Input is validated and sanitised at the point of entry (form submission, REST request). Data is stored clean. When data is output to the page, it is escaped again at the output point (<code>esc_html()</code>, <code>esc_attr()</code>, <code>esc_url()</code>) regardless of what sanitisation happened on input. This double-layer approach means a missed sanitisation step on input cannot directly lead to XSS.</p>
+                <p class="callout-title">
+                  Validate on the way in — escape on the way out
+                </p>
+                <p>
+                  Input is validated and sanitised at the point of entry (form
+                  submission, REST request). Data is stored clean. When data is
+                  output to the page, it is escaped again at the output point
+                  (<code>esc_html()</code>, <code>esc_attr()</code>,
+                  <code>esc_url()</code>) regardless of what sanitisation
+                  happened on input. This double-layer approach means a missed
+                  sanitisation step on input cannot directly lead to XSS.
+                </p>
               </div>
             </div>
           </div>
@@ -5201,19 +6410,41 @@ Indexes:
             <div class="tool-grid">
               <div class="tool-card">
                 <h3 class="tool-name">Prepared statements</h3>
-                <p class="tool-desc">Every query that includes a variable uses <code>$wpdb->prepare()</code> with typed placeholders (<code>%s</code>, <code>%d</code>). The driver handles escaping and quoting — no string concatenation for WHERE clauses anywhere in the codebase.</p>
+                <p class="tool-desc">
+                  Every query that includes a variable uses
+                  <code>$wpdb->prepare()</code> with typed placeholders
+                  (<code>%s</code>, <code>%d</code>). The driver handles
+                  escaping and quoting — no string concatenation for WHERE
+                  clauses anywhere in the codebase.
+                </p>
               </div>
               <div class="tool-card">
                 <h3 class="tool-name">Structured write methods</h3>
-                <p class="tool-desc"><code>$wpdb->insert()</code>, <code>$wpdb->update()</code>, and <code>$wpdb->delete()</code> accept a data array and a format array separately. The driver handles all quoting. No hand-built INSERT or UPDATE strings.</p>
+                <p class="tool-desc">
+                  <code>$wpdb->insert()</code>, <code>$wpdb->update()</code>,
+                  and <code>$wpdb->delete()</code> accept a data array and a
+                  format array separately. The driver handles all quoting. No
+                  hand-built INSERT or UPDATE strings.
+                </p>
               </div>
               <div class="tool-card">
                 <h3 class="tool-name">Server-side allowlists</h3>
-                <p class="tool-desc">Enum-like columns (<code>class_year</code>, <code>track</code>, <code>status</code>) are validated against strict PHP arrays before any database operation. A crafted request with an out-of-range value is rejected at the validation layer — never at the DB layer.</p>
+                <p class="tool-desc">
+                  Enum-like columns (<code>class_year</code>,
+                  <code>track</code>, <code>status</code>) are validated against
+                  strict PHP arrays before any database operation. A crafted
+                  request with an out-of-range value is rejected at the
+                  validation layer — never at the DB layer.
+                </p>
               </div>
               <div class="tool-card">
                 <h3 class="tool-name">UNIQUE constraint on emails</h3>
-                <p class="tool-desc">The <code>wp_swe_waitlist.email</code> column has a MySQL <code>UNIQUE KEY</code>. Even if application-level duplicate checking is bypassed (race condition), the database rejects duplicate inserts at the engine level.</p>
+                <p class="tool-desc">
+                  The <code>wp_swe_waitlist.email</code> column has a MySQL
+                  <code>UNIQUE KEY</code>. Even if application-level duplicate
+                  checking is bypassed (race condition), the database rejects
+                  duplicate inserts at the engine level.
+                </p>
               </div>
             </div>
           </div>
@@ -5221,19 +6452,40 @@ Indexes:
           <!-- CSRF & nonces -->
           <div class="doc-section">
             <h2 class="doc-section-heading">CSRF Protection &amp; Nonces</h2>
-            <p>All state-changing form submissions are protected by WordPress nonces — short-lived signed tokens that verify the request originated from the legitimate page and the current authenticated session.</p>
+            <p>
+              All state-changing form submissions are protected by WordPress
+              nonces — short-lived signed tokens that verify the request
+              originated from the legitimate page and the current authenticated
+              session.
+            </p>
             <table class="doc-table" aria-label="Nonce usage">
-              <thead><tr><th>Form / action</th><th>Nonce field / header</th><th>Verification</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Form / action</th>
+                  <th>Nonce field / header</th>
+                  <th>Verification</th>
+                </tr>
+              </thead>
               <tbody>
                 <tr>
                   <td>Waitlist signup (<code>[swe_waitlist]</code>)</td>
-                  <td><code>wp_nonce_field('swe_ml_subscribe')</code> hidden input</td>
-                  <td><code>check_admin_referer('swe_ml_subscribe')</code> in the <code>admin-post.php</code> handler — rejects with a 400 if the nonce is missing or expired</td>
+                  <td>
+                    <code>wp_nonce_field('swe_ml_subscribe')</code> hidden input
+                  </td>
+                  <td>
+                    <code>check_admin_referer('swe_ml_subscribe')</code> in the
+                    <code>admin-post.php</code> handler — rejects with a 400 if
+                    the nonce is missing or expired
+                  </td>
                 </tr>
                 <tr>
                   <td>Application form REST endpoint</td>
                   <td><code>X-WP-Nonce</code> header (WordPress REST nonce)</td>
-                  <td>WordPress REST API verifies the nonce automatically when a user is logged in; public endpoints use rate limiting + honeypot instead</td>
+                  <td>
+                    WordPress REST API verifies the nonce automatically when a
+                    user is logged in; public endpoints use rate limiting +
+                    honeypot instead
+                  </td>
                 </tr>
                 <tr>
                   <td>Admin status update (ATS Form)</td>
@@ -5243,7 +6495,10 @@ Indexes:
                 <tr>
                   <td>Fellows Deadline settings</td>
                   <td>WordPress Settings API nonce (automatic)</td>
-                  <td>Handled by <code>settings_fields('fellows_deadline_group')</code></td>
+                  <td>
+                    Handled by
+                    <code>settings_fields('fellows_deadline_group')</code>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -5255,19 +6510,41 @@ Indexes:
             <div class="tool-grid">
               <div class="tool-card">
                 <h3 class="tool-name">Honeypot fields</h3>
-                <p class="tool-desc">Both the application form (<code>swe_website</code>) and the waitlist form include a hidden field that real users never fill. If the field contains any value, the submission is rejected with a success-shaped response — bots learn nothing useful. Checked before any other validation.</p>
+                <p class="tool-desc">
+                  Both the application form (<code>swe_website</code>) and the
+                  waitlist form include a hidden field that real users never
+                  fill. If the field contains any value, the submission is
+                  rejected with a success-shaped response — bots learn nothing
+                  useful. Checked before any other validation.
+                </p>
               </div>
               <div class="tool-card">
                 <h3 class="tool-name">Per-IP rate limiting</h3>
-                <p class="tool-desc">Both submission endpoints limit to 5 requests per 10 minutes per IP address using WordPress transients (<code>set_transient($key, $count, 10 * MINUTE_IN_SECONDS)</code>). Breaches return HTTP 429. Rate-limit keys use <code>md5($ip)</code> to avoid storing raw IPs.</p>
+                <p class="tool-desc">
+                  Both submission endpoints limit to 5 requests per 10 minutes
+                  per IP address using WordPress transients (<code
+                    >set_transient($key, $count, 10 * MINUTE_IN_SECONDS)</code
+                  >). Breaches return HTTP 429. Rate-limit keys use
+                  <code>md5($ip)</code> to avoid storing raw IPs.
+                </p>
               </div>
               <div class="tool-card">
                 <h3 class="tool-name">WAF (All-in-One Security)</h3>
-                <p class="tool-desc">The All-in-One WP Security plugin writes firewall rules to <code>.htaccess</code> blocking common XSS probes, SQL injection fragments, directory traversal attempts, and suspicious user-agent strings before they reach PHP.</p>
+                <p class="tool-desc">
+                  The All-in-One WP Security plugin writes firewall rules to
+                  <code>.htaccess</code> blocking common XSS probes, SQL
+                  injection fragments, directory traversal attempts, and
+                  suspicious user-agent strings before they reach PHP.
+                </p>
               </div>
               <div class="tool-card">
                 <h3 class="tool-name">Login URL obfuscation</h3>
-                <p class="tool-desc">WPS Hide Login moves <code>wp-login.php</code> to a custom slug. Automated scanners targeting the default path receive a 404. This eliminates the overwhelming majority of credential-stuffing bots, which do not enumerate login URLs.</p>
+                <p class="tool-desc">
+                  WPS Hide Login moves <code>wp-login.php</code> to a custom
+                  slug. Automated scanners targeting the default path receive a
+                  404. This eliminates the overwhelming majority of
+                  credential-stuffing bots, which do not enumerate login URLs.
+                </p>
               </div>
             </div>
           </div>
@@ -5275,32 +6552,108 @@ Indexes:
           <!-- Output security -->
           <div class="doc-section">
             <h2 class="doc-section-heading">Output &amp; XSS Prevention</h2>
-            <p>The WordPress Coding Standard enforced by PHPCS in CI requires every template echo to use a contextually appropriate escape function. The CI pipeline fails on any unescaped output — this is enforced at the code level, not just by convention.</p>
+            <p>
+              The WordPress Coding Standard enforced by PHPCS in CI requires
+              every template echo to use a contextually appropriate escape
+              function. The CI pipeline fails on any unescaped output — this is
+              enforced at the code level, not just by convention.
+            </p>
             <table class="doc-table" aria-label="Output escaping rules">
-              <thead><tr><th>Context</th><th>Function</th><th>Example</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Context</th>
+                  <th>Function</th>
+                  <th>Example</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><td>HTML text node</td><td><code>esc_html()</code> / <code>esc_html_e()</code></td><td>Page titles, labels, all user-facing strings</td></tr>
-                <tr><td>HTML attribute</td><td><code>esc_attr()</code></td><td><code>class</code>, <code>id</code>, <code>data-*</code>, <code>aria-label</code></td></tr>
-                <tr><td>URL in <code>href</code> / <code>src</code></td><td><code>esc_url()</code></td><td>All links, image sources, form actions</td></tr>
-                <tr><td>Trusted HTML (plugin output)</td><td><code>wp_kses_post()</code></td><td>Breadcrumb separator glyph in <code>nu_research_breadcrumb()</code></td></tr>
-                <tr><td>JavaScript string</td><td><code>wp_json_encode()</code> / <code>esc_js()</code></td><td>Not used in this theme — no inline JS with PHP data</td></tr>
+                <tr>
+                  <td>HTML text node</td>
+                  <td><code>esc_html()</code> / <code>esc_html_e()</code></td>
+                  <td>Page titles, labels, all user-facing strings</td>
+                </tr>
+                <tr>
+                  <td>HTML attribute</td>
+                  <td><code>esc_attr()</code></td>
+                  <td>
+                    <code>class</code>, <code>id</code>, <code>data-*</code>,
+                    <code>aria-label</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>URL in <code>href</code> / <code>src</code></td>
+                  <td><code>esc_url()</code></td>
+                  <td>All links, image sources, form actions</td>
+                </tr>
+                <tr>
+                  <td>Trusted HTML (plugin output)</td>
+                  <td><code>wp_kses_post()</code></td>
+                  <td>
+                    Breadcrumb separator glyph in
+                    <code>nu_research_breadcrumb()</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>JavaScript string</td>
+                  <td><code>wp_json_encode()</code> / <code>esc_js()</code></td>
+                  <td>Not used in this theme — no inline JS with PHP data</td>
+                </tr>
               </tbody>
             </table>
           </div>
 
           <!-- Capability checks -->
           <div class="doc-section">
-            <h2 class="doc-section-heading">Capability &amp; Permission Checks</h2>
-            <p>Every admin-facing function checks capabilities before executing. No admin action is gated only on being logged in — the specific capability is checked:</p>
-            <table class="doc-table" aria-label="Capability checks in admin functions">
-              <thead><tr><th>Function</th><th>Required capability</th><th>On failure</th></tr></thead>
+            <h2 class="doc-section-heading">
+              Capability &amp; Permission Checks
+            </h2>
+            <p>
+              Every admin-facing function checks capabilities before executing.
+              No admin action is gated only on being logged in — the specific
+              capability is checked:
+            </p>
+            <table
+              class="doc-table"
+              aria-label="Capability checks in admin functions"
+            >
+              <thead>
+                <tr>
+                  <th>Function</th>
+                  <th>Required capability</th>
+                  <th>On failure</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><td>Fellows Deadline settings page</td><td><code>manage_options</code></td><td><code>return</code> — page renders empty</td></tr>
-                <tr><td>Fellows Deadline dashboard widget</td><td><code>manage_options</code></td><td><code>return</code> — widget renders empty</td></tr>
-                <tr><td>ATS Form admin table</td><td><code>manage_options</code></td><td>Standard WP admin redirect</td></tr>
-                <tr><td>Mail List admin table</td><td><code>manage_options</code></td><td>Standard WP admin redirect</td></tr>
-                <tr><td>Status update (ATS Form)</td><td><code>manage_options</code> + nonce</td><td>wp_die() with error message</td></tr>
-                <tr><td>Bulk announcement email</td><td><code>manage_options</code> + nonce</td><td>wp_die() with error message</td></tr>
+                <tr>
+                  <td>Fellows Deadline settings page</td>
+                  <td><code>manage_options</code></td>
+                  <td><code>return</code> — page renders empty</td>
+                </tr>
+                <tr>
+                  <td>Fellows Deadline dashboard widget</td>
+                  <td><code>manage_options</code></td>
+                  <td><code>return</code> — widget renders empty</td>
+                </tr>
+                <tr>
+                  <td>ATS Form admin table</td>
+                  <td><code>manage_options</code></td>
+                  <td>Standard WP admin redirect</td>
+                </tr>
+                <tr>
+                  <td>Mail List admin table</td>
+                  <td><code>manage_options</code></td>
+                  <td>Standard WP admin redirect</td>
+                </tr>
+                <tr>
+                  <td>Status update (ATS Form)</td>
+                  <td><code>manage_options</code> + nonce</td>
+                  <td>wp_die() with error message</td>
+                </tr>
+                <tr>
+                  <td>Bulk announcement email</td>
+                  <td><code>manage_options</code> + nonce</td>
+                  <td>wp_die() with error message</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -5308,14 +6661,55 @@ Indexes:
           <!-- Plugin-level hardening -->
           <div class="doc-section">
             <h2 class="doc-section-heading">Plugin-Level Hardening</h2>
-            <table class="doc-table" aria-label="Security plugin responsibilities">
-              <thead><tr><th>Plugin</th><th>Security function</th></tr></thead>
+            <table
+              class="doc-table"
+              aria-label="Security plugin responsibilities"
+            >
+              <thead>
+                <tr>
+                  <th>Plugin</th>
+                  <th>Security function</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><td>All-in-One WP Security</td><td>Brute-force lockout, file change detection, WAF rules in <code>.htaccess</code>, database prefix check, user account hardening (display name ≠ login name)</td></tr>
-                <tr><td>WPS Hide Login</td><td>Moves login URL from the default path; old path returns 404, eliminating automated credential-stuffing attacks</td></tr>
-                <tr><td>UpdraftPlus</td><td>Daily encrypted database backups + weekly file backups to remote storage. Recovery path for ransomware, accidental deletion, or hosting failure</td></tr>
-                <tr><td>WP Optimize</td><td>Removes expired transients (which could otherwise accumulate sensitive rate-limit data), orphaned postmeta, and post revisions that grow the database surface</td></tr>
-                <tr><td>Yoast SEO</td><td>Prevents information leakage via <code>noindex</code> on search result pages and configurable author archive indexing</td></tr>
+                <tr>
+                  <td>All-in-One WP Security</td>
+                  <td>
+                    Brute-force lockout, file change detection, WAF rules in
+                    <code>.htaccess</code>, database prefix check, user account
+                    hardening (display name ≠ login name)
+                  </td>
+                </tr>
+                <tr>
+                  <td>WPS Hide Login</td>
+                  <td>
+                    Moves login URL from the default path; old path returns 404,
+                    eliminating automated credential-stuffing attacks
+                  </td>
+                </tr>
+                <tr>
+                  <td>UpdraftPlus</td>
+                  <td>
+                    Daily encrypted database backups + weekly file backups to
+                    remote storage. Recovery path for ransomware, accidental
+                    deletion, or hosting failure
+                  </td>
+                </tr>
+                <tr>
+                  <td>WP Optimize</td>
+                  <td>
+                    Removes expired transients (which could otherwise accumulate
+                    sensitive rate-limit data), orphaned postmeta, and post
+                    revisions that grow the database surface
+                  </td>
+                </tr>
+                <tr>
+                  <td>Yoast SEO</td>
+                  <td>
+                    Prevents information leakage via <code>noindex</code> on
+                    search result pages and configurable author archive indexing
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -5323,64 +6717,129 @@ Indexes:
           <!-- Direct file access -->
           <div class="doc-section">
             <h2 class="doc-section-heading">Direct File Access Prevention</h2>
-            <p>Every custom plugin file opens with the WordPress direct-access guard:</p>
+            <p>
+              Every custom plugin file opens with the WordPress direct-access
+              guard:
+            </p>
             <pre><code>if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }</code></pre>
-            <p><code>ABSPATH</code> is only defined when WordPress bootstraps. If a file is accessed directly via HTTP (e.g., <code>https://example.com/wp-content/plugins/fellows-deadline/fellows-deadline.php</code>), the constant is undefined and the script exits immediately — no PHP execution, no error messages that could reveal server paths or PHP version.</p>
+            <p>
+              <code>ABSPATH</code> is only defined when WordPress bootstraps. If
+              a file is accessed directly via HTTP (e.g.,
+              <code
+                >https://example.com/wp-content/plugins/fellows-deadline/fellows-deadline.php</code
+              >), the constant is undefined and the script exits immediately —
+              no PHP execution, no error messages that could reveal server paths
+              or PHP version.
+            </p>
           </div>
 
           <!-- PHPCS in CI -->
           <div class="doc-section">
             <h2 class="doc-section-heading">Static Analysis in CI</h2>
-            <p>PHP CodeSniffer with the <code>WordPress</code> and <code>WordPress-Extra</code> rulesets runs on every push via GitHub Actions. The WordPress ruleset flags:</p>
-            <ul style="padding-left: var(--space-6); color: var(--color-text-secondary); line-height: 1.8;">
-              <li>Missing output-escaping functions (<code>esc_html</code>, <code>esc_attr</code>, <code>esc_url</code>)</li>
-              <li>Unescaped SQL (direct database queries without <code>prepare()</code>)</li>
+            <p>
+              PHP CodeSniffer with the <code>WordPress</code> and
+              <code>WordPress-Extra</code> rulesets runs on every push via
+              GitHub Actions. The WordPress ruleset flags:
+            </p>
+            <ul
+              style="
+                padding-left: var(--space-6);
+                color: var(--color-text-secondary);
+                line-height: 1.8;
+              "
+            >
+              <li>
+                Missing output-escaping functions (<code>esc_html</code>,
+                <code>esc_attr</code>, <code>esc_url</code>)
+              </li>
+              <li>
+                Unescaped SQL (direct database queries without
+                <code>prepare()</code>)
+              </li>
               <li>Missing nonce verification on form handlers</li>
               <li>Missing capability checks on admin callbacks</li>
               <li>Use of deprecated / unsafe PHP functions</li>
-              <li>Direct superglobal access without nonce verification (<code>$_POST</code>, <code>$_GET</code>)</li>
+              <li>
+                Direct superglobal access without nonce verification
+                (<code>$_POST</code>, <code>$_GET</code>)
+              </li>
             </ul>
-            <p style="margin-top: var(--space-4);">All custom code passes with zero errors and zero warnings. The <code>phpcs.xml</code> project config documents every intentional suppression inline with a justification comment.</p>
+            <p style="margin-top: var(--space-4)">
+              All custom code passes with zero errors and zero warnings. The
+              <code>phpcs.xml</code> project config documents every intentional
+              suppression inline with a justification comment.
+            </p>
           </div>
         </section>
 
         <!-- ══════════════════════════════════════════════════
              PAGE: LIGHTHOUSE SCORE
              ══════════════════════════════════════════════════ -->
-        <section class="doc-page" id="page-lighthouse" aria-labelledby="lighthouse-heading">
+        <section
+          class="doc-page"
+          id="page-lighthouse"
+          aria-labelledby="lighthouse-heading"
+        >
           <header class="page-header">
             <p class="page-eyebrow">Platform</p>
             <h1 class="page-title" id="lighthouse-heading">Lighthouse Score</h1>
             <p class="page-lead">
-              Lighthouse audit run against the home page (<code>https://northeastern-research.local/</code>)
-              in Chrome DevTools. The site scores 99 / 100 / 100 / 100 across
-              Performance, Accessibility, Best Practices, and SEO.
+              Lighthouse audit run against the home page
+              (<code>https://northeastern-research.local/</code>) in Chrome
+              DevTools. The site scores 99 / 100 / 100 / 100 across Performance,
+              Accessibility, Best Practices, and SEO.
             </p>
           </header>
 
           <!-- Score summary band -->
           <div class="stat-band" aria-label="Lighthouse scores">
-            <div class="stat-cell"><p class="stat-num" style="color: #0cce6b;">99</p><p class="stat-label">Performance</p></div>
-            <div class="stat-cell"><p class="stat-num" style="color: #0cce6b;">100</p><p class="stat-label">Accessibility</p></div>
-            <div class="stat-cell"><p class="stat-num" style="color: #0cce6b;">100</p><p class="stat-label">Best Practices</p></div>
-            <div class="stat-cell"><p class="stat-num" style="color: #0cce6b;">100</p><p class="stat-label">SEO</p></div>
-            <div class="stat-cell"><p class="stat-num">0.4 s</p><p class="stat-label">First Contentful Paint</p></div>
-            <div class="stat-cell"><p class="stat-num">0.9 s</p><p class="stat-label">Largest Contentful Paint</p></div>
+            <div class="stat-cell">
+              <p class="stat-num" style="color: #0cce6b">99</p>
+              <p class="stat-label">Performance</p>
+            </div>
+            <div class="stat-cell">
+              <p class="stat-num" style="color: #0cce6b">100</p>
+              <p class="stat-label">Accessibility</p>
+            </div>
+            <div class="stat-cell">
+              <p class="stat-num" style="color: #0cce6b">100</p>
+              <p class="stat-label">Best Practices</p>
+            </div>
+            <div class="stat-cell">
+              <p class="stat-num" style="color: #0cce6b">100</p>
+              <p class="stat-label">SEO</p>
+            </div>
+            <div class="stat-cell">
+              <p class="stat-num">0.4 s</p>
+              <p class="stat-label">First Contentful Paint</p>
+            </div>
+            <div class="stat-cell">
+              <p class="stat-num">0.9 s</p>
+              <p class="stat-label">Largest Contentful Paint</p>
+            </div>
           </div>
 
           <!-- Screenshot -->
           <div class="doc-section">
             <h2 class="doc-section-heading">Audit Screenshot</h2>
-            <figure style="margin: 0;">
+            <figure style="margin: 0">
               <img
                 src="lighthouse-score.png"
                 alt="Chrome DevTools Lighthouse panel showing scores of 99 for Performance, 100 for Accessibility, 100 for Best Practices, and 100 for SEO. Performance metrics show First Contentful Paint at 0.4 seconds and Largest Contentful Paint at 0.9 seconds."
-                style="border: 1px solid var(--color-border); max-width: 100%;"
+                style="border: 1px solid var(--color-border); max-width: 100%"
               />
-              <figcaption style="font-size: 0.875rem; color: var(--color-text-muted); margin-top: var(--space-3);">
-                Lighthouse audit · <code>https://northeastern-research.local/</code> · Chrome DevTools · 1:42 PM
+              <figcaption
+                style="
+                  font-size: 0.875rem;
+                  color: var(--color-text-muted);
+                  margin-top: var(--space-3);
+                "
+              >
+                Lighthouse audit ·
+                <code>https://northeastern-research.local/</code> · Chrome
+                DevTools · 1:42 PM
               </figcaption>
             </figure>
           </div>
@@ -5389,37 +6848,60 @@ Indexes:
           <div class="doc-section">
             <h2 class="doc-section-heading">Core Web Vitals &amp; Metrics</h2>
             <table class="doc-table" aria-label="Lighthouse metrics breakdown">
-              <thead><tr><th>Metric</th><th>Score</th><th>Rating</th><th>What it measures</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Score</th>
+                  <th>Rating</th>
+                  <th>What it measures</th>
+                </tr>
+              </thead>
               <tbody>
                 <tr>
                   <td>First Contentful Paint (FCP)</td>
                   <td><strong>0.4 s</strong></td>
-                  <td style="color: #0cce6b; font-weight: 700;">● Fast</td>
-                  <td>Time until the browser renders the first piece of DOM content. Target: &lt; 1.8 s.</td>
+                  <td style="color: #0cce6b; font-weight: 700">● Fast</td>
+                  <td>
+                    Time until the browser renders the first piece of DOM
+                    content. Target: &lt; 1.8 s.
+                  </td>
                 </tr>
                 <tr>
                   <td>Largest Contentful Paint (LCP)</td>
                   <td><strong>0.9 s</strong></td>
-                  <td style="color: #0cce6b; font-weight: 700;">● Fast</td>
-                  <td>Time until the largest visible element (the hero image) is rendered. Core Web Vital. Target: &lt; 2.5 s.</td>
+                  <td style="color: #0cce6b; font-weight: 700">● Fast</td>
+                  <td>
+                    Time until the largest visible element (the hero image) is
+                    rendered. Core Web Vital. Target: &lt; 2.5 s.
+                  </td>
                 </tr>
                 <tr>
                   <td>Total Blocking Time (TBT)</td>
                   <td>—</td>
                   <td>—</td>
-                  <td>Lab proxy for INP. Measures main-thread blocking by long tasks. Zero render-blocking scripts means near-zero TBT.</td>
+                  <td>
+                    Lab proxy for INP. Measures main-thread blocking by long
+                    tasks. Zero render-blocking scripts means near-zero TBT.
+                  </td>
                 </tr>
                 <tr>
                   <td>Cumulative Layout Shift (CLS)</td>
                   <td>—</td>
                   <td>—</td>
-                  <td>Measures unexpected layout shifts. Fixed dimensions on all image containers (<code>aspect-ratio</code> and explicit <code>width</code>/<code>height</code>) prevent shifts.</td>
+                  <td>
+                    Measures unexpected layout shifts. Fixed dimensions on all
+                    image containers (<code>aspect-ratio</code> and explicit
+                    <code>width</code>/<code>height</code>) prevent shifts.
+                  </td>
                 </tr>
                 <tr>
                   <td>Speed Index</td>
                   <td>—</td>
                   <td>—</td>
-                  <td>How quickly content is visually populated. Driven primarily by FCP and LCP scores above.</td>
+                  <td>
+                    How quickly content is visually populated. Driven primarily
+                    by FCP and LCP scores above.
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -5429,55 +6911,184 @@ Indexes:
           <div class="doc-section">
             <h2 class="doc-section-heading">What Drove Each Score</h2>
 
-            <h3 style="margin: var(--space-5) 0 var(--space-3);">Performance — 99</h3>
-            <p>One point below 100 is typical on local environments due to localhost DNS overhead that does not exist in production. The underlying optimisations that produced this score:</p>
-            <table class="doc-table" aria-label="Performance optimisations and their impact">
-              <thead><tr><th>Optimisation</th><th>Lighthouse audit it addresses</th></tr></thead>
+            <h3 style="margin: var(--space-5) 0 var(--space-3)">
+              Performance — 99
+            </h3>
+            <p>
+              One point below 100 is typical on local environments due to
+              localhost DNS overhead that does not exist in production. The
+              underlying optimisations that produced this score:
+            </p>
+            <table
+              class="doc-table"
+              aria-label="Performance optimisations and their impact"
+            >
+              <thead>
+                <tr>
+                  <th>Optimisation</th>
+                  <th>Lighthouse audit it addresses</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><td>Hero image <code>&lt;link rel="preload" fetchpriority="high"&gt;</code></td><td>LCP — browser discovers the hero image before CSS is parsed</td></tr>
-                <tr><td>Font preloads + <code>font-display: swap</code></td><td>FCP — text renders immediately with a system font fallback while the custom font loads</td></tr>
-                <tr><td>All scripts deferred (<code>strategy: defer</code>)</td><td>Eliminate render-blocking resources — zero parser-blocking scripts</td></tr>
-                <tr><td>Self-hosted fonts (no Google Fonts CDN)</td><td>Reduce third-party connection overhead — no extra DNS / TLS handshake</td></tr>
-                <tr><td>Remove <code>wp-block-library</code>, global-styles, emoji CDN</td><td>Reduce unused CSS and eliminate unused JavaScript</td></tr>
-                <tr><td>Lazy-loaded images (<code>loading="lazy"</code> on all non-LCP images)</td><td>Reduce initial page weight — off-screen images deferred until needed</td></tr>
-                <tr><td>Responsive images with <code>sizes</code> attributes</td><td>Properly size images — browser downloads the right size for the viewport</td></tr>
-                <tr><td>WP Optimize page caching</td><td>Reduce server response time (TTFB) — static HTML served on cache hits</td></tr>
-                <tr><td><code>filemtime()</code> cache-busting version</td><td>Long-lived caching between deploys without stale assets</td></tr>
+                <tr>
+                  <td>
+                    Hero image
+                    <code>&lt;link rel="preload" fetchpriority="high"&gt;</code>
+                  </td>
+                  <td>
+                    LCP — browser discovers the hero image before CSS is parsed
+                  </td>
+                </tr>
+                <tr>
+                  <td>Font preloads + <code>font-display: swap</code></td>
+                  <td>
+                    FCP — text renders immediately with a system font fallback
+                    while the custom font loads
+                  </td>
+                </tr>
+                <tr>
+                  <td>All scripts deferred (<code>strategy: defer</code>)</td>
+                  <td>
+                    Eliminate render-blocking resources — zero parser-blocking
+                    scripts
+                  </td>
+                </tr>
+                <tr>
+                  <td>Self-hosted fonts (no Google Fonts CDN)</td>
+                  <td>
+                    Reduce third-party connection overhead — no extra DNS / TLS
+                    handshake
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Remove <code>wp-block-library</code>, global-styles, emoji
+                    CDN
+                  </td>
+                  <td>Reduce unused CSS and eliminate unused JavaScript</td>
+                </tr>
+                <tr>
+                  <td>
+                    Lazy-loaded images (<code>loading="lazy"</code> on all
+                    non-LCP images)
+                  </td>
+                  <td>
+                    Reduce initial page weight — off-screen images deferred
+                    until needed
+                  </td>
+                </tr>
+                <tr>
+                  <td>Responsive images with <code>sizes</code> attributes</td>
+                  <td>
+                    Properly size images — browser downloads the right size for
+                    the viewport
+                  </td>
+                </tr>
+                <tr>
+                  <td>WP Optimize page caching</td>
+                  <td>
+                    Reduce server response time (TTFB) — static HTML served on
+                    cache hits
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>filemtime()</code> cache-busting version</td>
+                  <td>
+                    Long-lived caching between deploys without stale assets
+                  </td>
+                </tr>
               </tbody>
             </table>
 
-            <h3 style="margin: var(--space-6) 0 var(--space-3);">Accessibility — 100</h3>
-            <p>A perfect Lighthouse accessibility score reflects that all automated checks pass. Key signals Lighthouse evaluates:</p>
-            <ul style="padding-left: var(--space-6); color: var(--color-text-secondary); line-height: 2;">
-              <li>All images have descriptive <code>alt</code> attributes (or <code>alt=""</code> for decorative images)</li>
-              <li>All form inputs have associated <code>&lt;label&gt;</code> elements</li>
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">
+              Accessibility — 100
+            </h3>
+            <p>
+              A perfect Lighthouse accessibility score reflects that all
+              automated checks pass. Key signals Lighthouse evaluates:
+            </p>
+            <ul
+              style="
+                padding-left: var(--space-6);
+                color: var(--color-text-secondary);
+                line-height: 2;
+              "
+            >
+              <li>
+                All images have descriptive <code>alt</code> attributes (or
+                <code>alt=""</code> for decorative images)
+              </li>
+              <li>
+                All form inputs have associated
+                <code>&lt;label&gt;</code> elements
+              </li>
               <li>Colour contrast ratios meet or exceed 4.5:1 for all text</li>
-              <li>All interactive elements are keyboard-navigable and have visible focus indicators</li>
+              <li>
+                All interactive elements are keyboard-navigable and have visible
+                focus indicators
+              </li>
               <li><code>&lt;html lang="en"&gt;</code> is present</li>
               <li>Heading levels are sequential (no skipped levels)</li>
-              <li>All <code>&lt;nav&gt;</code> elements have unique <code>aria-label</code> attributes</li>
-              <li>Links have discernible text (no "click here" or icon-only links without labels)</li>
+              <li>
+                All <code>&lt;nav&gt;</code> elements have unique
+                <code>aria-label</code> attributes
+              </li>
+              <li>
+                Links have discernible text (no "click here" or icon-only links
+                without labels)
+              </li>
             </ul>
 
-            <h3 style="margin: var(--space-6) 0 var(--space-3);">Best Practices — 100</h3>
-            <ul style="padding-left: var(--space-6); color: var(--color-text-secondary); line-height: 2;">
-              <li>HTTPS served (Local WP provides SSL on <code>.local</code> domains)</li>
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">
+              Best Practices — 100
+            </h3>
+            <ul
+              style="
+                padding-left: var(--space-6);
+                color: var(--color-text-secondary);
+                line-height: 2;
+              "
+            >
+              <li>
+                HTTPS served (Local WP provides SSL on
+                <code>.local</code> domains)
+              </li>
               <li>No browser errors in the console</li>
               <li>No deprecated API usage</li>
               <li>Images have correct aspect ratios (no distortion)</li>
               <li>No vulnerabilities detected in front-end libraries</li>
-              <li>No third-party cookies from removed Google Fonts / Gravatar</li>
+              <li>
+                No third-party cookies from removed Google Fonts / Gravatar
+              </li>
             </ul>
 
-            <h3 style="margin: var(--space-6) 0 var(--space-3);">SEO — 100</h3>
-            <ul style="padding-left: var(--space-6); color: var(--color-text-secondary); line-height: 2;">
-              <li><code>&lt;meta name="description"&gt;</code> present (Yoast)</li>
-              <li><code>&lt;title&gt;</code> tag present and descriptive (Yoast)</li>
-              <li>Page is not blocked by <code>robots.txt</code> or <code>noindex</code></li>
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">SEO — 100</h3>
+            <ul
+              style="
+                padding-left: var(--space-6);
+                color: var(--color-text-secondary);
+                line-height: 2;
+              "
+            >
+              <li>
+                <code>&lt;meta name="description"&gt;</code> present (Yoast)
+              </li>
+              <li>
+                <code>&lt;title&gt;</code> tag present and descriptive (Yoast)
+              </li>
+              <li>
+                Page is not blocked by <code>robots.txt</code> or
+                <code>noindex</code>
+              </li>
               <li>Links have descriptive text</li>
               <li><code>&lt;html lang&gt;</code> present</li>
-              <li>Tap targets sufficiently sized (44 px minimum enforced in CSS)</li>
-              <li>Content is sized correctly for the viewport (no horizontal scroll)</li>
+              <li>
+                Tap targets sufficiently sized (44 px minimum enforced in CSS)
+              </li>
+              <li>
+                Content is sized correctly for the viewport (no horizontal
+                scroll)
+              </li>
             </ul>
           </div>
 
@@ -5488,17 +7099,184 @@ Indexes:
               <span class="callout-icon">💡</span>
               <div class="callout-body">
                 <p class="callout-title">Local vs. production scores</p>
-                <p>This audit was run on the Local WP development environment (<code>https://northeastern-research.local/</code>). Local environments typically score slightly lower on Performance than production deployments because localhost has no CDN, no HTTP/2 multiplexing, and no edge caching. A production deployment with a CDN and server-side caching would be expected to score 100 on Performance. The 99 score in a localhost environment demonstrates that the underlying optimisations are sound.</p>
+                <p>
+                  This audit was run on the Local WP development environment
+                  (<code>https://northeastern-research.local/</code>). Local
+                  environments typically score slightly lower on Performance
+                  than production deployments because localhost has no CDN, no
+                  HTTP/2 multiplexing, and no edge caching. A production
+                  deployment with a CDN and server-side caching would be
+                  expected to score 100 on Performance. The 99 score in a
+                  localhost environment demonstrates that the underlying
+                  optimisations are sound.
+                </p>
               </div>
             </div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════
+             PAGE: CAMPUSPRESS (replaced)
+             ══════════════════════════════════════════════════ -->
+        <section
+          class="doc-page"
+          id="page-campus-press"
+          aria-labelledby="campus-press-heading"
+        >
+          <header class="page-header">
+            <p class="page-eyebrow">Deployment</p>
+            <h1 class="page-title" id="campus-press-heading">CampusPress</h1>
+            <p class="page-lead">
+              CampusPress is Automattic's managed WordPress hosting platform built specifically
+              for universities. This is a brief reflection on how this Fellows Program site
+              would look and feel different if it had been built there instead of on a
+              standard self-hosted WordPress install.
+            </p>
+          </header>
+
+          <!-- How it would look different -->
+          <div class="doc-section">
+            <h2 class="doc-section-heading">How the Site Would Look Different</h2>
+            <p>
+              The most visible difference would be the starting point. CampusPress offers a
+              curated library of university-grade themes — many already branded for Northeastern's
+              colour palette, typography, and header/footer conventions. Rather than building the
+              NU Research design system from scratch (custom tokens, self-hosted fonts, component
+              CSS from zero), the project would begin with a theme that already looks like a
+              Northeastern site and only needs the program-specific content dropped in.
+            </p>
+            <p>
+              The tradeoff is control. The custom hero billboard, the hairline stat rows, the
+              horizontal timeline, the pill filter bar — these are deliberate design decisions
+              that required writing every CSS rule by hand. On CampusPress, those same sections
+              would likely be built from the platform's existing block patterns and theme
+              templates, which are more constrained but visually consistent with the rest of
+              the university web estate. The result would look more "official Northeastern"
+              and less bespoke, which for a department-facing production site is probably
+              the better outcome.
+            </p>
+          </div>
+
+          <!-- Easier things -->
+          <div class="doc-section">
+            <h2 class="doc-section-heading">What Would Be Easier on CampusPress</h2>
+            <p>
+              The hardest part of this build was the application form. Writing the ATS Form
+              plugin from scratch meant designing the database schema, building input validation,
+              implementing honeypot and rate limiting, wiring up transactional emails, and
+              creating the admin table — all before a single field rendered on the page.
+              On CampusPress, <strong>Gravity Forms</strong> (which is typically on the approved
+              plugin list) handles all of that in a few clicks: drag-and-drop fields, built-in
+              conditional logic, email notifications, entry management, and spam protection
+              through reCAPTCHA or Akismet — no custom PHP required.
+            </p>
+            <p>
+              Similarly, the waitlist email capture — which required a custom database table,
+              a shortcode, nonce verification, deduplication logic, and a bulk-send admin panel —
+              would be a single Mailchimp for WordPress form connected to an existing university
+              mailing list. The integration is pre-built, tested, and maintained by the plugin
+              author rather than by the developer of this site.
+            </p>
+            <p>
+              The Highlights &amp; Team page, which required configuring ACF repeater fields
+              and writing PHP to loop over them, would also be simpler: CampusPress themes
+              commonly include people directories and news/highlight post types out of the box,
+              meaning the data structure and admin UI are already there.
+            </p>
+          </div>
+
+          <!-- Reduced manual work -->
+          <div class="doc-section">
+            <h2 class="doc-section-heading">How CampusPress Reduces Manual Work</h2>
+            <p>
+              A significant portion of this build was operational infrastructure that has nothing
+              to do with the Fellows Program itself. Setting up UpdraftPlus for backups,
+              configuring WP Optimize for caching and database cleanup, tuning All-in-One
+              Security's brute-force rules, relocating the login URL with WPS Hide Login,
+              removing WordPress's default emoji CDN and oEmbed scripts, preloading fonts —
+              all of this is work that keeps the site running safely and efficiently, but
+              produces nothing visible to an applicant.
+            </p>
+            <p>
+              On CampusPress, all of that is managed by the platform team. Daily backups,
+              Varnish-layer caching, server hardening, WordPress core and plugin updates,
+              uptime monitoring, and SSL certificates are included as part of the hosting.
+              The developer's time goes entirely into the product — the pages, the content
+              structure, the application workflow — rather than the plumbing.
+            </p>
+            <div class="callout">
+              <span class="callout-icon">⏱️</span>
+              <div class="callout-body">
+                <p class="callout-title">Estimated time saved</p>
+                <p>Configuring and testing the security stack, backup schedule, caching layer,
+                and performance optimisations in this build took several hours that CampusPress
+                would eliminate entirely. For a small department site maintained by a developer
+                who is also a graduate student, that time is significant.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security and accessibility out of the box -->
+          <div class="doc-section">
+            <h2 class="doc-section-heading">Security &amp; Accessibility Out of the Box</h2>
+            <p>
+              This build required deliberate, manual effort to reach a 100 Lighthouse
+              accessibility score and a hardened security posture. On CampusPress, both
+              come as part of the platform.
+            </p>
+            <p>
+              <strong>Security:</strong> CampusPress runs on Automattic's infrastructure with
+              enterprise-grade WAF rules, DDoS protection, automatic core updates, and centrally
+              managed SSL. The login URL obfuscation, brute-force lockouts, and file-change
+              detection that this build handles through three separate plugins are all managed
+              at the network level — applied to every subsite simultaneously, kept up to date
+              by a dedicated platform team, and not dependent on any individual site admin
+              remembering to configure them. There is also no risk of a poorly-vetted plugin
+              introducing a vulnerability, because the approved plugin list is curated and audited.
+            </p>
+            <p>
+              <strong>Accessibility:</strong> CampusPress themes are built and maintained to
+              meet Northeastern's institutional accessibility standards, which align with WCAG 2.1 AA.
+              The skip links, landmark roles, focus management, and colour contrast requirements
+              that were coded by hand in this theme are already present in a compliant CampusPress
+              theme. More importantly, they are maintained — if a WCAG guideline changes or a
+              browser introduces a new focus behaviour, the platform theme is updated centrally
+              rather than requiring the individual site developer to catch and fix it.
+            </p>
+            <p>
+              For a department site that needs to be accessible to all students and maintained
+              indefinitely, that ongoing guarantee is more valuable than the fine-grained control
+              that a custom build provides.
+            </p>
           </div>
         </section>
       </main>
     </div>
 
     <script>
-      /* ── Page navigation ─────────────────────────────────────── */
+      /* ── Page navigation with hash-based routing ─────────────── */
+      var PAGE_IDS = [
+        "tools-used",
+        "custom-theme",
+        "design-system",
+        "custom-plugins",
+        "installed-plugins",
+        "database-schemas",
+        "ui-ux",
+        "responsiveness",
+        "accessibility",
+        "seo",
+        "security",
+        "lighthouse",
+        "campus-press",
+      ];
+
       function showPage(id, anchor) {
+        // Guard against unknown ids
+        if (PAGE_IDS.indexOf(id) === -1) {
+          id = "tools-used";
+        }
+
         // Hide all pages
         document.querySelectorAll(".doc-page").forEach(function (p) {
           p.classList.remove("is-active");
@@ -5508,11 +7286,6 @@ Indexes:
         var target = document.getElementById("page-" + id);
         if (target) {
           target.classList.add("is-active");
-          // Scroll main to top
-          var main = document.getElementById("doc-main");
-          if (main) {
-            main.scrollTop = 0;
-          }
           window.scrollTo(0, 0);
         }
 
@@ -5520,10 +7293,30 @@ Indexes:
         document.querySelectorAll(".sidebar-nav a").forEach(function (a) {
           a.classList.remove("is-active");
         });
+
+        // Activate the matching nav link (find by href if no anchor passed)
         if (anchor) {
           anchor.classList.add("is-active");
+        } else {
+          var match = document.querySelector(
+            '.sidebar-nav a[href="#' + id + '"]',
+          );
+          if (match) {
+            match.classList.add("is-active");
+          }
+        }
+
+        // Push hash so the URL reflects the current page
+        if (window.location.hash !== "#" + id) {
+          history.pushState(null, "", "#" + id);
         }
       }
+
+      /* ── Handle browser back / forward ──────────────────────── */
+      window.addEventListener("popstate", function () {
+        var hash = window.location.hash.replace("#", "");
+        showPage(hash || "tools-used");
+      });
 
       /* ── Sidebar toggle (mobile) ─────────────────────────────── */
       function toggleSidebar(btn) {
@@ -5533,8 +7326,12 @@ Indexes:
         nav.classList.toggle("is-open", !expanded);
       }
 
-      /* ── On load: open sidebar on desktop ───────────────────── */
+      /* ── Boot: read hash or default to tools-used ───────────── */
       (function () {
+        var hash = window.location.hash.replace("#", "");
+        showPage(PAGE_IDS.indexOf(hash) !== -1 ? hash : "tools-used");
+
+        // Open sidebar on desktop
         if (window.innerWidth >= 900) {
           var nav = document.getElementById("sidebar-nav");
           if (nav) nav.classList.add("is-open");
