@@ -1,3 +1,6 @@
 logs
 app/design-reference
 app/public/.claude
+app/public/graphify-out
+app/public/wp-content/cache
+app/public/wp-content/graphify-out
