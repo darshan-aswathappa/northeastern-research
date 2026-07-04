@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NU Research Fellows — Technical Documentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   NU Research — Technical Documentation
+   Mirrors the live theme's design tokens exactly.
+   ============================================================ */
+
+:root {
+  --nu-black:       #000000;
+  --nu-white:       #ffffff;
+  --nu-red:         #d41b2c;
+  --nu-red-dark:    #b01524;
+  --nu-red-bright:  #f0193a;
+
+  --gray-950: #1a1a1a;
+  --gray-800: #333333;
+  --gray-600: #6b6b6b;
+  --gray-300: #d1d1d1;
+  --gray-200: #e6e6e6;
+  --gray-100: #f4f4f4;
+  --gray-50:  #fafafa;
+
+  --color-text:          var(--gray-950);
+  --color-text-secondary:var(--gray-800);
+  --color-text-muted:    var(--gray-600);
+  --color-link:          var(--nu-red);
+  --color-border:        var(--gray-200);
+  --color-surface-muted: var(--gray-100);
+
+  --divider-dark:      rgba(255,255,255,0.28);
+  --text-on-dark-muted:rgba(255,255,255,0.72);
+
+  --font-sans:  'Hanken Grotesk','Helvetica Neue',Arial,sans-serif;
+  --font-serif: 'Source Serif 4',Georgia,'Times New Roman',serif;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  --doc-sidebar-w: 272px;
+  --transition-fast: 120ms cubic-bezier(0.2,0,0.1,1);
+}
+
+/* --- Reset ------------------------------------------------------------ */
+*,*::before,*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  background: var(--nu-white);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,h2,h3,h4 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin: 0 0 .5em;
+  color: var(--color-text);
+}
+h1 { font-size: clamp(2rem,3.5vw,3rem); }
+h2 { font-size: clamp(1.5rem,2.2vw,2.125rem); }
+h3 { font-size: clamp(1.2rem,1.6vw,1.5rem); }
+h4 { font-size: 1.125rem; font-family: var(--font-sans); font-weight: 700; letter-spacing: 0; }
+
+p { margin: 0 0 1em; }
+
+a { color: var(--color-link); text-decoration: none; }
+a:hover { color: var(--nu-red-dark); text-decoration: underline; text-underline-offset: 3px; }
+
+code {
+  font-family: 'SFMono-Regular','Consolas','Liberation Mono',Menlo,monospace;
+  font-size: .875em;
+  background: var(--gray-100);
+  border: 1px solid var(--gray-200);
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+
+pre {
+  background: var(--gray-950);
+  color: #e2e8f0;
+  font-family: 'SFMono-Regular','Consolas','Liberation Mono',Menlo,monospace;
+  font-size: .875rem;
+  line-height: 1.6;
+  padding: var(--space-5);
+  overflow-x: auto;
+  margin: 0 0 var(--space-5);
+  border-radius: 0;
+}
+
+pre code { background: none; border: none; padding: 0; font-size: inherit; color: inherit; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+:focus-visible { outline: 2px solid var(--nu-red); outline-offset: 2px; }
+
+/* --- Doc shell -------------------------------------------------------- */
+.doc-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--nu-black);
+  color: var(--nu-white);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.doc-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  max-width: 1440px;
+  margin-inline: auto;
+  padding: var(--space-4) var(--space-5);
+}
+
+.doc-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  text-decoration: none;
+  color: var(--nu-white);
+}
+.doc-brand:hover { color: var(--nu-white); text-decoration: none; }
+
+.doc-brand-lockup {
+  font-family: var(--font-serif);
+  font-size: 1.1875rem;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+}
+
+.doc-brand-sub {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--nu-red-bright);
+}
+
+.doc-header-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-on-dark-muted);
+}
+
+/* --- Layout ----------------------------------------------------------- */
+.doc-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 1440px;
+  margin-inline: auto;
+  min-height: calc(100vh - 64px);
+}
+
+@media (min-width: 900px) {
+  .doc-layout {
+    grid-template-columns: var(--doc-sidebar-w) 1fr;
+  }
+}
+
+/* --- Sidebar nav ------------------------------------------------------ */
+.doc-sidebar {
+  background: var(--gray-50);
+  border-right: 1px solid var(--color-border);
+}
+
+@media (min-width: 900px) {
+  .doc-sidebar {
+    position: sticky;
+    top: 65px;
+    height: calc(100vh - 65px);
+    overflow-y: auto;
+  }
+}
+
+.sidebar-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-4) var(--space-5);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-text);
+  cursor: pointer;
+  text-align: left;
+}
+
+.sidebar-toggle::after {
+  content: '▾';
+  color: var(--nu-red);
+  font-size: 1rem;
+  transition: transform var(--transition-fast);
+}
+
+.sidebar-toggle[aria-expanded="false"]::after {
+  transform: rotate(-90deg);
+}
+
+@media (min-width: 900px) {
+  .sidebar-toggle { display: none; }
+}
+
+.sidebar-nav {
+  padding: var(--space-5) 0 var(--space-7);
+  display: none;
+}
+
+.sidebar-nav.is-open,
+@media (min-width: 900px) { .sidebar-nav { display: block; } }
+
+@media (min-width: 900px) {
+  .sidebar-nav { display: block; }
+}
+
+.sidebar-group {
+  margin-bottom: var(--space-5);
+}
+
+.sidebar-group-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-text-muted);
+  padding: var(--space-2) var(--space-5);
+  margin-bottom: var(--space-1);
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-5);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+  min-height: 36px;
+}
+
+.sidebar-nav a:hover {
+  color: var(--color-text);
+  background: var(--gray-100);
+  text-decoration: none;
+}
+
+.sidebar-nav a.is-active {
+  color: var(--nu-red);
+  border-left-color: var(--nu-red);
+  font-weight: 600;
+  background: var(--nu-white);
+}
+
+.sidebar-nav a .nav-icon {
+  font-size: 1rem;
+  flex: 0 0 auto;
+  opacity: 0.7;
+}
+
+.sidebar-nav a.is-active .nav-icon { opacity: 1; }
+
+/* --- Main content ----------------------------------------------------- */
+.doc-main {
+  min-width: 0;
+}
+
+/* --- Page sections ---------------------------------------------------- */
+.doc-page {
+  display: none;
+  padding: clamp(32px, 4vw, 64px) clamp(20px, 4vw, 56px);
+  max-width: 900px;
+}
+
+.doc-page.is-active {
+  display: block;
+}
+
+/* --- Page header ------------------------------------------------------ */
+.page-header {
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--space-7);
+}
+
+.page-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--nu-red);
+  margin: 0 0 var(--space-3);
+}
+
+.page-title {
+  font-size: clamp(2rem,3.5vw,3rem);
+  margin: 0 0 var(--space-3);
+}
+
+.page-lead {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  max-width: 56rem;
+  margin: 0;
+}
+
+/* --- Section headings ------------------------------------------------- */
+.doc-section {
+  margin-bottom: var(--space-8);
+}
+
+.doc-section-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 1.375rem;
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.doc-section-heading::before {
+  content: '';
+  flex: 0 0 auto;
+  width: 3px;
+  height: 1.2em;
+  background: var(--nu-red);
+  border-radius: 0;
+}
+
+/* --- Tool card -------------------------------------------------------- */
+.tool-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .tool-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 1024px) {
+  .tool-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+.tool-card {
+  border: 1px solid var(--color-border);
+  padding: var(--space-5);
+  background: var(--nu-white);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.tool-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.tool-name {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.tool-badge {
+  display: inline-block;
+  flex: 0 0 auto;
+  padding: 2px var(--space-3);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.badge-version {
+  background: var(--gray-100);
+  color: var(--color-text-muted);
+  border: 1px solid var(--gray-200);
+}
+
+.badge-custom {
+  background: var(--nu-red);
+  color: var(--nu-white);
+}
+
+.badge-installed {
+  background: var(--gray-950);
+  color: var(--nu-white);
+}
+
+.badge-infra {
+  background: var(--gray-100);
+  color: var(--gray-950);
+  border: 1px solid var(--gray-300);
+}
+
+.tool-desc {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.tool-role {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--nu-red);
+  margin: 0;
+}
+
+/* --- Stat band -------------------------------------------------------- */
+.stat-band {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0;
+  border: 1px solid var(--color-border);
+  margin-bottom: var(--space-7);
+}
+
+.stat-cell {
+  padding: var(--space-5) var(--space-6);
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.stat-cell:last-child { border-right: 0; }
+
+.stat-num {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: var(--nu-red);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-1);
+}
+
+.stat-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* --- Info callout ----------------------------------------------------- */
+.callout {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border-left: 3px solid var(--nu-red);
+  background: var(--gray-50);
+  margin-bottom: var(--space-6);
+}
+
+.callout-icon {
+  font-size: 1.25rem;
+  flex: 0 0 auto;
+  margin-top: 1px;
+}
+
+.callout-body { flex: 1; }
+
+.callout-title {
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 var(--space-2);
+  font-size: 0.9375rem;
+}
+
+.callout p {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* --- Table ------------------------------------------------------------ */
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  margin-bottom: var(--space-5);
+}
+
+.doc-table th {
+  text-align: left;
+  padding: var(--space-3) var(--space-4);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  background: var(--gray-100);
+  border: 1px solid var(--color-border);
+}
+
+.doc-table td {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  vertical-align: top;
+}
+
+.doc-table tr:nth-child(even) td { background: var(--gray-50); }
+
+/* --- Placeholder page ------------------------------------------------- */
+.placeholder-page {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-8) clamp(20px, 4vw, 56px);
+}
+
+.placeholder-eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--nu-red);
+}
+
+.placeholder-heading {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  margin: 0 0 var(--space-3);
+}
+
+.placeholder-desc {
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  max-width: 44rem;
+  margin: 0;
+}
+
+.coming-soon-band {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  border: 1px dashed var(--gray-300);
+  background: var(--gray-50);
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* --- Responsive -------------------------------------------------------- */
+@media (max-width: 899px) {
+  .doc-sidebar { border-right: none; border-bottom: 1px solid var(--color-border); }
+  .sidebar-nav.is-open { display: block; }
+}
+
+/* --- Focus / A11y -------------------------------------------- */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--nu-black);
+  color: var(--nu-white);
+  padding: var(--space-3) var(--space-5);
+  font-weight: 700;
+}
+.skip-link:focus { left: 0; color: var(--nu-white); }
+
+@media (prefers-reduced-motion: reduce) {
+  *,*::before,*::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#doc-main">Skip to main content</a>
+
+<!-- ── Top header bar ─────────────────────────────────────────── -->
+<header class="doc-header" role="banner">
+  <div class="doc-header-inner">
+    <a href="#" class="doc-brand" onclick="showPage('tools-used'); return false;">
+      <span class="doc-brand-lockup">Northeastern University</span>
+      <span class="doc-brand-sub">Research Fellows Program — Technical Documentation</span>
+    </a>
+    <span class="doc-header-badge">v1.0.0 &nbsp;·&nbsp; 2025</span>
+  </div>
+</header>
+
+<!-- ── Doc layout ────────────────────────────────────────────────── -->
+<div class="doc-layout">
+
+  <!-- Sidebar navigation -->
+  <aside class="doc-sidebar" aria-label="Documentation navigation">
+    <button
+      class="sidebar-toggle"
+      aria-expanded="false"
+      aria-controls="sidebar-nav"
+      onclick="toggleSidebar(this)"
+    >Documentation Sections</button>
+
+    <nav class="sidebar-nav" id="sidebar-nav" role="navigation">
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Overview</div>
+        <a href="#tools-used" class="is-active" onclick="showPage('tools-used',this); return false;">
+          <span class="nav-icon">🔧</span> Tools Used
+        </a>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Theme</div>
+        <a href="#custom-theme" onclick="showPage('custom-theme',this); return false;">
+          <span class="nav-icon">🎨</span> Custom Theme
+        </a>
+        <a href="#design-system" onclick="showPage('design-system',this); return false;">
+          <span class="nav-icon">📐</span> Design System
+        </a>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Plugins</div>
+        <a href="#custom-plugins" onclick="showPage('custom-plugins',this); return false;">
+          <span class="nav-icon">🧩</span> Custom Plugins
+        </a>
+        <a href="#installed-plugins" onclick="showPage('installed-plugins',this); return false;">
+          <span class="nav-icon">📦</span> Installed Plugins
+        </a>
+        <a href="#database-schemas" onclick="showPage('database-schemas',this); return false;">
+          <span class="nav-icon">🗄️</span> Database Schemas
+        </a>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Frontend</div>
+        <a href="#ui-ux" onclick="showPage('ui-ux',this); return false;">
+          <span class="nav-icon">✏️</span> UI &amp; UX
+        </a>
+        <a href="#responsiveness" onclick="showPage('responsiveness',this); return false;">
+          <span class="nav-icon">📱</span> Responsiveness
+        </a>
+        <a href="#accessibility" onclick="showPage('accessibility',this); return false;">
+          <span class="nav-icon">♿</span> Accessibility
+        </a>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Platform</div>
+        <a href="#seo" onclick="showPage('seo',this); return false;">
+          <span class="nav-icon">🔍</span> SEO
+        </a>
+        <a href="#security" onclick="showPage('security',this); return false;">
+          <span class="nav-icon">🔒</span> Security
+        </a>
+        <a href="#lighthouse" onclick="showPage('lighthouse',this); return false;">
+          <span class="nav-icon">🏠</span> Lighthouse Score
+        </a>
+      </div>
+
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="doc-main" id="doc-main" tabindex="-1">
+
+    <!-- ══════════════════════════════════════════════════════════
+         PAGE: TOOLS USED
+         ══════════════════════════════════════════════════════════ -->
+    <section class="doc-page is-active" id="page-tools-used" aria-labelledby="tools-heading">
+
+      <header class="page-header">
+        <p class="page-eyebrow">Overview</p>
+        <h1 class="page-title" id="tools-heading">Tools Used</h1>
+        <p class="page-lead">
+          A complete inventory of every technology, library, framework, and third-party service
+          that powers the NU Research Fellows Program microsite — from the CMS runtime through
+          the CI pipeline.
+        </p>
+      </header>
+
+      <!-- Quick stats -->
+      <div class="stat-band" aria-label="Project statistics">
+        <div class="stat-cell">
+          <p class="stat-num">3</p>
+          <p class="stat-label">Custom Plugins</p>
+        </div>
+        <div class="stat-cell">
+          <p class="stat-num">7</p>
+          <p class="stat-label">Installed Plugins</p>
+        </div>
+        <div class="stat-cell">
+          <p class="stat-num">0</p>
+          <p class="stat-label">External JS dependencies (prod)</p>
+        </div>
+        <div class="stat-cell">
+          <p class="stat-num">PHP 8</p>
+          <p class="stat-label">Minimum runtime</p>
+        </div>
+        <div class="stat-cell">
+          <p class="stat-num">WP 6</p>
+          <p class="stat-label">CMS platform</p>
+        </div>
+      </div>
+
+      <!-- 1. CMS & Backend -->
+      <div class="doc-section">
+        <h2 class="doc-section-heading">CMS &amp; Backend Runtime</h2>
+
+        <div class="callout">
+          <span class="callout-icon">ℹ️</span>
+          <div class="callout-body">
+            <p class="callout-title">Classic theme architecture</p>
+            <p>The site uses a <strong>WordPress Classic theme</strong> (not a block/FSE theme). This was a deliberate choice: the design calls for hand-authored, pixel-controlled templates — something block themes make harder without additional complexity. All markup lives in PHP template files with no Gutenberg block registration on the front end.</p>
+          </div>
+        </div>
+
+        <div class="tool-grid">
+          <div class="tool-card">
+            <div class="tool-card-header">
+              <h3 class="tool-name">WordPress</h3>
+              <span class="tool-badge badge-version">6.x</span>
+            </div>
+            <p class="tool-role">CMS Platform</p>
+            <p class="tool-desc">
+              Open-source PHP content management system. Used as the application shell: it handles routing, the admin dashboard, plugin activation, user authentication, and the REST API. All content (pages, posts, settings) lives in the WP database.
+            </p>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-card-header">
+              <h3 class="tool-name">PHP</h3>
+              <span class="tool-badge badge-version">≥ 8.0</span>
+            </div>
+            <p class="tool-role">Server-side language</p>
+            <p class="tool-desc">
+              All theme templates, plugin logic, and database interaction are written in PHP 8+. Typed parameters, return types, and <code>match</code> expressions are used throughout. PHP-CS-Fixer (via PHPCS + WordPress Coding Standards) enforces style in CI.
+            </p>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-card-header">
+              <h3 class="tool-name">MySQL / MariaDB</h3>
+              <span class="tool-badge badge-version">via Local WP</span>
+            </div>
+            <p class="tool-role">Relational database</p>
+            <p class="tool-desc">
+              The standard WordPress database backend. The two custom plugins create their own dedicated tables (<code>wp_swe_applications</code>, <code>wp_swe_waitlist</code>) using <code>dbDelta()</code> — the WP-safe schema migration helper.
+            </p>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-card-header">
+              <h3 class="tool-name">WordPress REST API</h3>
+              <span class="tool-badge badge-version">WP Core</span>
+            </div>
+            <p class="tool-role">Application API layer</p>
+            <p class="tool-desc">
+              Used by the ATS Form plugin (<code>swe-fellows-application</code>) to expose a JSON endpoint for AJAX form submission. The custom REST route validates and sanitizes every input server-side before writing to the database.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Frontend -->
+      <div class="doc-section">
+        <h2 class="doc-section-heading">Frontend Stack</h2>
+
+        <div class="callout">
+          <span class="callout-icon">🎯</span>
+          <div class="callout-body">
+            <p class="callout-title">Zero build step, zero bundler</p>
+            <p>The frontend uses <strong>vanilla CSS and JavaScript with no preprocessor, no bundler, and no npm</strong>. The single stylesheet (<code>assets/css/main.css</code>) is a hand-authored token-driven file. JavaScript is split into two focused modules (<code>nav.js</code>, <code>blocks.js</code>) — both deferred and loaded from the footer. AOS is the only runtime library and is loaded from jsDelivr CDN (already mirrored in the browser cache for most users).</p>
+          </div>
+        </div>
+
+        <div class="tool-grid">
+          <div class="tool-card">
+            <div class="tool-card-header">
+              <h3 class="tool-name">CSS (Custom Properties)</h3>
+              <span class="tool-badge badge-version">~1 750 lines</span>
+            </div>
+            <p class="tool-role">Design token system + component styles</p>
+            <p class="tool-desc">
+              All visual decisions are driven by a single token layer in <code>:root</code> — colors, type scale, spacing, and transitions. Components never hard-code values; they reference tokens. This makes a full palette swap a one-file change.
+            </p>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-card-header">
+              <h3 class="tool-name">JavaScript (ES6+)</h3>
+              <span class="tool-badge badge-version">Vanilla, no framework</span>
+            </div>
+            <p class="tool-role">Navigation &amp; scroll behavior</p>
+            <p class="tool-desc">
+              <strong>nav.js</strong>: mobile hamburger toggle with <code>aria-expanded</code> and keyboard trap. <strong>blocks.js</strong>: initialises AOS and wires any home-page block interactions. Both files are <code>defer</code>-loaded so they never block rendering.
+            </p>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-card-header">
+              <h3 class="tool-name">AOS — Animate On Scroll</h3>
+              <span class="tool-badge badge-version">2.3.4</span>
+            </div>
+            <p class="tool-role">Scroll-triggered reveal animations</p>
+            <p class="tool-desc">
+              Lightweight (6 KB gzip) CSS animation library. Used for <code>data-aos="fade-up"</code> reveals on section cards and stat rows. Fully respects <code>prefers-reduced-motion</code> — animations are skipped when the OS motion setting is on.
+            </p>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-card-header">
+              <h3 class="tool-name">HTML5 Semantics</h3>
+              <span class="tool-badge badge-version">WHATWG</span>
+            </div>
+            <p class="tool-role">Markup standard</p>
+            <p class="tool-desc">
+              All templates use semantic elements: <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;details&gt;</code> / <code>&lt;summary&gt;</code> for the FAQ accordion (no JS needed), and native <code>&lt;table&gt;</code> for deadline data.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Typography -->
+      <div class="doc-section">
+        <h2 class="doc-section-heading">Typography &amp; Fonts</h2>
+
+        <table class="doc-table" aria-label="Font specifications">
+          <thead>
+            <tr>
+              <th>Font family</th>
+              <th>Role</th>
+              <th>Format</th>
+              <th>Delivery</th>
+              <th>Axes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Hanken Grotesk</strong></td>
+              <td>Body, UI, labels, nav, buttons</td>
+              <td>WOFF2 variable</td>
+              <td>Self-hosted (<code>assets/fonts/</code>)</td>
+              <td><code>wght</code> 100–900</td>
+            </tr>
+            <tr>
+              <td><strong>Source Serif 4</strong></td>
+              <td>All headings (h1–h4), hero, stat figures, pull quotes</td>
+              <td>WOFF2 variable</td>
+              <td>Self-hosted (<code>assets/fonts/</code>)</td>
+              <td><code>wght</code> 200–900</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          <span class="callout-icon">⚡</span>
+          <div class="callout-body">
+            <p class="callout-title">Performance rationale for self-hosting</p>
+            <p>Both fonts are served from the same origin as the page — eliminating the extra DNS lookup, TCP handshake, and font-fetch waterfall that Google Fonts incurs. They're <code>&lt;link rel="preload"&gt;</code>-hinted in <code>functions.php</code> so the browser fetches them before the CSS parser discovers the <code>@font-face</code> rule. <code>font-display: swap</code> keeps text visible immediately.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Dev environment -->
+      <div class="doc-section">
+        <h2 class="doc-section-heading">Development Environment</h2>
+
+        <div class="tool-grid">
+          <div class="tool-card">
+            <div class="tool-card-header">
+              <h3 class="tool-name">Local WP</h3>
+              <span class="tool-badge badge-infra">by WP Engine</span>
+            </div>
+            <p class="tool-role">Local development server</p>
+            <p class="tool-desc">
+              One-click local WordPress environment. Provides Apache/Nginx, PHP, and MySQL as isolated containers per site. Used throughout development — the site URL is <code>https://northeastern-research.local</code>. Xdebug is available via the bundled PHP build.
+            </p>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-card-header">
+              <h3 class="tool-name">Git + GitHub</h3>
+              <span class="tool-badge badge-infra">Version control</span>
+            </div>
+            <p class="tool-role">Source control &amp; collaboration</p>
+            <p class="tool-desc">
+              Full project history is tracked in a GitHub repository on the <code>custom-plugins-and-SCF</code> base branch and a <code>documentation</code> feature branch. Conventional commit messages are used throughout (<code>feat:</code>, <code>fix:</code>, <code>ci:</code>, <code>docs:</code>).
+            </p>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-card-header">
+              <h3 class="tool-name">GitHub Actions</h3>
+              <span class="tool-badge badge-infra">CI/CD</span>
+            </div>
+            <p class="tool-role">Continuous integration pipeline</p>
+            <p class="tool-desc">
+              Automated linting runs on every push and pull request. The CI workflow installs PHP, Composer, and PHPCS with the WordPress Coding Standards ruleset, then runs <code>phpcs</code> over all theme and plugin PHP files. CSS and JS files are excluded; the project has no compiled assets to lint.
+            </p>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-card-header">
+              <h3 class="tool-name">PHP CodeSniffer (PHPCS)</h3>
+              <span class="tool-badge badge-version">+ WPCS</span>
+            </div>
+            <p class="tool-role">Static analysis &amp; style enforcement</p>
+            <p class="tool-desc">
+              <code>phpcs.xml</code> at the project root configures the <code>WordPress</code> and <code>WordPress-Extra</code> rulesets. It excludes the <code>wp-admin/</code> and <code>wp-includes/</code> core directories, vendor paths, and the generated CSS/JS. All custom code passes with zero errors.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Installed plugins overview -->
+      <div class="doc-section">
+        <h2 class="doc-section-heading">WordPress Plugins</h2>
+        <p>There are two categories of plugins: <strong>custom plugins</strong> built for this project, and <strong>installed plugins</strong> sourced from the WordPress.org directory or commercial vendors. Each is documented in full detail in its own section.</p>
+
+        <h3 style="margin-top: var(--space-6); margin-bottom: var(--space-4);">Custom (project-built)</h3>
+        <div class="tool-grid tool-grid-3">
+          <div class="tool-card">
+            <div class="tool-card-header">
+              <h3 class="tool-name">Fellows Deadline Countdown</h3>
+              <span class="tool-badge badge-custom">Custom</span>
+            </div>
+            <p class="tool-role"><code>fellows-deadline</code> · v1.0.0</p>
+            <p class="tool-desc">Admin-configurable application window dates. Outputs the <code>[fellows_countdown]</code> shortcode, a site-wide "closing soon" banner, and a dashboard widget.</p>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-card-header">
+              <h3 class="tool-name">ATS Form</h3>
+              <span class="tool-badge badge-custom">Custom</span>
+            </div>
+            <p class="tool-role"><code>swe-fellows-application</code> · v2.0.0</p>
+            <p class="tool-desc">Multi-step fellowship application form. Stores submissions in <code>wp_swe_applications</code>. Exposes a REST endpoint. Sends confirmation emails. Admin table with status tracking.</p>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-card-header">
+              <h3 class="tool-name">Fellows Mail List</h3>
+              <span class="tool-badge badge-custom">Custom</span>
+            </div>
+            <p class="tool-role"><code>swe-mail-list</code> · v1.0.0</p>
+            <p class="tool-desc">Waitlist email capture rendered by <code>[swe_waitlist]</code>. Stores in <code>wp_swe_waitlist</code> with a UNIQUE email constraint. Admin panel with bulk announcement email capability.</p>
+          </div>
+        </div>
+
+        <h3 style="margin-top: var(--space-6); margin-bottom: var(--space-4);">Installed (WordPress.org / vendor)</h3>
+        <table class="doc-table" aria-label="Installed plugins">
+          <thead>
+            <tr>
+              <th>Plugin</th>
+              <th>Slug</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Yoast SEO</strong></td>
+              <td><code>wordpress-seo</code></td>
+              <td>Full SEO: meta tags, Open Graph, XML sitemaps, schema markup, canonical URLs, breadcrumbs</td>
+            </tr>
+            <tr>
+              <td><strong>All-in-One WP Security</strong></td>
+              <td><code>all-in-one-wp-security-and-firewall</code></td>
+              <td>Hardening, brute-force protection, file-change detection, WAF firewall rules</td>
+            </tr>
+            <tr>
+              <td><strong>WPS Hide Login</strong></td>
+              <td><code>wps-hide-login</code></td>
+              <td>Relocates <code>wp-login.php</code> to a custom URL to stop automated login attacks</td>
+            </tr>
+            <tr>
+              <td><strong>UpdraftPlus</strong></td>
+              <td><code>updraftplus</code></td>
+              <td>Scheduled database + file backups to remote storage</td>
+            </tr>
+            <tr>
+              <td><strong>WP Optimize</strong></td>
+              <td><code>wp-optimize</code></td>
+              <td>Database cleanup (revisions, spam, orphaned rows) and page/object caching</td>
+            </tr>
+            <tr>
+              <td><strong>Burst Statistics</strong></td>
+              <td><code>burst-statistics</code></td>
+              <td>Cookie-free, privacy-first analytics — no external service or GDPR consent required</td>
+            </tr>
+            <tr>
+              <td><strong>Secure Custom Fields</strong></td>
+              <td><code>secure-custom-fields</code></td>
+              <td>ACF-compatible custom fields for structured CMS content without post-meta hacks</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 6. CI pipeline detail -->
+      <div class="doc-section">
+        <h2 class="doc-section-heading">CI Pipeline Configuration</h2>
+
+        <p>The GitHub Actions workflow (<code>.github/workflows/phpcs.yml</code>) runs automatically on every push and pull request. It catches code-style and security-smelling patterns before they land on the main branch.</p>
+
+        <pre><code># .github/workflows/phpcs.yml (abbreviated)
+name: PHP CodeSniffer
+
+on: [push, pull_request]
+
+jobs:
+  phpcs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          tools: cs2pr
+
+      - name: Install WPCS via Composer
+        run: |
+          composer global require dealerdirect/phpcodesniffer-composer-installer
+          composer require --dev squizlabs/php_codesniffer
+          composer require --dev wp-coding-standards/wpcs
+
+      - name: Run PHPCS
+        run: vendor/bin/phpcs --report=checkstyle | cs2pr</code></pre>
+
+        <div class="callout">
+          <span class="callout-icon">✅</span>
+          <div class="callout-body">
+            <p class="callout-title">Zero-error baseline</p>
+            <p>All custom theme and plugin PHP files pass the <code>WordPress</code> and <code>WordPress-Extra</code> rulesets with zero errors and zero warnings as of the initial commit. The <code>phpcs.xml</code> project config pins the ruleset, excludes WP core directories and vendor paths, and ignores CSS/JS files (which PHPCS cannot meaningfully lint).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Third-party services summary -->
+      <div class="doc-section">
+        <h2 class="doc-section-heading">External Services &amp; Requests</h2>
+        <p>The live site makes a carefully controlled set of external requests. The design principle is <strong>no unnecessary third-party origins</strong> — each one adds latency and a privacy surface.</p>
+
+        <table class="doc-table" aria-label="External requests made by the site">
+          <thead>
+            <tr>
+              <th>Origin</th>
+              <th>What loads</th>
+              <th>Context</th>
+              <th>Removable?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>cdn.jsdelivr.net</code></td>
+              <td>AOS v2.3.4 (CSS + JS)</td>
+              <td>Front end, deferred</td>
+              <td>Yes — replace with a local copy</td>
+            </tr>
+            <tr>
+              <td><em>None</em></td>
+              <td>Fonts — self-hosted from theme origin</td>
+              <td>Front end, preloaded</td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td><em>None</em></td>
+              <td>Analytics — Burst Statistics runs locally</td>
+              <td>Admin + front end</td>
+              <td>N/A</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size: 0.875rem; color: var(--color-text-muted);">Google Fonts, Gravatar, and the default WordPress emoji CDN are all explicitly removed in <code>functions.php</code> via <code>wp_dequeue_style()</code>, <code>remove_action()</code>, and filter overrides.</p>
+      </div>
+
+    </section>
+    <!-- end #page-tools-used -->
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         PLACEHOLDER PAGES (filled in subsequent sessions)
+         ══════════════════════════════════════════════════════════ -->
+
+    <section class="doc-page" id="page-custom-theme" aria-labelledby="custom-theme-heading">
+      <div class="placeholder-page">
+        <p class="placeholder-eyebrow">Theme</p>
+        <h1 class="placeholder-heading" id="custom-theme-heading">Custom Theme</h1>
+        <p class="placeholder-desc">Full documentation of the NU Research Classic theme — template hierarchy, functions.php architecture, block integration, component inventory, and the token-to-UI mapping.</p>
+        <span class="coming-soon-band">⏳ &nbsp; Coming next session</span>
+      </div>
+    </section>
+
+    <section class="doc-page" id="page-design-system" aria-labelledby="design-system-heading">
+      <div class="placeholder-page">
+        <p class="placeholder-eyebrow">Theme</p>
+        <h1 class="placeholder-heading" id="design-system-heading">Design System</h1>
+        <p class="placeholder-desc">Token inventory, color palette, typographic scale, spacing system, component patterns, and the design rationale behind each decision.</p>
+        <span class="coming-soon-band">⏳ &nbsp; Coming next session</span>
+      </div>
+    </section>
+
+    <section class="doc-page" id="page-custom-plugins" aria-labelledby="custom-plugins-heading">
+      <div class="placeholder-page">
+        <p class="placeholder-eyebrow">Plugins</p>
+        <h1 class="placeholder-heading" id="custom-plugins-heading">Custom Plugins</h1>
+        <p class="placeholder-desc">Deep-dive documentation for Fellows Deadline Countdown, ATS Form (swe-fellows-application), and Fellows Mail List — architecture, hooks, REST endpoints, and admin UX.</p>
+        <span class="coming-soon-band">⏳ &nbsp; Coming next session</span>
+      </div>
+    </section>
+
+    <section class="doc-page" id="page-installed-plugins" aria-labelledby="installed-plugins-heading">
+      <div class="placeholder-page">
+        <p class="placeholder-eyebrow">Plugins</p>
+        <h1 class="placeholder-heading" id="installed-plugins-heading">Installed Plugins</h1>
+        <p class="placeholder-desc">Configuration and integration notes for all seven installed WordPress plugins — Yoast SEO, All-in-One Security, WPS Hide Login, UpdraftPlus, WP Optimize, Burst Statistics, and Secure Custom Fields.</p>
+        <span class="coming-soon-band">⏳ &nbsp; Coming next session</span>
+      </div>
+    </section>
+
+    <section class="doc-page" id="page-database-schemas" aria-labelledby="db-schemas-heading">
+      <div class="placeholder-page">
+        <p class="placeholder-eyebrow">Plugins</p>
+        <h1 class="placeholder-heading" id="db-schemas-heading">Database Schemas</h1>
+        <p class="placeholder-desc">ERD and column-level documentation for <code>wp_swe_applications</code> and <code>wp_swe_waitlist</code>, plus the WordPress core table relationships that connect them.</p>
+        <span class="coming-soon-band">⏳ &nbsp; Coming next session</span>
+      </div>
+    </section>
+
+    <section class="doc-page" id="page-ui-ux" aria-labelledby="ui-ux-heading">
+      <div class="placeholder-page">
+        <p class="placeholder-eyebrow">Frontend</p>
+        <h1 class="placeholder-heading" id="ui-ux-heading">UI &amp; UX</h1>
+        <p class="placeholder-desc">Design philosophy, interaction patterns, editorial hierarchy, CTA conventions, the hero billboard, card system, FAQ disclosure pattern, and the decision log for every major UI choice.</p>
+        <span class="coming-soon-band">⏳ &nbsp; Coming next session</span>
+      </div>
+    </section>
+
+    <section class="doc-page" id="page-responsiveness" aria-labelledby="responsiveness-heading">
+      <div class="placeholder-page">
+        <p class="placeholder-eyebrow">Frontend</p>
+        <h1 class="placeholder-heading" id="responsiveness-heading">Responsiveness</h1>
+        <p class="placeholder-desc">Breakpoint strategy, mobile-first approach, fluid typography via <code>clamp()</code>, grid collapse behaviour, hero variants, and tested viewport sizes.</p>
+        <span class="coming-soon-band">⏳ &nbsp; Coming next session</span>
+      </div>
+    </section>
+
+    <section class="doc-page" id="page-accessibility" aria-labelledby="accessibility-heading">
+      <div class="placeholder-page">
+        <p class="placeholder-eyebrow">Frontend</p>
+        <h1 class="placeholder-heading" id="accessibility-heading">Accessibility</h1>
+        <p class="placeholder-desc">WCAG 2.1 AA conformance audit — skip links, ARIA landmark roles, focus management, colour contrast ratios, keyboard navigation, screen reader testing notes, and reduced-motion support.</p>
+        <span class="coming-soon-band">⏳ &nbsp; Coming next session</span>
+      </div>
+    </section>
+
+    <section class="doc-page" id="page-seo" aria-labelledby="seo-heading">
+      <div class="placeholder-page">
+        <p class="placeholder-eyebrow">Platform</p>
+        <h1 class="placeholder-heading" id="seo-heading">SEO</h1>
+        <p class="placeholder-desc">Yoast SEO configuration, meta description strategy, Open Graph tags, JSON-LD schema markup, XML sitemap, canonical URLs, and the theme's own fallback meta-description hook.</p>
+        <span class="coming-soon-band">⏳ &nbsp; Coming next session</span>
+      </div>
+    </section>
+
+    <section class="doc-page" id="page-security" aria-labelledby="security-heading">
+      <div class="placeholder-page">
+        <p class="placeholder-eyebrow">Platform</p>
+        <h1 class="placeholder-heading" id="security-heading">Security</h1>
+        <p class="placeholder-desc">Full security posture: input validation and sanitisation patterns, prepared statements, nonce verification, CSRF protection, login URL obfuscation, firewall rules, file-permission hardening, and plugin-level audit trail.</p>
+        <span class="coming-soon-band">⏳ &nbsp; Coming next session</span>
+      </div>
+    </section>
+
+    <section class="doc-page" id="page-lighthouse" aria-labelledby="lighthouse-heading">
+      <div class="placeholder-page">
+        <p class="placeholder-eyebrow">Platform</p>
+        <h1 class="placeholder-heading" id="lighthouse-heading">Lighthouse Score</h1>
+        <p class="placeholder-desc">Performance, Accessibility, Best Practices, and SEO audit results — with annotated screenshots, LCP breakdown, INP analysis, and a before/after comparison for each optimisation applied.</p>
+        <span class="coming-soon-band">⏳ &nbsp; Coming next session</span>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+/* ── Page navigation ─────────────────────────────────────── */
+function showPage(id, anchor) {
+  // Hide all pages
+  document.querySelectorAll('.doc-page').forEach(function(p) {
+    p.classList.remove('is-active');
+  });
+
+  // Show target
+  var target = document.getElementById('page-' + id);
+  if (target) {
+    target.classList.add('is-active');
+    // Scroll main to top
+    var main = document.getElementById('doc-main');
+    if (main) { main.scrollTop = 0; }
+    window.scrollTo(0, 0);
+  }
+
+  // Update active nav link
+  document.querySelectorAll('.sidebar-nav a').forEach(function(a) {
+    a.classList.remove('is-active');
+  });
+  if (anchor) {
+    anchor.classList.add('is-active');
+  }
+}
+
+/* ── Sidebar toggle (mobile) ─────────────────────────────── */
+function toggleSidebar(btn) {
+  var nav = document.getElementById('sidebar-nav');
+  var expanded = btn.getAttribute('aria-expanded') === 'true';
+  btn.setAttribute('aria-expanded', String(!expanded));
+  nav.classList.toggle('is-open', !expanded);
+}
+
+/* ── On load: open sidebar on desktop ───────────────────── */
+(function() {
+  if (window.innerWidth >= 900) {
+    var nav = document.getElementById('sidebar-nav');
+    if (nav) nav.classList.add('is-open');
+  }
+})();
+</script>
+</body>
+</html>
