@@ -16,7 +16,7 @@ get_header();
 
 	<?php nu_research_breadcrumb(); ?>
 
-	<section class="section-block">
+	<section class="section-block" data-aos="fade-up">
 		<?php
 		nu_research_section_header(
 			__( 'Apply & Eligibility', 'nu-research' ),
@@ -28,7 +28,7 @@ get_header();
 	</section>
 
 	<section class="section-block two-col">
-		<div>
+		<div data-aos="fade-right">
 			<h2><?php esc_html_e( 'Eligibility criteria', 'nu-research' ); ?></h2>
 			<ul class="check-list">
 				<li><?php esc_html_e( 'Currently enrolled undergraduate in Computer Science, Software Engineering, or a related field', 'nu-research' ); ?></li>
@@ -38,7 +38,7 @@ get_header();
 				<li><?php esc_html_e( 'Open to U.S. citizens, permanent residents, and international students with valid visa status', 'nu-research' ); ?></li>
 			</ul>
 		</div>
-		<div>
+		<div data-aos="fade-left" data-aos-delay="100">
 			<h2><?php esc_html_e( 'Application steps', 'nu-research' ); ?></h2>
 			<ol class="numbered-list">
 				<li><?php esc_html_e( 'Review eligibility criteria and the four research tracks', 'nu-research' ); ?></li>
@@ -52,7 +52,7 @@ get_header();
 	</section>
 
 	<section class="section-block">
-		<h2><?php esc_html_e( 'Key deadlines', 'nu-research' ); ?></h2>
+		<h2 data-aos="fade-up"><?php esc_html_e( 'Key deadlines', 'nu-research' ); ?></h2>
 		<?php if ( function_exists( 'have_rows' ) && have_rows( 'deadlines' ) ) : ?>
 			<table class="deadlines-table">
 				<caption class="screen-reader-text"><?php esc_html_e( 'Application deadlines for the upcoming program year', 'nu-research' ); ?></caption>
@@ -80,25 +80,25 @@ get_header();
 	</section>
 
 	<section class="section-block" id="faq">
-		<h2><?php esc_html_e( 'Frequently asked questions', 'nu-research' ); ?></h2>
+		<h2 data-aos="fade-up"><?php esc_html_e( 'Frequently asked questions', 'nu-research' ); ?></h2>
 		<div class="faq-list">
-			<details open>
+			<details open data-aos="fade-up" data-aos-delay="0">
 				<summary><?php esc_html_e( 'Do I need prior WordPress experience?', 'nu-research' ); ?></summary>
 				<p><?php esc_html_e( 'No. Solid fundamentals in PHP or JavaScript (from any coursework) are enough — the first week is a paid onboarding sprint covering WordPress-specific concepts.', 'nu-research' ); ?></p>
 			</details>
-			<details>
+			<details data-aos="fade-up" data-aos-delay="75">
 				<summary><?php esc_html_e( 'Is the fellowship paid?', 'nu-research' ); ?></summary>
 				<p><?php esc_html_e( 'Yes. Fellows receive a flat stipend for the 10-week program, paid biweekly, plus a travel allowance for the end-of-summer showcase.', 'nu-research' ); ?></p>
 			</details>
-			<details>
+			<details data-aos="fade-up" data-aos-delay="150">
 				<summary><?php esc_html_e( 'Can I apply if I have a concurrent internship?', 'nu-research' ); ?></summary>
 				<p><?php esc_html_e( 'The program requires full-time availability for all 10 weeks, so a concurrent internship or heavy course load isn’t compatible.', 'nu-research' ); ?></p>
 			</details>
-			<details>
+			<details data-aos="fade-up" data-aos-delay="225">
 				<summary><?php esc_html_e( 'Do international students qualify?', 'nu-research' ); ?></summary>
 				<p><?php esc_html_e( 'Yes — U.S. citizens, permanent residents, and international students with valid visa status are all eligible to apply.', 'nu-research' ); ?></p>
 			</details>
-			<details>
+			<details data-aos="fade-up" data-aos-delay="300">
 				<summary><?php esc_html_e( 'How are tracks assigned?', 'nu-research' ); ?></summary>
 				<p><?php esc_html_e( 'You’ll rank your top two track preferences on the application; final placement balances student interest with mentor capacity.', 'nu-research' ); ?></p>
 			</details>

@@ -26,7 +26,7 @@ $nu_blog_title = $nu_blog_id ? get_the_title( $nu_blog_id ) : __( 'Blog', 'nu-re
 			)
 		);
 		?>
-		<article <?php post_class( 'post-single' ); ?>>
+		<article <?php post_class( 'post-single' ); ?> data-aos="fade-up">
 			<header class="post-header">
 				<?php
 				$nu_categories = get_the_category();

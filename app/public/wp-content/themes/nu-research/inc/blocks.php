@@ -216,7 +216,7 @@ function nu_research_render_hero( $a ) {
 function nu_research_render_section_header( $a ) {
 	ob_start();
 	?>
-	<section class="section">
+	<section class="section" data-aos="fade-up">
 		<div class="wrap">
 			<?php nu_research_section_header( $a['eyebrow'], $a['heading'], $a['intro'] ); ?>
 		</div>
@@ -232,16 +232,18 @@ function nu_research_render_section_header( $a ) {
  * @return string
  */
 function nu_research_render_media_card( $a ) {
-	$card_class = 'media-card' . ( $a['reverse'] ? ' media-card-reverse' : '' );
+	$card_class  = 'media-card' . ( $a['reverse'] ? ' media-card-reverse' : '' );
+	$img_aos     = $a['reverse'] ? 'fade-left' : 'fade-right';
+	$body_aos    = $a['reverse'] ? 'fade-right' : 'fade-left';
 	ob_start();
 	?>
 	<section class="<?php echo esc_attr( $a['section'] ); ?>">
 		<div class="wrap">
 			<div class="<?php echo esc_attr( $card_class ); ?>">
-				<div class="media-card-image">
+				<div class="media-card-image" data-aos="<?php echo esc_attr( $img_aos ); ?>">
 					<img src="<?php echo esc_url( nu_research_img( $a['image'] ) ); ?>" alt="<?php echo esc_attr( $a['imageAlt'] ); ?>" width="1000" height="750" loading="lazy">
 				</div>
-				<div class="media-card-body">
+				<div class="media-card-body" data-aos="<?php echo esc_attr( $body_aos ); ?>" data-aos-delay="100">
 					<h2><?php echo esc_html( $a['heading'] ); ?></h2>
 					<p><?php echo esc_html( $a['body'] ); ?></p>
 				</div>
@@ -265,8 +267,8 @@ function nu_research_render_track_badges( $a ) {
 	<section class="section section-tight" aria-label="<?php echo esc_attr( $a['label'] ); ?>">
 		<div class="wrap">
 			<ul class="badge-row">
-				<?php foreach ( $tracks as $track ) : ?>
-					<li class="badge badge-outline"><?php echo esc_html( $track ); ?></li>
+				<?php foreach ( $tracks as $i => $track ) : ?>
+					<li class="badge badge-outline" data-aos="fade-up" data-aos-delay="<?php echo esc_attr( $i * 75 ); ?>"><?php echo esc_html( $track ); ?></li>
 				<?php endforeach; ?>
 			</ul>
 		</div>
@@ -285,7 +287,7 @@ function nu_research_render_cta_band( $a ) {
 	ob_start();
 	?>
 	<section class="section section-cta">
-		<div class="wrap cta-wrap">
+		<div class="wrap cta-wrap" data-aos="fade-up">
 			<h2><?php echo esc_html( $a['heading'] ); ?></h2>
 			<p class="cta-lead"><?php echo esc_html( $a['lead'] ); ?></p>
 			<?php nu_research_cta( $a['ctaLabel'], nu_research_page_url( $a['ctaSlug'] ) ); ?>
@@ -369,10 +371,10 @@ function nu_research_render_pillars( $a ) {
 			<?php if ( $items ) : ?>
 				<ul class="pillars-grid">
 					<?php
-					foreach ( $items as $item ) :
+					foreach ( $items as $i => $item ) :
 						$parts = array_pad( explode( '|', $item, 3 ), 3, '' );
 						?>
-						<li class="pillar">
+						<li class="pillar" data-aos="fade-up" data-aos-delay="<?php echo esc_attr( $i * 100 ); ?>">
 							<?php nu_research_pillar_icon( sanitize_key( $parts[0] ) ); ?>
 							<h3 class="pillar-title"><?php echo esc_html( $parts[1] ); ?></h3>
 							<p class="pillar-body"><?php echo esc_html( $parts[2] ); ?></p>
@@ -406,10 +408,10 @@ function nu_research_render_journey_cards( $a ) {
 			<?php if ( $cards ) : ?>
 				<ul class="journey-grid">
 					<?php
-					foreach ( $cards as $card ) :
+					foreach ( $cards as $i => $card ) :
 						$parts = array_pad( explode( '|', $card, 6 ), 6, '' );
 						?>
-						<li class="journey-card">
+						<li class="journey-card" data-aos="fade-up" data-aos-delay="<?php echo esc_attr( $i * 100 ); ?>">
 							<div class="journey-card-media ratio-4-3">
 								<img src="<?php echo esc_url( nu_research_img( $parts[0] ) ); ?>" alt="<?php echo esc_attr( $parts[1] ); ?>" width="1000" height="750" loading="lazy">
 							</div>

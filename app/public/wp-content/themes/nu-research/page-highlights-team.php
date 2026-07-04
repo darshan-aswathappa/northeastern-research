@@ -15,7 +15,7 @@ get_header();
 
 	<?php nu_research_breadcrumb(); ?>
 
-	<section class="section-block">
+	<section class="section-block" data-aos="fade-up">
 		<?php
 		nu_research_section_header(
 			__( 'Highlights & Team', 'nu-research' ),
@@ -36,6 +36,7 @@ get_header();
 		<?php if ( function_exists( 'have_rows' ) && have_rows( 'team_members' ) ) : ?>
 			<ul class="card-grid card-grid-team">
 				<?php
+				$nu_card_index = 0;
 				while ( have_rows( 'team_members' ) ) :
 					the_row();
 					// Raw attachment ID (ACF stores the ID regardless of return format),
@@ -45,8 +46,10 @@ get_header();
 					$nu_major    = get_sub_field( 'major' );
 					$nu_mentor   = get_sub_field( 'mentor' );
 					$nu_focus    = get_sub_field( 'focus' );
+					$nu_delay    = ( $nu_card_index % 3 ) * 100;
+					$nu_card_index++;
 					?>
-					<li class="card">
+					<li class="card" data-aos="fade-up" data-aos-delay="<?php echo esc_attr( $nu_delay ); ?>">
 						<div class="card-media ratio-4-3">
 							<?php
 							if ( $nu_photo_id ) {
@@ -92,6 +95,7 @@ get_header();
 		<?php if ( function_exists( 'have_rows' ) && have_rows( 'research_highlights' ) ) : ?>
 			<ul class="card-grid card-grid-highlights">
 				<?php
+				$nu_highlight_index = 0;
 				while ( have_rows( 'research_highlights' ) ) :
 					the_row();
 					$nu_image_id = (int) get_sub_field( 'image', false );
@@ -99,8 +103,10 @@ get_header();
 					$nu_track    = get_sub_field( 'track' );
 					$nu_summary  = get_sub_field( 'summary' );
 					$nu_students = get_sub_field( 'students' );
+					$nu_h_delay  = ( $nu_highlight_index % 3 ) * 100;
+					$nu_highlight_index++;
 					?>
-					<li class="card">
+					<li class="card" data-aos="fade-up" data-aos-delay="<?php echo esc_attr( $nu_h_delay ); ?>">
 						<div class="card-media ratio-16-10">
 							<?php
 							if ( $nu_image_id ) {

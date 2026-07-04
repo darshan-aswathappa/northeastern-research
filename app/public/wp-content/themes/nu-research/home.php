@@ -13,6 +13,7 @@ $nu_blog_title = $nu_blog_id ? get_the_title( $nu_blog_id ) : __( 'Blog', 'nu-re
 
 <div class="wrap page-pad">
 	<?php nu_research_breadcrumb( $nu_blog_title ); ?>
+	<div data-aos="fade-up">
 	<?php
 	nu_research_section_header(
 		__( 'News & Updates', 'nu-research' ),
@@ -23,12 +24,17 @@ $nu_blog_title = $nu_blog_id ? get_the_title( $nu_blog_id ) : __( 'Blog', 'nu-re
 
 	nu_research_category_filter_bar();
 	?>
+	</div>
 
 	<?php if ( have_posts() ) : ?>
 		<ul class="card-grid card-grid-highlights">
 			<?php
+			$nu_post_index = 0;
 			while ( have_posts() ) :
 				the_post();
+				// Pass the stagger delay via a global so post-card.php can use it.
+				$GLOBALS['nu_aos_delay'] = ( $nu_post_index % 3 ) * 100;
+				$nu_post_index++;
 				get_template_part( 'template-parts/post-card' );
 			endwhile;
 			?>
