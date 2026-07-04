@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) die('No direct access allowed');
 
-// WP-Optimize advanced-cache.php (written by version: 4.5.5) (homeurl: http://localhost:10005/) (abspath: /Users/darshanaswathappa/Local Sites/northeastern-research/app/public/) (do not change this line, it is used for correctness checks)
+// WP-Optimize advanced-cache.php (written by version: 4.5.5) (homeurl: https://northeastern-research.local/) (abspath: /Users/darshanaswathappa/Local Sites/northeastern-research/app/public/) (do not change this line, it is used for correctness checks)
 
 if (!defined('WPO_ADVANCED_CACHE')) define('WPO_ADVANCED_CACHE', true);
 
@@ -27,7 +27,7 @@ if (false === $plugin_location) {
 	$protocol = $_SERVER['REQUEST_SCHEME'];
 	$host = $_SERVER['HTTP_HOST'];
 	$request_uri = $_SERVER['REQUEST_URI'];
-	if (strcasecmp('http://localhost:10005/', $protocol . '://' . $host . $request_uri) === 0) {
+	if (strcasecmp('https://northeastern-research.local/', $protocol . '://' . $host . $request_uri) === 0) {
 		error_log('WP-Optimize: No caching took place, because the plugin location could not be found');
 	}
 } else {
@@ -45,12 +45,12 @@ if (false !== $plugin_location) {
 	if (!defined('WPO_CACHE_EXT_DIR')) define('WPO_CACHE_EXT_DIR', '/Users/darshanaswathappa/Local Sites/northeastern-research/app/public/wp-content/plugins/wp-optimize/cache/extensions');
 }
 
-if (!@file_exists(WPO_CACHE_CONFIG_DIR . '/config-localhost-port10005.php')) { return; }
+if (!@file_exists(WPO_CACHE_CONFIG_DIR . '/config-northeastern-research.local.php')) { return; }
 
-$GLOBALS['wpo_cache_config'] = @json_decode(file_get_contents(WPO_CACHE_CONFIG_DIR . '/config-localhost-port10005.php'), true);
+$GLOBALS['wpo_cache_config'] = @json_decode(file_get_contents(WPO_CACHE_CONFIG_DIR . '/config-northeastern-research.local.php'), true);
 
 if (empty($GLOBALS['wpo_cache_config'])) {
-	include_once(WPO_CACHE_CONFIG_DIR . '/config-localhost-port10005.php');
+	include_once(WPO_CACHE_CONFIG_DIR . '/config-northeastern-research.local.php');
 }
 
 if (empty($GLOBALS['wpo_cache_config'])) {

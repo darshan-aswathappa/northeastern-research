@@ -50,6 +50,24 @@ function nu_research_enqueue() {
 		(string) filemtime( get_theme_file_path( 'assets/css/main.css' ) )
 	);
 
+	// AOS (Animate On Scroll) — loaded from CDN.
+	wp_enqueue_style(
+		'aos',
+		'https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css',
+		array(),
+		'2.3.4'
+	);
+	wp_enqueue_script(
+		'aos',
+		'https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js',
+		array(),
+		'2.3.4',
+		array(
+			'in_footer' => true,
+			'strategy'  => 'defer',
+		)
+	);
+
 	wp_enqueue_script(
 		'nu-research-nav',
 		get_theme_file_uri( 'assets/js/nav.js' ),

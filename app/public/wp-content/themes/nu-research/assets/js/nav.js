@@ -42,3 +42,14 @@
 		setOpen( e.matches );
 	} );
 } )();
+
+// Initialise AOS after all deferred scripts have loaded.
+window.addEventListener( 'load', function () {
+	if ( typeof AOS !== 'undefined' ) {
+		AOS.init( {
+			duration: 600,   // ms per animation
+			once:     true,  // animate only the first time the element enters view
+			offset:   80,    // px from viewport edge before triggering
+		} );
+	}
+} );
