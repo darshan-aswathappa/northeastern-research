@@ -154,7 +154,7 @@ function swe_app_render_detail( $id ) {
 				<tr><th scope="row"><?php esc_html_e( 'Statement', 'swe-fellows-application' ); ?></th><td><?php echo wp_kses_post( wpautop( $row->statement ) ); ?></td></tr>
 				<tr><th scope="row"><?php esc_html_e( 'Resume', 'swe-fellows-application' ); ?></th><td>
 					<?php if ( ! empty( $row->resume_path ) ) : ?>
-						<a href="<?php echo esc_url( swe_app_resume_url( $row->resume_path ) ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'View resume (PDF)', 'swe-fellows-application' ); ?></a>
+						<a href="<?php echo esc_url( swe_app_resume_download_url( $row->resume_path, $id ) ); ?>"><?php esc_html_e( 'Download resume (PDF)', 'swe-fellows-application' ); ?></a>
 					<?php else : ?>
 						<span aria-hidden="true">—</span> <span class="screen-reader-text"><?php esc_html_e( 'No resume on file', 'swe-fellows-application' ); ?></span>
 					<?php endif; ?>
@@ -183,6 +183,62 @@ function swe_app_render_detail( $id ) {
 	</div>
 	<?php
 }
+
+/**
+ * Return a nonce-protected download URL for an admin user.
+ *
+ * @param string $relative_path Path relative to uploads base.
+ * @param int    $id            Application row ID.
+ * @return string
+ */
+function swe_app_resume_download_url( $relative_path, $id ) {
+	return wp_nonce_url(
+		admin_url( 'admin-post.php?action=swe_app_download&id=' . (int) $id ),
+		'swe_app_download_' . (int) $id
+	);
+}
+
+/**
+ * Authenticated resume download handler.
+ *
+ * Verifies the nonce and capability, then streams the file with
+ * Content-Disposition: attachment so the browser downloads it.
+ */
+function swe_app_handle_download() {
+	$id = isset( $_GET['id'] ) ? (int) $_GET['id'] : 0;
+
+	check_admin_referer( 'swe_app_download_' . $id );
+
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_die( esc_html__( 'You do not have permission to download resumes.', 'swe-fellows-application' ), 403 );
+	}
+
+	$row = swe_app_get( $id );
+	if ( ! $row || empty( $row->resume_path ) ) {
+		wp_die( esc_html__( 'Resume not found.', 'swe-fellows-application' ), 404 );
+	}
+
+	$uploads  = wp_upload_dir();
+	$abs_path = wp_normalize_path( trailingslashit( $uploads['basedir'] ) . ltrim( $row->resume_path, '/' ) );
+	$resume_dir = wp_normalize_path( trailingslashit( swe_app_resume_dir() ) );
+
+	// Guard against path traversal: only serve files inside our directory.
+	if ( 0 !== strpos( $abs_path, $resume_dir ) || ! file_exists( $abs_path ) ) {
+		wp_die( esc_html__( 'Resume not found.', 'swe-fellows-application' ), 404 );
+	}
+
+	$filename = sanitize_file_name( basename( $abs_path ) );
+
+	header( 'Content-Type: application/pdf' );
+	header( 'Content-Disposition: attachment; filename="resume-' . $id . '.pdf"' );
+	header( 'Content-Length: ' . filesize( $abs_path ) );
+	header( 'X-Content-Type-Options: nosniff' );
+	header( 'Cache-Control: private, no-store' );
+
+	readfile( $abs_path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_readfile
+	exit;
+}
+add_action( 'admin_post_swe_app_download', 'swe_app_handle_download' );
 
 if ( ! class_exists( 'WP_List_Table' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';

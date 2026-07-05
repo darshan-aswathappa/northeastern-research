@@ -45,7 +45,7 @@ function swe_app_install() {
 		status VARCHAR(20) NOT NULL DEFAULT 'new',
 		created_at DATETIME NOT NULL,
 		PRIMARY KEY  (id),
-		KEY email (email),
+		UNIQUE KEY email (email),
 		KEY track (track),
 		KEY created_at (created_at)
 	) {$charset_collate};";
@@ -62,6 +62,15 @@ function swe_app_install() {
  */
 function swe_app_insert( array $data ) {
 	global $wpdb;
+
+	// Reject duplicate applications at the application layer before hitting the DB.
+	if ( swe_app_email_exists( $data['email'] ) ) {
+		return new WP_Error(
+			'swe_app_duplicate',
+			__( 'An application from this email address has already been received.', 'swe-fellows-application' ),
+			array( 'status' => 409, 'field' => 'email' )
+		);
+	}
 
 	$inserted = $wpdb->insert( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 		swe_app_table_name(),
@@ -185,4 +194,18 @@ function swe_app_set_status( $id, $status ) {
  */
 function swe_app_allowed_statuses() {
 	return array( 'new', 'reviewed', 'accepted', 'rejected' );
+}
+
+/**
+ * Whether an application from this email already exists.
+ *
+ * @param string $email Sanitized email.
+ * @return bool
+ */
+function swe_app_email_exists( $email ) {
+	global $wpdb;
+	$table_name = swe_app_table_name();
+	return (bool) $wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+		$wpdb->prepare( "SELECT id FROM {$table_name} WHERE email = %s", $email ) // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+	);
 }

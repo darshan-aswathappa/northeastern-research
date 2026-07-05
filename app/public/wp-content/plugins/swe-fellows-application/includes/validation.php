@@ -188,6 +188,12 @@ function swe_app_resume_dir() {
 		@file_put_contents( $index, '' ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 	}
 
+	// Deny direct web access — files are served only through the download handler.
+	$htaccess = trailingslashit( $dir ) . '.htaccess';
+	if ( ! file_exists( $htaccess ) ) {
+		@file_put_contents( $htaccess, "deny from all\n" ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+	}
+
 	return $dir;
 }
 

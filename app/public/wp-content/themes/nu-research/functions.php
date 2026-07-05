@@ -15,6 +15,17 @@ define( 'NU_RESEARCH_VERSION', '1.0.0' );
 require_once get_theme_file_path( 'inc/blocks.php' );
 
 /**
+ * Security response headers.
+ */
+function nu_research_security_headers() {
+	header( 'X-Content-Type-Options: nosniff' );
+	header( 'X-Frame-Options: SAMEORIGIN' );
+	header( 'Referrer-Policy: strict-origin-when-cross-origin' );
+	header( 'Permissions-Policy: camera=(), microphone=(), geolocation=()' );
+}
+add_action( 'send_headers', 'nu_research_security_headers' );
+
+/**
  * Theme supports and nav menus.
  */
 function nu_research_setup() {

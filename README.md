@@ -105,6 +105,14 @@ CSS, JS, and third-party vendor code are excluded from linting.
 
 ---
 
+## Technical documentation
+
+Full technical documentation — covering the custom theme, plugin architecture, database schemas, design system, UI/UX decisions, accessibility, security, Lighthouse results, and a dedicated **CampusPress deployment discussion** — is available here:
+
+**[View documentation](https://html-preview.github.io/?url=https://github.com/darshan-aswathappa/northeastern-research/blob/main/documentation.html)**
+
+---
+
 ## Local development
 
 The site runs in Local by Flywheel. The working directory for WordPress is `app/public/`.
