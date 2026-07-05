@@ -2996,12 +2996,15 @@ jobs:
             <pre><code>swe-fellows-application/
 ├── swe-fellows-application.php   ← Bootstrap, activation hook, upgrade check
 └── includes/
-    ├── db.php           ← Table creation (dbDelta), insert, update helpers
-    ├── validation.php   ← Input sanitisation, honeypot, rate limiting
+    ├── db.php           ← Table creation (dbDelta), insert, update, resume-file cleanup
+    ├── validation.php   ← Input sanitisation, honeypot, rate limiting, resume upload/validation
     ├── emails.php       ← Confirmation + rejection email functions
     ├── form.php         ← [swe_fellows_application] shortcode + multi-step UI
-    ├── rest.php         ← REST API endpoint (POST /wp-json/swe/v1/apply)
-    └── admin.php        ← Admin table, status update, bulk actions</code></pre>
+    ├── rest.php         ← REST API endpoint (POST /wp-json/swe-app/v1/submit)
+    └── admin.php        ← Admin table, status update, bulk actions
+
+Uploaded resumes are stored in wp-content/uploads/swe-resumes/ (random filenames,
+directory listing blocked by an index.html guard).</code></pre>
 
             <h3 style="margin: var(--space-5) 0 var(--space-3)">Form Fields</h3>
             <table class="doc-table" aria-label="Application form fields">
@@ -3060,6 +3063,19 @@ jobs:
                   </td>
                 </tr>
                 <tr>
+                  <td>Resume</td>
+                  <td>File (PDF)</td>
+                  <td>
+                    Required, PDF only — extension + MIME verified server-side
+                    with <code>wp_check_filetype_and_ext()</code> plus a
+                    <code>%PDF-</code> magic-byte check, 5&nbsp;MB max. Stored via
+                    <code>wp_handle_upload()</code> under
+                    <code>uploads/swe-resumes/</code> with a randomized filename;
+                    the relative path is saved to the <code>resume_path</code>
+                    column.
+                  </td>
+                </tr>
+                <tr>
                   <td><code>swe_website</code></td>
                   <td>Hidden (honeypot)</td>
                   <td>
@@ -3091,7 +3107,8 @@ jobs:
                   Enforced via WordPress transients
                   (<code>swe_app_rl_{md5(ip)}</code>). Returns HTTP 429 on
                   breach. Checked via
-                  <code>swe_app_check_rate_limit()</code> before validation.
+                  <code>swe_app_check_rate_limit()</code> after validation, so
+                  honest mistakes and bot noise don't consume the quota.
                 </p>
               </div>
               <div class="tool-card">
@@ -3114,24 +3131,41 @@ jobs:
                   the plugin.
                 </p>
               </div>
+              <div class="tool-card">
+                <h3 class="tool-name">Resume upload hardening</h3>
+                <p class="tool-desc">
+                  Uploaded resumes are validated as genuine PDFs (extension +
+                  MIME sniffing via <code>wp_check_filetype_and_ext()</code> and
+                  a <code>%PDF-</code> magic-byte check), capped at 5&nbsp;MB, and
+                  only moved to disk after every other check passes. Files are
+                  stored under <code>uploads/swe-resumes/</code> with unguessable
+                  randomized names; an <code>index.html</code> guard blocks
+                  directory listing, and deleting an application removes its
+                  resume file.
+                </p>
+              </div>
             </div>
 
             <h3 style="margin: var(--space-5) 0 var(--space-3)">
               REST Endpoint
             </h3>
-            <pre><code>POST /wp-json/swe/v1/apply
+            <pre><code>POST /wp-json/swe-app/v1/submit
 
-Request body (JSON):
+Request body (multipart/form-data — the enhanced form sends a file):
   name        string   required
   email       string   required
   class_year  string   required  (First-year|Sophomore|Junior|Senior)
   track       string   required  (one of 4 research tracks)
   coursework  string   optional
   statement   string   required  (≤ 500 words)
+  resume      file     required  (PDF, ≤ 5 MB)
   swe_website string   honeypot — must be absent or empty
 
-Success  → 201 { success: true, message: "..." }
-Error    → 400 { code: "swe_app_invalid_*", message: "...", data: { field: "..." } }
+Header: X-WP-Nonce (wp_rest nonce issued to the page)
+
+Success  → 200 { success: true, id: 123 }
+Error    → 400 { code: "swe_app_invalid_*" | "swe_app_resume_*", message: "...", data: { field: "..." } }
+Nonce    → 403 { code: "...invalid_nonce", ... }
 Rate     → 429 { code: "swe_app_rate_limited", ... }</code></pre>
 
             <h3 style="margin: var(--space-5) 0 var(--space-3)">
@@ -3176,7 +3210,8 @@ Rate     → 429 { code: "swe_app_rate_limited", ... }</code></pre>
               A top-level "Applications" admin menu lists all submissions in a
               paginated table. Columns: ID, Name, Email, Track, Class Year,
               Status, Date. Each row has a "View" link to a detail page where
-              the statement is readable and the status can be changed. Changing
+              the statement is readable, the applicant's resume can be opened as
+              a PDF in a new tab, and the status can be changed. Changing
               status to "rejected" automatically triggers the rejection email.
             </p>
 
@@ -3184,13 +3219,15 @@ Rate     → 429 { code: "swe_app_rate_limited", ... }</code></pre>
               Upgrade Safety
             </h3>
             <p>
-              The plugin defines <code>SWE_APP_DB_VERSION = '1'</code> (string,
+              The plugin defines <code>SWE_APP_DB_VERSION = '2'</code> (string,
               matching <code>get_option()</code> return type). On every
               <code>plugins_loaded</code> it compares the stored version to the
               constant and calls <code>swe_app_install()</code> (which runs
               <code>dbDelta()</code>) if they differ. This means schema changes
               are applied even when the activation hook doesn't fire — e.g., on
-              bulk plugin updates.
+              bulk plugin updates. Version&nbsp;2 added the
+              <code>resume_path</code> column; existing installs pick it up
+              automatically on the next page load with no data loss.
             </p>
           </div>
 

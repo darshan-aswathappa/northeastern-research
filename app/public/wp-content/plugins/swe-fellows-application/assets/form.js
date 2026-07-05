@@ -131,27 +131,50 @@
 			if ( ! submitBtn ) {
 				return;
 			}
+
+			// Client-side resume guard: accept="" is advisory and checkValidity()
+			// only enforces "required", so verify type and size before uploading.
+			// The server re-validates regardless — this is just faster feedback.
+			var resumeField = form.querySelector( '[name="resume"]' );
+			var resumeFile = resumeField && resumeField.files ? resumeField.files[ 0 ] : null;
+			if ( resumeFile ) {
+				var isPdf =
+					'application/pdf' === resumeFile.type ||
+					/\.pdf$/i.test( resumeFile.name );
+				if ( ! isPdf ) {
+					showError( window.sweAppConfig.i18n.resumeType );
+					return;
+				}
+				if ( resumeFile.size > 5 * 1024 * 1024 ) {
+					showError( window.sweAppConfig.i18n.resumeTooLarge );
+					return;
+				}
+			}
+
 			submitBtn.disabled = true;
 			submitBtn.textContent = window.sweAppConfig.i18n.submitting;
 
-			var payload = {
-				name: form.querySelector( '[name="name"]' ).value,
-				email: form.querySelector( '[name="email"]' ).value,
-				class_year: form.querySelector( '[name="class_year"]' ).value,
-				track: form.querySelector( '[name="track"]' ).value,
-				coursework: form.querySelector( '[name="coursework"]' ).value,
-				statement: form.querySelector( '[name="statement"]' ).value,
-				swe_website: form.querySelector( '[name="swe_website"]' ).value,
-			};
+			var payload = new FormData();
+			payload.append( 'name', form.querySelector( '[name="name"]' ).value );
+			payload.append( 'email', form.querySelector( '[name="email"]' ).value );
+			payload.append( 'class_year', form.querySelector( '[name="class_year"]' ).value );
+			payload.append( 'track', form.querySelector( '[name="track"]' ).value );
+			payload.append( 'coursework', form.querySelector( '[name="coursework"]' ).value );
+			payload.append( 'statement', form.querySelector( '[name="statement"]' ).value );
+			payload.append( 'swe_website', form.querySelector( '[name="swe_website"]' ).value );
+			if ( resumeFile ) {
+				payload.append( 'resume', resumeFile );
+			}
 
 			window
 				.fetch( window.sweAppConfig.restUrl, {
 					method: 'POST',
+					// No Content-Type header: the browser sets the multipart
+					// boundary for FormData automatically.
 					headers: {
-						'Content-Type': 'application/json',
 						'X-WP-Nonce': window.sweAppConfig.nonce,
 					},
-					body: JSON.stringify( payload ),
+					body: payload,
 				} )
 				.then( function ( res ) {
 					return res.json().then( function ( body ) {

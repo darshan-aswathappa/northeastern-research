@@ -152,6 +152,13 @@ function swe_app_render_detail( $id ) {
 				<tr><th scope="row"><?php esc_html_e( 'Track', 'swe-fellows-application' ); ?></th><td><?php echo esc_html( $row->track ); ?></td></tr>
 				<tr><th scope="row"><?php esc_html_e( 'Coursework', 'swe-fellows-application' ); ?></th><td><?php echo esc_html( $row->coursework ); ?></td></tr>
 				<tr><th scope="row"><?php esc_html_e( 'Statement', 'swe-fellows-application' ); ?></th><td><?php echo wp_kses_post( wpautop( $row->statement ) ); ?></td></tr>
+				<tr><th scope="row"><?php esc_html_e( 'Resume', 'swe-fellows-application' ); ?></th><td>
+					<?php if ( ! empty( $row->resume_path ) ) : ?>
+						<a href="<?php echo esc_url( swe_app_resume_url( $row->resume_path ) ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'View resume (PDF)', 'swe-fellows-application' ); ?></a>
+					<?php else : ?>
+						<span aria-hidden="true">—</span> <span class="screen-reader-text"><?php esc_html_e( 'No resume on file', 'swe-fellows-application' ); ?></span>
+					<?php endif; ?>
+				</td></tr>
 				<tr><th scope="row"><?php esc_html_e( 'Submitted', 'swe-fellows-application' ); ?></th><td><?php echo esc_html( $row->created_at ); ?></td></tr>
 			</tbody>
 		</table>
