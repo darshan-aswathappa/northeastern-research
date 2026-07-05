@@ -25,14 +25,18 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function swe_app_error_message( $code ) {
 	$messages = array(
-		'swe_app_invalid_name'       => __( 'Please enter your full name.', 'swe-fellows-application' ),
-		'swe_app_invalid_email'      => __( 'Please enter a valid email address.', 'swe-fellows-application' ),
-		'swe_app_invalid_year'       => __( 'Please select your class year.', 'swe-fellows-application' ),
-		'swe_app_invalid_track'      => __( 'Please select a preferred track.', 'swe-fellows-application' ),
-		'swe_app_invalid_statement'  => __( 'Please include a statement of interest.', 'swe-fellows-application' ),
-		'swe_app_statement_too_long' => sprintf( /* translators: %d: word limit */ __( 'The statement of interest must be %d words or fewer.', 'swe-fellows-application' ), swe_app_statement_word_limit() ),
-		'swe_app_rate_limited'       => __( 'Too many submissions from this connection — please wait a few minutes and try again.', 'swe-fellows-application' ),
-		'swe_app_bad_nonce'          => __( 'Your session expired — please reload the page and try again.', 'swe-fellows-application' ),
+		'swe_app_invalid_name'         => __( 'Please enter your full name.', 'swe-fellows-application' ),
+		'swe_app_invalid_email'        => __( 'Please enter a valid email address.', 'swe-fellows-application' ),
+		'swe_app_invalid_year'         => __( 'Please select your class year.', 'swe-fellows-application' ),
+		'swe_app_invalid_track'        => __( 'Please select a preferred track.', 'swe-fellows-application' ),
+		'swe_app_invalid_statement'    => __( 'Please include a statement of interest.', 'swe-fellows-application' ),
+		'swe_app_statement_too_long'   => sprintf( /* translators: %d: word limit */ __( 'The statement of interest must be %d words or fewer.', 'swe-fellows-application' ), swe_app_statement_word_limit() ),
+		'swe_app_resume_missing'       => __( 'Please attach your resume as a PDF.', 'swe-fellows-application' ),
+		'swe_app_resume_type'          => __( 'Your resume must be a PDF file.', 'swe-fellows-application' ),
+		'swe_app_resume_too_large'     => sprintf( /* translators: %d: max size in MB */ __( 'Your resume must be %d MB or smaller.', 'swe-fellows-application' ), (int) ( swe_app_resume_max_bytes() / MB_IN_BYTES ) ),
+		'swe_app_resume_upload_failed' => __( 'Your resume could not be uploaded — please try again.', 'swe-fellows-application' ),
+		'swe_app_rate_limited'         => __( 'Too many submissions from this connection — please wait a few minutes and try again.', 'swe-fellows-application' ),
+		'swe_app_bad_nonce'            => __( 'Your session expired — please reload the page and try again.', 'swe-fellows-application' ),
 	);
 	return isset( $messages[ $code ] ) ? $messages[ $code ] : __( 'Something went wrong — please check your answers and try again.', 'swe-fellows-application' );
 }
@@ -65,6 +69,8 @@ function swe_app_shortcode() {
 				'submitting'       => __( 'Submitting…', 'swe-fellows-application' ),
 				'submitLabel'      => __( 'Submit application', 'swe-fellows-application' ),
 				'networkError'     => __( 'Something went wrong submitting your application — please try again.', 'swe-fellows-application' ),
+				'resumeType'       => __( 'Your resume must be a PDF file.', 'swe-fellows-application' ),
+				'resumeTooLarge'   => sprintf( /* translators: %d: max size in MB */ __( 'Your resume must be %d MB or smaller.', 'swe-fellows-application' ), (int) ( swe_app_resume_max_bytes() / MB_IN_BYTES ) ),
 			),
 		)
 	);
@@ -104,7 +110,7 @@ function swe_app_shortcode() {
 			<li data-progress-step="3"><?php esc_html_e( 'Statement of interest', 'swe-fellows-application' ); ?></li>
 		</ol>
 
-		<form class="swe-app-form" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+		<form class="swe-app-form" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" enctype="multipart/form-data">
 			<input type="hidden" name="action" value="swe_app_submit">
 			<?php wp_nonce_field( 'swe_app_submit', 'swe_app_nonce' ); ?>
 
@@ -173,6 +179,12 @@ function swe_app_shortcode() {
 					<span class="swe-app-hint" id="swe-statement-hint"><?php esc_html_e( '500 words max — why do you want to spend a summer building WordPress tooling?', 'swe-fellows-application' ); ?></span>
 				</p>
 
+				<p class="swe-app-field">
+					<label for="swe-resume"><?php esc_html_e( 'Resume (PDF)', 'swe-fellows-application' ); ?> <span class="swe-app-req" aria-hidden="true">*</span></label>
+					<input type="file" id="swe-resume" name="resume" required accept="application/pdf,.pdf" aria-describedby="swe-resume-hint">
+					<span class="swe-app-hint" id="swe-resume-hint"><?php esc_html_e( 'PDF only, 5 MB max.', 'swe-fellows-application' ); ?></span>
+				</p>
+
 				<p class="swe-app-nav swe-app-nav-final">
 					<button type="button" class="swe-app-btn swe-app-btn-secondary swe-app-back" hidden data-nav-back><?php esc_html_e( 'Back', 'swe-fellows-application' ); ?></button>
 					<button type="submit" class="swe-app-btn swe-app-submit"><?php esc_html_e( 'Submit application', 'swe-fellows-application' ); ?></button>
@@ -220,13 +232,29 @@ function swe_app_handle_post() {
 		$fail( $data->get_error_code() );
 	}
 
+	// $_FILES is not slashed, so it's passed through untouched.
+	$resume       = isset( $_FILES['resume'] ) ? $_FILES['resume'] : null; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+	$resume_valid = swe_app_validate_resume( $resume );
+	if ( is_wp_error( $resume_valid ) ) {
+		$fail( $resume_valid->get_error_code() );
+	}
+
 	$limited = swe_app_check_rate_limit();
 	if ( is_wp_error( $limited ) ) {
 		$fail( $limited->get_error_code() );
 	}
 
+	// Persist the file only after every check has passed.
+	$resume_path = swe_app_store_resume( $resume );
+	if ( is_wp_error( $resume_path ) ) {
+		$fail( $resume_path->get_error_code() );
+	}
+	$data['resume_path'] = $resume_path;
+
 	$result = swe_app_insert( $data );
 	if ( is_wp_error( $result ) ) {
+		// Don't leave an orphaned file behind if the row never saved.
+		swe_app_delete_resume_file( $resume_path );
 		$fail( $result->get_error_code() );
 	}
 

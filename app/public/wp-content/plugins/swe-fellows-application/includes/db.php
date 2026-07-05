@@ -41,6 +41,7 @@ function swe_app_install() {
 		track VARCHAR(80) NOT NULL DEFAULT '',
 		coursework VARCHAR(255) NOT NULL DEFAULT '',
 		statement TEXT NOT NULL,
+		resume_path VARCHAR(255) NOT NULL DEFAULT '',
 		status VARCHAR(20) NOT NULL DEFAULT 'new',
 		created_at DATETIME NOT NULL,
 		PRIMARY KEY  (id),
@@ -65,16 +66,17 @@ function swe_app_insert( array $data ) {
 	$inserted = $wpdb->insert( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 		swe_app_table_name(),
 		array(
-			'name'       => $data['name'],
-			'email'      => $data['email'],
-			'class_year' => $data['class_year'],
-			'track'      => $data['track'],
-			'coursework' => $data['coursework'],
-			'statement'  => $data['statement'],
-			'status'     => 'new',
-			'created_at' => current_time( 'mysql', true ),
+			'name'        => $data['name'],
+			'email'       => $data['email'],
+			'class_year'  => $data['class_year'],
+			'track'       => $data['track'],
+			'coursework'  => $data['coursework'],
+			'statement'   => $data['statement'],
+			'resume_path' => isset( $data['resume_path'] ) ? $data['resume_path'] : '',
+			'status'      => 'new',
+			'created_at'  => current_time( 'mysql', true ),
 		),
-		array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )
+		array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )
 	);
 
 	if ( false === $inserted ) {
@@ -128,6 +130,14 @@ function swe_app_get( $id ) {
  */
 function swe_app_delete( $id ) {
 	global $wpdb;
+
+	// Remove the applicant's resume from disk before dropping the row, so the
+	// file doesn't linger with no record pointing to it.
+	$row = swe_app_get( $id );
+	if ( $row && ! empty( $row->resume_path ) ) {
+		swe_app_delete_resume_file( $row->resume_path );
+	}
+
 	return (bool) $wpdb->delete( swe_app_table_name(), array( 'id' => (int) $id ), array( '%d' ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 }
 

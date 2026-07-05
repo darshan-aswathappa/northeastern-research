@@ -2996,12 +2996,15 @@ jobs:
             <pre><code>swe-fellows-application/
 ├── swe-fellows-application.php   ← Bootstrap, activation hook, upgrade check
 └── includes/
-    ├── db.php           ← Table creation (dbDelta), insert, update helpers
-    ├── validation.php   ← Input sanitisation, honeypot, rate limiting
+    ├── db.php           ← Table creation (dbDelta), insert, update, resume-file cleanup
+    ├── validation.php   ← Input sanitisation, honeypot, rate limiting, resume upload/validation
     ├── emails.php       ← Confirmation + rejection email functions
     ├── form.php         ← [swe_fellows_application] shortcode + multi-step UI
-    ├── rest.php         ← REST API endpoint (POST /wp-json/swe/v1/apply)
-    └── admin.php        ← Admin table, status update, bulk actions</code></pre>
+    ├── rest.php         ← REST API endpoint (POST /wp-json/swe-app/v1/submit)
+    └── admin.php        ← Admin table, status update, bulk actions
+
+Uploaded resumes are stored in wp-content/uploads/swe-resumes/ (random filenames,
+directory listing blocked by an index.html guard).</code></pre>
 
             <h3 style="margin: var(--space-5) 0 var(--space-3)">Form Fields</h3>
             <table class="doc-table" aria-label="Application form fields">
@@ -3060,6 +3063,19 @@ jobs:
                   </td>
                 </tr>
                 <tr>
+                  <td>Resume</td>
+                  <td>File (PDF)</td>
+                  <td>
+                    Required, PDF only — extension + MIME verified server-side
+                    with <code>wp_check_filetype_and_ext()</code> plus a
+                    <code>%PDF-</code> magic-byte check, 5&nbsp;MB max. Stored via
+                    <code>wp_handle_upload()</code> under
+                    <code>uploads/swe-resumes/</code> with a randomized filename;
+                    the relative path is saved to the <code>resume_path</code>
+                    column.
+                  </td>
+                </tr>
+                <tr>
                   <td><code>swe_website</code></td>
                   <td>Hidden (honeypot)</td>
                   <td>
@@ -3091,7 +3107,8 @@ jobs:
                   Enforced via WordPress transients
                   (<code>swe_app_rl_{md5(ip)}</code>). Returns HTTP 429 on
                   breach. Checked via
-                  <code>swe_app_check_rate_limit()</code> before validation.
+                  <code>swe_app_check_rate_limit()</code> after validation, so
+                  honest mistakes and bot noise don't consume the quota.
                 </p>
               </div>
               <div class="tool-card">
@@ -3114,24 +3131,41 @@ jobs:
                   the plugin.
                 </p>
               </div>
+              <div class="tool-card">
+                <h3 class="tool-name">Resume upload hardening</h3>
+                <p class="tool-desc">
+                  Uploaded resumes are validated as genuine PDFs (extension +
+                  MIME sniffing via <code>wp_check_filetype_and_ext()</code> and
+                  a <code>%PDF-</code> magic-byte check), capped at 5&nbsp;MB, and
+                  only moved to disk after every other check passes. Files are
+                  stored under <code>uploads/swe-resumes/</code> with unguessable
+                  randomized names; an <code>index.html</code> guard blocks
+                  directory listing, and deleting an application removes its
+                  resume file.
+                </p>
+              </div>
             </div>
 
             <h3 style="margin: var(--space-5) 0 var(--space-3)">
               REST Endpoint
             </h3>
-            <pre><code>POST /wp-json/swe/v1/apply
+            <pre><code>POST /wp-json/swe-app/v1/submit
 
-Request body (JSON):
+Request body (multipart/form-data — the enhanced form sends a file):
   name        string   required
   email       string   required
   class_year  string   required  (First-year|Sophomore|Junior|Senior)
   track       string   required  (one of 4 research tracks)
   coursework  string   optional
   statement   string   required  (≤ 500 words)
+  resume      file     required  (PDF, ≤ 5 MB)
   swe_website string   honeypot — must be absent or empty
 
-Success  → 201 { success: true, message: "..." }
-Error    → 400 { code: "swe_app_invalid_*", message: "...", data: { field: "..." } }
+Header: X-WP-Nonce (wp_rest nonce issued to the page)
+
+Success  → 200 { success: true, id: 123 }
+Error    → 400 { code: "swe_app_invalid_*" | "swe_app_resume_*", message: "...", data: { field: "..." } }
+Nonce    → 403 { code: "...invalid_nonce", ... }
 Rate     → 429 { code: "swe_app_rate_limited", ... }</code></pre>
 
             <h3 style="margin: var(--space-5) 0 var(--space-3)">
@@ -3176,7 +3210,8 @@ Rate     → 429 { code: "swe_app_rate_limited", ... }</code></pre>
               A top-level "Applications" admin menu lists all submissions in a
               paginated table. Columns: ID, Name, Email, Track, Class Year,
               Status, Date. Each row has a "View" link to a detail page where
-              the statement is readable and the status can be changed. Changing
+              the statement is readable, the applicant's resume can be opened as
+              a PDF in a new tab, and the status can be changed. Changing
               status to "rejected" automatically triggers the rejection email.
             </p>
 
@@ -3184,13 +3219,15 @@ Rate     → 429 { code: "swe_app_rate_limited", ... }</code></pre>
               Upgrade Safety
             </h3>
             <p>
-              The plugin defines <code>SWE_APP_DB_VERSION = '1'</code> (string,
+              The plugin defines <code>SWE_APP_DB_VERSION = '2'</code> (string,
               matching <code>get_option()</code> return type). On every
               <code>plugins_loaded</code> it compares the stored version to the
               constant and calls <code>swe_app_install()</code> (which runs
               <code>dbDelta()</code>) if they differ. This means schema changes
               are applied even when the activation hook doesn't fire — e.g., on
-              bulk plugin updates.
+              bulk plugin updates. Version&nbsp;2 added the
+              <code>resume_path</code> column; existing installs pick it up
+              automatically on the next page load with no data loss.
             </p>
           </div>
 
@@ -7137,73 +7174,109 @@ Indexes:
           <!-- How it would look different -->
           <div class="doc-section">
             <h2 class="doc-section-heading">How the Site Would Look Different</h2>
-            <p>
-              The most visible difference would be the starting point. CampusPress offers a
-              curated library of university-grade themes — many already branded for Northeastern's
-              colour palette, typography, and header/footer conventions. Rather than building the
-              NU Research design system from scratch (custom tokens, self-hosted fonts, component
-              CSS from zero), the project would begin with a theme that already looks like a
-              Northeastern site and only needs the program-specific content dropped in.
-            </p>
-            <p>
-              The tradeoff is control. The custom hero billboard, the hairline stat rows, the
-              horizontal timeline, the pill filter bar — these are deliberate design decisions
-              that required writing every CSS rule by hand. On CampusPress, those same sections
-              would likely be built from the platform's existing block patterns and theme
-              templates, which are more constrained but visually consistent with the rest of
-              the university web estate. The result would look more "official Northeastern"
-              and less bespoke, which for a department-facing production site is probably
-              the better outcome.
-            </p>
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Aspect</th>
+                  <th>This Build (Self-Hosted)</th>
+                  <th>CampusPress</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Starting point</strong></td>
+                  <td>Built from scratch — custom design tokens, self-hosted fonts, all component CSS written by hand</td>
+                  <td>Curated library of university-grade themes pre-branded for Northeastern's colour palette, typography, and header/footer conventions</td>
+                </tr>
+                <tr>
+                  <td><strong>Design control</strong></td>
+                  <td>Full control — custom hero, hairline stat rows, horizontal timeline, pill filter bar, every CSS rule deliberate</td>
+                  <td>Constrained to platform block patterns and theme templates; less bespoke but consistent with the rest of the university web estate</td>
+                </tr>
+                <tr>
+                  <td><strong>Visual outcome</strong></td>
+                  <td>Bespoke and program-specific; looks unique</td>
+                  <td>More "official Northeastern" — better suited for a department-facing production site</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
           <!-- Easier things -->
           <div class="doc-section">
             <h2 class="doc-section-heading">What Would Be Easier on CampusPress</h2>
-            <p>
-              The hardest part of this build was the application form. Writing the ATS Form
-              plugin from scratch meant designing the database schema, building input validation,
-              implementing honeypot and rate limiting, wiring up transactional emails, and
-              creating the admin table — all before a single field rendered on the page.
-              On CampusPress, <strong>Gravity Forms</strong> (which is typically on the approved
-              plugin list) handles all of that in a few clicks: drag-and-drop fields, built-in
-              conditional logic, email notifications, entry management, and spam protection
-              through reCAPTCHA or Akismet — no custom PHP required.
-            </p>
-            <p>
-              Similarly, the waitlist email capture — which required a custom database table,
-              a shortcode, nonce verification, deduplication logic, and a bulk-send admin panel —
-              would be a single Mailchimp for WordPress form connected to an existing university
-              mailing list. The integration is pre-built, tested, and maintained by the plugin
-              author rather than by the developer of this site.
-            </p>
-            <p>
-              The Highlights &amp; Team page, which required configuring ACF repeater fields
-              and writing PHP to loop over them, would also be simpler: CampusPress themes
-              commonly include people directories and news/highlight post types out of the box,
-              meaning the data structure and admin UI are already there.
-            </p>
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th>This Build (Self-Hosted)</th>
+                  <th>CampusPress</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Application form</strong></td>
+                  <td>Custom ATS plugin — database schema, input validation, honeypot, rate limiting, transactional emails, and admin table all written from scratch</td>
+                  <td>Gravity Forms (on the approved plugin list) — drag-and-drop fields, conditional logic, email notifications, entry management, reCAPTCHA spam protection, no custom PHP</td>
+                </tr>
+                <tr>
+                  <td><strong>Waitlist / email capture</strong></td>
+                  <td>Custom database table, shortcode, nonce verification, deduplication logic, and bulk-send admin panel</td>
+                  <td>Single Mailchimp for WordPress form connected to an existing university mailing list — pre-built, tested, and maintained by the plugin author</td>
+                </tr>
+                <tr>
+                  <td><strong>People &amp; highlights directory</strong></td>
+                  <td>ACF repeater fields configured manually; custom PHP template to loop and render entries</td>
+                  <td>People directories and highlight post types included out of the box — data structure and admin UI already present</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
           <!-- Reduced manual work -->
           <div class="doc-section">
             <h2 class="doc-section-heading">How CampusPress Reduces Manual Work</h2>
-            <p>
-              A significant portion of this build was operational infrastructure that has nothing
-              to do with the Fellows Program itself. Setting up UpdraftPlus for backups,
-              configuring WP Optimize for caching and database cleanup, tuning All-in-One
-              Security's brute-force rules, relocating the login URL with WPS Hide Login,
-              removing WordPress's default emoji CDN and oEmbed scripts, preloading fonts —
-              all of this is work that keeps the site running safely and efficiently, but
-              produces nothing visible to an applicant.
-            </p>
-            <p>
-              On CampusPress, all of that is managed by the platform team. Daily backups,
-              Varnish-layer caching, server hardening, WordPress core and plugin updates,
-              uptime monitoring, and SSL certificates are included as part of the hosting.
-              The developer's time goes entirely into the product — the pages, the content
-              structure, the application workflow — rather than the plumbing.
-            </p>
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Operational Task</th>
+                  <th>This Build (Self-Hosted)</th>
+                  <th>CampusPress</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Backups</strong></td>
+                  <td>UpdraftPlus installed, configured, and schedule verified manually</td>
+                  <td>Daily backups managed by the platform team — included with hosting</td>
+                </tr>
+                <tr>
+                  <td><strong>Caching</strong></td>
+                  <td>WP Optimize configured for page caching and database cleanup</td>
+                  <td>Varnish-layer caching applied at the server level — no plugin needed</td>
+                </tr>
+                <tr>
+                  <td><strong>Security hardening</strong></td>
+                  <td>All-in-One Security brute-force rules tuned; WPS Hide Login to relocate the login URL; file-change detection enabled</td>
+                  <td>Server hardening, brute-force lockouts, and login protection managed at the network level across all subsites simultaneously</td>
+                </tr>
+                <tr>
+                  <td><strong>Core &amp; plugin updates</strong></td>
+                  <td>Manual — site admin responsible for monitoring and applying updates</td>
+                  <td>WordPress core and plugin updates managed by the platform team</td>
+                </tr>
+                <tr>
+                  <td><strong>Performance tuning</strong></td>
+                  <td>Font preloading, emoji CDN removal, oEmbed script disabling — each configured manually</td>
+                  <td>Handled by the platform; developer time goes entirely into content and product</td>
+                </tr>
+                <tr>
+                  <td><strong>SSL &amp; uptime</strong></td>
+                  <td>SSL provisioned separately; uptime monitoring not included</td>
+                  <td>SSL certificates and uptime monitoring included as part of the hosting contract</td>
+                </tr>
+              </tbody>
+            </table>
             <div class="callout">
               <span class="callout-icon">⏱️</span>
               <div class="callout-body">
@@ -7219,35 +7292,42 @@ Indexes:
           <!-- Security and accessibility out of the box -->
           <div class="doc-section">
             <h2 class="doc-section-heading">Security &amp; Accessibility Out of the Box</h2>
-            <p>
-              This build required deliberate, manual effort to reach a 100 Lighthouse
-              accessibility score and a hardened security posture. On CampusPress, both
-              come as part of the platform.
-            </p>
-            <p>
-              <strong>Security:</strong> CampusPress runs on Automattic's infrastructure with
-              enterprise-grade WAF rules, DDoS protection, automatic core updates, and centrally
-              managed SSL. The login URL obfuscation, brute-force lockouts, and file-change
-              detection that this build handles through three separate plugins are all managed
-              at the network level — applied to every subsite simultaneously, kept up to date
-              by a dedicated platform team, and not dependent on any individual site admin
-              remembering to configure them. There is also no risk of a poorly-vetted plugin
-              introducing a vulnerability, because the approved plugin list is curated and audited.
-            </p>
-            <p>
-              <strong>Accessibility:</strong> CampusPress themes are built and maintained to
-              meet Northeastern's institutional accessibility standards, which align with WCAG 2.1 AA.
-              The skip links, landmark roles, focus management, and colour contrast requirements
-              that were coded by hand in this theme are already present in a compliant CampusPress
-              theme. More importantly, they are maintained — if a WCAG guideline changes or a
-              browser introduces a new focus behaviour, the platform theme is updated centrally
-              rather than requiring the individual site developer to catch and fix it.
-            </p>
-            <p>
-              For a department site that needs to be accessible to all students and maintained
-              indefinitely, that ongoing guarantee is more valuable than the fine-grained control
-              that a custom build provides.
-            </p>
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Area</th>
+                  <th>This Build (Self-Hosted)</th>
+                  <th>CampusPress</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>WAF &amp; DDoS protection</strong></td>
+                  <td>Dependent on the host; not configured at the application layer</td>
+                  <td>Automattic enterprise-grade WAF rules and DDoS protection applied platform-wide</td>
+                </tr>
+                <tr>
+                  <td><strong>Login security</strong></td>
+                  <td>Three separate plugins: WPS Hide Login, All-in-One Security brute-force lockout, file-change detection</td>
+                  <td>Managed at the network level — applied to every subsite simultaneously, kept current by a dedicated platform team</td>
+                </tr>
+                <tr>
+                  <td><strong>Plugin risk</strong></td>
+                  <td>Open plugin library — any poorly-vetted plugin can introduce a vulnerability</td>
+                  <td>Curated, audited approved plugin list; no unvetted plugins allowed</td>
+                </tr>
+                <tr>
+                  <td><strong>Accessibility</strong></td>
+                  <td>Skip links, landmark roles, focus management, and colour contrast all coded and tested by hand to reach WCAG 2.1 AA / 100 Lighthouse score</td>
+                  <td>Themes built and maintained to meet Northeastern's institutional accessibility standards (WCAG 2.1 AA) — compliant out of the box</td>
+                </tr>
+                <tr>
+                  <td><strong>Ongoing maintenance</strong></td>
+                  <td>Individual site developer must catch and apply accessibility and security updates as standards evolve</td>
+                  <td>Platform theme updated centrally — WCAG changes and new browser focus behaviours handled without any per-site effort</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </section>
       </main>

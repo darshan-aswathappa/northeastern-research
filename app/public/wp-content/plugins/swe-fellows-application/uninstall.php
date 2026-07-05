@@ -19,3 +19,18 @@ $swe_table = $wpdb->prefix . 'swe_applications';
 $wpdb->query( "DROP TABLE IF EXISTS {$swe_table}" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 
 delete_option( 'swe_app_db_version' );
+
+// Remove stored resumes (uploads/swe-resumes/) so nothing is orphaned on delete.
+$swe_uploads = wp_upload_dir();
+$swe_resumes = trailingslashit( $swe_uploads['basedir'] ) . 'swe-resumes';
+if ( is_dir( $swe_resumes ) ) {
+	$swe_files = glob( trailingslashit( $swe_resumes ) . '*' );
+	if ( is_array( $swe_files ) ) {
+		foreach ( $swe_files as $swe_file ) {
+			if ( is_file( $swe_file ) ) {
+				wp_delete_file( $swe_file );
+			}
+		}
+	}
+	@rmdir( $swe_resumes ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.file_system_operations_rmdir
+}

@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'SWE_APP_VERSION', '2.0.0' );
-define( 'SWE_APP_DB_VERSION', '1' ); // String: get_option() returns strings, and the upgrade check compares strictly.
+define( 'SWE_APP_DB_VERSION', '2' ); // String: get_option() returns strings, and the upgrade check compares strictly. v2 added the resume_path column.
 define( 'SWE_APP_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SWE_APP_URL', plugin_dir_url( __FILE__ ) );
 

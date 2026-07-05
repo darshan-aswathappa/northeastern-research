@@ -90,13 +90,30 @@ function swe_app_handle_rest_submit( WP_REST_Request $request ) {
 		return $data;
 	}
 
+	// The resume rides in as multipart, not JSON — read it from the file params.
+	$files         = $request->get_file_params();
+	$resume        = isset( $files['resume'] ) ? $files['resume'] : null;
+	$resume_valid  = swe_app_validate_resume( $resume );
+	if ( is_wp_error( $resume_valid ) ) {
+		return $resume_valid;
+	}
+
 	$limited = swe_app_check_rate_limit();
 	if ( is_wp_error( $limited ) ) {
 		return $limited;
 	}
 
+	// Persist the file only after every check has passed.
+	$resume_path = swe_app_store_resume( $resume );
+	if ( is_wp_error( $resume_path ) ) {
+		return $resume_path;
+	}
+	$data['resume_path'] = $resume_path;
+
 	$id = swe_app_insert( $data );
 	if ( is_wp_error( $id ) ) {
+		// Don't leave an orphaned file behind if the row never saved.
+		swe_app_delete_resume_file( $resume_path );
 		return $id;
 	}
 
