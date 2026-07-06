@@ -58,7 +58,8 @@
 					'container'      => false,
 					'menu_class'     => 'nav-tabs',
 					'fallback_cb'    => 'wp_page_menu',
-					'depth'          => 1,
+					'depth'          => 2,
+					'walker'         => new NU_Research_Nav_Walker(),
 				)
 			);
 			?>

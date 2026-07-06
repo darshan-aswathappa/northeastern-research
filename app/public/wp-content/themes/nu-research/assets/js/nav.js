@@ -29,17 +29,93 @@
 		setOpen( toggle.getAttribute( 'aria-expanded' ) !== 'true' );
 	} );
 
-	// Escape closes the menu and returns focus to the toggle.
+	/* --- Submenu disclosures (depth-2 dropdowns / mobile accordions) ------ */
+
+	var subToggles = Array.prototype.slice.call(
+		nav.querySelectorAll( '.submenu-toggle' )
+	);
+
+	function submenuFor( btn ) {
+		return document.getElementById( btn.getAttribute( 'aria-controls' ) );
+	}
+
+	function setSubmenu( btn, open ) {
+		btn.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
+		var panel = submenuFor( btn );
+		if ( panel ) {
+			panel.setAttribute( 'data-open', open ? 'true' : 'false' );
+		}
+	}
+
+	function closeAllSubmenus( except ) {
+		subToggles.forEach( function ( btn ) {
+			if ( btn !== except ) {
+				setSubmenu( btn, false );
+			}
+		} );
+	}
+
+	// Buttons ship hidden so no-JS visitors (who see submenus expanded) never
+	// meet a dead control. Reveal them and start every submenu collapsed.
+	subToggles.forEach( function ( btn ) {
+		btn.removeAttribute( 'hidden' );
+		setSubmenu( btn, false );
+
+		btn.addEventListener( 'click', function () {
+			var open = btn.getAttribute( 'aria-expanded' ) !== 'true';
+			closeAllSubmenus( btn );
+			setSubmenu( btn, open );
+		} );
+	} );
+
+	// Escape: close an open submenu first (focus back on its toggle);
+	// otherwise, on mobile, close the whole nav.
 	nav.addEventListener( 'keydown', function ( e ) {
-		if ( 'Escape' === e.key && ! mq.matches ) {
+		if ( 'Escape' !== e.key ) {
+			return;
+		}
+
+		var openBtn = null;
+		subToggles.forEach( function ( btn ) {
+			var panel = submenuFor( btn );
+			if (
+				'true' === btn.getAttribute( 'aria-expanded' ) &&
+				( btn === e.target || ( panel && panel.contains( e.target ) ) )
+			) {
+				openBtn = btn;
+			}
+		} );
+
+		if ( openBtn ) {
+			setSubmenu( openBtn, false );
+			openBtn.focus();
+			return;
+		}
+
+		if ( ! mq.matches ) {
 			setOpen( false );
 			toggle.focus();
+		}
+	} );
+
+	// Light dismiss: clicking or tabbing outside the nav closes any open
+	// dropdown (matches how visitors expect desktop dropdowns to behave).
+	document.addEventListener( 'click', function ( e ) {
+		if ( ! nav.contains( e.target ) ) {
+			closeAllSubmenus( null );
+		}
+	} );
+
+	document.addEventListener( 'focusin', function ( e ) {
+		if ( ! nav.contains( e.target ) ) {
+			closeAllSubmenus( null );
 		}
 	} );
 
 	// Keep state sane across viewport changes.
 	mq.addEventListener( 'change', function ( e ) {
 		setOpen( e.matches );
+		closeAllSubmenus( null );
 	} );
 } )();
 

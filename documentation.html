@@ -1941,10 +1941,12 @@ jobs:
                 <p class="tool-desc">
                   A <code>&lt;nav&gt;</code> with
                   <code>aria-label="Program pages"</code> containing
-                  <code>wp_nav_menu()</code> output. The menu renders flat
-                  (depth: 1) as a horizontal tab row on desktop. On mobile it is
-                  hidden by default until the toggle is clicked; JS adds
-                  <code>data-collapsed</code>. No JS = always visible
+                  <code>wp_nav_menu()</code> output rendered through a custom
+                  walker (depth: 2, disclosure pattern — see next section).
+                  Top-level items form a horizontal tab row on desktop; parents
+                  with children gain a chevron toggle that opens a dropdown. On
+                  mobile the whole nav is hidden until the toggle is clicked;
+                  JS adds <code>data-collapsed</code>. No JS = always visible
                   (progressive enhancement).
                 </p>
               </div>
@@ -1962,6 +1964,167 @@ jobs:
                   the repeated header navigation. The target is the
                   <code>&lt;main id="main"&gt;</code> opened at the bottom of
                   header.php.
+                </p>
+              </div>
+            </div>
+
+            <h2 class="doc-section-heading" style="margin-top: var(--space-7)">
+              Disclosure Navigation Pattern (depth 2)
+            </h2>
+            <p>
+              The primary nav uses the
+              <strong>WAI-ARIA "disclosure navigation" pattern</strong>: each
+              parent item that has child pages renders as a normal link
+              followed by a separate chevron
+              <code>&lt;button aria-expanded aria-controls&gt;</code> that
+              toggles the submenu. Clicking, tapping, or pressing
+              Enter/Space on the button opens the panel — there is no
+              hover-only behavior, so mouse, touch, and keyboard users all get
+              the same interaction model. The walker lives in
+              <code>inc/nav-walker.php</code>
+              (<code>NU_Research_Nav_Walker</code>); state handling lives in
+              <code>nav.js</code>; presentation in <code>main.css</code>.
+            </p>
+
+            <h3 style="margin: var(--space-6) 0 var(--space-4)">
+              Why this pattern — and not flat or a mega menu
+            </h3>
+            <div
+              class="tool-grid tool-grid-3"
+              style="margin-bottom: var(--space-5)"
+            >
+              <div class="tool-card">
+                <div class="tool-card-header">
+                  <h3 class="tool-name">Flat structure</h3>
+                  <span class="tool-badge badge-version">rejected</span>
+                </div>
+                <p class="tool-desc">
+                  The previous depth-1 tab row put every page in one line.
+                  That works at six pages but does not scale: each new page
+                  competes for primary-wayfinding space, the row overflows at
+                  tablet widths, and related pages (e.g. Highlights &amp; Team
+                  under About) cannot be grouped. Depth 2 keeps the top level
+                  at 4–6 tabs while related pages nest under a parent.
+                </p>
+              </div>
+              <div class="tool-card">
+                <div class="tool-card-header">
+                  <h3 class="tool-name">Mega menu</h3>
+                  <span class="tool-badge badge-version">rejected</span>
+                </div>
+                <p class="tool-desc">
+                  NN/g guidance: mega menus pay off at 20+ pages or 3+ levels
+                  of hierarchy (a university's <em>main</em> site, not a
+                  program site). At this site's scale a mega menu is pure
+                  overhead — a second layout system to build, a full mobile
+                  re-configuration, and more surface area for accessibility
+                  bugs, with no findability gain.
+                </p>
+              </div>
+              <div class="tool-card">
+                <div class="tool-card-header">
+                  <h3 class="tool-name">Disclosure dropdowns</h3>
+                  <span class="tool-badge badge-lang">chosen</span>
+                </div>
+                <p class="tool-desc">
+                  Click-to-open <code>aria-expanded</code> buttons — the
+                  WAI-ARIA APG pattern for site navigation. One interaction
+                  model on every device (no hover-intent timers, no
+                  touchscreen special-casing), a natural mobile mapping
+                  (the same button drives an inline accordion), and it extends
+                  the toggle mechanics <code>nav.js</code> already used for
+                  the hamburger.
+                </p>
+              </div>
+            </div>
+
+            <p>
+              The <strong>split-button</strong> variant was chosen
+              deliberately: the parent label stays a real link to its landing
+              page, and only the 44×44&nbsp;px chevron button opens the
+              submenu. This avoids the classic dropdown trap where touch users
+              can't visit a parent page without also (or instead) opening its
+              dropdown.
+            </p>
+
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">
+              Markup sketch
+            </h3>
+            <pre><code>&lt;li class="menu-item-has-children"&gt;
+  &lt;a href="/about-the-program/"&gt;About the Program&lt;/a&gt;
+
+  &lt;!-- ships hidden; nav.js reveals it --&gt;
+  &lt;button class="submenu-toggle" aria-expanded="false"
+          aria-controls="submenu-18" hidden&gt;
+    &lt;span class="screen-reader-text"&gt;About the Program submenu&lt;/span&gt;
+    &lt;span class="submenu-chevron" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+
+  &lt;ul class="nav-submenu" id="submenu-18"&gt;
+    &lt;li&gt;&lt;a href="/highlights-team/"&gt;Highlights &amp;amp; Team&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/li&gt;</code></pre>
+
+            <table class="doc-table" aria-label="Disclosure nav interactions">
+              <thead>
+                <tr>
+                  <th>Interaction</th>
+                  <th>Behavior</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Click / Enter / Space on chevron</td>
+                  <td>
+                    Toggles that submenu; any other open submenu closes
+                    (one open at a time)
+                  </td>
+                </tr>
+                <tr>
+                  <td>Escape inside an open submenu</td>
+                  <td>
+                    Closes it and returns focus to its chevron button; on
+                    mobile a second Escape closes the whole nav
+                  </td>
+                </tr>
+                <tr>
+                  <td>Click or Tab outside the nav</td>
+                  <td>Light dismiss — any open submenu closes</td>
+                </tr>
+                <tr>
+                  <td>Viewport crosses 768&nbsp;px</td>
+                  <td>
+                    All submenus close; panel switches between floating
+                    dropdown (desktop, <code>position: absolute</code>) and
+                    inline accordion (mobile, in-flow with a left rule)
+                  </td>
+                </tr>
+                <tr>
+                  <td>No JavaScript</td>
+                  <td>
+                    Submenus render permanently expanded and the (useless)
+                    chevron buttons stay <code>hidden</code> — nothing is
+                    unreachable
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="callout" style="margin-top: var(--space-5)">
+              <span class="callout-icon">♿</span>
+              <div class="callout-body">
+                <p class="callout-title">
+                  Deliberately no <code>role="menu"</code>
+                </p>
+                <p>
+                  The submenu is a plain <code>&lt;ul&gt;</code> of links with
+                  <code>aria-expanded</code>/<code>aria-controls</code> on the
+                  button. ARIA menu roles are for application menus (menubar
+                  semantics, arrow-key management, single tab stop) and
+                  actively harm link navigation. Collapsed submenus use
+                  <code>display: none</code> — gated behind the
+                  <code>.nav-ready</code> class — so their links leave the tab
+                  order entirely instead of being merely invisible.
                 </p>
               </div>
             </div>
@@ -2437,19 +2600,22 @@ jobs:
               <div class="tool-card">
                 <div class="tool-card-header">
                   <h3 class="tool-name">nav.js</h3>
-                  <span class="tool-badge badge-version">~32 lines</span>
+                  <span class="tool-badge badge-version">~120 lines</span>
                 </div>
                 <p class="tool-role">Front end · deferred · IIFE</p>
                 <p class="tool-desc">
-                  Accessible mobile-first hamburger disclosure. Adds
-                  <code>.nav-ready</code> to <code>&lt;html&gt;</code> (the CSS
-                  collapsed state only activates once this class is present, so
-                  no-JS users always see the nav). Manages
-                  <code>aria-expanded</code> on the toggle and
-                  <code>data-collapsed</code> on the nav. Handles Escape-key
-                  close (with focus return to the toggle) and a
-                  <code>matchMedia</code> listener that resets state on viewport
-                  resize.
+                  Accessible hamburger disclosure plus depth-2 submenu
+                  disclosures. Adds <code>.nav-ready</code> to
+                  <code>&lt;html&gt;</code> (the CSS collapsed states only
+                  activate once this class is present, so no-JS users always
+                  see the full nav). Manages <code>aria-expanded</code> on the
+                  hamburger and every <code>.submenu-toggle</code>, plus
+                  <code>data-collapsed</code>/<code>data-open</code> on the
+                  panels. Reveals the server-<code>hidden</code> chevron
+                  buttons, keeps one submenu open at a time, handles
+                  Escape-key close with focus return, light-dismiss on outside
+                  click/focus, and a <code>matchMedia</code> listener that
+                  resets all state on viewport resize.
                 </p>
               </div>
               <div class="tool-card">
