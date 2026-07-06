@@ -278,6 +278,68 @@ function nu_research_register_blocks() {
 			),
 		)
 	);
+
+	register_block_type(
+		'nu/feature-band',
+		array(
+			'render_callback' => 'nu_research_render_feature_band',
+			'attributes'      => array(
+				'heading'   => array(
+					'type'    => 'string',
+					'default' => 'Gain an experience-driven advantage',
+				),
+				'lead'      => array(
+					'type'    => 'string',
+					'default' => 'For more than a century, we’ve led the way in experience-powered learning. As a research fellow, you’ll sharpen the skills and knowledge gained in the classroom with real-world, career-building opportunities.',
+				),
+				'linkLabel' => array(
+					'type'    => 'string',
+					'default' => 'See what it’s like to be a fellow',
+				),
+				'linkSlug'  => array(
+					'type'    => 'string',
+					'default' => 'about-the-program',
+				),
+				'image'     => array(
+					'type'    => 'string',
+					'default' => 'collab.jpg',
+				),
+				'imageAlt'  => array(
+					'type'    => 'string',
+					'default' => 'Fellows collaborating in a lab',
+				),
+				'dark'      => array(
+					'type'    => 'boolean',
+					'default' => true,
+				),
+				'reverse'   => array(
+					'type'    => 'boolean',
+					'default' => false,
+				),
+			),
+		)
+	);
+
+	register_block_type(
+		'nu/video-band',
+		array(
+			'render_callback' => 'nu_research_render_video_band',
+			'attributes'      => array(
+				'video'  => array(
+					'type'    => 'string',
+					'default' => 'fellows-video.mp4',
+				),
+				'poster' => array(
+					'type'    => 'string',
+					'default' => '',
+				),
+				'label'  => array(
+					'type'    => 'string',
+					'default' => 'A look inside the fellowship',
+				),
+			),
+		)
+	);
 }
 add_action( 'init', 'nu_research_register_blocks' );
 
@@ -555,6 +617,62 @@ function nu_research_render_ambition( $a ) {
 					<img src="<?php echo esc_url( nu_research_img( $a['imageSecondary'] ) ); ?>" alt="<?php echo esc_attr( $a['imageSecondaryAlt'] ); ?>" width="1000" height="750" loading="lazy">
 				</div>
 			</div>
+		</div>
+	</section>
+	<?php
+	return ob_get_clean();
+}
+
+/**
+ * Feature band: serif heading, lead, and an arrow text-link beside a large
+ * photo. Toggles cover the dark (black field) and light variants and which
+ * side the photo sits on; small screens always stack copy over photo.
+ *
+ * @param array $a Block attributes.
+ * @return string
+ */
+function nu_research_render_feature_band( $a ) {
+	$section_class = 'section feature-band ' . ( $a['dark'] ? 'feature-band-dark' : 'feature-band-light' ) . ( $a['reverse'] ? ' feature-band-reverse' : '' );
+	ob_start();
+	?>
+	<section class="<?php echo esc_attr( $section_class ); ?>">
+		<div class="wrap feature-band-inner">
+			<div class="feature-band-copy" data-aos="fade-up">
+				<h2 class="feature-band-heading"><?php echo esc_html( $a['heading'] ); ?></h2>
+				<p class="feature-band-lead"><?php echo esc_html( $a['lead'] ); ?></p>
+				<?php if ( $a['linkLabel'] ) : ?>
+					<a class="arrow-link" href="<?php echo esc_url( nu_research_page_url( $a['linkSlug'] ) ); ?>">
+						<?php echo esc_html( $a['linkLabel'] ); ?><span class="arrow-link-glyph" aria-hidden="true">&rarr;</span>
+					</a>
+				<?php endif; ?>
+			</div>
+			<div class="feature-band-media" data-aos="fade-up" data-aos-delay="100">
+				<img src="<?php echo esc_url( nu_research_img( $a['image'] ) ); ?>" alt="<?php echo esc_attr( $a['imageAlt'] ); ?>" width="1200" height="900" loading="lazy">
+			</div>
+		</div>
+	</section>
+	<?php
+	return ob_get_clean();
+}
+
+/**
+ * Video band: a full-width self-hosted HTML5 player. The file lives in the
+ * theme's assets/media/ directory so the embed stays same-origin (no
+ * mixed-content or third-party requests).
+ *
+ * @param array $a Block attributes.
+ * @return string
+ */
+function nu_research_render_video_band( $a ) {
+	$video_url  = get_theme_file_uri( 'assets/media/' . sanitize_file_name( $a['video'] ) );
+	$poster_url = $a['poster'] ? nu_research_img( $a['poster'] ) : '';
+	ob_start();
+	?>
+	<section class="section video-band" aria-label="<?php echo esc_attr( $a['label'] ); ?>">
+		<div class="wrap" data-aos="fade-up">
+			<video class="video-band-player" controls preload="metadata" playsinline<?php echo $poster_url ? ' poster="' . esc_url( $poster_url ) . '"' : ''; ?>>
+				<source src="<?php echo esc_url( $video_url ); ?>" type="video/mp4">
+			</video>
 		</div>
 	</section>
 	<?php

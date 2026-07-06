@@ -144,6 +144,33 @@
 				{ key: 'label', label: __( 'Section heading', 'nu-research' ), type: 'text' },
 				{ key: 'cards', label: __( 'Cards (one per line: image|alt|title|body|ctaLabel|slug)', 'nu-research' ), type: 'lines' }
 			]
+		},
+		{
+			name: 'nu/feature-band',
+			title: __( 'Fellows: Feature Band', 'nu-research' ),
+			description: __( 'Serif heading, lead, and arrow link beside a large photo. Dark/light and image-side variants.', 'nu-research' ),
+			icon: 'align-pull-right',
+			fields: [
+				{ key: 'heading', label: __( 'Heading', 'nu-research' ), type: 'text' },
+				{ key: 'lead', label: __( 'Lead paragraph', 'nu-research' ), type: 'textarea' },
+				{ key: 'linkLabel', label: __( 'Arrow link label', 'nu-research' ), type: 'text' },
+				{ key: 'linkSlug', label: __( 'Arrow link page slug', 'nu-research' ), type: 'text' },
+				{ key: 'image', label: __( 'Image filename (assets/img/)', 'nu-research' ), type: 'text' },
+				{ key: 'imageAlt', label: __( 'Image alt text', 'nu-research' ), type: 'text' },
+				{ key: 'dark', label: __( 'Dark (black) background', 'nu-research' ), type: 'toggle' },
+				{ key: 'reverse', label: __( 'Image on the left', 'nu-research' ), type: 'toggle' }
+			]
+		},
+		{
+			name: 'nu/video-band',
+			title: __( 'Fellows: Video Band', 'nu-research' ),
+			description: __( 'Full-width self-hosted video player (assets/media/).', 'nu-research' ),
+			icon: 'video-alt3',
+			fields: [
+				{ key: 'video', label: __( 'Video filename (assets/media/)', 'nu-research' ), type: 'text' },
+				{ key: 'poster', label: __( 'Poster image filename (assets/img/, optional)', 'nu-research' ), type: 'text' },
+				{ key: 'label', label: __( 'Accessible label', 'nu-research' ), type: 'text' }
+			]
 		}
 	];
 
