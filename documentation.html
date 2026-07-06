@@ -1603,6 +1603,8 @@ jobs:
 ├── page-apply.php                ← Template: Apply & Eligibility
 ├── page-contact.php              ← Template: Contact
 ├── page-highlights-team.php      ← Template: Highlights & Team (ACF-driven)
+├── page-events.php               ← Template: Events & Info Sessions (SCF-driven)
+├── page-press.php                ← Template: Press & Publications (SCF-driven)
 │
 └── template-parts/
     └── post-card.php             ← Reusable blog post card partial</code></pre>
@@ -1614,7 +1616,7 @@ jobs:
             <p>
               WordPress resolves which PHP file to load using its standard
               template hierarchy. The theme uses page templates (set in the Page
-              Attributes panel) for the four content-heavy pages, and relies on
+              Attributes panel) for the six content-heavy pages, and relies on
               WordPress core fallback logic for all standard views.
             </p>
 
@@ -1663,6 +1665,22 @@ jobs:
                   <td>Page template: "Highlights &amp; Team"</td>
                   <td><code>page-highlights-team.php</code></td>
                   <td>ACF repeater-driven team &amp; highlights card grids</td>
+                </tr>
+                <tr>
+                  <td>Page template: "Events &amp; Info Sessions"</td>
+                  <td><code>page-events.php</code></td>
+                  <td>
+                    SCF <code>events</code> repeater sorted &amp; split into
+                    upcoming / past at render time
+                  </td>
+                </tr>
+                <tr>
+                  <td>Page template: "Press &amp; Publications"</td>
+                  <td><code>page-press.php</code></td>
+                  <td>
+                    Three SCF repeaters: publications, repositories, press
+                    coverage
+                  </td>
                 </tr>
                 <tr>
                   <td>Category / tag / date archives</td>
@@ -2405,6 +2423,124 @@ jobs:
               <code>.resource-list</code> of four related links with name +
               description rows.
             </p>
+
+            <!-- page-events.php -->
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">
+              page-events.php — Events &amp; Info Sessions
+            </h3>
+            <div class="callout">
+              <span class="callout-icon">📅</span>
+              <div class="callout-body">
+                <p class="callout-title">A living calendar from one flat repeater</p>
+                <p>
+                  Editors maintain a single SCF <code>events</code> repeater in
+                  any order. The template does the calendar work at render time:
+                  the <code>date</code> sub-field returns <code>Ymd</code>
+                  (string-sortable), rows are sorted with <code>usort()</code>,
+                  then split against <code>current_datetime()</code> into
+                  upcoming and past. The nearest upcoming event is promoted into
+                  a black "Next up" feature band; the rest render as agenda
+                  rows; past events collapse into a compact archive. No manual
+                  reordering, no stale "upcoming" entries.
+                </p>
+              </div>
+            </div>
+            <table class="doc-table" aria-label="Events page sections">
+              <thead>
+                <tr>
+                  <th>Section</th>
+                  <th>Component</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Next up</td>
+                  <td><code>.next-up</code></td>
+                  <td>
+                    Black band: oversized red serif day numeral in a ruled date
+                    column beside title, meta, and a CTA button
+                  </td>
+                </tr>
+                <tr>
+                  <td>Upcoming events</td>
+                  <td><code>.event-rows</code></td>
+                  <td>
+                    Hairline-ruled agenda rows — date block (red month eyebrow +
+                    serif day) + copy + arrow link; semantic
+                    <code>&lt;ol&gt;</code> with <code>&lt;time&gt;</code>
+                    elements
+                  </td>
+                </tr>
+                <tr>
+                  <td>Past events</td>
+                  <td><code>.past-events</code></td>
+                  <td>
+                    Compact reverse-chronological rows with outline type badges
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="font-size: 0.875rem; color: var(--color-text-muted)">
+              Repeater sub-fields: <code>title</code>, <code>type</code>
+              (select), <code>date</code>, <code>time</code>,
+              <code>location</code>, <code>description</code>,
+              <code>link</code>, <code>link_label</code>. Every zone falls back
+              to an <code>.empty-state</code> message when no rows exist.
+            </p>
+
+            <!-- page-press.php -->
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">
+              page-press.php — Press &amp; Publications
+            </h3>
+            <p>
+              Research outputs across three SCF repeaters, each with its own
+              presentation: <code>publications</code> renders as a numbered
+              academic citation list (<code>.pub-list</code> — oversized red
+              serif serials, serif titles linked to DOIs, muted author · venue ·
+              year meta lines); <code>repositories</code> renders inside a
+              full-black <code>.repo-band</code> ("Shipped in the open") as a
+              three-up grid of repo cards with red arrow links and outline
+              language tags; <code>press_coverage</code> renders as
+              <code>.press-rows</code> — editorial headline rows with a red
+              outlet overline and a right-set <code>&lt;time&gt;</code> date.
+              The section closes with an arrow link to the program blog.
+            </p>
+            <table class="doc-table" aria-label="Press page fields">
+              <thead>
+                <tr>
+                  <th>SCF repeater</th>
+                  <th>Sub-fields</th>
+                  <th>Component</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>publications</code></td>
+                  <td>
+                    <code>title</code>, <code>authors</code>,
+                    <code>venue</code>, <code>year</code>, <code>link</code>
+                  </td>
+                  <td><code>.pub-list</code> numbered citation list</td>
+                </tr>
+                <tr>
+                  <td><code>repositories</code></td>
+                  <td>
+                    <code>name</code>, <code>description</code>,
+                    <code>url</code>, <code>tag</code>
+                  </td>
+                  <td><code>.repo-band</code> + <code>.repo-grid</code> dark band</td>
+                </tr>
+                <tr>
+                  <td><code>press_coverage</code></td>
+                  <td>
+                    <code>outlet</code>, <code>headline</code>,
+                    <code>date</code>, <code>link</code>
+                  </td>
+                  <td><code>.press-rows</code> headline rows</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
           <!-- 7. Custom Blocks -->
@@ -4028,6 +4164,46 @@ Rate     → 429 { code: "swe_app_rate_limited", ... }</code></pre>
                   <td><code>label</code> (text), <code>date</code> (text)</td>
                   <td><code>page-apply.php</code></td>
                 </tr>
+                <tr>
+                  <td>Events &amp; Info Sessions</td>
+                  <td><code>events</code> repeater</td>
+                  <td>
+                    <code>title</code>, <code>type</code> (select),
+                    <code>date</code> (date picker, returns
+                    <code>Ymd</code>), <code>time</code>,
+                    <code>location</code>, <code>description</code>,
+                    <code>link</code>, <code>link_label</code>
+                  </td>
+                  <td><code>page-events.php</code></td>
+                </tr>
+                <tr>
+                  <td>Press &amp; Publications</td>
+                  <td><code>publications</code> repeater</td>
+                  <td>
+                    <code>title</code>, <code>authors</code>,
+                    <code>venue</code>, <code>year</code>, <code>link</code>
+                  </td>
+                  <td><code>page-press.php</code></td>
+                </tr>
+                <tr>
+                  <td>Press &amp; Publications</td>
+                  <td><code>repositories</code> repeater</td>
+                  <td>
+                    <code>name</code>, <code>description</code>,
+                    <code>url</code>, <code>tag</code>
+                  </td>
+                  <td><code>page-press.php</code></td>
+                </tr>
+                <tr>
+                  <td>Press &amp; Publications</td>
+                  <td><code>press_coverage</code> repeater</td>
+                  <td>
+                    <code>outlet</code>, <code>headline</code>,
+                    <code>date</code> (date picker, returns <code>Ymd</code>),
+                    <code>link</code>
+                  </td>
+                  <td><code>page-press.php</code></td>
+                </tr>
               </tbody>
             </table>
             <p style="font-size: 0.875rem; color: var(--color-text-muted)">
@@ -4584,9 +4760,10 @@ Indexes:
                   <td>Theme templates</td>
                   <td>
                     All page content (Home, About, Apply, Contact, Highlights
-                    &amp; Team) is stored as WordPress pages. The Home page post
-                    content carries the Gutenberg block markup for the 8 custom
-                    blocks.
+                    &amp; Team, Events &amp; Info Sessions, Press &amp;
+                    Publications) is stored as WordPress pages. The Home page
+                    post content carries the Gutenberg block markup for the 8
+                    custom blocks.
                   </td>
                 </tr>
                 <tr>
@@ -4595,8 +4772,10 @@ Indexes:
                   <td>
                     ACF stores repeater field data as serialised postmeta rows
                     on the relevant page. The <code>team_members</code>,
-                    <code>research_highlights</code>, and
-                    <code>deadlines</code> repeaters are stored here.
+                    <code>research_highlights</code>, <code>deadlines</code>,
+                    <code>events</code>, <code>publications</code>,
+                    <code>repositories</code>, and
+                    <code>press_coverage</code> repeaters are stored here.
                   </td>
                 </tr>
                 <tr>
@@ -4663,6 +4842,10 @@ Indexes:
   │ team_members (repeater)  │◄── page-highlights-team.php
   │ research_highlights      │◄── page-highlights-team.php
   │ deadlines (repeater)     │◄── page-apply.php
+  │ events (repeater)        │◄── page-events.php
+  │ publications (repeater)  │◄── page-press.php
+  │ repositories (repeater)  │◄── page-press.php
+  │ press_coverage (repeater)│◄── page-press.php
   └──────────────────────────┘</code></pre>
           </div>
 
