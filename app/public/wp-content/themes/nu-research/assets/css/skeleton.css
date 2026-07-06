@@ -1,0 +1,215 @@
+/**
+ * Skeleton loading screens.
+ *
+ * A full-viewport overlay of grey placeholder blocks, shown on first paint and
+ * removed by assets/js/skeleton.js once the page loads. The content partials
+ * reuse the theme's real layout classes (.section-block, .event-rows,
+ * .card-grid, .next-up, …) so the skeleton's widths and grids line up with the
+ * live page; this file only styles the placeholder primitives and the overlay.
+ *
+ * Depends on main.css for the design tokens and layout classes referenced here.
+ */
+
+/* Overlay ------------------------------------------------------------------ */
+.nu-skeleton {
+	position: fixed;
+	inset: 0;
+	z-index: 1200;
+	overflow: hidden;
+	background: var(--nu-white);
+	opacity: 1;
+	transition: opacity 300ms cubic-bezier(0.2, 0, 0.1, 1);
+}
+
+.nu-skeleton.is-hiding {
+	opacity: 0;
+	pointer-events: none;
+}
+
+/* Base placeholder + shimmer ----------------------------------------------- */
+.sk {
+	display: block;
+	position: relative;
+	overflow: hidden;
+	background: var(--gray-100);
+	border-radius: 2px;
+}
+
+.sk::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	transform: translateX(-100%);
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+	animation: sk-shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes sk-shimmer {
+	100% {
+		transform: translateX(100%);
+	}
+}
+
+/* Typographic + shape helpers ---------------------------------------------- */
+.sk-line {
+	height: 14px;
+	margin-bottom: var(--space-3);
+}
+
+.sk-line:last-child {
+	margin-bottom: 0;
+}
+
+.sk-line-sm {
+	height: 11px;
+	margin-bottom: var(--space-2);
+}
+
+.sk-eyebrow {
+	height: 12px;
+	width: 160px;
+	margin-bottom: var(--space-4);
+}
+
+.sk-h1 {
+	height: 40px;
+	margin-bottom: var(--space-5);
+}
+
+.sk-h2 {
+	height: 26px;
+	margin-bottom: var(--space-5);
+}
+
+.sk-breadcrumb {
+	height: 12px;
+	width: 30%;
+	margin-bottom: var(--space-6);
+}
+
+.sk-media {
+	width: 100%;
+	aspect-ratio: 4 / 3;
+}
+
+.sk-hero-media {
+	display: block;
+	width: 100%;
+	aspect-ratio: 20 / 9;
+}
+
+.sk-btn {
+	height: 46px;
+	width: 180px;
+	border-radius: 999px;
+	margin-top: var(--space-4);
+}
+
+.sk-input {
+	height: 46px;
+	margin-bottom: var(--space-4);
+}
+
+.sk-tag {
+	height: 22px;
+	width: 96px;
+	margin-top: var(--space-3);
+}
+
+.sk-pub-number {
+	height: 22px;
+	width: 28px;
+}
+
+/* Width utilities ---------------------------------------------------------- */
+.sk-w-25 { width: 25%; }
+.sk-w-30 { width: 30%; }
+.sk-w-40 { width: 40%; }
+.sk-w-45 { width: 45%; }
+.sk-w-50 { width: 50%; }
+.sk-w-55 { width: 55%; }
+.sk-w-60 { width: 60%; }
+.sk-w-70 { width: 70%; }
+.sk-w-75 { width: 75%; }
+.sk-w-85 { width: 85%; }
+.sk-w-90 { width: 90%; }
+.sk-w-100 { width: 100%; }
+
+/* Skeleton header (utility bar, brand, primary nav) ------------------------ */
+.sk-header {
+	border-bottom: 1px solid var(--gray-200);
+}
+
+.sk-utility {
+	height: 40px;
+	background: var(--nu-black);
+}
+
+.sk-brand {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2);
+	padding-block: var(--space-5);
+}
+
+.sk-brand-line {
+	height: 22px;
+}
+
+.sk-brand-sub {
+	height: 13px;
+}
+
+.sk-nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-5);
+	padding-bottom: var(--space-4);
+}
+
+.sk-nav-item {
+	height: 16px;
+	width: 92px;
+}
+
+/* Media boxes borrowed from the real card ratios need a visible fill ------- */
+.nu-skeleton .card-media {
+	background: var(--gray-100);
+}
+
+/* Force a dark hero (the real one relies on an inline background image) ----- */
+.nu-skeleton .hero {
+	background: var(--gray-950);
+}
+
+/* On dark bands the shimmer needs a lighter base to read ------------------- */
+.nu-skeleton .hero .sk,
+.nu-skeleton .hero-billboard .sk,
+.nu-skeleton .next-up .sk,
+.nu-skeleton .repo-band .sk,
+.nu-skeleton .section-cta .sk,
+.nu-skeleton .feature-band-dark .sk,
+.nu-skeleton .ambition-section .sk {
+	background: rgba(255, 255, 255, 0.16);
+}
+
+.nu-skeleton .hero .sk::after,
+.nu-skeleton .hero-billboard .sk::after,
+.nu-skeleton .next-up .sk::after,
+.nu-skeleton .repo-band .sk::after,
+.nu-skeleton .section-cta .sk::after,
+.nu-skeleton .feature-band-dark .sk::after,
+.nu-skeleton .ambition-section .sk::after {
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+}
+
+/* Reduced motion: no shimmer, no fade (mirrors main.css) ------------------- */
+@media (prefers-reduced-motion: reduce) {
+	.nu-skeleton {
+		transition: none;
+	}
+
+	.sk::after {
+		animation: none;
+	}
+}

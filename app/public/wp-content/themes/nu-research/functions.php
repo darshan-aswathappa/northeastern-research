@@ -17,6 +17,9 @@ require_once get_theme_file_path( 'inc/blocks.php' );
 // Disclosure-pattern walker for the depth-2 primary navigation.
 require_once get_theme_file_path( 'inc/nav-walker.php' );
 
+// Skeleton loading screens + the Appearance -> Skeleton Loading settings.
+require_once get_theme_file_path( 'inc/skeleton.php' );
+
 /**
  * Security response headers.
  */
