@@ -329,13 +329,17 @@ function nu_research_register_blocks() {
 					'type'    => 'string',
 					'default' => 'fellows-video.mp4',
 				),
-				'poster' => array(
+				'poster'   => array(
 					'type'    => 'string',
-					'default' => '',
+					'default' => 'collab.jpg',
 				),
-				'label'  => array(
+				'label'    => array(
 					'type'    => 'string',
 					'default' => 'A look inside the fellowship',
+				),
+				'captions' => array(
+					'type'    => 'string',
+					'default' => 'fellows-video-en.vtt',
 				),
 			),
 		)
@@ -664,14 +668,27 @@ function nu_research_render_feature_band( $a ) {
  * @return string
  */
 function nu_research_render_video_band( $a ) {
-	$video_url  = get_theme_file_uri( 'assets/media/' . sanitize_file_name( $a['video'] ) );
-	$poster_url = $a['poster'] ? nu_research_img( $a['poster'] ) : '';
+	$video_url    = get_theme_file_uri( 'assets/media/' . sanitize_file_name( $a['video'] ) );
+	$poster_url   = nu_research_img( $a['poster'] ? $a['poster'] : 'collab.jpg' );
+	$captions_url = $a['captions'] ? get_theme_file_uri( 'assets/media/' . sanitize_file_name( $a['captions'] ) ) : '';
 	ob_start();
 	?>
 	<section class="section video-band" aria-label="<?php echo esc_attr( $a['label'] ); ?>">
 		<div class="wrap" data-aos="fade-up">
-			<video class="video-band-player" controls preload="metadata" playsinline<?php echo $poster_url ? ' poster="' . esc_url( $poster_url ) . '"' : ''; ?>>
+			<video class="video-band-player" controls preload="metadata" playsinline aria-label="<?php echo esc_attr( $a['label'] ); ?>"<?php echo $poster_url ? ' poster="' . esc_url( $poster_url ) . '"' : ''; ?>>
 				<source src="<?php echo esc_url( $video_url ); ?>" type="video/mp4">
+				<?php if ( $captions_url ) : ?>
+					<track kind="captions" src="<?php echo esc_url( $captions_url ); ?>" srclang="en" label="English" default>
+				<?php endif; ?>
+				<p class="video-band-fallback">
+					<?php
+					printf(
+						/* translators: %s: link to download the video file. */
+						esc_html__( 'Your browser does not support embedded video. %s', 'nu-research' ),
+						'<a href="' . esc_url( $video_url ) . '">' . esc_html__( 'Download the video', 'nu-research' ) . '</a>'
+					);
+					?>
+				</p>
 			</video>
 		</div>
 	</section>
