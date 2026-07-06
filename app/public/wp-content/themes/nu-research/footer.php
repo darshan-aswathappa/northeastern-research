@@ -19,6 +19,8 @@
 			<ul>
 				<li><a href="<?php echo esc_url( nu_research_page_url( 'about-the-program' ) ); ?>"><?php esc_html_e( 'About', 'nu-research' ); ?></a></li>
 				<li><a href="<?php echo esc_url( nu_research_page_url( 'highlights-team' ) ); ?>"><?php esc_html_e( 'Highlights & Team', 'nu-research' ); ?></a></li>
+				<li><a href="<?php echo esc_url( nu_research_page_url( 'events' ) ); ?>"><?php esc_html_e( 'Events & Info Sessions', 'nu-research' ); ?></a></li>
+				<li><a href="<?php echo esc_url( nu_research_page_url( 'press' ) ); ?>"><?php esc_html_e( 'Press & Publications', 'nu-research' ); ?></a></li>
 				<li><a href="<?php echo esc_url( nu_research_page_url( 'blog' ) ); ?>"><?php esc_html_e( 'Blog', 'nu-research' ); ?></a></li>
 				<li><a href="<?php echo esc_url( nu_research_page_url( 'apply-eligibility' ) ); ?>"><?php esc_html_e( 'Apply', 'nu-research' ); ?></a></li>
 				<li><a href="<?php echo esc_url( nu_research_page_url( 'apply-eligibility' ) ); ?>#faq"><?php esc_html_e( 'FAQ', 'nu-research' ); ?></a></li>

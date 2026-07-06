@@ -1549,6 +1549,437 @@ a:hover {
 	margin-bottom: var(--space-6);
 }
 
+/* --- Events: "Next up" feature band (events page) --------------------------------
+   The nearest upcoming event on the system's black surface: an oversized
+   serif day numeral in a red-ruled date column beside the event copy. */
+.next-up {
+	background: var(--nu-black);
+	color: var(--nu-white);
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--space-5);
+	padding: clamp(32px, 4vw, 56px);
+}
+
+.next-up-date {
+	display: flex;
+	align-items: baseline;
+	gap: var(--space-3);
+	border-bottom: 1px solid var(--divider-dark);
+	padding-bottom: var(--space-4);
+}
+
+.next-up-month,
+.next-up-weekday {
+	font-size: 0.8125rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+	color: var(--text-on-dark-muted);
+}
+
+.next-up-day {
+	font-family: var(--font-serif);
+	font-size: clamp(3.5rem, 7vw, 6.5rem);
+	font-weight: 400;
+	line-height: 0.9;
+	letter-spacing: -0.02em;
+	color: var(--nu-red-bright);
+}
+
+.next-up-eyebrow {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--space-3);
+	font-size: 0.8125rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+	color: var(--nu-red-bright);
+	margin: 0 0 var(--space-3);
+}
+
+.next-up-type {
+	color: var(--text-on-dark-muted);
+	border-left: 2px solid var(--nu-red);
+	padding-left: var(--space-3);
+}
+
+.next-up-title {
+	color: var(--nu-white);
+	font-size: clamp(1.875rem, 3.4vw, 3rem);
+	margin: 0 0 var(--space-3);
+}
+
+.next-up-meta {
+	font-weight: 600;
+	color: var(--nu-white);
+	margin: 0 0 var(--space-3);
+}
+
+.next-up-desc {
+	color: var(--text-on-dark-muted);
+	max-width: 620px;
+	margin: 0 0 var(--space-5);
+}
+
+.next-up :focus-visible {
+	outline-color: var(--nu-white);
+}
+
+@media (min-width: 768px) {
+	.next-up {
+		grid-template-columns: minmax(160px, 220px) 1fr;
+		gap: clamp(32px, 4vw, 72px);
+	}
+
+	/* On wide screens the date becomes a stacked column against a red-ruled edge. */
+	.next-up-date {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--space-2);
+		border-bottom: 0;
+		border-right: 1px solid var(--divider-dark);
+		padding: 0 var(--space-5) 0 0;
+	}
+}
+
+/* --- Events: upcoming calendar rows ------------------------------------------------
+   Hairline-ruled agenda rows: a fixed date block (red serif numeral) beside
+   the event copy, closed by the bold arrow link. */
+.event-rows {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border-top: 1px solid var(--color-border);
+}
+
+.event-row {
+	display: grid;
+	grid-template-columns: minmax(72px, 96px) 1fr;
+	gap: var(--space-4) var(--space-6);
+	padding: clamp(24px, 3vw, 40px) 0;
+	border-bottom: 1px solid var(--color-border);
+}
+
+.event-date time {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.event-date-month,
+.event-date-weekday {
+	font-size: 0.8125rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+	color: var(--color-text-muted);
+}
+
+.event-date-month {
+	color: var(--nu-red);
+}
+
+.event-date-day {
+	font-family: var(--font-serif);
+	font-size: clamp(2.25rem, 3.4vw, 3.25rem);
+	line-height: 1;
+	letter-spacing: -0.02em;
+	color: var(--color-text);
+}
+
+.event-title {
+	font-size: clamp(1.375rem, 2vw, 1.75rem);
+	margin: 0 0 var(--space-2);
+}
+
+.event-meta {
+	font-size: 0.9375rem;
+	font-weight: 600;
+	color: var(--color-text-muted);
+	margin: 0 0 var(--space-2);
+}
+
+.event-desc {
+	font-size: 1rem;
+	line-height: 1.6;
+	color: var(--color-text-secondary);
+	max-width: 640px;
+	margin: 0;
+}
+
+.event-action {
+	grid-column: 2;
+}
+
+.event-rows-note {
+	color: var(--color-text-muted);
+	font-size: 1rem;
+	border-top: 1px solid var(--color-border);
+	padding-top: var(--space-5);
+	margin: 0;
+}
+
+@media (min-width: 768px) {
+	.event-row {
+		grid-template-columns: minmax(96px, 120px) 1fr auto;
+		align-items: start;
+	}
+
+	.event-action {
+		grid-column: auto;
+		align-self: center;
+	}
+}
+
+/* --- Events: past archive ----------------------------------------------------------- */
+.past-events {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border-top: 1px solid var(--color-border);
+}
+
+.past-event {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--space-2) var(--space-4);
+	padding: var(--space-4) 0;
+	border-bottom: 1px solid var(--color-border);
+}
+
+.past-event-date {
+	flex: 0 0 auto;
+	min-width: 10.5em;
+	font-size: 0.9375rem;
+	color: var(--color-text-muted);
+}
+
+.past-event-title {
+	font-weight: 700;
+	color: var(--color-text);
+}
+
+/* --- Press: publications citation list ----------------------------------------------
+   Numbered like an academic reference list: an oversized red serif serial
+   beside a serif title and a single muted meta line. */
+.pub-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border-top: 1px solid var(--color-border);
+}
+
+.pub-item {
+	display: grid;
+	grid-template-columns: minmax(48px, 72px) 1fr;
+	gap: var(--space-5);
+	padding: clamp(24px, 3vw, 40px) 0;
+	border-bottom: 1px solid var(--color-border);
+}
+
+.pub-number {
+	font-family: var(--font-serif);
+	font-size: clamp(1.75rem, 2.6vw, 2.5rem);
+	line-height: 1.1;
+	letter-spacing: -0.02em;
+	color: var(--nu-red);
+}
+
+.pub-title {
+	font-size: clamp(1.375rem, 2vw, 1.75rem);
+	margin: 0 0 var(--space-2);
+	max-width: 46em;
+}
+
+.pub-title a {
+	color: var(--color-text);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 4px;
+	transition: color 200ms cubic-bezier(0.2, 0, 0.1, 1);
+}
+
+.pub-title a:hover {
+	color: var(--nu-red);
+}
+
+.pub-meta {
+	font-size: 1rem;
+	color: var(--color-text-muted);
+	margin: 0;
+}
+
+.pub-venue {
+	font-style: italic;
+	color: var(--color-text-secondary);
+}
+
+/* --- Press: open-source repo band ----------------------------------------------------
+   Full-black feature zone listing repositories that shipped from the program. */
+.repo-band {
+	background: var(--nu-black);
+	color: var(--nu-white);
+}
+
+.repo-band .section-header {
+	margin-bottom: clamp(32px, 5vw, 56px);
+}
+
+.repo-band-heading {
+	color: var(--nu-white);
+}
+
+.repo-band-lead {
+	color: var(--text-on-dark-muted);
+	font-size: 1.1875rem;
+	line-height: 1.6;
+	margin: 0;
+	max-width: 560px;
+}
+
+.repo-grid {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--space-5);
+}
+
+@media (min-width: 768px) {
+	.repo-grid {
+		grid-template-columns: repeat(3, 1fr);
+		gap: clamp(24px, 3vw, 48px);
+	}
+}
+
+.repo-card {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: var(--space-3);
+	border-top: 1px solid var(--divider-dark);
+	padding-top: var(--space-5);
+}
+
+.repo-name {
+	font-family: var(--font-sans);
+	font-size: 1.1875rem;
+	font-weight: 700;
+	margin: 0;
+	color: var(--nu-white);
+	overflow-wrap: anywhere;
+}
+
+.repo-name a {
+	color: var(--nu-white);
+	text-decoration: none;
+}
+
+.repo-name a:hover {
+	color: var(--nu-white);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.repo-name .arrow-link-glyph {
+	color: var(--nu-red-bright);
+	margin-left: var(--space-2);
+}
+
+.repo-desc {
+	color: var(--text-on-dark-muted);
+	font-size: 1rem;
+	line-height: 1.6;
+	margin: 0;
+	flex: 1;
+}
+
+.repo-tag {
+	display: inline-block;
+	padding: var(--space-1) var(--space-4);
+	font-size: 0.875rem;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	border: 1px solid var(--divider-dark);
+	color: var(--nu-white);
+}
+
+.repo-band-empty {
+	border: 1px dashed var(--divider-dark);
+	padding: var(--space-6);
+	color: var(--text-on-dark-muted);
+	font-size: 1rem;
+	margin: 0;
+}
+
+.repo-band :focus-visible {
+	outline-color: var(--nu-white);
+}
+
+/* --- Press: coverage rows -------------------------------------------------------------
+   Editorial headline rows: red outlet overline, serif headline, right-set date. */
+.section-block-after-band {
+	padding-top: clamp(48px, 6vw, 96px);
+}
+
+.press-rows {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border-top: 1px solid var(--color-border);
+}
+
+.press-row {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2);
+	padding: clamp(20px, 3vw, 32px) 0;
+	border-bottom: 1px solid var(--color-border);
+}
+
+.press-headline {
+	font-size: clamp(1.375rem, 2vw, 1.75rem);
+	margin: 0;
+	max-width: 40em;
+}
+
+.press-headline a {
+	color: var(--color-text);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 4px;
+	transition: color 200ms cubic-bezier(0.2, 0, 0.1, 1);
+}
+
+.press-headline a:hover {
+	color: var(--nu-red);
+}
+
+.press-date {
+	flex: 0 0 auto;
+	font-size: 0.9375rem;
+	color: var(--color-text-muted);
+	white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+	.press-row {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: var(--space-6);
+	}
+}
+
+.press-blog-link {
+	margin: var(--space-6) 0 0;
+}
+
 /* --- Contact / feature banner / resources ---------------------------------------------------------
    The feature banner is a full-black feature zone (the system's second
    surface mode) with bold arrow links over hairline dividers. */

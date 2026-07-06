@@ -11,8 +11,17 @@ A custom WordPress site for the **WordPress Research Fellows Program**, built wi
 A classic PHP theme built from scratch against the Northeastern Research design system.
 
 - Responsive, accessible, token-driven styles (`assets/css/main.css`)
-- Custom page templates: home, apply, highlights/team, contact, 404
+- Custom page templates: home, apply, highlights/team, events, press, contact, 404
 - Requires WordPress 6.0+, PHP 8.0+
+
+Two templates are fully driven by Secure Custom Fields (SCF) repeaters, so editors maintain flat lists in the admin and the templates handle presentation:
+
+| Template          | SCF repeaters                                     | What the template does                                                                                                                                                    |
+| ----------------- | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `page-events.php` | `events`                                          | A living calendar: sorts rows by date at render time, features the nearest upcoming event in a black "Next up" band, lists the rest as agenda rows, and archives past dates |
+| `page-press.php`  | `publications`, `repositories`, `press_coverage`  | Research outputs: a numbered citation list for papers, a full-black "Shipped in the open" band for GitHub repos, and editorial headline rows for news coverage              |
+
+(The Highlights & Team and Apply pages also use SCF repeaters: `team_members`, `research_highlights`, and `deadlines`.)
 
 ### Plugin — `swe-fellows-application` (ATS Form)
 
