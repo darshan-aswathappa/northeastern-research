@@ -349,6 +349,72 @@ a:hover {
 	font-weight: 600;
 }
 
+/* Split-button parent: the label stays a link, a separate chevron button
+   discloses the submenu (touch users can do either without ambiguity). */
+.nav-tabs .menu-item-has-children {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.nav-tabs .menu-item-has-children > a {
+	flex: 1;
+}
+
+.submenu-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	min-height: 44px;
+	background: none;
+	border: 0;
+	border-radius: 0;
+	padding: 0;
+	cursor: pointer;
+	color: var(--gray-950);
+}
+
+.submenu-toggle:hover {
+	color: var(--nu-red);
+}
+
+.submenu-chevron {
+	width: 8px;
+	height: 8px;
+	border-right: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	transform: rotate(45deg) translate(-1px, -1px);
+	transition: transform 0.15s ease;
+}
+
+.submenu-toggle[aria-expanded='true'] .submenu-chevron {
+	transform: rotate(225deg) translate(-1px, -1px);
+}
+
+.submenu-toggle[aria-expanded='true'] {
+	color: var(--nu-red);
+}
+
+/* Submenu: inline accordion on mobile; only collapsible once JS is ready,
+   so no-JS visitors always see every link. */
+.nav-submenu {
+	list-style: none;
+	margin: 0;
+	padding: 0 0 var(--space-2) var(--space-4);
+	flex-basis: 100%;
+	border-left: 2px solid var(--color-border);
+}
+
+.nav-ready .nav-submenu[data-open='false'] {
+	display: none;
+}
+
+.nav-submenu a {
+	font-size: 0.9375rem;
+}
+
 @media (min-width: 768px) {
 	.nav-toggle {
 		display: none;
@@ -365,6 +431,31 @@ a:hover {
 
 	.nav-tabs a {
 		padding: var(--space-4) var(--space-1);
+	}
+
+	.nav-tabs .menu-item-has-children {
+		flex-wrap: nowrap;
+	}
+
+	/* Desktop: the submenu becomes a floating dropdown panel anchored to
+	   its parent tab. */
+	.nav-submenu {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		z-index: 50;
+		min-width: 240px;
+		flex-basis: auto;
+		padding: var(--space-2) 0;
+		background: var(--nu-white);
+		border: 1px solid var(--color-border);
+		border-top: 3px solid var(--nu-red);
+		border-left: 1px solid var(--color-border);
+		box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+	}
+
+	.nav-submenu a {
+		padding: var(--space-3) var(--space-4);
 	}
 }
 
