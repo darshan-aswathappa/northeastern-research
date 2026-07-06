@@ -119,6 +119,23 @@
 			]
 		},
 		{
+			name: 'nu/ambition',
+			title: __( 'Fellows: Ambition Banner', 'nu-research' ),
+			description: __( 'Black band: photo collage with a red stat tile beside eyebrow, serif heading, and lead.', 'nu-research' ),
+			icon: 'awards',
+			fields: [
+				{ key: 'eyebrow', label: __( 'Eyebrow', 'nu-research' ), type: 'text' },
+				{ key: 'heading', label: __( 'Heading', 'nu-research' ), type: 'text' },
+				{ key: 'lead', label: __( 'Lead paragraph', 'nu-research' ), type: 'textarea' },
+				{ key: 'statValue', label: __( 'Stat value (e.g. #1)', 'nu-research' ), type: 'text' },
+				{ key: 'statCaption', label: __( 'Stat caption', 'nu-research' ), type: 'textarea' },
+				{ key: 'imagePrimary', label: __( 'Large image filename (assets/img/)', 'nu-research' ), type: 'text' },
+				{ key: 'imagePrimaryAlt', label: __( 'Large image alt text', 'nu-research' ), type: 'text' },
+				{ key: 'imageSecondary', label: __( 'Small image filename (assets/img/)', 'nu-research' ), type: 'text' },
+				{ key: 'imageSecondaryAlt', label: __( 'Small image alt text', 'nu-research' ), type: 'text' }
+			]
+		},
+		{
 			name: 'nu/journey-cards',
 			title: __( 'Fellows: Journey Cards', 'nu-research' ),
 			description: __( 'Labelled three-up grid of photo cards with arrow links.', 'nu-research' ),

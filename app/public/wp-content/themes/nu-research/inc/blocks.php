@@ -217,6 +217,51 @@ function nu_research_register_blocks() {
 	);
 
 	register_block_type(
+		'nu/ambition',
+		array(
+			'render_callback' => 'nu_research_render_ambition',
+			'attributes'      => array(
+				'eyebrow'           => array(
+					'type'    => 'string',
+					'default' => 'Empower Your Ambition',
+				),
+				'heading'           => array(
+					'type'    => 'string',
+					'default' => 'Research experience that advances careers',
+				),
+				'lead'              => array(
+					'type'    => 'string',
+					'default' => 'Take your career in a new direction with hands-on WordPress research, a paid 10-week fellowship, and mentored, experience-driven work that will set you far ahead of the pack.',
+				),
+				'statValue'         => array(
+					'type'    => 'string',
+					'default' => '#1',
+				),
+				'statCaption'       => array(
+					'type'    => 'string',
+					'default' => 'University for co-ops and internships (U.S. News & World Report, 2025)',
+				),
+				'imagePrimary'      => array(
+					'type'    => 'string',
+					'default' => 'mentor.jpg',
+				),
+				'imagePrimaryAlt'   => array(
+					'type'    => 'string',
+					'default' => 'A fellow smiling while working alongside a mentor',
+				),
+				'imageSecondary'    => array(
+					'type'    => 'string',
+					'default' => 'hero.jpg',
+				),
+				'imageSecondaryAlt' => array(
+					'type'    => 'string',
+					'default' => 'Fellows working together in a research lab',
+				),
+			),
+		)
+	);
+
+	register_block_type(
 		'nu/journey-cards',
 		array(
 			'render_callback' => 'nu_research_render_journey_cards',
@@ -473,6 +518,43 @@ function nu_research_render_pillars( $a ) {
 					<?php endforeach; ?>
 				</ul>
 			<?php endif; ?>
+		</div>
+	</section>
+	<?php
+	return ob_get_clean();
+}
+
+/**
+ * Ambition banner: flat black band with a photo collage — large photo over a
+ * red stat tile and a second photo — beside eyebrow / serif heading / lead.
+ * On small screens the copy leads and the second photo is dropped, matching
+ * the design system's mobile treatment.
+ *
+ * @param array $a Block attributes.
+ * @return string
+ */
+function nu_research_render_ambition( $a ) {
+	ob_start();
+	?>
+	<section class="section ambition-section">
+		<div class="wrap ambition-inner">
+			<div class="ambition-copy" data-aos="fade-up">
+				<p class="eyebrow eyebrow-on-dark"><?php echo esc_html( $a['eyebrow'] ); ?></p>
+				<h2 class="ambition-heading"><?php echo esc_html( $a['heading'] ); ?></h2>
+				<p class="ambition-lead"><?php echo esc_html( $a['lead'] ); ?></p>
+			</div>
+			<div class="ambition-media" data-aos="fade-up" data-aos-delay="100">
+				<div class="ambition-photo ambition-photo-primary">
+					<img src="<?php echo esc_url( nu_research_img( $a['imagePrimary'] ) ); ?>" alt="<?php echo esc_attr( $a['imagePrimaryAlt'] ); ?>" width="1600" height="900" loading="lazy">
+				</div>
+				<div class="ambition-stat">
+					<p class="ambition-stat-value"><?php echo esc_html( $a['statValue'] ); ?></p>
+					<p class="ambition-stat-caption"><?php echo esc_html( $a['statCaption'] ); ?></p>
+				</div>
+				<div class="ambition-photo ambition-photo-secondary">
+					<img src="<?php echo esc_url( nu_research_img( $a['imageSecondary'] ) ); ?>" alt="<?php echo esc_attr( $a['imageSecondaryAlt'] ); ?>" width="1000" height="750" loading="lazy">
+				</div>
+			</div>
 		</div>
 	</section>
 	<?php
