@@ -32,6 +32,12 @@
 	border: 1px solid #dee2e6;
 }
 
+/* "Decisions expected …" line, shown in the closed state when a notify date is set */
+.fellows-countdown__notify {
+	font-weight: 400;
+	opacity: .8;
+}
+
 /* Green status dot (open state only) */
 .fellows-countdown__indicator {
 	display: inline-block;

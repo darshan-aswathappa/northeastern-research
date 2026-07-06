@@ -16,8 +16,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'FELLOWS_DL_VERSION', '1.0.0' );
+define( 'FELLOWS_DL_VERSION', '1.1.0' );
 define( 'FELLOWS_DL_URL', plugin_dir_url( __FILE__ ) );
+
+// Closing-soon banner: default and maximum lead time (in days) before the close date.
+define( 'FELLOWS_DL_BANNER_DAYS_DEFAULT', 7 );
+define( 'FELLOWS_DL_BANNER_DAYS_MAX', 90 );
 
 /*
 -------------------------------------------------------------------------- *
@@ -57,6 +61,14 @@ function fellows_deadline_settings_init() {
 		'fellows_dl_notify',
 		array( 'sanitize_callback' => 'fellows_deadline_sanitize_date' )
 	);
+	register_setting(
+		'fellows_deadline_group',
+		'fellows_dl_banner_days',
+		array(
+			'sanitize_callback' => 'fellows_deadline_sanitize_days',
+			'default'           => FELLOWS_DL_BANNER_DAYS_DEFAULT,
+		)
+	);
 
 	add_settings_section(
 		'fellows_dl_main',
@@ -88,6 +100,31 @@ function fellows_deadline_settings_init() {
 			'fellows_dl_main'
 		);
 	}
+
+	add_settings_section(
+		'fellows_dl_banner',
+		__( 'Closing-Soon Banner', 'fellows-deadline' ),
+		static function () {
+			echo '<p>' . esc_html__( 'Control the site-wide banner that appears as the deadline approaches.', 'fellows-deadline' ) . '</p>';
+		},
+		'fellows-deadline'
+	);
+
+	add_settings_field(
+		'fellows_dl_banner_days',
+		__( 'Show banner within', 'fellows-deadline' ),
+		static function () {
+			printf(
+				'<input type="number" id="fellows_dl_banner_days" name="fellows_dl_banner_days" value="%1$s" min="1" max="%2$d" step="1" class="small-text"> %3$s',
+				esc_attr( (string) fellows_deadline_banner_threshold() ),
+				esc_attr( (string) FELLOWS_DL_BANNER_DAYS_MAX ),
+				esc_html__( 'days of the close date', 'fellows-deadline' )
+			);
+			echo '<p class="description">' . esc_html__( 'The banner is hidden until the deadline is this many days away (1–90). Leave the close date blank to disable the banner entirely.', 'fellows-deadline' ) . '</p>';
+		},
+		'fellows-deadline',
+		'fellows_dl_banner'
+	);
 }
 
 /**
@@ -103,6 +140,57 @@ function fellows_deadline_sanitize_date( $value ) {
 	}
 	$dt = DateTime::createFromFormat( 'Y-m-d', $value );
 	return ( $dt && $dt->format( 'Y-m-d' ) === $value ) ? $value : '';
+}
+
+/**
+ * Sanitize callback: clamp the banner lead time to a whole number of days in range.
+ *
+ * @param mixed $value Raw input.
+ * @return int Days between 1 and FELLOWS_DL_BANNER_DAYS_MAX.
+ */
+function fellows_deadline_sanitize_days( $value ) {
+	$value = absint( $value );
+	if ( $value < 1 ) {
+		return FELLOWS_DL_BANNER_DAYS_DEFAULT;
+	}
+	return min( $value, FELLOWS_DL_BANNER_DAYS_MAX );
+}
+
+/**
+ * Get the configured banner lead time in days, clamped to the valid range.
+ *
+ * @return int Days before the close date the banner starts showing.
+ */
+function fellows_deadline_banner_threshold() {
+	return fellows_deadline_sanitize_days(
+		get_option( 'fellows_dl_banner_days', FELLOWS_DL_BANNER_DAYS_DEFAULT )
+	);
+}
+
+/**
+ * Build the "decisions expected" phrase from the notify date.
+ *
+ * Returns a localized phrase while the decision date is still in the future,
+ * or an empty string when no notify date is set or the date has passed.
+ *
+ * @return string Localized phrase or ''.
+ */
+function fellows_deadline_notify_phrase() {
+	$notify_str = get_option( 'fellows_dl_notify', '' );
+	if ( ! $notify_str ) {
+		return '';
+	}
+
+	$notify_ts = strtotime( $notify_str );
+	if ( ! $notify_ts || current_time( 'timestamp' ) > $notify_ts ) {
+		return '';
+	}
+
+	return sprintf(
+		/* translators: %s: formatted decision-notification date */
+		esc_html__( 'Decisions expected %s', 'fellows-deadline' ),
+		date_i18n( get_option( 'date_format' ), $notify_ts )
+	);
 }
 
 /**
@@ -137,9 +225,26 @@ function fellows_deadline_settings_page() {
  *
  * States: not-configured → opening-soon → open → closed.
  *
+ * Attributes:
+ *   show_days   "true"|"false" — show the "· Closes in N days" suffix while open. Default true.
+ *   show_notify "true"|"false" — show the "Decisions expected …" line once closed. Default true.
+ *
+ * @param array|string $atts Shortcode attributes.
  * @return string HTML output.
  */
-function fellows_deadline_render_shortcode() {
+function fellows_deadline_render_shortcode( $atts = array() ) {
+	$atts = shortcode_atts(
+		array(
+			'show_days'   => 'true',
+			'show_notify' => 'true',
+		),
+		$atts,
+		'fellows_countdown'
+	);
+
+	$show_days   = filter_var( $atts['show_days'], FILTER_VALIDATE_BOOLEAN );
+	$show_notify = filter_var( $atts['show_notify'], FILTER_VALIDATE_BOOLEAN );
+
 	wp_enqueue_style( 'fellows-deadline' );
 
 	$open_str  = get_option( 'fellows_dl_open', '' );
@@ -174,12 +279,16 @@ function fellows_deadline_render_shortcode() {
 
 	if ( $close_ts && $now > $close_ts ) {
 		// --- Closed ---
+		$notify = $show_notify ? fellows_deadline_notify_phrase() : '';
 		ob_start();
 		?>
 		<div class="fellows-countdown fellows-countdown--closed">
 			<span class="fellows-countdown__label">
 				<?php esc_html_e( 'Applications are closed for this cycle.', 'fellows-deadline' ); ?>
 			</span>
+			<?php if ( $notify ) : ?>
+				<span class="fellows-countdown__notify"><?php echo esc_html( $notify ); ?></span>
+			<?php endif; ?>
 		</div>
 		<?php
 		return ob_get_clean();
@@ -187,7 +296,7 @@ function fellows_deadline_render_shortcode() {
 
 	// --- Window is open ---
 	$days_label = '';
-	if ( $close_ts ) {
+	if ( $close_ts && $show_days ) {
 		$days_left  = (int) ceil( ( $close_ts - $now ) / DAY_IN_SECONDS );
 		$days_label = ' &middot; ' . sprintf(
 			/* translators: %d: number of days */
@@ -229,8 +338,9 @@ function fellows_deadline_banner() {
 	$close_ts  = strtotime( $close_str );
 	$now       = current_time( 'timestamp' );
 	$days_left = (int) ceil( ( $close_ts - $now ) / DAY_IN_SECONDS );
+	$threshold = fellows_deadline_banner_threshold();
 
-	if ( $days_left < 1 || $days_left > 7 ) {
+	if ( $days_left < 1 || $days_left > $threshold ) {
 		return;
 	}
 
@@ -345,6 +455,15 @@ function fellows_deadline_dashboard_widget() {
 			esc_html( date_i18n( get_option( 'date_format' ), strtotime( $close_str ) ) )
 		);
 	}
+
+	$notify_str = get_option( 'fellows_dl_notify', '' );
+	if ( $notify_str ) {
+		printf(
+			'<p class="fellows-dl-snapshot__dates">%s <strong>%s</strong></p>',
+			esc_html__( 'Decisions sent:', 'fellows-deadline' ),
+			esc_html( date_i18n( get_option( 'date_format' ), strtotime( $notify_str ) ) )
+		);
+	}
 }
 
 /**
@@ -442,6 +561,15 @@ function fellows_deadline_utility_status() {
 	} elseif ( $close_ts && $now > $close_ts ) {
 		$state   = 'closed';
 		$message = __( 'Applications closed', 'fellows-deadline' );
+		$notify  = fellows_deadline_notify_phrase();
+		if ( $notify ) {
+			/* translators: 1: "Applications closed", 2: "Decisions expected <date>" */
+			$message = sprintf(
+				__( '%1$s · %2$s', 'fellows-deadline' ),
+				$message,
+				$notify
+			);
+		}
 	} else {
 		$state = 'open';
 		if ( $close_ts ) {

@@ -1231,7 +1231,7 @@
                   <h3 class="tool-name">Fellows Deadline Countdown</h3>
                   <span class="tool-badge badge-custom">Custom</span>
                 </div>
-                <p class="tool-role"><code>fellows-deadline</code> · v1.0.0</p>
+                <p class="tool-role"><code>fellows-deadline</code> · v1.1.0</p>
                 <p class="tool-desc">
                   Admin-configurable application window dates. Outputs the
                   <code>[fellows_countdown]</code> shortcode, a site-wide
@@ -2780,7 +2780,7 @@ jobs:
                 </tr>
                 <tr>
                   <td><strong>Version</strong></td>
-                  <td>1.0.0</td>
+                  <td>1.1.0</td>
                 </tr>
                 <tr>
                   <td><strong>Main file</strong></td>
@@ -2819,7 +2819,9 @@ jobs:
                   are the authoritative source for whether applications are
                   open. The ATS Form plugin, the Mail List waitlist plugin, the
                   utility-bar pill, and the closing-soon banner all derive their
-                  state from these values — no duplication, no drift.
+                  state from these values — no duplication, no drift. Once the
+                  window closes, <code>fellows_dl_notify</code> drives a
+                  "Decisions expected …" state across the badge and pill.
                 </p>
               </div>
             </div>
@@ -2834,7 +2836,9 @@ jobs:
                   WordPress Settings API with <code>Y-m-d</code> sanitisation.
                   Inputs are validated with
                   <code>DateTime::createFromFormat()</code> — invalid dates are
-                  silently cleared.
+                  silently cleared. A separate "Closing-Soon Banner" section
+                  holds the banner lead time (<code>fellows_dl_banner_days</code>),
+                  a whole number of days clamped to 1–90.
                 </p>
               </div>
               <div class="tool-card">
@@ -2843,9 +2847,12 @@ jobs:
                 </h3>
                 <p class="tool-role">Front end</p>
                 <p class="tool-desc">
-                  Renders a countdown display — "X days until applications
-                  close" or "Applications open Dec 1". Output adapts to the
-                  three date states: pre-open, open, or closed. Styled by
+                  Renders a status display — "X days until applications close"
+                  or "Applications open Dec 1". Output adapts to the three date
+                  states: pre-open, open, or closed. Accepts two attributes —
+                  <code>show_days</code> and <code>show_notify</code> (both
+                  default <code>true</code>); once closed it surfaces the
+                  decision date as "Decisions expected …". Styled by
                   <code>assets/deadline.css</code>.
                 </p>
               </div>
@@ -2854,7 +2861,8 @@ jobs:
                 <p class="tool-role">wp_footer hook</p>
                 <p class="tool-desc">
                   A site-wide banner injected via <code>wp_footer</code> when
-                  the window closes within a configurable threshold of days.
+                  the window closes within the configurable lead time
+                  (<code>fellows_dl_banner_days</code>, default 7 days).
                   Styled with the theme's black/red palette via
                   <code>body .fellows-dl-banner</code> — overridden in
                   <code>main.css</code> to stay on-palette.
@@ -2869,8 +2877,9 @@ jobs:
                   Hooked into the theme's
                   <code>nu_research_utility_bar</code> action to inject a
                   coloured status pill into the black utility bar: green pulsing
-                  dot (open), neutral (coming soon), or plain span (closed).
-                  Never outputs an empty element.
+                  dot (open), neutral (coming soon), or plain span (closed, with
+                  the decision date appended when set). Never outputs an empty
+                  element.
                 </p>
               </div>
               <div class="tool-card">
