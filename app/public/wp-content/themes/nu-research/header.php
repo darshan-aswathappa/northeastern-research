@@ -14,6 +14,13 @@
 	<link rel="icon" type="image/png" sizes="16x16" href="<?php echo esc_url( get_theme_file_uri( 'assets/img/favicon-16x16.png' ) ); ?>">
 	<link rel="apple-touch-icon" sizes="152x152" href="<?php echo esc_url( get_theme_file_uri( 'assets/img/apple-touch-icon.png' ) ); ?>">
 	<?php wp_head(); ?>
+	<noscript>
+		<style>
+			/* AOS hides [data-aos] elements (opacity:0) until JavaScript reveals them.
+			   Without JS, restore visibility so all content is readable. */
+			[data-aos] { opacity: 1 !important; transform: none !important; }
+		</style>
+	</noscript>
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>

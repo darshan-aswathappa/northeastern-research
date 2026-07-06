@@ -37,10 +37,11 @@ Waitlist/interest-list capture tied to the application window.
 
 Controls the application window and surfaces deadline information across the site.
 
-- Settings page under **Settings → Fellows Deadline**
-- Shortcode: `[fellows_countdown]` — live countdown timer
-- Site-wide "closing soon" banner (auto-shows near deadline)
-- Dashboard widget with a program snapshot
+- Settings page under **Settings → Fellows Deadline** — open, close, and decision-notification dates, plus a configurable banner lead time
+- Shortcode: `[fellows_countdown]` — status badge with `show_days` and `show_notify` attributes (e.g. `[fellows_countdown show_days="false"]`)
+- Once closed, the open/close badge and utility-bar pill surface the decision-notification date ("Decisions expected …")
+- Site-wide "closing soon" banner, shown within a configurable number of days of the deadline (default 7, 1–90)
+- Dashboard widget with a program snapshot, close date, and decision date
 
 ---
 

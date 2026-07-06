@@ -119,6 +119,23 @@
 			]
 		},
 		{
+			name: 'nu/ambition',
+			title: __( 'Fellows: Ambition Banner', 'nu-research' ),
+			description: __( 'Black band: photo collage with a red stat tile beside eyebrow, serif heading, and lead.', 'nu-research' ),
+			icon: 'awards',
+			fields: [
+				{ key: 'eyebrow', label: __( 'Eyebrow', 'nu-research' ), type: 'text' },
+				{ key: 'heading', label: __( 'Heading', 'nu-research' ), type: 'text' },
+				{ key: 'lead', label: __( 'Lead paragraph', 'nu-research' ), type: 'textarea' },
+				{ key: 'statValue', label: __( 'Stat value (e.g. #1)', 'nu-research' ), type: 'text' },
+				{ key: 'statCaption', label: __( 'Stat caption', 'nu-research' ), type: 'textarea' },
+				{ key: 'imagePrimary', label: __( 'Large image filename (assets/img/)', 'nu-research' ), type: 'text' },
+				{ key: 'imagePrimaryAlt', label: __( 'Large image alt text', 'nu-research' ), type: 'text' },
+				{ key: 'imageSecondary', label: __( 'Small image filename (assets/img/)', 'nu-research' ), type: 'text' },
+				{ key: 'imageSecondaryAlt', label: __( 'Small image alt text', 'nu-research' ), type: 'text' }
+			]
+		},
+		{
 			name: 'nu/journey-cards',
 			title: __( 'Fellows: Journey Cards', 'nu-research' ),
 			description: __( 'Labelled three-up grid of photo cards with arrow links.', 'nu-research' ),
@@ -126,6 +143,33 @@
 			fields: [
 				{ key: 'label', label: __( 'Section heading', 'nu-research' ), type: 'text' },
 				{ key: 'cards', label: __( 'Cards (one per line: image|alt|title|body|ctaLabel|slug)', 'nu-research' ), type: 'lines' }
+			]
+		},
+		{
+			name: 'nu/feature-band',
+			title: __( 'Fellows: Feature Band', 'nu-research' ),
+			description: __( 'Serif heading, lead, and arrow link beside a large photo. Dark/light and image-side variants.', 'nu-research' ),
+			icon: 'align-pull-right',
+			fields: [
+				{ key: 'heading', label: __( 'Heading', 'nu-research' ), type: 'text' },
+				{ key: 'lead', label: __( 'Lead paragraph', 'nu-research' ), type: 'textarea' },
+				{ key: 'linkLabel', label: __( 'Arrow link label', 'nu-research' ), type: 'text' },
+				{ key: 'linkSlug', label: __( 'Arrow link page slug', 'nu-research' ), type: 'text' },
+				{ key: 'image', label: __( 'Image filename (assets/img/)', 'nu-research' ), type: 'text' },
+				{ key: 'imageAlt', label: __( 'Image alt text', 'nu-research' ), type: 'text' },
+				{ key: 'dark', label: __( 'Dark (black) background', 'nu-research' ), type: 'toggle' },
+				{ key: 'reverse', label: __( 'Image on the left', 'nu-research' ), type: 'toggle' }
+			]
+		},
+		{
+			name: 'nu/video-band',
+			title: __( 'Fellows: Video Band', 'nu-research' ),
+			description: __( 'Full-width self-hosted video player (assets/media/).', 'nu-research' ),
+			icon: 'video-alt3',
+			fields: [
+				{ key: 'video', label: __( 'Video filename (assets/media/)', 'nu-research' ), type: 'text' },
+				{ key: 'poster', label: __( 'Poster image filename (assets/img/, optional)', 'nu-research' ), type: 'text' },
+				{ key: 'label', label: __( 'Accessible label', 'nu-research' ), type: 'text' }
 			]
 		}
 	];

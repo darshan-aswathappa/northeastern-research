@@ -573,6 +573,115 @@ a:hover {
 	margin: 0;
 }
 
+/* --- Ambition banner (home) ---------------------------------------------------
+   Flat black band above the journey cards: a photo collage — large photo over
+   a red stat tile and a second photo — beside eyebrow / serif heading / lead.
+   Mobile leads with the copy and drops the second photo. */
+.ambition-section {
+	background: var(--nu-black);
+}
+
+.ambition-inner {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(32px, 5vw, 88px);
+	align-items: center;
+}
+
+.ambition-heading {
+	color: var(--nu-white);
+	font-size: clamp(2.25rem, 4vw, 4rem);
+	max-width: 12em;
+	margin: 0 0 var(--space-5);
+}
+
+.ambition-lead {
+	color: var(--text-on-dark-muted);
+	font-size: clamp(1.0625rem, 2vw, 1.25rem);
+	line-height: 1.6;
+	max-width: 560px;
+	margin: 0;
+}
+
+.ambition-media {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--space-5);
+}
+
+.ambition-photo {
+	overflow: hidden;
+	background: var(--gray-950);
+}
+
+.ambition-photo img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.ambition-photo-primary {
+	aspect-ratio: 16 / 9;
+}
+
+.ambition-photo-secondary {
+	display: none;
+}
+
+.ambition-stat {
+	background: var(--nu-red);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	padding: var(--space-8) var(--space-5);
+}
+
+.ambition-stat-value {
+	font-family: var(--font-serif);
+	font-size: clamp(3rem, 4vw, 4.25rem);
+	font-weight: 600;
+	line-height: 1;
+	color: var(--nu-white);
+	margin: 0 0 var(--space-3);
+}
+
+.ambition-stat-caption {
+	color: var(--nu-white);
+	max-width: 36ch;
+	margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+	.ambition-media {
+		grid-template-columns: 2fr 3fr;
+	}
+
+	.ambition-photo-primary {
+		grid-column: 1 / -1;
+	}
+
+	.ambition-photo-secondary {
+		display: block;
+		aspect-ratio: 3 / 2;
+	}
+
+	.ambition-stat {
+		padding: var(--space-6) var(--space-5);
+	}
+}
+
+@media (min-width: 900px) {
+	.ambition-inner {
+		grid-template-columns: 1.15fr 1fr;
+	}
+
+	/* Copy reads first in the DOM; the collage moves left on wide screens. */
+	.ambition-media {
+		order: -1;
+	}
+}
+
 /* --- Journey cards (home) -------------------------------------------------------
    Hairline-ruled section: serif title over three flat photo cards, each
    closed by the signature bold red arrow link. */
@@ -641,6 +750,96 @@ a:hover {
 	color: var(--nu-red);
 	font-size: 1.1em;
 	line-height: 1;
+}
+
+/* --- Feature bands (home) -------------------------------------------------------
+   Editorial split bands below the journey cards: serif heading, lead, and an
+   arrow link beside a large flat photo. Dark variant mirrors the billboard's
+   black field; the reverse variant moves the photo to the left on wide
+   screens. Small screens always stack copy over photo. */
+.feature-band-inner {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(32px, 5vw, 88px);
+	align-items: center;
+}
+
+.feature-band-heading {
+	font-size: clamp(2rem, 3.5vw, 3.5rem);
+	max-width: 13em;
+	margin: 0 0 var(--space-5);
+}
+
+.feature-band-lead {
+	font-size: clamp(1.0625rem, 2vw, 1.25rem);
+	line-height: 1.6;
+	max-width: 560px;
+	margin: 0 0 var(--space-6);
+}
+
+.feature-band-media {
+	overflow: hidden;
+	background: var(--gray-200);
+}
+
+.feature-band-media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	aspect-ratio: 4 / 3;
+}
+
+.feature-band-dark {
+	background: var(--nu-black);
+}
+
+.feature-band-dark .feature-band-heading {
+	color: var(--nu-white);
+}
+
+.feature-band-dark .feature-band-lead {
+	color: var(--text-on-dark-muted);
+}
+
+.feature-band-dark .arrow-link {
+	color: var(--nu-white);
+}
+
+.feature-band-dark .arrow-link:hover {
+	color: var(--nu-white);
+}
+
+.feature-band-dark .arrow-link-glyph {
+	color: var(--nu-red-bright);
+}
+
+.feature-band-dark :focus-visible {
+	outline-color: var(--nu-white);
+}
+
+@media (min-width: 900px) {
+	.feature-band-inner {
+		grid-template-columns: 1fr 1.1fr;
+	}
+
+	.feature-band-reverse .feature-band-inner {
+		grid-template-columns: 1.1fr 1fr;
+	}
+
+	/* Copy reads first in the DOM; the photo moves left on wide screens. */
+	.feature-band-reverse .feature-band-media {
+		order: -1;
+	}
+}
+
+/* --- Video band (home) -----------------------------------------------------------
+   Full-width self-hosted player. The black letterbox field matches the
+   system's flat dark surfaces while the video loads. */
+.video-band-player {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	background: var(--nu-black);
 }
 
 /* --- Buttons (square red CTA with trailing arrow) ---------------------------- */

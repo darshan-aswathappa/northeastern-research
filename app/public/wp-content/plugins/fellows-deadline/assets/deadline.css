@@ -14,31 +14,41 @@
 	line-height: 1.4;
 }
 
+/* States use the NU neutral ramp (no off-palette green/amber). The single
+   brand accent — NU red — is carried by the indicator dot on the open state,
+   not by the surface, per the design system's "one accent, used with
+   discipline" rule. Fallbacks keep the plugin legible without the theme. */
 .fellows-countdown--open {
-	background: #f0faf4;
-	color: #0f5132;
-	border: 1px solid #badbcc;
+	background: var(--gray-50, #fafafa);
+	color: var(--gray-950, #1a1a1a);
+	border: 1px solid var(--gray-200, #e6e6e6);
 }
 
 .fellows-countdown--soon {
-	background: #fff8e6;
-	color: #664d03;
-	border: 1px solid #ffe69c;
+	background: var(--gray-100, #f4f4f4);
+	color: var(--gray-800, #333333);
+	border: 1px solid var(--gray-200, #e6e6e6);
 }
 
 .fellows-countdown--closed {
-	background: #f8f9fa;
-	color: #495057;
-	border: 1px solid #dee2e6;
+	background: var(--gray-100, #f4f4f4);
+	color: var(--gray-600, #6b6b6b);
+	border: 1px solid var(--gray-200, #e6e6e6);
 }
 
-/* Green status dot (open state only) */
+/* "Decisions expected …" line, shown in the closed state when a notify date is set */
+.fellows-countdown__notify {
+	font-weight: 400;
+	opacity: .8;
+}
+
+/* NU-red accent dot (open state only) */
 .fellows-countdown__indicator {
 	display: inline-block;
 	width: .55em;
 	height: .55em;
 	border-radius: 50%;
-	background: #0f5132;
+	background: var(--nu-red, #d41b2c);
 	flex-shrink: 0;
 }
 
@@ -63,33 +73,42 @@
 	font-weight: 600;
 	letter-spacing: .04em;
 	text-decoration: none;
-	color: rgba(255,255,255,.65);
+	color: var(--text-on-dark-muted, rgba(255,255,255,.72));
 	transition: color .15s;
 }
 
 .utility-bar .fellows-util-status:hover,
-.utility-bar .fellows-util-status:focus { color: #fff; outline-color: rgba(255,255,255,.5); }
+.utility-bar .fellows-util-status:focus { color: var(--nu-white, #fff); outline-color: rgba(255,255,255,.5); }
 
+/* Open = the one actionable state. The label stays bright white; the single
+   NU-red accent is carried by the pulsing dot, not the whole word. */
 .utility-bar .fellows-util-status--open,
-.utility-bar .fellows-util-status--open:visited  { color: #6ee7a0; }
-.utility-bar .fellows-util-status--open:hover    { color: #9bf5bf; }
+.utility-bar .fellows-util-status--open:visited  { color: var(--nu-white, #fff); }
+.utility-bar .fellows-util-status--open .fellows-util-status__dot {
+	background: var(--nu-red-bright, #f0193a);
+}
 
+/* Opening soon = informational, not yet actionable — muted, no accent. */
 .utility-bar .fellows-util-status--soon,
-.utility-bar .fellows-util-status--soon:visited  { color: #fcd34d; }
-.utility-bar .fellows-util-status--soon:hover    { color: #fde68a; }
+.utility-bar .fellows-util-status--soon:visited  { color: var(--text-on-dark-muted, rgba(255,255,255,.72)); }
+.utility-bar .fellows-util-status--soon:hover    { color: var(--nu-white, #fff); }
 
-/* Closed renders as a <span>, no hover/link styles needed */
-.fellows-util-status--closed {
+/* Closed renders as a <span>, no hover/link styles needed. Scoped under
+   .utility-bar so the muted colour actually wins over the base pill rule
+   (equal specificity, later in source order). Set to .6 ≈ 7.4:1 on black —
+   clears WCAG AA for this 13px text, where the previous .4 (~3.7:1) failed
+   and was in any case dead-overridden by the .72 base. */
+.utility-bar .fellows-util-status--closed {
 	display: inline-flex;
 	align-items: center;
 	gap: .4em;
 	font-size: 0.8125rem;
 	font-weight: 600;
 	letter-spacing: .04em;
-	color: rgba(255,255,255,.4);
+	color: rgba(255,255,255,.6);
 }
 
-/* Pulsing green dot — open state only */
+/* Pulsing NU-red accent dot — open state only (colour set by the --open rule) */
 .fellows-util-status__dot {
 	display: inline-block;
 	width: .45em;

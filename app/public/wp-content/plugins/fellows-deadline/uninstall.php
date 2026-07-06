@@ -12,3 +12,4 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 delete_option( 'fellows_dl_open' );
 delete_option( 'fellows_dl_close' );
 delete_option( 'fellows_dl_notify' );
+delete_option( 'fellows_dl_banner_days' );
