@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"name": "nu/section-header",
+	"title": "Fellows: Section Header",
+	"description": "Eyebrow, heading, and intro paragraph — the program overview.",
+	"category": "nu-research",
+	"icon": "heading",
+	"textdomain": "nu-research",
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php",
+		"fields": [
+			{ "name": "eyebrow", "label": "Eyebrow", "type": "text", "default_value": "Program Overview" },
+			{ "name": "heading", "label": "Heading", "type": "text", "default_value": "Build the tools you use every day" },
+			{ "name": "intro", "label": "Intro paragraph", "type": "textarea", "rows": 4, "new_lines": "", "default_value": "The WordPress Research Fellows Program pairs Software Engineering undergraduates with faculty mentors to solve real problems in plugin architecture, editor UX, performance, security, and accessibility — the same systems that power the department’s own web infrastructure." }
+		]
+	},
+	"supports": {
+		"align": false,
+		"html": false,
+		"mode": true,
+		"jsx": false,
+		"multiple": true
+	}
+}

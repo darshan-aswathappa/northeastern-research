@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"name": "nu/hero-billboard",
+	"title": "Fellows: Hero Billboard",
+	"description": "Full-black billboard hero: eyebrow, serif heading, lead, CTA, and side photo.",
+	"category": "nu-research",
+	"icon": "cover-image",
+	"textdomain": "nu-research",
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php",
+		"fields": [
+			{ "name": "eyebrow", "label": "Eyebrow", "type": "text", "default_value": "WordPress Research Fellows" },
+			{ "name": "heading", "label": "Heading", "type": "text", "default_value": "Build. Test. Ship." },
+			{ "name": "lead", "label": "Lead paragraph", "type": "textarea", "rows": 4, "new_lines": "", "default_value": "A 10-week paid summer fellowship where undergraduate Software Engineering students build, test, and ship real WordPress tooling alongside faculty mentors." },
+			{ "name": "cta_label", "label": "Button label", "type": "text", "default_value": "Apply Now" },
+			{ "name": "cta_slug", "label": "Button links to page slug", "type": "text", "default_value": "apply-eligibility" },
+			{ "name": "image", "label": "Image filename (assets/img/)", "type": "text", "default_value": "hero.jpg" },
+			{ "name": "image_alt", "label": "Image alt text", "type": "text", "default_value": "Fellows working together in a research lab" }
+		]
+	},
+	"supports": {
+		"align": false,
+		"html": false,
+		"mode": true,
+		"jsx": false,
+		"multiple": true
+	}
+}

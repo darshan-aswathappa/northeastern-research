@@ -11,8 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'NU_RESEARCH_VERSION', '1.0.0' );
 
-// Home-page content blocks (hero, overview, media cards, CTA).
-require_once get_theme_file_path( 'inc/blocks.php' );
+// SCF-powered content blocks (hero, overview, media cards, CTA) in blocks/.
+require_once get_theme_file_path( 'inc/scf-blocks.php' );
 
 // Disclosure-pattern walker for the depth-2 primary navigation.
 require_once get_theme_file_path( 'inc/nav-walker.php' );

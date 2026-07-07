@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"name": "nu/feature-band",
+	"title": "Fellows: Feature Band",
+	"description": "Serif heading, lead, and arrow link beside a large photo. Dark/light and image-side variants.",
+	"category": "nu-research",
+	"icon": "align-pull-right",
+	"textdomain": "nu-research",
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php",
+		"fields": [
+			{ "name": "heading", "label": "Heading", "type": "text", "default_value": "Gain an experience-driven advantage" },
+			{ "name": "lead", "label": "Lead paragraph", "type": "textarea", "rows": 4, "new_lines": "", "default_value": "For more than a century, we’ve led the way in experience-powered learning. As a research fellow, you’ll sharpen the skills and knowledge gained in the classroom with real-world, career-building opportunities." },
+			{ "name": "link_label", "label": "Link label", "type": "text", "default_value": "See what it’s like to be a fellow" },
+			{ "name": "link_slug", "label": "Link to page slug", "type": "text", "default_value": "about-the-program" },
+			{ "name": "image", "label": "Image filename (assets/img/)", "type": "text", "default_value": "collab.jpg" },
+			{ "name": "image_alt", "label": "Image alt text", "type": "text", "default_value": "Fellows collaborating in a lab" },
+			{ "name": "dark", "label": "Dark (black field)", "type": "true_false", "ui": 1, "default_value": 1 },
+			{ "name": "reverse", "label": "Image on the left", "type": "true_false", "ui": 1, "default_value": 0 }
+		]
+	},
+	"supports": {
+		"align": false,
+		"html": false,
+		"mode": true,
+		"jsx": false,
+		"multiple": true
+	}
+}

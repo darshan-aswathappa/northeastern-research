@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"name": "nu/video-band",
+	"title": "Fellows: Video Band",
+	"description": "Full-width self-hosted video player (assets/media/).",
+	"category": "nu-research",
+	"icon": "video-alt3",
+	"textdomain": "nu-research",
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php",
+		"fields": [
+			{ "name": "video", "label": "Video filename (assets/media/)", "type": "text", "default_value": "fellows-video.mp4" },
+			{ "name": "poster", "label": "Poster image filename (assets/img/)", "type": "text", "default_value": "collab.jpg" },
+			{ "name": "label", "label": "Accessible label", "type": "text", "default_value": "A look inside the fellowship" },
+			{ "name": "captions", "label": "Captions filename (assets/media/)", "type": "text", "default_value": "fellows-video-en.vtt" }
+		]
+	},
+	"supports": {
+		"align": false,
+		"html": false,
+		"mode": true,
+		"jsx": false,
+		"multiple": true
+	}
+}

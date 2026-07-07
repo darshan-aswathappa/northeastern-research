@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"name": "nu/ambition",
+	"title": "Fellows: Ambition Banner",
+	"description": "Black band: photo collage with a red stat tile beside eyebrow, serif heading, and lead.",
+	"category": "nu-research",
+	"icon": "awards",
+	"textdomain": "nu-research",
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php",
+		"fields": [
+			{ "name": "eyebrow", "label": "Eyebrow", "type": "text", "default_value": "Empower Your Ambition" },
+			{ "name": "heading", "label": "Heading", "type": "text", "default_value": "Research experience that advances careers" },
+			{ "name": "lead", "label": "Lead paragraph", "type": "textarea", "rows": 4, "new_lines": "", "default_value": "Take your career in a new direction with hands-on WordPress research, a paid 10-week fellowship, and mentored, experience-driven work that will set you far ahead of the pack." },
+			{ "name": "stat_value", "label": "Stat value", "type": "text", "default_value": "#1" },
+			{ "name": "stat_caption", "label": "Stat caption", "type": "text", "default_value": "University for co-ops and internships (U.S. News & World Report, 2025)" },
+			{ "name": "image_primary", "label": "Primary image filename (assets/img/)", "type": "text", "default_value": "mentor.jpg" },
+			{ "name": "image_primary_alt", "label": "Primary image alt text", "type": "text", "default_value": "A fellow smiling while working alongside a mentor" },
+			{ "name": "image_secondary", "label": "Secondary image filename (assets/img/)", "type": "text", "default_value": "hero.jpg" },
+			{ "name": "image_secondary_alt", "label": "Secondary image alt text", "type": "text", "default_value": "Fellows working together in a research lab" }
+		]
+	},
+	"supports": {
+		"align": false,
+		"html": false,
+		"mode": true,
+		"jsx": false,
+		"multiple": true
+	}
+}

@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"name": "nu/cta-band",
+	"title": "Fellows: CTA Band",
+	"description": "Closing call-to-action with heading, lead, and button.",
+	"category": "nu-research",
+	"icon": "megaphone",
+	"textdomain": "nu-research",
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php",
+		"fields": [
+			{ "name": "heading", "label": "Heading", "type": "text", "default_value": "Ready to spend your summer building?" },
+			{ "name": "lead", "label": "Lead paragraph", "type": "textarea", "rows": 3, "new_lines": "", "default_value": "Applications for Summer 2027 open December 1, 2026." },
+			{ "name": "cta_label", "label": "Button label", "type": "text", "default_value": "See Eligibility & Deadlines" },
+			{ "name": "cta_slug", "label": "Button links to page slug", "type": "text", "default_value": "apply-eligibility" }
+		]
+	},
+	"supports": {
+		"align": false,
+		"html": false,
+		"mode": true,
+		"jsx": false,
+		"multiple": true
+	}
+}
