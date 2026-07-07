@@ -1,0 +1,49 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"name": "nu/logo-marquee",
+	"title": "Fellows: Logo Marquee",
+	"description": "A 'trusted by' line over a strip of partner logos that drifts sideways, follows the page scroll direction, and fades under a blur at both ends.",
+	"category": "nu-research",
+	"icon": "images-alt2",
+	"textdomain": "nu-research",
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php",
+		"fields": [
+			{ "name": "heading", "label": "Heading", "type": "text", "default_value": "Trusted by 280+ research labs and universities since 2005" },
+			{
+				"name": "logos",
+				"label": "Logos",
+				"type": "repeater",
+				"layout": "table",
+				"button_label": "Add logo",
+				"sub_fields": [
+					{
+						"name": "mark",
+						"label": "Mark",
+						"type": "select",
+						"choices": {
+							"orbit": "Orbit",
+							"blocks": "Blocks",
+							"helix": "Helix",
+							"peak": "Peak",
+							"column": "Column",
+							"hexagon": "Hexagon",
+							"node": "Node",
+							"prism": "Prism"
+						},
+						"default_value": "hexagon"
+					},
+					{ "name": "name", "label": "Name", "type": "text" }
+				]
+			}
+		]
+	},
+	"supports": {
+		"align": false,
+		"html": false,
+		"mode": true,
+		"jsx": false,
+		"multiple": true
+	}
+}

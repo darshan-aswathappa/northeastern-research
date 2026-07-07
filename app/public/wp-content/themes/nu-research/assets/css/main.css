@@ -1078,38 +1078,64 @@ a:hover {
 	background: var(--nu-black);
 }
 
-/* --- Photo marquee (home) ---------------------------------------------------------
-   Full-bleed film strip driven by assets/js/marquee.js: it drifts on its own,
-   follows the page scroll direction, and dissolves under a blur at both ends.
-   The ::before/::after overlays blur whatever passes beneath them, and their
-   mask tapers that blur so the strip fades out instead of hitting a hard edge. */
-.photo-marquee {
+/* --- Logo marquee (home) ----------------------------------------------------------
+   A "trusted by" line over a full-bleed strip of partner logos, driven by
+   assets/js/marquee.js: it drifts on its own, follows the page scroll
+   direction, and dissolves under a blur at both ends. The ::before/::after
+   overlays blur whatever passes beneath them, and their mask tapers that blur
+   so the strip fades out instead of hitting a hard edge. */
+.logo-marquee {
 	position: relative;
 	overflow: hidden;
-	padding-block: clamp(32px, 4vw, 56px);
+	padding-block: clamp(40px, 5vw, 72px);
 	background: var(--nu-white);
+	border-block: 1px solid var(--color-border);
 }
 
-.photo-marquee-track {
+.logo-marquee-heading {
+	margin: 0 0 clamp(24px, 3vw, 40px);
+	text-align: center;
+	font-size: 0.8125rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+	color: var(--color-text-muted);
+}
+
+.logo-marquee-track {
 	display: flex;
 	width: max-content;
 	will-change: transform;
 }
 
-.photo-marquee-group {
+.logo-marquee-group {
 	display: flex;
+	align-items: center;
 }
 
-.photo-marquee-group img {
-	display: block;
-	height: clamp(160px, 24vw, 280px);
-	width: auto;
-	object-fit: cover;
-	margin-right: var(--space-4);
+.logo-item {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-3);
+	margin-right: clamp(40px, 6vw, 88px);
+	color: var(--gray-600);
+	white-space: nowrap;
 }
 
-.photo-marquee::before,
-.photo-marquee::after {
+.logo-mark {
+	flex: none;
+	color: var(--nu-red);
+}
+
+.logo-name {
+	font-family: var(--font-sans);
+	font-size: clamp(1.125rem, 2vw, 1.375rem);
+	font-weight: 700;
+	letter-spacing: -0.01em;
+}
+
+.logo-marquee::before,
+.logo-marquee::after {
 	content: "";
 	position: absolute;
 	top: 0;
@@ -1117,18 +1143,18 @@ a:hover {
 	width: clamp(64px, 10vw, 160px);
 	z-index: 1;
 	pointer-events: none;
-	backdrop-filter: blur(7px);
-	-webkit-backdrop-filter: blur(7px);
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
 }
 
-.photo-marquee::before {
+.logo-marquee::before {
 	left: 0;
 	background: linear-gradient(to right, var(--nu-white), transparent);
 	-webkit-mask-image: linear-gradient(to right, #000 25%, transparent);
 	mask-image: linear-gradient(to right, #000 25%, transparent);
 }
 
-.photo-marquee::after {
+.logo-marquee::after {
 	right: 0;
 	background: linear-gradient(to left, var(--nu-white), transparent);
 	-webkit-mask-image: linear-gradient(to left, #000 25%, transparent);

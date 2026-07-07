@@ -75,3 +75,32 @@ function nu_research_pillar_icon( $name ) {
 		$paths[ $name ] // Static markup defined above; contains no user input.
 	);
 }
+
+/**
+ * Abstract wordmark glyph for the logo marquee, drawn with currentColor so the
+ * whole logo (mark + name) tints as one in CSS. Same 2px line-icon language as
+ * the pillar icons above.
+ *
+ * @param string $name Mark key.
+ */
+function nu_research_logo_mark( $name ) {
+	$paths = array(
+		'orbit'   => '<circle cx="12" cy="12" r="3.2"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="4" ry="10"/>',
+		'blocks'  => '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+		'helix'   => '<path d="M7 3c0 4.5 10 4.5 10 9s-10 4.5-10 9"/><path d="M17 3c0 4.5-10 4.5-10 9s10 4.5 10 9"/><path d="M8.5 6h7M8.5 18h7"/>',
+		'peak'    => '<path d="M3 20 10 6l4 7 2.2-3.4L21 20Z"/>',
+		'column'  => '<path d="M12 3 3.5 8h17L12 3Z"/><path d="M6 8v9M10 8v9M14 8v9M18 8v9"/><path d="M3 21h18"/>',
+		'hexagon' => '<path d="M12 2 21 7v10l-9 5-9-5V7Z"/><path d="M12 8 16 10.5v5L12 18l-4-2.5v-5Z"/>',
+		'node'    => '<circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M10.6 7.2 6.4 16.5M13.4 7.2l4.2 9.3M7.5 19h9"/>',
+		'prism'   => '<path d="M12 3 3 20h18Z"/><path d="M12 3v17M3 20l9-9 9 9"/>',
+	);
+
+	if ( ! isset( $paths[ $name ] ) ) {
+		$name = 'hexagon';
+	}
+
+	printf(
+		'<svg class="logo-mark" viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">%s</svg>',
+		$paths[ $name ] // Static markup keyed above; contains no user input.
+	);
+}

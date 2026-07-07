@@ -1,9 +1,9 @@
 /**
- * Photo marquee: the strip drifts left on its own, speeds up with the page's
- * scroll velocity, and reverses direction when the visitor scrolls up. The
- * track holds two identical groups, so translating within one group-width
- * loops seamlessly. Honors prefers-reduced-motion (strip stays static) and
- * only animates while on screen.
+ * Marquee strip: it drifts left on its own, speeds up with the page's scroll
+ * velocity, and reverses direction when the visitor scrolls up. The track holds
+ * two identical groups, so translating within one group-width loops seamlessly.
+ * Honors prefers-reduced-motion (strip stays static) and only animates while on
+ * screen.
  */
 ( () => {
 	'use strict';
@@ -32,7 +32,7 @@
 
 	marquees.forEach( ( marquee ) => {
 		const track = marquee.querySelector( '[data-marquee-track]' );
-		const group = marquee.querySelector( '.photo-marquee-group' );
+		const group = marquee.querySelector( '[data-marquee-group]' );
 		if ( ! track || ! group ) {
 			return;
 		}

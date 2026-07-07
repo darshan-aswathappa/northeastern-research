@@ -99,7 +99,7 @@ function nu_research_enqueue() {
 		)
 	);
 
-	// Scroll-reactive photo marquee (nu/photo-marquee block).
+	// Scroll-reactive logo marquee (nu/logo-marquee block).
 	wp_enqueue_script(
 		'nu-research-marquee',
 		get_theme_file_uri( 'assets/js/marquee.js' ),
