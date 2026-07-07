@@ -1,0 +1,46 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"name": "nu/pillars",
+	"title": "Fellows: Commitment Pillars",
+	"description": "Section heading and intro over a three-up icon / title / body grid.",
+	"category": "nu-research",
+	"icon": "columns",
+	"textdomain": "nu-research",
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php",
+		"fields": [
+			{ "name": "heading", "label": "Heading", "type": "text", "default_value": "A deep commitment to your research success" },
+			{ "name": "intro", "label": "Intro paragraph", "type": "textarea", "rows": 3, "new_lines": "" },
+			{
+				"name": "items",
+				"label": "Pillars",
+				"type": "repeater",
+				"layout": "block",
+				"button_label": "Add pillar",
+				"sub_fields": [
+					{
+						"name": "icon",
+						"label": "Icon",
+						"type": "select",
+						"choices": {
+							"network": "Network",
+							"medal": "Medal",
+							"pyramid": "Pyramid"
+						},
+						"default_value": "network"
+					},
+					{ "name": "title", "label": "Title", "type": "text" },
+					{ "name": "body", "label": "Body", "type": "textarea", "rows": 3, "new_lines": "" }
+				]
+			}
+		]
+	},
+	"supports": {
+		"align": false,
+		"html": false,
+		"mode": true,
+		"jsx": false,
+		"multiple": true
+	}
+}

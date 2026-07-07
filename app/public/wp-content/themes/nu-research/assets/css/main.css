@@ -129,6 +129,16 @@ p {
 	margin: 0 0 1em;
 }
 
+/* Heading links — subtle lift on hover */
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+	display: inline-block;
+	transition: transform 180ms cubic-bezier(0.2, 0, 0.1, 1);
+}
+
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
+	transform: translateY(-2px);
+}
+
 a {
 	color: var(--color-link);
 	text-decoration: none;
@@ -219,6 +229,11 @@ a:hover {
 	letter-spacing: 0.14em;
 }
 
+/* Red N square in the utility bar — phones only (desktop keeps the text label) */
+.utility-logo {
+	display: none;
+}
+
 .brand-bar {
 	border-bottom: 1px solid var(--color-border);
 }
@@ -297,6 +312,7 @@ a:hover {
 	background: currentColor;
 	position: relative;
 	content: '';
+	transition: transform 0.2s ease, background-color 0.15s ease, top 0.2s ease;
 }
 
 .nav-toggle-icon::before {
@@ -309,6 +325,21 @@ a:hover {
 	top: 6px;
 }
 
+/* Hamburger → X when overlay is open */
+.nav-toggle[aria-expanded='true'] .nav-toggle-icon {
+	background: transparent;
+}
+
+.nav-toggle[aria-expanded='true'] .nav-toggle-icon::before {
+	top: 0;
+	transform: rotate(45deg);
+}
+
+.nav-toggle[aria-expanded='true'] .nav-toggle-icon::after {
+	top: 0;
+	transform: rotate(-45deg);
+}
+
 .primary-nav {
 	background: var(--nu-white);
 	border-bottom: 1px solid var(--color-border);
@@ -317,6 +348,44 @@ a:hover {
 /* Collapsed by default on mobile once JS adds .nav-ready */
 .nav-ready .primary-nav[data-collapsed='true'] {
 	display: none;
+}
+
+/* ── Mobile / tablet: full-screen overlay nav ──────────────────────────────
+   When the hamburger is tapped, the header stretches to cover the full
+   viewport instead of pushing page content down.                           */
+@media (max-width: 1049px) {
+	body.nav-open {
+		overflow: hidden;
+	}
+
+	body.nav-open .site-header {
+		position: fixed;
+		inset: 0;
+		z-index: 999;
+		background: var(--nu-white);
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+	}
+
+	/* Nav panel scrolls independently so long menus stay accessible */
+	body.nav-open .primary-nav {
+		display: block;
+		flex: 1;
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+		border-bottom: none;
+	}
+
+	/* Give the nav items more breathing room inside the overlay */
+	body.nav-open .nav-tabs {
+		padding-block: var(--space-4);
+	}
+
+	body.nav-open .nav-tabs a {
+		font-size: 1.125rem;
+		padding-block: var(--space-4);
+	}
 }
 
 .nav-tabs {
@@ -415,7 +484,7 @@ a:hover {
 	font-size: 0.9375rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1050px) {
 	.nav-toggle {
 		display: none;
 	}
@@ -456,6 +525,77 @@ a:hover {
 
 	.nav-submenu a {
 		padding: var(--space-3) var(--space-4);
+	}
+}
+
+/* Compact header on phones: the application status owns the utility bar,
+   the brand drops its longest line, and the menu button collapses to a
+   bare icon (its label stays available to screen readers). */
+@media (max-width: 599px) {
+	.utility-label {
+		display: none;
+	}
+
+	/* The bar's height comes from the row so the logo square can bleed
+	   to the top, bottom, and left edges. */
+	.utility-bar {
+		padding-block: 0;
+	}
+
+	.utility-bar__row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		min-height: 44px;
+	}
+
+	.utility-logo {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		align-self: stretch;
+		width: 44px;
+		margin-left: calc(-1 * var(--content-pad));
+		background: var(--nu-red);
+	}
+
+	/* The source mark is NU red; flip it to white on the red square. */
+	.utility-logo img {
+		filter: brightness(0) invert(1);
+	}
+
+	.brand-lockup {
+		font-size: 1.25rem;
+	}
+
+	.brand-unit {
+		font-size: 1rem;
+	}
+
+	.brand-sub {
+		display: none;
+	}
+
+	.nav-toggle {
+		border: 0;
+		padding: var(--space-2);
+	}
+
+	.nav-toggle-icon,
+	.nav-toggle-icon::before,
+	.nav-toggle-icon::after {
+		width: 22px;
+	}
+
+	.nav-toggle-label {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
 	}
 }
 
@@ -810,6 +950,11 @@ a:hover {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	transition: transform 0.4s ease;
+}
+
+.journey-card:hover .journey-card-media img {
+	transform: scale(1.05);
 }
 
 .journey-card-title {
@@ -1344,6 +1489,11 @@ a:hover {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	transition: transform 0.4s ease;
+}
+
+.card:hover .card-media img {
+	transform: scale(1.05);
 }
 
 .ratio-4-3 {
@@ -2296,6 +2446,7 @@ body .fellows-dl-banner {
 	color: inherit;
 	text-decoration: underline;
 	text-underline-offset: 3px;
+	transform: translateY(-2px);
 }
 
 .card-media {

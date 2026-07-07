@@ -9,7 +9,7 @@
 
 	var toggle = document.querySelector( '.nav-toggle' );
 	var nav = document.getElementById( 'primary-nav' );
-	var mq = window.matchMedia( '(min-width: 768px)' );
+	var mq = window.matchMedia( '(min-width: 1050px)' );
 
 	if ( ! toggle || ! nav ) {
 		return;
@@ -20,6 +20,9 @@
 	function setOpen( open ) {
 		toggle.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
 		nav.setAttribute( 'data-collapsed', open ? 'false' : 'true' );
+		// Drive the full-screen overlay on mobile/tablet via a body class.
+		// On desktop the CSS media query (max-width: 1049px) ensures this is a no-op.
+		document.body.classList.toggle( 'nav-open', open && ! mq.matches );
 	}
 
 	// Start collapsed on small screens only.

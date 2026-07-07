@@ -1,0 +1,275 @@
+/**
+ * Spotlight-style search palette.
+ *
+ * Trigger button in the utility bar + a centered command-palette overlay.
+ * Uses the theme's tokens from main.css (square corners, single red accent).
+ */
+
+/* --- Trigger button (primary/bottom nav) ------------------------------- */
+
+/* The button is its own item in the white nav bar: right-aligned on desktop,
+   a full-width row inside the disclosed menu on mobile. */
+.nav-item--search {
+	display: flex;
+	align-items: center;
+}
+
+.search-trigger {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-2);
+	padding: 8px var(--space-3);
+	min-height: 40px;
+	background: var(--nu-white);
+	border: 1px solid var(--gray-300);
+	border-radius: 0;
+	color: var(--color-text);
+	font: inherit;
+	font-size: 0.9375rem;
+	font-weight: 600;
+	letter-spacing: 0.01em;
+	cursor: pointer;
+	transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.search-trigger:hover,
+.search-trigger:focus-visible {
+	background: var(--gray-100);
+	border-color: var(--gray-600);
+	color: var(--nu-red);
+	outline: none;
+}
+
+.search-trigger__icon {
+	flex: 0 0 auto;
+	color: var(--color-text-muted);
+}
+
+.search-trigger:hover .search-trigger__icon,
+.search-trigger:focus-visible .search-trigger__icon {
+	color: var(--nu-red);
+}
+
+.search-trigger__kbd {
+	font-family: var(--font-sans);
+	font-size: 0.6875rem;
+	font-weight: 700;
+	line-height: 1;
+	padding: 3px 5px;
+	color: var(--color-text-muted);
+	background: var(--gray-100);
+	border: 1px solid var(--gray-200);
+}
+
+/* Desktop: push the button to the far right of the tab row. */
+@media (min-width: 1050px) {
+	.nav-item--search {
+		margin-left: auto;
+	}
+}
+
+/* Mobile/tablet: it sits in the disclosed menu — full width, set off from the
+   links above it, and the keyboard hint is irrelevant without a keyboard. */
+@media (max-width: 1049px) {
+	.nav-item--search {
+		margin-top: var(--space-3);
+		padding-top: var(--space-4);
+		padding-bottom: var(--space-5);
+		border-top: 1px solid var(--color-border);
+	}
+
+	.nav-item--search .search-trigger {
+		width: 100%;
+		justify-content: flex-start;
+	}
+
+	.nav-item--search .search-trigger__kbd {
+		display: none;
+	}
+}
+
+/* --- Overlay ----------------------------------------------------------- */
+
+.search-modal {
+	position: fixed;
+	inset: 0;
+	z-index: 1000;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	/* Spotlight sits in the upper third rather than dead center. */
+	padding: clamp(64px, 12vh, 160px) var(--content-pad) var(--space-6);
+}
+
+.search-modal[hidden] {
+	display: none;
+}
+
+.search-modal__backdrop {
+	position: fixed;
+	inset: 0;
+	background: rgba(10, 10, 10, 0.55);
+	-webkit-backdrop-filter: blur(4px);
+	backdrop-filter: blur(4px);
+	opacity: 0;
+	transition: opacity 180ms ease;
+}
+
+.search-modal[data-open='true'] .search-modal__backdrop {
+	opacity: 1;
+}
+
+.search-modal__panel {
+	position: relative;
+	width: min(100%, 640px);
+	background: var(--nu-white);
+	border: 1px solid var(--color-border);
+	border-top: 3px solid var(--nu-red);
+	box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+	opacity: 0;
+	transform: translateY(-8px) scale(0.98);
+	transition: opacity 180ms ease, transform 180ms cubic-bezier(0.2, 0, 0.1, 1);
+}
+
+.search-modal[data-open='true'] .search-modal__panel {
+	opacity: 1;
+	transform: translateY(0) scale(1);
+}
+
+/* --- Input field ------------------------------------------------------- */
+
+.search-modal__field {
+	display: flex;
+	align-items: center;
+	gap: var(--space-3);
+	padding: var(--space-4) var(--space-5);
+	border-bottom: 1px solid var(--color-border);
+}
+
+.search-modal__field-icon {
+	flex: 0 0 auto;
+	color: var(--color-text-muted);
+}
+
+.search-modal__input {
+	flex: 1 1 auto;
+	min-width: 0;
+	border: 0;
+	background: none;
+	padding: var(--space-2) 0;
+	font-family: var(--font-sans);
+	font-size: 1.125rem;
+	color: var(--color-text);
+	appearance: none;
+}
+
+.search-modal__input:focus {
+	outline: none;
+}
+
+.search-modal__input::placeholder {
+	color: var(--color-text-muted);
+}
+
+/* Hide the native clear affordance so the field stays flush. */
+.search-modal__input::-webkit-search-cancel-button {
+	appearance: none;
+}
+
+.search-modal__close {
+	flex: 0 0 auto;
+	background: none;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+	color: var(--color-text-muted);
+}
+
+.search-modal__close kbd {
+	font-family: var(--font-sans);
+	font-size: 0.6875rem;
+	font-weight: 700;
+	padding: 4px 6px;
+	border: 1px solid var(--color-border);
+	color: var(--color-text-secondary);
+}
+
+.search-modal__close:hover kbd,
+.search-modal__close:focus-visible kbd {
+	border-color: var(--gray-600);
+	color: var(--color-text);
+}
+
+/* --- Results ----------------------------------------------------------- */
+
+.search-modal__results {
+	list-style: none;
+	margin: 0;
+	padding: var(--space-2);
+	max-height: min(52vh, 420px);
+	overflow-y: auto;
+}
+
+.search-modal__results[hidden] {
+	display: none;
+}
+
+.search-modal__result-link {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: var(--space-4);
+	padding: var(--space-3) var(--space-4);
+	text-decoration: none;
+	color: var(--color-text);
+}
+
+.search-modal__result.is-active .search-modal__result-link,
+.search-modal__result-link:hover {
+	background: var(--gray-100);
+	color: var(--color-text);
+}
+
+/* Red rule on the highlighted row keeps the single-accent discipline. */
+.search-modal__result.is-active .search-modal__result-link {
+	box-shadow: inset 3px 0 0 var(--nu-red);
+}
+
+.search-modal__result-title {
+	font-size: 1rem;
+	font-weight: 600;
+}
+
+.search-modal__result-kind {
+	flex: 0 0 auto;
+	font-size: 0.6875rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	color: var(--color-text-muted);
+}
+
+.search-modal__status {
+	margin: 0;
+	padding: var(--space-3) var(--space-5);
+	border-top: 1px solid var(--color-border);
+	font-size: 0.8125rem;
+	color: var(--color-text-muted);
+}
+
+.search-modal__status:empty {
+	display: none;
+}
+
+/* --- Motion preferences ------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+	.search-modal__backdrop,
+	.search-modal__panel {
+		transition: none;
+	}
+
+	.search-modal__panel {
+		transform: none;
+	}
+}

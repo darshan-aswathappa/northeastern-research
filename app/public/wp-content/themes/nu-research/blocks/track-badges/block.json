@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"name": "nu/track-badges",
+	"title": "Fellows: Track Badges",
+	"description": "Row of outlined badges listing the research tracks.",
+	"category": "nu-research",
+	"icon": "tag",
+	"textdomain": "nu-research",
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php",
+		"fields": [
+			{ "name": "label", "label": "Accessible label", "type": "text", "default_value": "Research tracks" },
+			{
+				"name": "tracks",
+				"label": "Tracks",
+				"type": "repeater",
+				"layout": "table",
+				"button_label": "Add track",
+				"sub_fields": [
+					{ "name": "name", "label": "Track name", "type": "text" }
+				]
+			}
+		]
+	},
+	"supports": {
+		"align": false,
+		"html": false,
+		"mode": true,
+		"jsx": false,
+		"multiple": true
+	}
+}

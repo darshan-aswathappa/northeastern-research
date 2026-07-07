@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"name": "nu/journey-cards",
+	"title": "Fellows: Journey Cards",
+	"description": "Labelled three-up grid of photo cards with arrow links.",
+	"category": "nu-research",
+	"icon": "grid-view",
+	"textdomain": "nu-research",
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php",
+		"fields": [
+			{ "name": "label", "label": "Section label", "type": "text", "default_value": "Your research journey" },
+			{
+				"name": "cards",
+				"label": "Cards",
+				"type": "repeater",
+				"layout": "block",
+				"button_label": "Add card",
+				"sub_fields": [
+					{ "name": "image", "label": "Image filename (assets/img/)", "type": "text" },
+					{ "name": "image_alt", "label": "Image alt text", "type": "text" },
+					{ "name": "title", "label": "Title", "type": "text" },
+					{ "name": "body", "label": "Body", "type": "textarea", "rows": 3, "new_lines": "" },
+					{ "name": "cta_label", "label": "Link label", "type": "text" },
+					{ "name": "cta_slug", "label": "Link to page slug", "type": "text" }
+				]
+			}
+		]
+	},
+	"supports": {
+		"align": false,
+		"html": false,
+		"mode": true,
+		"jsx": false,
+		"multiple": true
+	}
+}

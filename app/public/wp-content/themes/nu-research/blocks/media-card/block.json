@@ -1,0 +1,37 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"name": "nu/media-card",
+	"title": "Fellows: Media Card",
+	"description": "Image beside a heading and paragraph. Optionally reversed.",
+	"category": "nu-research",
+	"icon": "align-pull-left",
+	"textdomain": "nu-research",
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php",
+		"fields": [
+			{ "name": "heading", "label": "Heading", "type": "text", "default_value": "Hands-on, mentored research" },
+			{ "name": "body", "label": "Body", "type": "textarea", "rows": 4, "new_lines": "", "default_value": "Each fellow is paired with a faculty mentor and joins a small track team focused on one problem area — plugin architecture, editor UX, performance, or accessibility. No prior WordPress experience required, just solid PHP or JS fundamentals." },
+			{ "name": "image", "label": "Image filename (assets/img/)", "type": "text", "default_value": "mentor.jpg" },
+			{ "name": "image_alt", "label": "Image alt text", "type": "text", "default_value": "Fellow working at a laptop with a mentor" },
+			{ "name": "reverse", "label": "Image on the right", "type": "true_false", "ui": 1, "default_value": 0 },
+			{
+				"name": "section",
+				"label": "Background",
+				"type": "select",
+				"choices": {
+					"section section-tight": "Tight (white)",
+					"section section-muted": "Muted (grey)"
+				},
+				"default_value": "section section-tight"
+			}
+		]
+	},
+	"supports": {
+		"align": false,
+		"html": false,
+		"mode": true,
+		"jsx": false,
+		"multiple": true
+	}
+}

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Fellows Deadline Countdown
  * Description: Deadline settings, [fellows_countdown] shortcode, a "closing soon" site-wide banner, and an admin dashboard snapshot widget for the SWE Fellows Program.
- * Version:     1.0.0
+ * Version:     1.1.1
  * Author:      Darshan Aswathappa
  * License:     GPL v2 or later
  * Requires at least: 6.3
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'FELLOWS_DL_VERSION', '1.1.0' );
+define( 'FELLOWS_DL_VERSION', '1.1.1' );
 define( 'FELLOWS_DL_URL', plugin_dir_url( __FILE__ ) );
 
 // Closing-soon banner: default and maximum lead time (in days) before the close date.
@@ -558,9 +558,11 @@ function fellows_deadline_utility_status() {
 			__( 'Applications open %s', 'fellows-deadline' ),
 			date_i18n( get_option( 'date_format' ), $open_ts )
 		);
+		$short   = __( 'Applications open soon', 'fellows-deadline' );
 	} elseif ( $close_ts && $now > $close_ts ) {
 		$state   = 'closed';
 		$message = __( 'Applications closed', 'fellows-deadline' );
+		$short   = $message;
 		$notify  = fellows_deadline_notify_phrase();
 		if ( $notify ) {
 			/* translators: 1: "Applications closed", 2: "Decisions expected <date>" */
@@ -572,6 +574,7 @@ function fellows_deadline_utility_status() {
 		}
 	} else {
 		$state = 'open';
+		$short = __( 'Applications open', 'fellows-deadline' );
 		if ( $close_ts ) {
 			$days_left = (int) ceil( ( $close_ts - $now ) / DAY_IN_SECONDS );
 			$message   = sprintf(
@@ -580,15 +583,20 @@ function fellows_deadline_utility_status() {
 				$days_left
 			);
 		} else {
-			$message = __( 'Applications open', 'fellows-deadline' );
+			$message = $short;
 		}
 	}
+
+	// Full text on larger screens; the short, date-free text on phones
+	// (deadline.css swaps the two spans at the mobile breakpoint).
+	$label = '<span class="fellows-util-status__full">' . esc_html( $message ) . '</span>'
+		. '<span class="fellows-util-status__short">' . esc_html( $short ) . '</span>';
 
 	// Closed state is not a link — renders as a plain span to avoid theme link-colour bleed.
 	if ( 'closed' === $state ) :
 		?>
 		<span class="fellows-util-status fellows-util-status--closed" role="status">
-			<?php echo esc_html( $message ); ?>
+			<?php echo $label; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from esc_html() above. ?>
 		</span>
 		<?php
 		return;
@@ -604,7 +612,7 @@ function fellows_deadline_utility_status() {
 		<?php if ( 'open' === $state ) : ?>
 			<span class="fellows-util-status__dot" aria-hidden="true"></span>
 		<?php endif; ?>
-		<?php echo esc_html( $message ); ?>
+		<?php echo $label; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from esc_html() above. ?>
 	</a>
 	<?php
 }

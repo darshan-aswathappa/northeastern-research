@@ -124,6 +124,22 @@
 	50%       { opacity: .35; }
 }
 
+/* Phones get the short, date-free status text; everything wider keeps the
+   full message. Breakpoint matches the theme's compact-header query. */
+.fellows-util-status__short {
+	display: none;
+}
+
+@media (max-width: 599px) {
+	.fellows-util-status__full {
+		display: none;
+	}
+
+	.fellows-util-status__short {
+		display: inline;
+	}
+}
+
 /* ---------- Closing-soon banner ---------- */
 
 .fellows-dl-banner {
