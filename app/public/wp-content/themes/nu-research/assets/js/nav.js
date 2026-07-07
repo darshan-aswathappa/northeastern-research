@@ -20,6 +20,9 @@
 	function setOpen( open ) {
 		toggle.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
 		nav.setAttribute( 'data-collapsed', open ? 'false' : 'true' );
+		// Drive the full-screen overlay on mobile/tablet via a body class.
+		// On desktop the CSS media query (max-width: 1023px) ensures this is a no-op.
+		document.body.classList.toggle( 'nav-open', open && ! mq.matches );
 	}
 
 	// Start collapsed on small screens only.

@@ -312,6 +312,7 @@ a:hover {
 	background: currentColor;
 	position: relative;
 	content: '';
+	transition: transform 0.2s ease, background-color 0.15s ease, top 0.2s ease;
 }
 
 .nav-toggle-icon::before {
@@ -324,6 +325,21 @@ a:hover {
 	top: 6px;
 }
 
+/* Hamburger → X when overlay is open */
+.nav-toggle[aria-expanded='true'] .nav-toggle-icon {
+	background: transparent;
+}
+
+.nav-toggle[aria-expanded='true'] .nav-toggle-icon::before {
+	top: 0;
+	transform: rotate(45deg);
+}
+
+.nav-toggle[aria-expanded='true'] .nav-toggle-icon::after {
+	top: 0;
+	transform: rotate(-45deg);
+}
+
 .primary-nav {
 	background: var(--nu-white);
 	border-bottom: 1px solid var(--color-border);
@@ -332,6 +348,44 @@ a:hover {
 /* Collapsed by default on mobile once JS adds .nav-ready */
 .nav-ready .primary-nav[data-collapsed='true'] {
 	display: none;
+}
+
+/* ── Mobile / tablet: full-screen overlay nav ──────────────────────────────
+   When the hamburger is tapped, the header stretches to cover the full
+   viewport instead of pushing page content down.                           */
+@media (max-width: 1023px) {
+	body.nav-open {
+		overflow: hidden;
+	}
+
+	body.nav-open .site-header {
+		position: fixed;
+		inset: 0;
+		z-index: 999;
+		background: var(--nu-white);
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+	}
+
+	/* Nav panel scrolls independently so long menus stay accessible */
+	body.nav-open .primary-nav {
+		display: block;
+		flex: 1;
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+		border-bottom: none;
+	}
+
+	/* Give the nav items more breathing room inside the overlay */
+	body.nav-open .nav-tabs {
+		padding-block: var(--space-4);
+	}
+
+	body.nav-open .nav-tabs a {
+		font-size: 1.125rem;
+		padding-block: var(--space-4);
+	}
 }
 
 .nav-tabs {
