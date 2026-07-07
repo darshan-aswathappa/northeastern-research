@@ -1078,6 +1078,89 @@ a:hover {
 	background: var(--nu-black);
 }
 
+/* --- Logo marquee (home) ----------------------------------------------------------
+   A "trusted by" line over a full-bleed strip of partner logos, driven by
+   assets/js/marquee.js: it drifts on its own, follows the page scroll
+   direction, and dissolves under a blur at both ends. The ::before/::after
+   overlays blur whatever passes beneath them, and their mask tapers that blur
+   so the strip fades out instead of hitting a hard edge. */
+.logo-marquee {
+	position: relative;
+	overflow: hidden;
+	padding-block: clamp(40px, 5vw, 72px);
+	background: var(--nu-white);
+	border-block: 1px solid var(--color-border);
+}
+
+.logo-marquee-heading {
+	margin: 0 0 clamp(24px, 3vw, 40px);
+	text-align: center;
+	font-size: 0.8125rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+	color: var(--color-text-muted);
+}
+
+.logo-marquee-track {
+	display: flex;
+	width: max-content;
+	will-change: transform;
+}
+
+.logo-marquee-group {
+	display: flex;
+	align-items: center;
+}
+
+.logo-item {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-3);
+	margin-right: clamp(40px, 6vw, 88px);
+	color: var(--gray-600);
+	white-space: nowrap;
+}
+
+.logo-mark {
+	flex: none;
+	color: var(--nu-red);
+}
+
+.logo-name {
+	font-family: var(--font-sans);
+	font-size: clamp(1.125rem, 2vw, 1.375rem);
+	font-weight: 700;
+	letter-spacing: -0.01em;
+}
+
+.logo-marquee::before,
+.logo-marquee::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: clamp(64px, 10vw, 160px);
+	z-index: 1;
+	pointer-events: none;
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
+}
+
+.logo-marquee::before {
+	left: 0;
+	background: linear-gradient(to right, var(--nu-white), transparent);
+	-webkit-mask-image: linear-gradient(to right, #000 25%, transparent);
+	mask-image: linear-gradient(to right, #000 25%, transparent);
+}
+
+.logo-marquee::after {
+	right: 0;
+	background: linear-gradient(to left, var(--nu-white), transparent);
+	-webkit-mask-image: linear-gradient(to left, #000 25%, transparent);
+	mask-image: linear-gradient(to left, #000 25%, transparent);
+}
+
 /* --- Buttons (square red CTA with trailing arrow) ---------------------------- */
 .btn {
 	display: inline-flex;
@@ -2391,6 +2474,121 @@ body .fellows-dl-banner {
 	margin: 0;
 	font-size: 0.875rem;
 	color: var(--text-on-dark-muted);
+}
+
+/* --- Institutional sub-footer (light, below main footer) ------------------- */
+.site-footer-inst {
+	background: var(--nu-white);
+	border-top: 1px solid var(--gray-200);
+	padding-block: var(--space-7) var(--space-7);
+}
+
+.footer-inst-inner {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-6);
+	text-align: center;
+}
+
+/* Logo: visible on mobile, hidden on desktop */
+.footer-inst-logo {
+	display: block;
+	max-width: 120px;
+	height: auto;
+	margin-inline: auto;
+}
+
+.footer-inst-brand p {
+	margin: var(--space-1) 0 0;
+	font-size: 0.9375rem;
+	color: var(--gray-800);
+	line-height: 1.5;
+}
+
+.footer-inst-brand a {
+	color: var(--color-link);
+	text-decoration: none;
+}
+
+.footer-inst-brand a:hover,
+.footer-inst-brand a:focus-visible {
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.footer-inst-legal {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-2);
+}
+
+.footer-inst-legal p {
+	margin: 0;
+	font-size: 0.9375rem;
+	color: var(--gray-800);
+}
+
+.footer-inst-legal a {
+	font-size: 0.9375rem;
+	color: var(--gray-800);
+	text-decoration: none;
+}
+
+.footer-inst-legal a:hover,
+.footer-inst-legal a:focus-visible {
+	color: var(--color-link);
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.footer-inst-social {
+	display: flex;
+	align-items: center;
+	gap: var(--space-5);
+}
+
+.footer-inst-social a {
+	display: flex;
+	align-items: center;
+	color: var(--gray-800);
+	transition: color var(--transition-fast);
+}
+
+.footer-inst-social a:hover,
+.footer-inst-social a:focus-visible {
+	color: var(--nu-red);
+}
+
+/* Desktop: three-column horizontal layout */
+@media (min-width: 768px) {
+	.footer-inst-inner {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		text-align: left;
+	}
+
+	.footer-inst-logo {
+		display: none; /* logo hidden on desktop; brand name text suffices */
+	}
+
+	.footer-inst-brand {
+		flex: 1 1 auto;
+	}
+
+	.footer-inst-legal {
+		flex: 0 0 auto;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--space-1);
+	}
+
+	.footer-inst-social {
+		flex: 0 0 auto;
+		justify-content: flex-end;
+	}
 }
 
 /* --- Front page top spacing: hero sits flush under header ------------------- */
