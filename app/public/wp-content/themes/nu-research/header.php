@@ -33,7 +33,7 @@
 			<a class="utility-logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'Northeastern University home', 'nu-research' ); ?>">
 				<img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/nu-mark.png' ) ); ?>" alt="" width="22" height="22">
 			</a>
-			<span class="utility-label"><?php esc_html_e( 'Explore Northeastern', 'nu-research' ); ?></span>
+			<span class="utility-label"><?php esc_html_e( 'Graduate Research', 'nu-research' ); ?></span>
 			<?php do_action( 'nu_research_utility_bar' ); ?>
 		</div>
 	</div>
