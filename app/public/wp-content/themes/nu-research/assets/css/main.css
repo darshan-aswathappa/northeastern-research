@@ -2393,6 +2393,121 @@ body .fellows-dl-banner {
 	color: var(--text-on-dark-muted);
 }
 
+/* --- Institutional sub-footer (light, below main footer) ------------------- */
+.site-footer-inst {
+	background: var(--nu-white);
+	border-top: 1px solid var(--gray-200);
+	padding-block: var(--space-7) var(--space-7);
+}
+
+.footer-inst-inner {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-6);
+	text-align: center;
+}
+
+/* Logo: visible on mobile, hidden on desktop */
+.footer-inst-logo {
+	display: block;
+	max-width: 120px;
+	height: auto;
+	margin-inline: auto;
+}
+
+.footer-inst-brand p {
+	margin: var(--space-1) 0 0;
+	font-size: 0.9375rem;
+	color: var(--gray-800);
+	line-height: 1.5;
+}
+
+.footer-inst-brand a {
+	color: var(--color-link);
+	text-decoration: none;
+}
+
+.footer-inst-brand a:hover,
+.footer-inst-brand a:focus-visible {
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.footer-inst-legal {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-2);
+}
+
+.footer-inst-legal p {
+	margin: 0;
+	font-size: 0.9375rem;
+	color: var(--gray-800);
+}
+
+.footer-inst-legal a {
+	font-size: 0.9375rem;
+	color: var(--gray-800);
+	text-decoration: none;
+}
+
+.footer-inst-legal a:hover,
+.footer-inst-legal a:focus-visible {
+	color: var(--color-link);
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.footer-inst-social {
+	display: flex;
+	align-items: center;
+	gap: var(--space-5);
+}
+
+.footer-inst-social a {
+	display: flex;
+	align-items: center;
+	color: var(--gray-800);
+	transition: color var(--transition-fast);
+}
+
+.footer-inst-social a:hover,
+.footer-inst-social a:focus-visible {
+	color: var(--nu-red);
+}
+
+/* Desktop: three-column horizontal layout */
+@media (min-width: 768px) {
+	.footer-inst-inner {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		text-align: left;
+	}
+
+	.footer-inst-logo {
+		display: none; /* logo hidden on desktop; brand name text suffices */
+	}
+
+	.footer-inst-brand {
+		flex: 1 1 auto;
+	}
+
+	.footer-inst-legal {
+		flex: 0 0 auto;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--space-1);
+	}
+
+	.footer-inst-social {
+		flex: 0 0 auto;
+		justify-content: flex-end;
+	}
+}
+
 /* --- Front page top spacing: hero sits flush under header ------------------- */
 .home .site-main > .hero {
 	margin-top: 0;
