@@ -62,7 +62,7 @@
 }
 
 /* Desktop: push the button to the far right of the tab row. */
-@media (min-width: 1024px) {
+@media (min-width: 1050px) {
 	.nav-item--search {
 		margin-left: auto;
 	}
@@ -70,7 +70,7 @@
 
 /* Mobile/tablet: it sits in the disclosed menu — full width, set off from the
    links above it, and the keyboard hint is irrelevant without a keyboard. */
-@media (max-width: 1023px) {
+@media (max-width: 1049px) {
 	.nav-item--search {
 		margin-top: var(--space-3);
 		padding-top: var(--space-4);

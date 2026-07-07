@@ -353,7 +353,7 @@ a:hover {
 /* ── Mobile / tablet: full-screen overlay nav ──────────────────────────────
    When the hamburger is tapped, the header stretches to cover the full
    viewport instead of pushing page content down.                           */
-@media (max-width: 1023px) {
+@media (max-width: 1049px) {
 	body.nav-open {
 		overflow: hidden;
 	}
@@ -484,7 +484,7 @@ a:hover {
 	font-size: 0.9375rem;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1050px) {
 	.nav-toggle {
 		display: none;
 	}
