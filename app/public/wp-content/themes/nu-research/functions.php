@@ -98,6 +98,18 @@ function nu_research_enqueue() {
 			'strategy'  => 'defer',
 		)
 	);
+
+	// Scroll-reactive photo marquee (nu/photo-marquee block).
+	wp_enqueue_script(
+		'nu-research-marquee',
+		get_theme_file_uri( 'assets/js/marquee.js' ),
+		array(),
+		(string) filemtime( get_theme_file_path( 'assets/js/marquee.js' ) ),
+		array(
+			'in_footer' => true,
+			'strategy'  => 'defer',
+		)
+	);
 }
 add_action( 'wp_enqueue_scripts', 'nu_research_enqueue' );
 

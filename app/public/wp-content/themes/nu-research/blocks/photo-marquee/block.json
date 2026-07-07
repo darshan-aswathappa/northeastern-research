@@ -1,0 +1,34 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"name": "nu/photo-marquee",
+	"title": "Fellows: Photo Marquee",
+	"description": "Full-bleed strip of photos that drifts sideways, follows the page scroll direction, and fades under a blur at both ends.",
+	"category": "nu-research",
+	"icon": "images-alt2",
+	"textdomain": "nu-research",
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php",
+		"fields": [
+			{ "name": "label", "label": "Accessible label", "type": "text", "default_value": "Photos from the fellowship" },
+			{
+				"name": "images",
+				"label": "Photos",
+				"type": "repeater",
+				"layout": "block",
+				"button_label": "Add photo",
+				"sub_fields": [
+					{ "name": "image", "label": "Image filename (assets/img/)", "type": "text" },
+					{ "name": "image_alt", "label": "Image alt text", "type": "text" }
+				]
+			}
+		]
+	},
+	"supports": {
+		"align": false,
+		"html": false,
+		"mode": true,
+		"jsx": false,
+		"multiple": true
+	}
+}
