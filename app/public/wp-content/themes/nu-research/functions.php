@@ -20,6 +20,9 @@ require_once get_theme_file_path( 'inc/nav-walker.php' );
 // Skeleton loading screens + the Appearance -> Skeleton Loading settings.
 require_once get_theme_file_path( 'inc/skeleton.php' );
 
+// Spotlight-style search palette (header button + Cmd/Ctrl+S overlay).
+require_once get_theme_file_path( 'inc/search.php' );
+
 /**
  * Security response headers.
  */
