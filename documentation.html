@@ -1576,18 +1576,21 @@ jobs:
 ├── style.css                     ← Theme header only (no styles here)
 ├── functions.php                 ← All hooks, helpers, enqueues
 ├── inc/
-│   └── blocks.php                ← 8 custom Gutenberg blocks (server-rendered)
+│   ├── blocks.php                ← 8 custom Gutenberg blocks (server-rendered)
+│   └── skeleton.php              ← Skeleton loading screens + admin settings
 │
 ├── assets/
 │   ├── css/
-│   │   └── main.css              ← All styles (~1 750 lines, token-driven)
+│   │   ├── main.css              ← All styles (~1 750 lines, token-driven)
+│   │   └── skeleton.css          ← Skeleton overlay, placeholder primitives, shimmer
 │   ├── fonts/
 │   │   ├── hankengrotesk-var.woff2   ← Self-hosted variable font
 │   │   └── sourceserif4-var.woff2   ← Self-hosted variable font
 │   ├── img/                      ← Hero, team, and section photos
 │   └── js/
-│       ├── nav.js                ← Mobile hamburger disclosure (32 lines)
-│       └── blocks.js             ← Editor UIs for the 8 custom blocks
+│       ├── nav.js                ← Mobile hamburger disclosure
+│       ├── blocks.js             ← Editor UIs for the 8 custom blocks
+│       └── skeleton.js           ← Skeleton reveal (fade out + DOM remove on load)
 │
 ├── header.php                    ← Skip link, utility bar, brand bar, nav
 ├── footer.php                    ← Black global footer with four-column nav
@@ -1607,7 +1610,17 @@ jobs:
 ├── page-press.php                ← Template: Press & Publications (SCF-driven)
 │
 └── template-parts/
-    └── post-card.php             ← Reusable blog post card partial</code></pre>
+    ├── post-card.php             ← Reusable blog post card partial
+    └── skeleton/                 ← Layout-matching skeleton partials (one per template)
+        ├── header.php            ← Shared utility bar + brand + nav placeholder
+        ├── front.php             ← Home page skeleton
+        ├── about.php             ← About page skeleton
+        ├── apply.php             ← Apply & Eligibility skeleton
+        ├── contact.php           ← Contact page skeleton
+        ├── events.php            ← Events & Info Sessions skeleton
+        ├── highlights-team.php   ← Highlights & Team skeleton
+        ├── press.php             ← Press & Publications skeleton
+        └── generic.php           ← Fallback for unspecified templates</code></pre>
           </div>
 
           <!-- 3. Template hierarchy -->
@@ -2857,7 +2870,244 @@ jobs:
             </p>
           </div>
 
-          <!-- 10. Performance optimizations summary -->
+          <!-- 10. Skeleton Loading Screens -->
+          <div class="doc-section">
+            <h2 class="doc-section-heading">Skeleton Loading Screens</h2>
+
+            <div class="callout">
+              <span class="callout-icon">⚡</span>
+              <div class="callout-body">
+                <p class="callout-title">Layout-matching placeholders, not spinners</p>
+                <p>
+                  The skeleton system renders a full-viewport overlay of grey
+                  placeholder blocks that mirror the real page's layout. It
+                  appears on first paint — before any JavaScript runs — and is
+                  removed once the page finishes loading. Slow connections see a
+                  structured skeleton instead of a blank page or a generic
+                  spinner.
+                </p>
+              </div>
+            </div>
+
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">Architecture</h3>
+            <p>Three files implement the system:</p>
+            <ul style="margin: 0 0 var(--space-5); padding-left: var(--space-6); line-height: 1.8">
+              <li><code>inc/skeleton.php</code> — PHP logic: settings, asset enqueue, overlay render</li>
+              <li><code>assets/css/skeleton.css</code> — overlay, placeholder primitives, shimmer animation</li>
+              <li><code>assets/js/skeleton.js</code> — reveal script (fade-out + DOM removal after page load)</li>
+            </ul>
+            <p>Nine template partials under <code>template-parts/skeleton/</code> provide the per-template content areas.</p>
+
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">How it works</h3>
+            <ol style="margin: 0 0 var(--space-5); padding-left: var(--space-6); line-height: 2">
+              <li>PHP renders the <code>.nu-skeleton</code> overlay immediately after <code>&lt;body&gt;</code> opens, via the <code>wp_body_open</code> action hook.</li>
+              <li>The overlay is visible on first paint — no flash of content, no layout shift on reveal.</li>
+              <li><code>skeleton.js</code> (deferred) listens for the <code>load</code> event and fades the overlay out, then removes it from the DOM.</li>
+              <li>A <code>&lt;noscript&gt;</code> rule hides the overlay when scripts are disabled, so no-JS visitors always see the real page.</li>
+              <li>A hard failsafe (real visitors: 6 s; admins: configured delay + 6 s) ensures the overlay is never permanently stuck if a resource stalls.</li>
+            </ol>
+
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">Admin settings (Appearance → Skeleton Loading)</h3>
+            <p>Three options are stored in <code>wp_options</code> and managed via the WordPress Settings API:</p>
+            <table class="doc-table" aria-label="Skeleton admin options">
+              <thead>
+                <tr>
+                  <th>Option</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>nu_skeleton_enabled</code></td>
+                  <td><code>true</code></td>
+                  <td>Master toggle — disabling removes the overlay and dequeues all skeleton assets on the front end.</td>
+                </tr>
+                <tr>
+                  <td><code>nu_skeleton_sim_enabled</code></td>
+                  <td><code>false</code></td>
+                  <td>Preview delay toggle, visible to administrators only. Regular visitors are never affected.</td>
+                </tr>
+                <tr>
+                  <td><code>nu_skeleton_sim_delay</code></td>
+                  <td><code>2000</code> ms</td>
+                  <td>Duration of the simulated hold (0–10 000 ms). Lets admins preview the skeleton on fast connections.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">PHP functions (inc/skeleton.php)</h3>
+            <table class="doc-table" aria-label="Skeleton PHP functions">
+              <thead>
+                <tr>
+                  <th>Function</th>
+                  <th>Hook</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>nu_skeleton_enabled()</code></td>
+                  <td>—</td>
+                  <td>Returns <code>bool</code> — whether the feature is switched on.</td>
+                </tr>
+                <tr>
+                  <td><code>nu_skeleton_effective_delay()</code></td>
+                  <td>—</td>
+                  <td>Returns <code>0</code> for real visitors; the configured delay for logged-in administrators when the sim is enabled.</td>
+                </tr>
+                <tr>
+                  <td><code>nu_skeleton_partial_name()</code></td>
+                  <td>—</td>
+                  <td>Maps the current WordPress template to a skeleton partial name (<code>front</code>, <code>events</code>, <code>about</code>, etc.), falling back to <code>generic</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>nu_skeleton_render()</code></td>
+                  <td><code>wp_body_open</code></td>
+                  <td>Outputs the <code>.nu-skeleton</code> overlay: shared header partial + page-specific content partial + <code>&lt;noscript&gt;</code> hide rule.</td>
+                </tr>
+                <tr>
+                  <td><code>nu_skeleton_enqueue()</code></td>
+                  <td><code>wp_enqueue_scripts</code></td>
+                  <td>Enqueues <code>skeleton.css</code> and <code>skeleton.js</code> (deferred), and passes the effective delay to JS via <code>wp_localize_script()</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>nu_skeleton_section_header()</code></td>
+                  <td>—</td>
+                  <td>Shared helper for content partials — renders the eyebrow + h1 + two-line intro placeholder that mirrors the real <code>.section-header</code> pattern.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">CSS primitives (skeleton.css)</h3>
+            <p>
+              The stylesheet defines only what is unique to the skeleton — it
+              relies on <code>main.css</code> for design tokens and layout
+              classes.
+            </p>
+            <table class="doc-table" aria-label="Skeleton CSS classes">
+              <thead>
+                <tr>
+                  <th>Class</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>.nu-skeleton</code></td>
+                  <td>Fixed full-viewport overlay. <code>opacity: 1</code> on first paint; transitions to <code>opacity: 0</code> when <code>.is-hiding</code> is added by JS (300 ms ease-out).</td>
+                </tr>
+                <tr>
+                  <td><code>.sk</code></td>
+                  <td>Base placeholder block — <code>var(--gray-100)</code> fill with the shimmer pseudo-element.</td>
+                </tr>
+                <tr>
+                  <td><code>.sk::after</code></td>
+                  <td>Shimmer wave — a translucent white gradient sweeping left to right at 1.4 s infinite. Disabled under <code>prefers-reduced-motion</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>.sk-line</code>, <code>.sk-line-sm</code></td>
+                  <td>Text-line placeholders (14 px / 11 px tall).</td>
+                </tr>
+                <tr>
+                  <td><code>.sk-eyebrow</code>, <code>.sk-h1</code>, <code>.sk-h2</code></td>
+                  <td>Typographic hierarchy placeholders at heights matching the live type scale.</td>
+                </tr>
+                <tr>
+                  <td><code>.sk-media</code>, <code>.sk-hero-media</code></td>
+                  <td>Image placeholders at 4:3 and 20:9 aspect ratios.</td>
+                </tr>
+                <tr>
+                  <td><code>.sk-btn</code>, <code>.sk-input</code>, <code>.sk-tag</code></td>
+                  <td>Interactive-element shape placeholders.</td>
+                </tr>
+                <tr>
+                  <td><code>.sk-w-25</code> … <code>.sk-w-100</code></td>
+                  <td>Width utilities (25 % steps) for varying placeholder line lengths.</td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="margin-top: var(--space-3)">
+              On dark sections (<code>.hero</code>, <code>.next-up</code>,
+              <code>.repo-band</code>, etc.) placeholders switch to
+              <code>rgba(255, 255, 255, 0.16)</code> so they remain legible
+              against the dark surface without a separate colour token.
+            </p>
+
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">JavaScript reveal (skeleton.js)</h3>
+            <pre><code>window load → setTimeout(hide, delay)
+hide()      → overlay.classList.add('is-hiding')
+            → CSS transition: opacity 300ms → transitionend → remove from DOM
+Failsafe    → setTimeout(hide, delay + 6000)  // never stuck
+prefers-reduced-motion → skip transition, remove immediately</code></pre>
+            <p>
+              The reveal delay (<code>nuSkeleton.delay</code>) is always
+              <code>0</code> for real visitors. The admin simulation delay is
+              injected server-side via <code>wp_localize_script()</code> and
+              only takes effect when both <code>nu_skeleton_sim_enabled</code>
+              is on and the current user has <code>manage_options</code>.
+            </p>
+
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">Per-page partials (template-parts/skeleton/)</h3>
+            <table class="doc-table" aria-label="Skeleton template partials">
+              <thead>
+                <tr>
+                  <th>Partial</th>
+                  <th>Maps to</th>
+                  <th>Key placeholders</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>header.php</code></td>
+                  <td>All views (shared)</td>
+                  <td>Utility bar, brand wordmark lines, primary nav items</td>
+                </tr>
+                <tr>
+                  <td><code>front.php</code></td>
+                  <td>front-page.php</td>
+                  <td>Hero billboard, section header, journey card grid, CTA band</td>
+                </tr>
+                <tr>
+                  <td><code>about.php</code></td>
+                  <td>page-about.php</td>
+                  <td>Hero media, stat rows, program list, timeline rail</td>
+                </tr>
+                <tr>
+                  <td><code>apply.php</code></td>
+                  <td>page-apply.php</td>
+                  <td>Section header, two-column eligibility/steps layout, deadlines table, form input fields</td>
+                </tr>
+                <tr>
+                  <td><code>contact.php</code></td>
+                  <td>page-contact.php</td>
+                  <td>Section header, contact item rows, feature banner, resource list</td>
+                </tr>
+                <tr>
+                  <td><code>events.php</code></td>
+                  <td>page-events.php</td>
+                  <td>Next-up band, upcoming event agenda rows, past event rows</td>
+                </tr>
+                <tr>
+                  <td><code>highlights-team.php</code></td>
+                  <td>page-highlights-team.php</td>
+                  <td>Team card grid (portrait ratio), highlights card grid (landscape ratio)</td>
+                </tr>
+                <tr>
+                  <td><code>press.php</code></td>
+                  <td>page-press.php</td>
+                  <td>Publication citation list, repo band cards, press headline rows</td>
+                </tr>
+                <tr>
+                  <td><code>generic.php</code></td>
+                  <td>All other templates (fallback)</td>
+                  <td>Minimal section header placeholder only</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- 11. Performance optimizations summary -->
           <div class="doc-section">
             <h2 class="doc-section-heading">
               Performance Optimisations Summary
@@ -5395,6 +5645,129 @@ Indexes:
               <code>li::before { content: '\2713' }</code> with a red tick. Both
               avoid <code>&lt;ol&gt;</code> / <code>&lt;ul&gt;</code> default
               markers entirely.
+            </p>
+          </div>
+
+          <!-- UX best practices -->
+          <div class="doc-section">
+            <h2 class="doc-section-heading">UX Best Practices</h2>
+            <p>
+              The following principles guided design and implementation decisions
+              across the site. Each is grounded in user impact and observable
+              outcome, not convention.
+            </p>
+
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">1. Skeleton Screens Over Spinners</h3>
+            <p>
+              Spinners signal waiting without context. Skeleton screens —
+              placeholder shapes that mirror the content's layout — signal what
+              is loading and where it will appear. Users perceive skeleton screens
+              as 20–35% faster in studies because the layout is already set when
+              content arrives, eliminating jarring reflow. Every page in this site
+              shows a layout-matched skeleton on first paint rather than a generic
+              indicator. See the <em>Skeleton Loading Screens</em> section in
+              Custom Theme for the full implementation.
+            </p>
+
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">2. 8-Point Spacing Grid</h3>
+            <p>
+              All spacing values in the theme are multiples of 8:
+              <code>--space-1: 4px</code> through <code>--space-9: 96px</code>.
+              Screens render at integer pixel values, and a base-8 system divides
+              evenly on 1×, 2×, and 3× displays — no sub-pixel blurring. The
+              grid eliminates micro-decisions ("should this margin be 13 px or
+              14 px?") and keeps visual rhythm consistent across components
+              without per-element negotiation.
+            </p>
+
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">3. Hierarchy Through Size and Weight, Not Just Colour</h3>
+            <p>
+              Information hierarchy is established with font size, weight, and
+              spacing before colour is applied. H1–H4 use Source Serif 4 at 400
+              weight; eyebrow labels use Hanken Grotesk at 600 weight and
+              uppercase tracking; body copy is 17 px at 1.6 line-height. The red
+              eyebrow reinforces hierarchy that is already clear from spacing and
+              scale alone. A hierarchy that survives stripping all colour is
+              robust — it holds in print, high-contrast mode, and greyscale.
+            </p>
+
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">4. Affordance on Interactive Elements</h3>
+            <p>
+              Buttons look pressable, links look clickable, inputs look fillable
+              — without instructions. Signs of this throughout the theme:
+              <code>cursor: pointer</code> on all interactive elements,
+              <code>text-underline-offset: 3px</code> on link hover,
+              <code>aria-expanded</code> on nav toggle buttons, and a
+              background-colour plus transform transition on the CTA button.
+              Hover and focus states confirm interactivity in a way that works
+              even for colour-blind users, because the change is not colour alone.
+            </p>
+
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">5. Error States That Explain, Not Just Alert</h3>
+            <p>
+              Form errors specify what went wrong and how to fix it — not just
+              that something is wrong. Rather than "Invalid email", a well-formed
+              error reads: "Please enter a full email address (e.g.
+              name@northeastern.edu)". The user is not wrong — the interface
+              failed to guide them. Error messages are written from the user's
+              perspective: what happened, why, and what to do next.
+            </p>
+
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">6. Progressive Disclosure</h3>
+            <p>
+              Only what the user needs right now is shown; more is revealed on
+              demand. The Apply page FAQ uses native HTML
+              <code>&lt;details&gt;</code>/<code>&lt;summary&gt;</code> — no
+              JavaScript, no ARIA role juggling. The browser handles
+              expand/collapse, keyboard interaction, and screen reader
+              announcements natively. Progressive disclosure hides complexity
+              until the user asks for it, keeping the page scannable without
+              losing content.
+            </p>
+
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">7. Consistent Empty States</h3>
+            <p>
+              When there is no content — no upcoming events, no ACF data for a
+              card grid, no past events — the templates render a deliberate
+              <code>.empty-state</code> message, not a blank area. Every list
+              component has three designed states: loading (skeleton), empty
+              (intentional message), and populated. Undesigned empty states read
+              as broken; intentional ones read as informative.
+            </p>
+
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">8. Touch Target Size</h3>
+            <p>
+              Interactive elements meet the WCAG 2.5.5 minimum of 44 × 44 px.
+              The CTA button has a minimum height of 48 px. Nav links use
+              <code>padding-block</code> to expand the tap area beyond the
+              visual text size. The visual size and the interactive area are
+              kept separate — small labels get generous padding so the tap
+              target is always reachable on touch screens.
+            </p>
+
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">9. Contrast Ratio Annotation</h3>
+            <p>
+              Contrast ratios are documented directly in the design token
+              declarations in <code>main.css</code>:
+            </p>
+            <pre><code>--nu-red-bright: #f0193a; /* 4.9:1 on #000, AA */</code></pre>
+            <p>
+              This makes the invisible constraint visible at the point of change.
+              Adjusting <code>--nu-red-bright</code> to a lighter value would
+              silently fail WCAG AA; the inline comment catches that immediately
+              rather than in a later audit.
+            </p>
+
+            <h3 style="margin: var(--space-6) 0 var(--space-3)">10. Responsive Images with <code>srcset</code></h3>
+            <p>
+              Images are served at the right size for the device using
+              WordPress's built-in <code>srcset</code> generation.
+              <code>wp_get_attachment_image()</code> emits a
+              <code>srcset</code> attribute automatically from registered image
+              sizes — a phone receives the 400 px variant, a retina desktop
+              receives the 1200 px variant. All below-fold images also carry
+              <code>loading="lazy"</code> and <code>decoding="async"</code>
+              so they do not compete with the LCP element at initial paint.
             </p>
           </div>
 
