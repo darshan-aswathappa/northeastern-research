@@ -219,6 +219,11 @@ a:hover {
 	letter-spacing: 0.14em;
 }
 
+/* Red N square in the utility bar — phones only (desktop keeps the text label) */
+.utility-logo {
+	display: none;
+}
+
 .brand-bar {
 	border-bottom: 1px solid var(--color-border);
 }
@@ -415,7 +420,7 @@ a:hover {
 	font-size: 0.9375rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
 	.nav-toggle {
 		display: none;
 	}
@@ -456,6 +461,77 @@ a:hover {
 
 	.nav-submenu a {
 		padding: var(--space-3) var(--space-4);
+	}
+}
+
+/* Compact header on phones: the application status owns the utility bar,
+   the brand drops its longest line, and the menu button collapses to a
+   bare icon (its label stays available to screen readers). */
+@media (max-width: 599px) {
+	.utility-label {
+		display: none;
+	}
+
+	/* The bar's height comes from the row so the logo square can bleed
+	   to the top, bottom, and left edges. */
+	.utility-bar {
+		padding-block: 0;
+	}
+
+	.utility-bar__row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		min-height: 44px;
+	}
+
+	.utility-logo {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		align-self: stretch;
+		width: 44px;
+		margin-left: calc(-1 * var(--content-pad));
+		background: var(--nu-red);
+	}
+
+	/* The source mark is NU red; flip it to white on the red square. */
+	.utility-logo img {
+		filter: brightness(0) invert(1);
+	}
+
+	.brand-lockup {
+		font-size: 1.25rem;
+	}
+
+	.brand-unit {
+		font-size: 1rem;
+	}
+
+	.brand-sub {
+		display: none;
+	}
+
+	.nav-toggle {
+		border: 0;
+		padding: var(--space-2);
+	}
+
+	.nav-toggle-icon,
+	.nav-toggle-icon::before,
+	.nav-toggle-icon::after {
+		width: 22px;
+	}
+
+	.nav-toggle-label {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
 	}
 }
 

@@ -9,7 +9,7 @@
 
 	var toggle = document.querySelector( '.nav-toggle' );
 	var nav = document.getElementById( 'primary-nav' );
-	var mq = window.matchMedia( '(min-width: 768px)' );
+	var mq = window.matchMedia( '(min-width: 1024px)' );
 
 	if ( ! toggle || ! nav ) {
 		return;
